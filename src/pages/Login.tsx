@@ -2,7 +2,8 @@ import { TextField, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import toast, { Toaster } from 'react-hot-toast';
-import { HrLine } from '../components/component_reuse';
+import { HrLine, ButtonStyledLogin } from '../components/component_reuse';
+import { TextFieldLoginPassword } from '../components/Login';
 import { Frame, bgLogin } from '../assets/image';
 import { resolverLogin } from '../myYup';
 import { FormLogin } from '../myYup';
@@ -14,6 +15,10 @@ type payloadLogin = {
 };
 
 function Login() {
+    if(localStorage.getItem("userAdmin")){
+        location.href = 'http://localhost:4000/accounts';
+    }
+
     const {
         register,
         handleSubmit,
@@ -26,8 +31,8 @@ function Login() {
             localStorage.setItem('userAdmin', JSON.stringify(data.token));
             location.href = 'http://localhost:4000/accounts';
         },
-        onError: () => {
-            toast.error('login faill');
+        onError: (error: any) => {
+            toast.error(`login faill because of +${error?.message}`);
         },
     });
 
@@ -35,7 +40,7 @@ function Login() {
         mutate(payload);
     };
     return (
-        <section className="Login w-full h-screen  pl-[60px]">
+       <section className="Login w-full h-screen  pl-[60px]">
             <Toaster />
             <div className=" flex relative justify-between">
                 <div className="form_login w-[609px]  pt-[70px]">
@@ -45,9 +50,10 @@ function Login() {
                     <form action="submit" onSubmit={handleSubmit(onSubmit)}>
                         <HrLine content="Login" />
                         <div className="pt-[35px] relative">
-                            <label htmlFor="">Email</label>
+                            <label htmlFor="userName">Email</label>
                             <TextField
                                 {...register('username')}
+                                id="userName"
                                 name="username"
                                 placeholder="Email"
                                 sx={{
@@ -58,6 +64,7 @@ function Login() {
                         </div>
                         <div className="pt-5 relative">
                             <label htmlFor="">Password</label>
+                            <TextFieldLoginPassword  {...register('password', { required: true })}/>
                             <TextField
                                 {...register('password', { required: true })}
                                 name="password"
@@ -69,7 +76,6 @@ function Login() {
                             />
                             <p className="absolute -bottom-6 text-[14px] text-[red]">{errors.password?.message}</p>
                         </div>
-
                         <p className="pt-5">
                             <a href="#">Forgot your password</a>
                         </p>
@@ -85,17 +91,7 @@ function Login() {
                             Login
                         </Button>
                         <HrLine content="Or continue with" />
-                        <Button
-                            variant="outlined"
-                            sx={{
-                                marginTop: '30px',
-                                padding: '10px 0',
-                                color: '#80A3E7',
-                                width: '100%',
-                            }}
-                        >
-                            Login with SSO
-                        </Button>
+                        <ButtonStyledLogin> Login with SSO</ButtonStyledLogin>
                     </form>
                 </div>
                 <div className="image_right relative w-[50%] ">

@@ -1,2 +1,3 @@
 import HrLine from "./HrLine";
-export {HrLine}
+import ButtonStyledLogin from "./ButtonStyledLogin";
+export {HrLine,ButtonStyledLogin}

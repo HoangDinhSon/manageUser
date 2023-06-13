@@ -1,0 +1,133 @@
+// do dai 4
+const dummyDatauser = [
+    {
+        id: 1,
+        firstName: 'Terry',
+        maidenName: 'Smitham',
+        email: 'atuny0@sohu.com',
+        team: 'none',
+        company: {
+            address: {
+                address: '629 Debbie Drive',
+                city: 'Nashville',
+                coordinates: {
+                    lat: 36.208114,
+                    lng: -86.58621199999999,
+                },
+                postalCode: '37076',
+                state: 'TN',
+            },
+            department: 'Marketing',
+            name: "Blanda-O'Keefe",
+            title: 'Help Desk Operator',
+        },
+        role: 'none',
+        status: 'none',
+        // detail
+        phone: '+63 791 675 8914',
+        contractType: 'none',
+        contractStartDate: 'none',
+        contractEndDate: 'none',
+        position: 'none',
+        level: 'none',
+        skills: 'none',
+    },
+    {
+        id: 2,
+        firstName: 'Terry',
+        maidenName: 'Smitham',
+        email: 'atuny0@sohu.com',
+        team: 'none',
+        company: {
+            address: {
+                address: '629 Debbie Drive',
+                city: 'Nashville',
+                coordinates: {
+                    lat: 36.208114,
+                    lng: -86.58621199999999,
+                },
+                postalCode: '37076',
+                state: 'TN',
+            },
+            department: 'Marketing',
+            name: "Blanda-O'Keefe",
+            title: 'Help Desk Operator',
+        },
+        role: 'none',
+        status: 'none',
+        // detail
+        phone: '+63 791 675 8914',
+        contractType: 'none',
+        contractStartDate: 'none',
+        contractEndDate: 'none',
+        position: 'none',
+        level: 'none',
+        skills: 'none',
+    },
+    {
+        id: 3,
+        firstName: 'Terry',
+        maidenName: 'Smitham',
+        email: 'atuny0@sohu.com',
+        team: 'none',
+        company: {
+            address: {
+                address: '629 Debbie Drive',
+                city: 'Nashville',
+                coordinates: {
+                    lat: 36.208114,
+                    lng: -86.58621199999999,
+                },
+                postalCode: '37076',
+                state: 'TN',
+            },
+            department: 'Marketing',
+            name: "Blanda-O'Keefe",
+            title: 'Help Desk Operator',
+        },
+        role: 'none',
+        status: 'none',
+        // detail
+        phone: '+63 791 675 8914',
+        contractType: 'none',
+        contractStartDate: 'none',
+        contractEndDate: 'none',
+        position: 'none',
+        level: 'none',
+        skills: 'none',
+    },
+    {
+        id: 4,
+        firstName: 'Terry',
+        maidenName: 'Smitham',
+        email: 'atuny0@sohu.com',
+        team: 'none',
+        company: {
+            address: {
+                address: '629 Debbie Drive',
+                city: 'Nashville',
+                coordinates: {
+                    lat: 36.208114,
+                    lng: -86.58621199999999,
+                },
+                postalCode: '37076',
+                state: 'TN',
+            },
+            department: 'Marketing',
+            name: "Blanda-O'Keefe",
+            title: 'Help Desk Operator',
+        },
+        role: 'none',
+        status: 'none',
+        // detail
+        phone: '+63 791 675 8914',
+        contractType: 'none',
+        contractStartDate: 'none',
+        contractEndDate: 'none',
+        position: 'none',
+        level: 'none',
+        skills: 'none',
+    },
+];
+
+export default dummyDatauser;
