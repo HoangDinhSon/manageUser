@@ -1,3 +1,8 @@
+/*
+chức năng : khi hover vào icon thì hiện thông tin chi tiết 
+dùng  : group , group-hover tailwindcss
+*/
+
 function IconMenu({ icon, iconNameMenu, ...props }: any) {
     return (
         <div className="group relative " {...props}>
@@ -8,4 +13,4 @@ function IconMenu({ icon, iconNameMenu, ...props }: any) {
         </div>
     );
 }
-export default IconMenu
+export default IconMenu;

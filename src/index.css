@@ -6,20 +6,19 @@
     * {
         font-family: 'Poppins', sans-serif;
     }
-    h2{
-        font-size: 30px;
-        font-weight: 600;
-        color: red;
-        padding-top:60px ;
-    
-        
-    }
-    h1{
-        padding-top:5px ;
+    h1 {
+        padding-top: 5px;
         font-size: 45px;
         font-weight: 600;
     }
-    h3{
+    h2 {
+        font-size: 30px;
+        font-weight: 600;
+        color: red;
+        padding-top: 60px;
+    }
+
+    h3 {
         padding: 7px;
         font-size: 30px;
     }
