@@ -5,6 +5,13 @@
 @layer base {
     * {
         font-family: 'Poppins', sans-serif;
+        /* outline: 1px solid red; */
+    }
+
+    body {
+        max-width: 1440px;
+        margin: 0 auto;
+        position: relative;
     }
     h1 {
         padding-top: 5px;
@@ -22,4 +29,44 @@
         padding: 7px;
         font-size: 30px;
     }
+    h4 {
+        font-size: 18px;
+        line-height: 27px;
+    }
+    h5 {
+        color: #9da7b9;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+    thead td {
+        color: #9da7b9;
+    }
+
+    tbody td {
+    }
+    td {
+        padding: 12px 5px;
+        overflow: hidden;
+        word-wrap: normal;
+    }
+}
+
+@layer components {
+    .my_input {
+        @apply  outline outline-1 outline-[--outlineColor] h-[42px] w-[337px] rounded-md px-4 py-3;
+    }
+    .my_div_after {
+        @apply relative  after:absolute  after:right-3 after:bottom-[1px] after:text-[12px] after:text-[#999999] 
+    }
+    .my_after_star {
+        @apply after:content-['*'] after:text-[red] after:ml-1
+    }
+}
+:root {
+    --outlineColor: '#D2D2D2';
 }

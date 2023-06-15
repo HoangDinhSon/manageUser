@@ -14,15 +14,20 @@ import nameOfaccounts from './name_of_menu/nameOfaccounts.svg';
 import nameOfproject from './name_of_menu/nameOfproject.svg';
 import nameOfreport from './name_of_menu/nameOfreport.svg';
 export { nameOfDashboard, nameOfRolemanager, nameOfStacks, nameOfaccounts, nameOfproject, nameOfreport };
-//Nav user 
+//Nav user
 import icondocument from './NavManageUser/icondocument.svg';
 import iconimportuser from './NavManageUser/iconimportuser.svg';
 import iconplususer from './NavManageUser/iconplususer.svg';
 import iconuploaduser from './NavManageUser/iconuploaduser.svg';
-export{icondocument,iconimportuser,iconplususer,iconuploaduser}
+export { icondocument, iconimportuser, iconplususer, iconuploaduser };
 
-// icon for table 
-import filterbutton from "./icon_of_table/filterButton.svg"
-import iconSearch from "./icon_of_table/iconSearch.svg"
-import iconArrowTable from "./icon_of_table/iconArrowTable.svg"
-export{filterbutton ,iconSearch,iconArrowTable}
+// icon for table
+import filterbutton from './icon_of_table/filterButton.svg';
+import iconSearch from './icon_of_table/iconSearch.svg';
+import iconArrowTable from './icon_of_table/iconArrowTable.svg';
+import IconViewUser from './icon_of_table/IconViewUser.svg';
+import IconEditUser from './icon_of_table/IconEditUser.svg';
+export { filterbutton, iconSearch, iconArrowTable, IconViewUser, IconEditUser };
+//icon Form Detail
+import IconcancelInFromDetaile from './iconFormDetail/IconcancelInFromDetaile.svg';
+export { IconcancelInFromDetaile };

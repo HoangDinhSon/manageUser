@@ -1,3 +1,3 @@
 import Filter from "./Filter";
-import AccoutDetailForm from "./AccountDetailForm";
-export{Filter,AccoutDetailForm}
+import FormViewUser from "./FormViewUser";
+export{Filter,FormViewUser}
