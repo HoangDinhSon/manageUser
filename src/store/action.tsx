@@ -7,6 +7,7 @@ import {
     DISPLAY_FORM_VIEW_USER,
     CLOSE_FORM_VIEW_USER,
     VIEW_DATA_FOR_FORM_VIEW,
+    ADD_NEW_USER
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
 const getRowPerPage = (payload: any) => ({
@@ -42,6 +43,10 @@ const viewDataUserForFORMVIEW  =(payload:any)=>({
     payload:payload,
 
 })
+const add_new_user =(newUser:any)=>({
+    type:ADD_NEW_USER,
+    payload:newUser,
+})
 
 export {
     getRowPerPage,
@@ -52,6 +57,7 @@ export {
     displayFormViewUser,
     closeFormViewUser,
     viewDataUserForFORMVIEW,
+    add_new_user,
 };
 
 /*

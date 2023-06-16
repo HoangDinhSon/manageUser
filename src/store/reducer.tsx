@@ -7,6 +7,7 @@ import {
     DISPLAY_FORM_VIEW_USER,
     CLOSE_FORM_VIEW_USER,
     VIEW_DATA_FOR_FORM_VIEW,
+    ADD_NEW_USER,
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
 const ROW_PER_PAGE_DEFAULT = 5;
@@ -91,6 +92,17 @@ function reducer(state: TypeStateGlobal, action: any) {
             return {
                 ...state,
                 UserForFormViewAfterCallApi: action.payload,
+            };
+        }
+        case ADD_NEW_USER: {
+            console.log(action.payload);
+            console.log(state.resApi);
+            
+            
+            // state.resApi.users.splice(0,0,"check")
+            // state.resApi.users.unshift(action.payload);
+            return {
+                ...state
             };
         }
         default:

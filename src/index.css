@@ -58,15 +58,19 @@
 
 @layer components {
     .my_input {
-        @apply  outline outline-1 outline-[--outlineColor] h-[42px] w-[337px] rounded-md px-4 py-3;
-    }
-    .my_div_after {
-        @apply relative  after:absolute  after:right-3 after:bottom-[1px] after:text-[12px] after:text-[#999999] 
+        @apply outline outline-1 outline-[--outlineColor] h-[42px] w-full rounded-md px-4 py-3 mt-1;
     }
     .my_after_star {
-        @apply after:content-['*'] after:text-[red] after:ml-1
+        @apply after:content-['*'] after:text-[red] after:ml-1;
+    }
+    .my_hidden_icon_select {
+        appearance: none;
+    }
+    .my_outline_rounded_edit_form {
+        @apply outline outline-1 outline-[--outlineColor] rounded-md;
     }
 }
 :root {
-    --outlineColor: '#D2D2D2';
+    --outlineColor: #D2D2D2;
+    --ColorBgButton: #5E90F0;
 }

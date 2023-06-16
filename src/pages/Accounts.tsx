@@ -10,7 +10,7 @@ import { Toaster, toast } from 'react-hot-toast';
 
 function Accounts() {
     const [state, dispatch] = useGlobalState();
-    // console.log('🚀 ~ file: Accounts.tsx:12 ~ Accounts ~ state:', state);
+    console.log('🚀 ~ file: Accounts.tsx:12 ~ Accounts ~ state:', state);
     let limit = state.rowPerPage;
     let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
     const { status } = useQuery({

@@ -6,4 +6,8 @@ type TypeOfUser = {
     company:any;
     phone:string;
 };
-export type {TypeOfUser}
+type typeOption = {
+    content: string;
+    value: string | number;
+};
+export type {TypeOfUser,typeOption}

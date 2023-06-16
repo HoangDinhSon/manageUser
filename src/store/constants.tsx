@@ -6,6 +6,7 @@ const TOGLE_DISPLAY_ASIDE_MENU = 'togle_display_aside_menu';
 const DISPLAY_FORM_VIEW_USER = 'display_form_view_user';
 const CLOSE_FORM_VIEW_USER = 'close_form_view_user';
 const VIEW_DATA_FOR_FORM_VIEW = 'view_data_for_form_view';
+const ADD_NEW_USER= "add_new_user";
 export {
     GET_ROW_PER_PAGE,
     GET_ORDINAL_NUMBER_PAGE,
@@ -15,4 +16,5 @@ export {
     DISPLAY_FORM_VIEW_USER,
     CLOSE_FORM_VIEW_USER,
     VIEW_DATA_FOR_FORM_VIEW,
+    ADD_NEW_USER,
 };

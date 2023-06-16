@@ -31,3 +31,7 @@ export { filterbutton, iconSearch, iconArrowTable, IconViewUser, IconEditUser };
 //icon Form Detail
 import IconcancelInFromDetaile from './iconFormDetail/IconcancelInFromDetaile.svg';
 export { IconcancelInFromDetaile };
+//
+import arrowSelect from "./edit_user/arrowSelect.svg";
+import calendar from "./edit_user/calendar.svg"
+export {arrowSelect,calendar}

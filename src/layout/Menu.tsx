@@ -23,7 +23,7 @@ function Menu({ children }: any) {
             {/* 1/4. Aside Bar */}
             {state.togleDisplayAsideMenu && (
                 <div className={`${state.togleDisplayAsideMenu?"w-[85px]":""}`}>
-                    <div className=" w-[78px] bg-[#fff] fixed z-[11]  top-0 bottom-0">
+                    <div className=" w-[78px] bg-[#fff] fixed z-[2]  top-0 bottom-0">
                         <div className="flex flex-col items-center gap-[53px] pt-6">
                             <img src={hamberger} alt="" onClick={handleSwitchDisplay} />
                             <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} />
@@ -37,7 +37,7 @@ function Menu({ children }: any) {
                 </div>
             )}
             {/*2/4. TopNav Bar */}
-            <div className="fixed top-0 left-[0] right-0 h-[78px] px-[20px] bg-[#fff] z-10 2xl:px-[calc((100%-1440px)/2)] ">
+            <div className="fixed z-[1] top-0 left-[0] right-0 h-[78px] px-[20px] bg-[#fff]  2xl:px-[calc((100%-1440px)/2)] ">
                 <div className="flex justify-between items-center  h-[78px]">
                     <div className="Left_Nav flex items-center gap-[15px]" onClick={handleSwitchDisplay}>
                         {!state.togleDisplayAsideMenu && <img src={hamberger} alt="" />}

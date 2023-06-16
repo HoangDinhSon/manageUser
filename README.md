@@ -24,6 +24,14 @@ b2 : dùng payload  = useContext ( themeContext )
         store 
         component 
         dummydata.tsx 
+# React Hook Form and Yup
+    step 1: schema --> 
+    step 2: type (because typescript)
+    step 3: resolver --> object 
+    step 4: pass into useForm()
+# unshift
+làm thay đổi mảng cũ,
+return lại???
 
 
 
