@@ -1,0 +1,29 @@
+import { arrowSelect } from "../../assets/icon";
+type typeOption = {
+    content: string;
+    value: string | number;
+};
+
+function Select({ nameSelect, listOption, label, register }: any) {
+    return (
+        <div>
+            <p className="my_after_star pb-[5px]">{label}</p>
+            <div className="relative">
+                <img src={arrowSelect} alt="" className="absolute right-4 top-[50%] -translate-y-[50%]" />
+                <select
+                    {...register(nameSelect)}
+                    name={nameSelect}
+                    className="w-full h-[42px] outline outline-1 outline-[--outlineColor] rounded-[5px] px-4  my_hidden_icon_select"
+                >
+                    {listOption.map((option: typeOption, index: any) => (
+                        <option value={option.value} key={index}>
+                            {option.content}
+                        </option>
+                    ))}
+                </select>
+            </div>
+        </div>
+    );
+}
+
+export default Select;

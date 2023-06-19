@@ -8,9 +8,10 @@ const CLOSE_FORM_VIEW_USER = 'close_form_view_user';
 const VIEW_DATA_FOR_FORM_VIEW = 'view_data_for_form_view';
 const EDIT_USER ="edit_user";
 const GET_ID_FOR_EDIT= "get_id_for_edit";
-const  DISPLAY_IMPORT_FORM = "display_import_form";
 
 const ADD_NEW_USER= "add_new_user";
+const  DISPLAY_IMPORT_FORM = "display_import_form";
+
 export {
     GET_ROW_PER_PAGE,
     GET_ORDINAL_NUMBER_PAGE,
@@ -22,6 +23,7 @@ export {
     VIEW_DATA_FOR_FORM_VIEW,
     GET_ID_FOR_EDIT,
     EDIT_USER,
+  
 
     
     ADD_NEW_USER,

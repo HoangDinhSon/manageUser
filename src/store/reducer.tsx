@@ -10,7 +10,7 @@ import {
     GET_ID_FOR_EDIT,
     EDIT_USER,
     ADD_NEW_USER,
-    DISPLAY_IMPORT_FORM
+    DISPLAY_IMPORT_FORM,
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
 const ROW_PER_PAGE_DEFAULT = 5;
@@ -26,34 +26,34 @@ const USE_FOR_FORM_VIEW_DEFAULT = {
     phone: 'DEFAULT',
 };
 import { findIndex } from '../handlelogic';
-const ID_FOR_EDIT_DEFAULT =0;
+const ID_FOR_EDIT_DEFAULT = 0;
 const DISPLAY_FORM_VIEW_USER_DEFAULT = false;
 const IS_DISPLAY_IMPORT_FORM_DEFAULT = false;
 type TypeStateGlobal = {
     rowPerPage: number;
     ordinalNumberPage: number;
-    resApi: any;//Array<any>
+    resApi: any; //Array<any>
     togleDisplayFiter: boolean;
-    togleDisplayAsideMenu: boolean;
+    isDisplayAsideMenu: boolean;
     UserForFormView: TypeOfUser;
     isDisplayFormView: boolean;
     UserForFormViewAfterCallApi: any;
-    idForEdit:number;
-    userAfterEdit:any;//object
-    isDisplayImportForm : boolean;
+    idForEdit: number;
+    userAfterEdit: any; //object
+    isDisplayImportForm: boolean;
 };
 const initState = {
     rowPerPage: ROW_PER_PAGE_DEFAULT,
     ordinalNumberPage: ORDINAL_NUMBER_PAGE_DEFAULT,
     resApi: {},
     togleDisplayFiter: IS_DISPLAY_FILTER_DEFAULT,
-    togleDisplayAsideMenu: DISPLAY_ASIDE_MENU_DEFAULT,
+    isDisplayAsideMenu: DISPLAY_ASIDE_MENU_DEFAULT,
     UserForFormView: USE_FOR_FORM_VIEW_DEFAULT,
     isDisplayFormView: DISPLAY_FORM_VIEW_USER_DEFAULT,
     UserForFormViewAfterCallApi: {},
-    idForEdit:ID_FOR_EDIT_DEFAULT,
-    userAfterEdit:{},// kiểm tra xem có dùng tới ko
-    isDisplayImportForm:IS_DISPLAY_IMPORT_FORM_DEFAULT,
+    idForEdit: ID_FOR_EDIT_DEFAULT,
+    userAfterEdit: {}, // kiểm tra xem có dùng tới ko
+    isDisplayImportForm: IS_DISPLAY_IMPORT_FORM_DEFAULT,
 };
 
 function reducer(state: TypeStateGlobal, action: any) {
@@ -84,7 +84,7 @@ function reducer(state: TypeStateGlobal, action: any) {
         case TOGLE_DISPLAY_ASIDE_MENU: {
             return {
                 ...state,
-                togleDisplayAsideMenu: !action.payload,
+                isDisplayAsideMenu: !action.payload,
             };
         }
         case DISPLAY_FORM_VIEW_USER: {
@@ -107,35 +107,30 @@ function reducer(state: TypeStateGlobal, action: any) {
             };
         }
         case GET_ID_FOR_EDIT: {
-            return{
+            return {
                 ...state,
-                idForEdit:action.payload
-            }
+                idForEdit: action.payload,
+            };
         }
-        case EDIT_USER :{
-            const index = findIndex(state.idForEdit,state.resApi.users)
-            state.resApi.users.splice(index,1,action.payload)
-            return({
+        case EDIT_USER: {
+            const index = findIndex(state.idForEdit, state.resApi.users);
+            state.resApi.users.splice(index, 1, action.payload);
+            return {
                 ...state,
-            })
+            };
         }
 
         case ADD_NEW_USER: {
-            console.log(action.payload);
-            console.log(state.resApi);
-            
-            
-            // state.resApi.users.splice(0,0,"check")
-            // state.resApi.users.unshift(action.payload);
             return {
-                ...state
+                ...state,
+                resApi: { ...state.resApi, users: [ action.payload,...state.resApi.users] },
             };
         }
-        case DISPLAY_IMPORT_FORM :{
-            return ({
+        case DISPLAY_IMPORT_FORM: {
+            return {
                 ...state,
                 isDisplayImportForm: !state.isDisplayImportForm,
-            })
+            };
         }
 
         default:

@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { iconArrowTable, IconEditUser, IconViewUser } from '../../../assets/icon';
 import PaginationTable from './PaginationTable';
 import { ContextState } from '../../../store';
@@ -6,36 +6,70 @@ import { actions } from '../../../store';
 import { TypeOfUser } from '../../../type/typePageAccounts';
 import { LINK_PAGE_ACCOUNT_EDIT } from '../../../constance_for_page';
 
-function TDHeader({ header, width }: any) {
-    const classOfCss = `flex justify-between w-[${width}]`;
-    return (
-        <td>
-            <div className={classOfCss}>
-                <span>{header}</span>
-                <img src={iconArrowTable} alt="" />
-            </div>
-        </td>
-    );
-}
 function TableRowForHeader() {
     return (
         <tr className="text-center">
             <td>
-                <div className="w-[44px]">
+                <div className="w-[20px]">
                     <input type="checkbox" />
                 </div>
             </td>
-            <TDHeader header="ID" width={'110px'} />
-            <TDHeader header="First Name" width={'308px'} />
-            <TDHeader header="Alias" width={'258px'} />
-            <TDHeader header="Email" width={'178px'} />
-            <TDHeader header="Team" width={'128px'} />
-            <TDHeader header="Company" width={'128px'} />
-            <TDHeader header="Position" width={'128px'} />
-            <TDHeader header="Role" width={'128px'} />
-            <TDHeader header="Status" width={'128px'} />
+            <td>
+                <div className="flex justify-between w-[86px]">
+                    <span>ID</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
+            <td>
+                <div className="flex justify-between w-[94px]">
+                    <span>First Name</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
+            <td>
+                <div className="flex justify-between w-[94px]">
+                    <span>Alias</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
+            <td>
+                <div className="flex justify-between w-[154px]">
+                    <span>Email</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
+            <td>
+                <div className="flex justify-between w-[94px]">
+                    <span>Team</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
+            <td>
+                <div className="flex justify-between w-[94px]">
+                    <span>Company</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
+            <td>
+                <div className="flex justify-between w-[94px]">
+                    <span>Position</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
+            <td>
+                <div className="flex justify-between w-[94px]">
+                    <span>Role</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
+            <td>
+                <div className="flex justify-between w-[94px]">
+                    <span>Status</span>
+                    <img src={iconArrowTable} alt="" />
+                </div>
+            </td>
             <td colSpan={2}>
-                <div className="w-[100px] flex justify-between">
+                <div className="w-[94px] flex justify-between">
                     Action <img src={iconArrowTable} alt="" />
                 </div>
             </td>
@@ -61,9 +95,9 @@ function TableUser() {
                     <TableRowForHeader />
                 </thead>
                 <tbody>
-                    {listUser?.map((user: any) => {
+                    {listUser?.map((user: any, index: number) => {
                         return (
-                            <tr key={user?.id}>
+                            <tr key={index}>
                                 <td className="text-center">
                                     <input type="checkbox" />
                                 </td>

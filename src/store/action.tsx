@@ -9,8 +9,9 @@ import {
     VIEW_DATA_FOR_FORM_VIEW,
     GET_ID_FOR_EDIT,
     EDIT_USER,
+    
+    ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
-    ADD_NEW_USER
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
 const getRowPerPage = (payload: any) => ({
@@ -56,7 +57,8 @@ const editUser =(userAfterEdit:any)=>({
     type:EDIT_USER,
     payload:userAfterEdit,
 })
-const add_new_user =(newUser:any)=>({
+
+const addNewUser =(newUser:any)=>({
     type:ADD_NEW_USER,
     payload:newUser,
 })
@@ -75,7 +77,7 @@ export {
     viewDataUserForFORMVIEW,
     getIdForEdit,
     editUser,
-    add_new_user,
+    addNewUser,
     toggleImportForm,
 };
 

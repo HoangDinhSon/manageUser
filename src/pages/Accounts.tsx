@@ -6,25 +6,14 @@ import { filterbutton, iconSearch } from '../assets/icon';
 import { useGlobalState } from '../store/Provider';
 import { getLimitAndSkipUser, getUserBaseOnID } from '../Api/logTimeApi';
 import { actions } from '../store';
-// import {} from '../components/accounts';
 import { ImportForm, Filter, FormViewUser, BtnImportAndADD } from '../components';
 
 function Accounts() {
     const [state, dispatch] = useGlobalState();
-    // console.log('🚀 ~ file: Accounts.tsx:12 ~ Accounts ~ state:', state);
-    let limit = state.rowPerPage;
-    let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
-    const { status } = useQuery({
-        queryKey: ['getLimitAndSkip', limit, skip],
-        queryFn: () => getLimitAndSkipUser(limit, skip),
-        onSuccess: (res) => {
-            dispatch(actions.upDateListUser(res));
-        },
-    });
     const handleSwitchDisplayFilterForm = () => {
         dispatch(actions.togleDisplayFilter(state.togleDisplayFiter));
     };
-    // call apis by id
+    // call apis by id dùng cho hiển thị form 
     const { status: statusForApiByID } = useQuery({
         queryKey: ['userByID', state.UserForFormView.id],
         queryFn: () => getUserBaseOnID(state.UserForFormView.id),
@@ -36,17 +25,9 @@ function Accounts() {
             toast.error('get one api fail ');
         },
     });
-    // import User
-    const handleImportUser =()=>{
-        dispatch(actions.toggleImportForm())
-    }
-
     return (
         <section className="accounts_page">
             <Toaster />
-            {status === 'loading' && <div>loading....</div>}
-            {status === 'error' && <div>error</div>}
-            {status === 'success' && (
                 <div className="bg-white rounded-[12px] p-8">
                     <div className="nav_for_table flex gap-1 h-[54px] items-end   border-b border-[#EBEBEB]">
                         <p className="w-[44px] h-[40px] leading-[40px] text-center text-[#5E90F0]  border-b-4 border-[#5E90F0]">
@@ -55,7 +36,7 @@ function Accounts() {
                         <p className="w-[75px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Vinova</p>
                         <p className="w-[44px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Patner</p>
                     </div>
-                    <div className='flex justify-between '>
+                    <div className="flex justify-between ">
                         <div className="search_filter h-[97px] pt-[29px]">
                             <TextField
                                 placeholder="Search"
@@ -70,16 +51,15 @@ function Accounts() {
                                 <img src={filterbutton} alt="" />
                             </Button>
                         </div>
-                       {state.togleDisplayAsideMenu&& <BtnImportAndADD />}
+                        {state.isDisplayAsideMenu && <BtnImportAndADD />}
                     </div>
                     <div className="flex">
                         <TableUser />
                         {state.togleDisplayFiter && <Filter />}
                     </div>
                     {statusForApiByID === 'success' && state.isDisplayFormView && <FormViewUser />}
-                   { state.isDisplayImportForm&&<ImportForm/>}
+                    {state.isDisplayImportForm && <ImportForm />}
                 </div>
-            )}
         </section>
     );
 }

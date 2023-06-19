@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { cloudComputer, icondot, closeSmall, IconcancelInFromDetaile } from '../../assets';
 import { actions } from '../../store';
 import { useGlobalState } from '../../store/Provider';
+import { LINK_PAGE_ACCOUNT } from '../../constance_for_page';
 function RequirementFileUI() {
     return (
         <>
@@ -26,6 +27,7 @@ function ImportForm() {
     const [listFile, setListFile] = useState<Array<any>>([]);
     const refInput = useRef(null);
     const [state, dispatch] = useGlobalState();
+    // Save File import into Array listFilr 
     if (refInput.current != null) {
         const refInputForChange: any = refInput.current;
         refInputForChange.addEventListener('change', (event: any) => {
@@ -48,7 +50,7 @@ function ImportForm() {
             toast.error('you must import File');
         } else {
             dispatch(actions.toggleImportForm());
-            location.href= "http://localhost:4000/accounts"
+            location.href= `http://localhost:4000${LINK_PAGE_ACCOUNT}`
         }
     };
 

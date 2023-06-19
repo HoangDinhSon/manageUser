@@ -11,17 +11,17 @@ import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
-import { FormLogOut ,BtnImportAndADD} from '../components';
+import { FormLogOut, BtnImportAndADD } from '../components';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { LINK_PAGE_ACCOUNT_EDIT } from '../constance_for_page';
+import { LINK_PAGE_ACCOUNT, LINK_PAGE_ACCOUNT_EDIT } from '../constance_for_page';
 
 function Menu({ children }: any) {
     const location = useLocation();
     const [state, dispatch] = useGlobalState();
     const [isDisPlayLogout, setIsDisplayLogout] = useState(false);
     const handleSwitchDisplay = () => {
-        dispatch(actions.togleDisplayAsideMenu(state.togleDisplayAsideMenu));
+        dispatch(actions.togleDisplayAsideMenu(state.isDisplayAsideMenu));
     };
     const handleLogOut = () => {
         setIsDisplayLogout(!isDisPlayLogout);
@@ -45,12 +45,16 @@ function Menu({ children }: any) {
             }
         }
     }
+    // hiddent or display BtnAddandImport : 
+    const conditionToDisplayBtnADDandImport =
+        state.isDisplayAsideMenu === false &&
+        (location.pathname === LINK_PAGE_ACCOUNT || location.pathname === `${LINK_PAGE_ACCOUNT}/`);
 
     return (
         <div className="menu_Layout flex bg-[#ECECEC]  w-full h-full relative">
             {/* 1/4. Aside Bar */}
-            {state.togleDisplayAsideMenu && (
-                <div className={`${state.togleDisplayAsideMenu ? 'w-[85px]' : ''}`}>
+            {state.isDisplayAsideMenu && (
+                <div className={`${state.isDisplayAsideMenu ? 'w-[85px]' : ''}`}>
                     <div className=" w-[78px] bg-[#fff] fixed z-[2]  top-0 bottom-0 min-h-[750px] ">
                         <div className="relative flex flex-col items-center  gap-[53px] pt-5 h-full">
                             <img src={hamberger} alt="" onClick={handleSwitchDisplay} />
@@ -81,28 +85,12 @@ function Menu({ children }: any) {
                     <div className="Left_Nav flex items-center gap-[15px]" onClick={handleSwitchDisplay}>
                         {/* {!state.togleDisplayAsideMenu &&<img src={hamberger} alt="" /> } */}
                         <img src={hamberger} alt="" />
-                        <h4 className={`${state.togleDisplayAsideMenu ? 'pl-[20px]' : ''}`}>
+                        <h4 className={`${state.isDisplayAsideMenu ? 'pl-[20px]' : ''}`}>
                             <ChangeContentBaseAddress />
                         </h4>
                     </div>
-                    
-                    {!state.togleDisplayAsideMenu && (
-                        <BtnImportAndADD />
-                        // <div className="Right_Nav flex items-center gap-[10px]">
-                        //     <img src={icondocument} alt="" />
-                        //     <img src={iconimportuser} alt="" />
-                        //     <img src={iconuploaduser} alt="" />
-                        //     <Button
-                        //         variant="contained"
-                        //         sx={{
-                        //             height: '40px',
-                        //         }}
-                        //     >
-                        //         <img src={iconplususer} alt="" />
-                        //         New Account
-                        //     </Button>
-                        // </div>
-                    )}
+
+                    {conditionToDisplayBtnADDandImport && <BtnImportAndADD />}
                 </div>
             </div>
             {/*3/4. Background  */}
