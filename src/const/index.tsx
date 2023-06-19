@@ -1,2 +1,0 @@
-const DEFAULT_COUNT = 2 ; 
-export {DEFAULT_COUNT}

@@ -6,6 +6,10 @@ const TOGLE_DISPLAY_ASIDE_MENU = 'togle_display_aside_menu';
 const DISPLAY_FORM_VIEW_USER = 'display_form_view_user';
 const CLOSE_FORM_VIEW_USER = 'close_form_view_user';
 const VIEW_DATA_FOR_FORM_VIEW = 'view_data_for_form_view';
+const EDIT_USER ="edit_user";
+const GET_ID_FOR_EDIT= "get_id_for_edit";
+const  DISPLAY_IMPORT_FORM = "display_import_form";
+
 const ADD_NEW_USER= "add_new_user";
 export {
     GET_ROW_PER_PAGE,
@@ -16,5 +20,10 @@ export {
     DISPLAY_FORM_VIEW_USER,
     CLOSE_FORM_VIEW_USER,
     VIEW_DATA_FOR_FORM_VIEW,
+    GET_ID_FOR_EDIT,
+    EDIT_USER,
+
+    
     ADD_NEW_USER,
+    DISPLAY_IMPORT_FORM,
 };

@@ -7,6 +7,9 @@ import {
     DISPLAY_FORM_VIEW_USER,
     CLOSE_FORM_VIEW_USER,
     VIEW_DATA_FOR_FORM_VIEW,
+    GET_ID_FOR_EDIT,
+    EDIT_USER,
+    DISPLAY_IMPORT_FORM,
     ADD_NEW_USER
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
@@ -43,9 +46,22 @@ const viewDataUserForFORMVIEW  =(payload:any)=>({
     payload:payload,
 
 })
+const getIdForEdit =(idForEdit:number|string)=>({
+    type:GET_ID_FOR_EDIT,
+    payload:idForEdit
+})
+
+type userAfterEdit = {}// object chứa các key value 
+const editUser =(userAfterEdit:any)=>({
+    type:EDIT_USER,
+    payload:userAfterEdit,
+})
 const add_new_user =(newUser:any)=>({
     type:ADD_NEW_USER,
     payload:newUser,
+})
+const toggleImportForm = ()=>({
+    type: DISPLAY_IMPORT_FORM,
 })
 
 export {
@@ -57,7 +73,10 @@ export {
     displayFormViewUser,
     closeFormViewUser,
     viewDataUserForFORMVIEW,
+    getIdForEdit,
+    editUser,
     add_new_user,
+    toggleImportForm,
 };
 
 /*

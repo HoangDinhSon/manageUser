@@ -16,6 +16,8 @@ const getLimitAndSkipUser = (limit: number, skip: number) =>
         .get(`https://dummyjson.com/users?limit=${limit}&skip=${skip}&select=id,firstName,maidenName,email,company,phone`)
         .then((res) => res.data);
 const getUserBaseOnID=(id:typeID)=> axiosClient.get(`/users/${id}`).then((res)=>res.data);
+//type informationAfterEdit là một object chứa {firstName:string , id:number|string ,... }
+const editUserBaseOnID =(payload:any)=> axiosClient.put(`/users/${payload.id}`,payload.informationAfterEdit ).then((res)=>res.data)
 type typeUserSendServer={
     firstName:string;
     email:string;
@@ -24,4 +26,4 @@ type typeUserSendServer={
 } 
 const addUserToServer = (detailUser:any)=>axiosClient.post("/users/add",detailUser ).then((res)=>res.data)
 
-export { loginAuth,getLimitAndSkipUser ,getUserBaseOnID,addUserToServer};
+export { loginAuth,getLimitAndSkipUser ,getUserBaseOnID,addUserToServer,editUserBaseOnID};

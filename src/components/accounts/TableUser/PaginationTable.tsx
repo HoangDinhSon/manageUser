@@ -1,6 +1,6 @@
 import { Select, MenuItem, Pagination } from '@mui/material';
 import { actions, ContextState } from '../../../store';
-import { DEFAULT_COUNT } from '../../../const';
+import { DEFAULT_COUNT } from '../../../constance_for_page';
 
 function PaginationTable() {
     const [state, dispatch] = ContextState.useGlobalState();
@@ -43,6 +43,7 @@ function PaginationTable() {
                         variant="outlined"
                         shape="rounded"
                         count={count}
+                        page={state.ordinalNumberPage}
                         onChange={(e, value) => {
                             handlePagination(e, value);
                         }}

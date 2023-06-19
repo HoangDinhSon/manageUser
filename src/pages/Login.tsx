@@ -17,6 +17,7 @@ type payloadLogin = {
 function Login() {
     if(localStorage.getItem("userAdmin")){
         location.href = 'http://localhost:4000/accounts';
+        return(<div>dang chuyền trang</div>);
     }
 
     const {
@@ -30,6 +31,7 @@ function Login() {
             toast.success('Login succcess');
             localStorage.setItem('userAdmin', JSON.stringify(data.token));
             location.href = 'http://localhost:4000/accounts';
+           
         },
         onError: (error: any) => {
             toast.error(`login faill because of +${error?.message}`);

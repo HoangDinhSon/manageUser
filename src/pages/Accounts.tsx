@@ -1,16 +1,17 @@
 import { Button, TextField } from '@mui/material';
+import { Toaster, toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import { TableUser } from '../components/accounts/TableUser';
 import { filterbutton, iconSearch } from '../assets/icon';
 import { useGlobalState } from '../store/Provider';
 import { getLimitAndSkipUser, getUserBaseOnID } from '../Api/logTimeApi';
 import { actions } from '../store';
-import { Filter, FormViewUser } from '../components/accounts';
-import { Toaster, toast } from 'react-hot-toast';
+// import {} from '../components/accounts';
+import { ImportForm, Filter, FormViewUser, BtnImportAndADD } from '../components';
 
 function Accounts() {
     const [state, dispatch] = useGlobalState();
-    console.log('🚀 ~ file: Accounts.tsx:12 ~ Accounts ~ state:', state);
+    // console.log('🚀 ~ file: Accounts.tsx:12 ~ Accounts ~ state:', state);
     let limit = state.rowPerPage;
     let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
     const { status } = useQuery({
@@ -35,9 +36,13 @@ function Accounts() {
             toast.error('get one api fail ');
         },
     });
+    // import User
+    const handleImportUser =()=>{
+        dispatch(actions.toggleImportForm())
+    }
 
     return (
-        <section className="accounts pt-[98px] mx-5 w-full">
+        <section className="accounts_page">
             <Toaster />
             {status === 'loading' && <div>loading....</div>}
             {status === 'error' && <div>error</div>}
@@ -50,25 +55,29 @@ function Accounts() {
                         <p className="w-[75px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Vinova</p>
                         <p className="w-[44px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Patner</p>
                     </div>
-                    <div className="search_filter h-[97px] pt-[29px]">
-                        <TextField
-                            placeholder="Search"
-                            InputProps={{
-                                startAdornment: <img src={iconSearch} alt="" className="pr-2" />,
-                                style: {
-                                    height: '40px',
-                                },
-                            }}
-                        />
-                        <Button sx={{ height: '40px' }} onClick={handleSwitchDisplayFilterForm}>
-                            <img src={filterbutton} alt="" />
-                        </Button>
+                    <div className='flex justify-between '>
+                        <div className="search_filter h-[97px] pt-[29px]">
+                            <TextField
+                                placeholder="Search"
+                                InputProps={{
+                                    startAdornment: <img src={iconSearch} alt="" className="pr-2" />,
+                                    style: {
+                                        height: '40px',
+                                    },
+                                }}
+                            />
+                            <Button sx={{ height: '40px' }} onClick={handleSwitchDisplayFilterForm}>
+                                <img src={filterbutton} alt="" />
+                            </Button>
+                        </div>
+                       {state.togleDisplayAsideMenu&& <BtnImportAndADD />}
                     </div>
                     <div className="flex">
                         <TableUser />
                         {state.togleDisplayFiter && <Filter />}
                     </div>
                     {statusForApiByID === 'success' && state.isDisplayFormView && <FormViewUser />}
+                   { state.isDisplayImportForm&&<ImportForm/>}
                 </div>
             )}
         </section>

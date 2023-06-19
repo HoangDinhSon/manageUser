@@ -7,7 +7,10 @@ import {
     DISPLAY_FORM_VIEW_USER,
     CLOSE_FORM_VIEW_USER,
     VIEW_DATA_FOR_FORM_VIEW,
+    GET_ID_FOR_EDIT,
+    EDIT_USER,
     ADD_NEW_USER,
+    DISPLAY_IMPORT_FORM
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
 const ROW_PER_PAGE_DEFAULT = 5;
@@ -22,16 +25,22 @@ const USE_FOR_FORM_VIEW_DEFAULT = {
     company: 'DEFAULT',
     phone: 'DEFAULT',
 };
+import { findIndex } from '../handlelogic';
+const ID_FOR_EDIT_DEFAULT =0;
 const DISPLAY_FORM_VIEW_USER_DEFAULT = false;
+const IS_DISPLAY_IMPORT_FORM_DEFAULT = false;
 type TypeStateGlobal = {
     rowPerPage: number;
     ordinalNumberPage: number;
-    resApi: any;
+    resApi: any;//Array<any>
     togleDisplayFiter: boolean;
     togleDisplayAsideMenu: boolean;
     UserForFormView: TypeOfUser;
     isDisplayFormView: boolean;
     UserForFormViewAfterCallApi: any;
+    idForEdit:number;
+    userAfterEdit:any;//object
+    isDisplayImportForm : boolean;
 };
 const initState = {
     rowPerPage: ROW_PER_PAGE_DEFAULT,
@@ -42,6 +51,9 @@ const initState = {
     UserForFormView: USE_FOR_FORM_VIEW_DEFAULT,
     isDisplayFormView: DISPLAY_FORM_VIEW_USER_DEFAULT,
     UserForFormViewAfterCallApi: {},
+    idForEdit:ID_FOR_EDIT_DEFAULT,
+    userAfterEdit:{},// kiểm tra xem có dùng tới ko
+    isDisplayImportForm:IS_DISPLAY_IMPORT_FORM_DEFAULT,
 };
 
 function reducer(state: TypeStateGlobal, action: any) {
@@ -94,6 +106,20 @@ function reducer(state: TypeStateGlobal, action: any) {
                 UserForFormViewAfterCallApi: action.payload,
             };
         }
+        case GET_ID_FOR_EDIT: {
+            return{
+                ...state,
+                idForEdit:action.payload
+            }
+        }
+        case EDIT_USER :{
+            const index = findIndex(state.idForEdit,state.resApi.users)
+            state.resApi.users.splice(index,1,action.payload)
+            return({
+                ...state,
+            })
+        }
+
         case ADD_NEW_USER: {
             console.log(action.payload);
             console.log(state.resApi);
@@ -105,6 +131,13 @@ function reducer(state: TypeStateGlobal, action: any) {
                 ...state
             };
         }
+        case DISPLAY_IMPORT_FORM :{
+            return ({
+                ...state,
+                isDisplayImportForm: !state.isDisplayImportForm,
+            })
+        }
+
         default:
             throw Error('action in valid hành động không phù hợp ');
     }

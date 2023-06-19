@@ -1,85 +1,61 @@
-import { iconArrowTable ,IconEditUser, IconViewUser} from '../../../assets/icon';
+import { NavLink, Link } from 'react-router-dom';
+import { iconArrowTable, IconEditUser, IconViewUser } from '../../../assets/icon';
 import PaginationTable from './PaginationTable';
 import { ContextState } from '../../../store';
 import { actions } from '../../../store';
 import { TypeOfUser } from '../../../type/typePageAccounts';
+import { LINK_PAGE_ACCOUNT_EDIT } from '../../../constance_for_page';
 
+function TDHeader({ header, width }: any) {
+    const classOfCss = `flex justify-between w-[${width}]`;
+    return (
+        <td>
+            <div className={classOfCss}>
+                <span>{header}</span>
+                <img src={iconArrowTable} alt="" />
+            </div>
+        </td>
+    );
+}
 function TableRowForHeader() {
     return (
         <tr className="text-center">
-            <td className="w-6">
-                <input type="checkbox" />
-            </td>
-            <td className="w-[110px] ">ID</td>
-            <td className="w-[118px] ">
-                First Name
-                <img src={iconArrowTable} alt="" className="inline " />
-            </td>
-            <td className="w-[110px]">
-                Alias <img src={iconArrowTable} alt="" className="inline ml-[30px]" />
-            </td>
-            <td className="w-[178px]">
-                Email <img src={iconArrowTable} alt="" className="inline ml-[30px]" />
-            </td>
-            <td className="w-[110px]">
-                Team <img src={iconArrowTable} alt="" className="inline ml-[30px]" />
-            </td>
-            <td className="w-[210px]">
-                <div className="flex">
-                    <span>Company</span>
-                    <img src={iconArrowTable} alt="" />
+            <td>
+                <div className="w-[44px]">
+                    <input type="checkbox" />
                 </div>
             </td>
-            <td className="">
-                <div className="flex justify-between w-[110px] overflow-auto">
-                    <span>Position</span>
-                    <img src={iconArrowTable} alt="" />
+            <TDHeader header="ID" width={'110px'} />
+            <TDHeader header="First Name" width={'308px'} />
+            <TDHeader header="Alias" width={'258px'} />
+            <TDHeader header="Email" width={'178px'} />
+            <TDHeader header="Team" width={'128px'} />
+            <TDHeader header="Company" width={'128px'} />
+            <TDHeader header="Position" width={'128px'} />
+            <TDHeader header="Role" width={'128px'} />
+            <TDHeader header="Status" width={'128px'} />
+            <td colSpan={2}>
+                <div className="w-[100px] flex justify-between">
+                    Action <img src={iconArrowTable} alt="" />
                 </div>
-            </td>
-            <td className="w-[110px]">
-                Role <img src={iconArrowTable} alt="" className="inline ml-[30px]" />
-            </td>
-            <td className="w-[110px]">
-                Status <img src={iconArrowTable} alt="" className="inline ml-[30px]" />
-            </td>
-            <td colSpan={2} className="w-[200px]">
-                Action <img src={iconArrowTable} alt="" className="inline ml-[30px]" />
             </td>
         </tr>
     );
 }
-// function TableRowForBody(user: any) {
-//     return (
-//         <tr>
-//             <td>
-//                 <input type="checkbox" />
-//             </td>
-//             <td>{user?.id}</td>
-//             <td>{user?.firstName}</td>
-//             <td>{user?.alias}</td>
-//             <td>{user?.email}</td>
-//             <td>{user?.team}</td>
-//             <td>{user?.company.name}</td>
-//             <td>{user?.position}</td>
-//             <td>{user?.role}</td>
-//             <td>{user?.status}</td>
-//             <td>{user?.action}</td>
-//         </tr>
-//     );
-// }
 
 function TableUser() {
     const [state, dispatch] = ContextState.useGlobalState();
     const listUser = state.resApi.users;
-    const handleDisplayViewForm=( user:TypeOfUser) => {
+    const handleDisplayViewForm = (user: TypeOfUser) => {
         // console.log("🚀 ~ file: TableUser.tsx:73 ~ handleDisplayViewForm ~ user:", user)
-        dispatch(actions.displayFormViewUser(user))
+        dispatch(actions.displayFormViewUser(user));
+    };
+    const handleGetID = (id: number | string) => {
+        dispatch(actions.getIdForEdit(id));
+    };
 
-     
-        
-    }
     return (
-        <div className="bg-white overflow-auto">
+        <div className="bg-white overflow-x-auto ">
             <table>
                 <thead>
                     <TableRowForHeader />
@@ -100,8 +76,19 @@ function TableUser() {
                                 <td className="">{user?.position}</td>
                                 <td className="">{user?.role}</td>
                                 <td className="">{user?.status}</td>
-                                <td><img src={IconViewUser} alt="" className='w-[100px]' onClick={( )=>handleDisplayViewForm(user)} /></td>
-                                <td><img src={IconEditUser} alt=""  className='w-[100px]'/></td>
+                                <td onClick={() => handleDisplayViewForm(user)}>
+                                    <img src={IconViewUser} alt="" className="w-[50px] " />
+                                </td>
+                                <td>
+                                    <NavLink to={LINK_PAGE_ACCOUNT_EDIT}>
+                                        <img
+                                            src={IconEditUser}
+                                            alt=""
+                                            className="w-[50px]"
+                                            onClick={() => handleGetID(user.id)}
+                                        />
+                                    </NavLink>
+                                </td>
                             </tr>
                         );
                     })}

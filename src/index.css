@@ -33,9 +33,14 @@
         font-size: 18px;
         line-height: 27px;
     }
+    .h4_lean_100 {
+        font-size: 18px;
+        line-height: 18px;
+    }
     h5 {
         color: #9da7b9;
     }
+
     table,
     th,
     td {
@@ -69,8 +74,16 @@
     .my_outline_rounded_edit_form {
         @apply outline outline-1 outline-[--outlineColor] rounded-md;
     }
+    .my_border_dashed {
+        background-color: #ffffff;
+        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='5' ry='5' stroke='%23D2D2D2FF' stroke-width='5' stroke-dasharray='5%25%2c 3%25' stroke-dashoffset='66' stroke-linecap='butt'/%3e%3c/svg%3e");
+        border-radius: 5px;
+    }
 }
 :root {
-    --outlineColor: #D2D2D2;
-    --ColorBgButton: #5E90F0;
+    --outlineColor: #d2d2d2;
+    --ColorBgButton: #5e90f0;
+    --colorGrey: #999999;
+    --greyChart: #9da7b9;
+    --blackTranspirationHalf: rgba(0, 0, 0, 0.5);
 }
