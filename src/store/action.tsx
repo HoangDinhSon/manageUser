@@ -1,6 +1,7 @@
 import {
     GET_ROW_PER_PAGE,
     GET_ORDINAL_NUMBER_PAGE,
+    MAKE_LIST_FILTER,
     UPDATE_LIST_USER,
     TOGLE_DISPLAY_FILTER,
     TOGLE_DISPLAY_ASIDE_MENU,
@@ -65,10 +66,15 @@ const addNewUser =(newUser:any)=>({
 const toggleImportForm = ()=>({
     type: DISPLAY_IMPORT_FORM,
 })
+const makeListFilter = (listFilter:Array<any>)=>({
+    type: MAKE_LIST_FILTER,
+    payload : listFilter,
+})
 
 export {
     getRowPerPage,
     getOrdinalNumberPage,
+    makeListFilter,
     upDateListUser,
     togleDisplayFilter,
     togleDisplayAsideMenu,

@@ -8,9 +8,11 @@ import { useGlobalState } from './store/Provider';
 import { actions } from './store';
 import { useQuery } from 'react-query';
 import { getLimitAndSkipUser } from './Api/logTimeApi';
+import { Fragment } from 'react';
 function App() {
     const [state, dispatch] = useGlobalState();
-    // console.log('🚀 ~ file: Accounts.tsx:12 ~ Accounts ~ state:', state);
+    console.log('state*********>>>', state);
+    
     let limit = state.rowPerPage;
     let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
     const { status } = useQuery({
@@ -21,20 +23,18 @@ function App() {
         },
     });
     return (
-        <div>
-            {status === 'loading' && <CircularProgress disableShrink />}
-            {status === 'error' && <div>error</div>}
-            {status === 'success' && (
-                <BrowserRouter>
+        <Fragment>
+            <BrowserRouter>
+                {status === 'success' && (
                     <Routes>
                         <Route path="/" element={<Login />}></Route>
                         <Route path={LINK_PAGE_ACCOUNT} element={<Menu>{<Accounts />}</Menu>}></Route>
                         <Route path={LINK_PAGE_ACCOUNT_EDIT} element={<Menu>{<EditUser />}</Menu>}></Route>
                         <Route path={LINK_PAGE_ACCOUNT_ADD} element={<Menu>{<AddUser />}</Menu>}></Route>
                     </Routes>
-                </BrowserRouter>
-            )}
-        </div>
+                )}
+            </BrowserRouter>
+        </Fragment>
     );
 }
 export default App;

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useLocation, NavLink } from 'react-router-dom';
 import { accounts, dasboard, hamberger, project, stacks, RoleManager, Report } from '../assets/icon';
 import {
     nameOfDashboard,
@@ -12,14 +14,25 @@ import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
 import { FormLogOut, BtnImportAndADD } from '../components';
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { LINK_PAGE_ACCOUNT, LINK_PAGE_ACCOUNT_EDIT } from '../constance_for_page';
+import {
+    LINK_PAGE_ACCOUNT,
+    LINK_PAGE_ACCOUNT_EDIT,
+    LINK_PAGE_ACCOUNT_ADD,
+    LINK_PAGE_DASHBOARD,
+    LINK_PAGE_PROJECT,
+    LINK_PAGE_STACKS,
+    LINK_PAGE_ROLEMANAGER,
+    LINK_PAGE_REPORT,
+} from '../constance_for_page';
 
 function Menu({ children }: any) {
     const location = useLocation();
     const [state, dispatch] = useGlobalState();
     const [isDisPlayLogout, setIsDisplayLogout] = useState(false);
+    if (localStorage.getItem('userAdmin') == undefined) {
+        window.location.href = 'http://localhost:4000';
+        return <div></div>;
+    }
     const handleSwitchDisplay = () => {
         dispatch(actions.togleDisplayAsideMenu(state.isDisplayAsideMenu));
     };
@@ -31,7 +44,9 @@ function Menu({ children }: any) {
         function ContentHeaderLayOut({ children }: any) {
             return (
                 <div className="flex gap-4">
-                    <img src={arrowBackForLayout} alt="" />
+                    <NavLink to={LINK_PAGE_ACCOUNT}>
+                        <img src={arrowBackForLayout} alt="" />
+                    </NavLink>
                     <p className="text-[--greyChart]">{children}</p>
                 </div>
             );
@@ -40,12 +55,15 @@ function Menu({ children }: any) {
             case LINK_PAGE_ACCOUNT_EDIT: {
                 return <ContentHeaderLayOut>Accounts / Edit Account</ContentHeaderLayOut>;
             }
+            case LINK_PAGE_ACCOUNT_ADD: {
+                return <ContentHeaderLayOut>Accounts / Add Account</ContentHeaderLayOut>;
+            }
             default: {
                 return <ContentHeaderLayOut>Accounts</ContentHeaderLayOut>;
             }
         }
     }
-    // hiddent or display BtnAddandImport : 
+    // hidden or display BtnAddAndImport :
     const conditionToDisplayBtnADDandImport =
         state.isDisplayAsideMenu === false &&
         (location.pathname === LINK_PAGE_ACCOUNT || location.pathname === `${LINK_PAGE_ACCOUNT}/`);
@@ -59,20 +77,20 @@ function Menu({ children }: any) {
                         <div className="relative flex flex-col items-center  gap-[53px] pt-5 h-full">
                             <img src={hamberger} alt="" onClick={handleSwitchDisplay} />
                             <div className="flex flex-col items-center gap-[53px]">
-                                <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} />
-                                <IconMenu icon={project} iconNameMenu={nameOfproject} />
-                                <IconMenu icon={stacks} iconNameMenu={nameOfStacks} />
-                                <IconMenu icon={Report} iconNameMenu={nameOfreport} />
-                                <IconMenu icon={accounts} iconNameMenu={nameOfaccounts} />
-                                <IconMenu icon={RoleManager} iconNameMenu={nameOfRolemanager} />
+                                <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} name={LINK_PAGE_DASHBOARD}/>
+                                <IconMenu icon={project} iconNameMenu={nameOfproject} name={LINK_PAGE_PROJECT} />
+                                <IconMenu icon={stacks} iconNameMenu={nameOfStacks} name={LINK_PAGE_STACKS} />
+                                <IconMenu icon={Report} iconNameMenu={nameOfreport} name={LINK_PAGE_REPORT} />
+                                <IconMenu icon={accounts} iconNameMenu={nameOfaccounts} name={LINK_PAGE_ACCOUNT} />
+                                <IconMenu icon={RoleManager} iconNameMenu={nameOfRolemanager} name={LINK_PAGE_ROLEMANAGER}/>
                             </div>
                             <div className=" flex flex-col items-center gap-10 ">
-                                <img src={notification} alt="" />
+                                <img src={notification} alt=""  className='cursor-pointer'/>
                                 <div className="relative">
                                     <div className="absolute bottom-0 left-[52px] ">
                                         {isDisPlayLogout && <FormLogOut />}
                                     </div>
-                                    <img src={bgAvatar} alt="" onClick={handleLogOut} />
+                                    <img src={bgAvatar} alt="" onClick={handleLogOut}  className='cursor-pointer'/>
                                 </div>
                             </div>
                         </div>
@@ -82,14 +100,12 @@ function Menu({ children }: any) {
             {/*2/4. TopNav Bar */}
             <div className="fixed z-[1] top-0 left-[0] right-0 h-[78px] px-[20px] bg-[#fff]  range_1441_:px-[calc((100%-1440px)/2+20px)] ">
                 <div className="flex justify-between items-center  h-[78px]">
-                    <div className="Left_Nav flex items-center gap-[15px]" onClick={handleSwitchDisplay}>
-                        {/* {!state.togleDisplayAsideMenu &&<img src={hamberger} alt="" /> } */}
-                        <img src={hamberger} alt="" />
-                        <h4 className={`${state.isDisplayAsideMenu ? 'pl-[20px]' : ''}`}>
+                    <div className="Left_Nav flex items-center gap-[15px]">
+                        <img src={hamberger} alt="" onClick={handleSwitchDisplay} className="cursor-pointer" />
+                        <h4 className={state.isDisplayAsideMenu ? 'pl-[20px]' : ''}>
                             <ChangeContentBaseAddress />
                         </h4>
                     </div>
-
                     {conditionToDisplayBtnADDandImport && <BtnImportAndADD />}
                 </div>
             </div>

@@ -25,7 +25,7 @@ const theme = createTheme({
 function FormLogOut() {
     const handleLogOut = () => {
         localStorage.removeItem('userAdmin');
-        window.location.href="http://localhost:4000/"
+        window.location.href="http://localhost:4000"
     };
     return (
         <ThemeProvider theme={theme}>

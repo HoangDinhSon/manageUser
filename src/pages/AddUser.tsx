@@ -17,31 +17,24 @@ import {
     listOptionOffice,
     listOptionPotion,
 } from '../constance_for_page';
- type resServerAfterAddNewUser = {
-
-}
+type resServerAfterAddNewUser = {};
 
 function AddUser() {
-    
-    const [state, dispatch]= useGlobalState();
-    const { register, handleSubmit,reset ,resetField} = useForm();
+    const [state, dispatch] = useGlobalState();
+    const { register, handleSubmit, reset } = useForm();
     const [listSkill, setListSkill] = useState<Array<string>>([]);
     const { mutate } = useMutation({
         mutationFn: addUserToServer,
         onSuccess: (res) => {
-            toast.success("add user success")
+            toast.success('add user success');
             reset();
-            dispatch(actions.addNewUser(res))
+            dispatch(actions.addNewUser(res));
         },
         onError: () => {
             toast.error('can not send inform user to server');
         },
     });
-    if(!state.resApi.users){
-        location.href= `http://localhost:4000${LINK_PAGE_ACCOUNT}`
-        return (<div><CircularProgress disableShrink /></div>)
-    }
-    const onSubmitForm = (formData: any) => {        
+    const onSubmitForm = (formData: any) => {
         mutate({
             ...formData,
             listSkill: listSkill,
@@ -124,7 +117,9 @@ function AddUser() {
                     </div>
                     <Select label="Level" listOption={listOptionLevel} nameSelect="level" register={register} />
                     <SkillDisplayInput resultListSkill={getListSkill} />
-                    <button className="w-full h-[42px] rounded bg-[--ColorBgButton]" type='submit'>Save</button>
+                    <button className="w-full h-[42px] rounded bg-[--ColorBgButton]" type="submit">
+                        Save
+                    </button>
                 </form>
             </div>
         </div>

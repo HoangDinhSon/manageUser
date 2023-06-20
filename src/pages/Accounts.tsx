@@ -11,7 +11,7 @@ import { ImportForm, Filter, FormViewUser, BtnImportAndADD } from '../components
 function Accounts() {
     const [state, dispatch] = useGlobalState();
     const handleSwitchDisplayFilterForm = () => {
-        dispatch(actions.togleDisplayFilter(state.togleDisplayFiter));
+        dispatch(actions.togleDisplayFilter(state.isDisplayFiler));
     };
     // call apis by id dùng cho hiển thị form 
     const { status: statusForApiByID } = useQuery({
@@ -55,7 +55,7 @@ function Accounts() {
                     </div>
                     <div className="flex">
                         <TableUser />
-                        {state.togleDisplayFiter && <Filter />}
+                        {state.isDisplayFiler && <Filter />}
                     </div>
                     {statusForApiByID === 'success' && state.isDisplayFormView && <FormViewUser />}
                     {state.isDisplayImportForm && <ImportForm />}

@@ -7,3 +7,7 @@ import BtnImportAndADD from './component_reuse/BtnImportAndADD';
 import { PhoneNumber ,Select,Input,InputWithCharacter} from './component_reuse'; 
 export { SkillDisplayInput, FormLogOut, ImportForm, Filter, FormViewUser, ListName, BtnImportAndADD};
 export {Select ,PhoneNumber,Input,InputWithCharacter}
+
+// animation
+import TableAnimation from './animationUI/TableAnimation';
+export {TableAnimation}

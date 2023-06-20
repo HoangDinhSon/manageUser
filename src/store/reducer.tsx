@@ -1,6 +1,7 @@
 import {
     GET_ROW_PER_PAGE,
     GET_ORDINAL_NUMBER_PAGE,
+    MAKE_LIST_FILTER,
     UPDATE_LIST_USER,
     TOGLE_DISPLAY_FILTER,
     TOGLE_DISPLAY_ASIDE_MENU,
@@ -33,7 +34,7 @@ type TypeStateGlobal = {
     rowPerPage: number;
     ordinalNumberPage: number;
     resApi: any; //Array<any>
-    togleDisplayFiter: boolean;
+    isDisplayFiler: boolean;
     isDisplayAsideMenu: boolean;
     UserForFormView: TypeOfUser;
     isDisplayFormView: boolean;
@@ -41,12 +42,13 @@ type TypeStateGlobal = {
     idForEdit: number;
     userAfterEdit: any; //object
     isDisplayImportForm: boolean;
+    listFilter: Array<any>;
 };
 const initState = {
     rowPerPage: ROW_PER_PAGE_DEFAULT,
     ordinalNumberPage: ORDINAL_NUMBER_PAGE_DEFAULT,
     resApi: {},
-    togleDisplayFiter: IS_DISPLAY_FILTER_DEFAULT,
+    isDisplayFiler: IS_DISPLAY_FILTER_DEFAULT,
     isDisplayAsideMenu: DISPLAY_ASIDE_MENU_DEFAULT,
     UserForFormView: USE_FOR_FORM_VIEW_DEFAULT,
     isDisplayFormView: DISPLAY_FORM_VIEW_USER_DEFAULT,
@@ -54,6 +56,7 @@ const initState = {
     idForEdit: ID_FOR_EDIT_DEFAULT,
     userAfterEdit: {}, // kiểm tra xem có dùng tới ko
     isDisplayImportForm: IS_DISPLAY_IMPORT_FORM_DEFAULT,
+    listFilter: [],
 };
 
 function reducer(state: TypeStateGlobal, action: any) {
@@ -78,7 +81,7 @@ function reducer(state: TypeStateGlobal, action: any) {
             let isDisplay = !action.payload;
             return {
                 ...state,
-                togleDisplayFiter: isDisplay,
+                isDisplayFiler: isDisplay,
             };
         }
         case TOGLE_DISPLAY_ASIDE_MENU: {
@@ -123,13 +126,19 @@ function reducer(state: TypeStateGlobal, action: any) {
         case ADD_NEW_USER: {
             return {
                 ...state,
-                resApi: { ...state.resApi, users: [ action.payload,...state.resApi.users] },
+                resApi: { ...state.resApi, users: [action.payload, ...state.resApi.users] },
             };
         }
         case DISPLAY_IMPORT_FORM: {
             return {
                 ...state,
                 isDisplayImportForm: !state.isDisplayImportForm,
+            };
+        }
+        case MAKE_LIST_FILTER: {
+            return {
+                ...state,
+                listFilter: action.payload,
             };
         }
 

@@ -2,9 +2,10 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import toast, { Toaster } from 'react-hot-toast';
+import { LinearProgress } from '@mui/material';
 import { getUserBaseOnID, editUserBaseOnID } from '../Api/logTimeApi';
 import { SkillDisplayInput } from '../components';
-import {  calendar } from '../assets/icon';
+import { calendar } from '../assets/icon';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import {
@@ -17,16 +18,14 @@ import {
     listOptionOffice,
     listOptionPotion,
 } from '../constance_for_page';
-import {Select ,PhoneNumber,Input,InputWithCharacter} from "../components"
+import { Select, PhoneNumber, Input, InputWithCharacter } from '../components';
 import { UserAfterEdit } from '../type/typeComponentEditUser';
-
-
 
 function EditUser() {
     const [state, dispatch] = useGlobalState();
     const { register, handleSubmit } = useForm();
     const [listSkill, setListSkill] = useState<Array<string>>([]);
-    //check id of user Edit 
+    //check id of user Edit
     if (state.idForEdit === ID_FOR_EDIT_DEFAULT) {
         location.href = `http://localhost:4000${LINK_PAGE_ACCOUNT}`;
     }
@@ -62,7 +61,11 @@ function EditUser() {
     return (
         <div className="edit_form ">
             <Toaster />
-            {status === 'loading' && <div>loadingOfEditUser...</div>}
+            {status === 'loading' && (
+                <div>
+                    <LinearProgress />
+                </div>
+            )}
             {status === 'error' && <div>error</div>}
             {status === 'success' && (
                 <div className="mx-5 my-7 max-w-[697px]">

@@ -16,8 +16,8 @@ type payloadLogin = {
 
 function Login() {
     if(localStorage.getItem("userAdmin")){
-        location.href = 'http://localhost:4000/accounts';
-        return(<div>dang chuyền trang</div>);
+        window.location.href = 'http://localhost:4000/accounts';
+        return(<div></div>);
     }
 
     const {
@@ -66,7 +66,7 @@ function Login() {
                         </div>
                         <div className="pt-5 relative">
                             <label htmlFor="">Password</label>
-                            <TextFieldLoginPassword  {...register('password', { required: true })}/>
+                            {/* <TextFieldLoginPassword  {...register('password', { required: true })}/> */}
                             <TextField
                                 {...register('password', { required: true })}
                                 name="password"
