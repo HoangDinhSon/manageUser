@@ -1,82 +1,70 @@
 import { Checkbox, FormControlLabel, Select, MenuItem, Button } from '@mui/material';
-import { useMemo, useRef, useState,useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { getUserBaseFilter } from '../../Api/logTimeApi';
 import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
+import { OutPutFormFilter } from '../../type';
 type typeSeclect = { children: string; value: string | number };
-type typeForm = {
-    contract: boolean;
-    contractSelect: string;
-    level: boolean;
-    levelSelect: string;
-    position: boolean;
-    positionSelect: string;
-    role: boolean;
-    roleSelect: string;
-    skill: boolean;
-    skillSelect: string;
-    team: boolean;
-    teamSelect: string;
-};
+type DataCallApi = { keyFilter: string | number; valueFilter: string | number }[]; // dạng mảng chứa object
 
 const ListFilter = [
     {
-        label: 'Role(id)',
-        propcheck: 'id',
+        label: 'gender',
+        propcheck: 'gender',
         propselect: 'select',
         content: [
-            { children: 'Admin1', value: '1' },
-            { children: 'Customer2', value: '2' },
-            { children: 'UserID3', value: '3' },
+            { children: 'male', value: 'male' },
+            { children: 'female', value: 'female' },
         ],
     },
     {
-        label: 'Team(Age)',
+        label: 'Age',
         propcheck: 'age',
         propselect: 'select',
         content: [
-            { children: 'JS', value: '50' },
-            { children: 'Java', value: '27' },
-            { children: 'C++', value: '28' },
+            { children: '50', value: 50 },
+            { children: '49', value: 49 },
+            { children: '38', value: 38 },
         ],
     },
     {
-        label: 'Position',
-        propcheck: 'position',
+        label: 'eyeColor',
+        propcheck: 'eyeColor',
         propselect: 'select',
         content: [
-            { children: 'Leader', value: 'leader' },
-            { children: 'Employee', value: 'employee' },
+            { children: 'Green', value: 'Green' },
+            { children: 'Amber', value: 'Amber' },
+            { children: 'Blue', value: 'Blue' },
         ],
     },
     {
-        label: 'Level',
-        propcheck: 'level',
+        label: 'bloodGroup',
+        propcheck: 'bloodGroup',
         propselect: 'select',
         content: [
-            { children: 'Mot', value: 'mot' },
-            { children: 'Hai', value: 'hai' },
+            { children: 'B−', value: 'B−' },
+            { children: 'A−', value: 'A−' },
         ],
     },
     {
-        label: 'Skills',
-        propcheck: 'skill',
+        label: 'university',
+        propcheck: 'university',
         propselect: 'select',
         content: [
-            { children: 'PM, React Native, Mobile iOS', value: 'pm' },
-            { children: ' React Native', value: 'reactnative' },
+            { children: 'Capitol University', value: 'Capitol University' },
+            { children: 'Stavropol State Technical University', value: 'Stavropol State Technical University' },
         ],
     },
     {
-        label: 'Contract Type',
-        propcheck: 'contract',
+        label: 'height',
+        propcheck: 'height',
         propselect: 'select',
         content: [
-            { children: 'Probation', value: 'probation' },
-            { children: 'Long', value: 'long' },
-            { children: 'Short', value: 'short' },
+            { children: '188', value: 188 },
+            { children: '200', value: 200 },
+            { children: '176', value: 176 },
         ],
     },
 ];
@@ -108,22 +96,29 @@ function CheckAndSeclect({ PropsCheck, PropsSelect, label, content, register }: 
         </div>
     );
 }
-type DataCallApi = { keyFilter: string | number; valueFilter: string | number }[]; // dạng mảng chứa object
 
 function Filter() {
     const [state, dispatch] = useGlobalState();
     const [isdisplayForm, setIsDisplayForm] = useState(true);
-    const [listUser, setListUser] = useState<any[]>([]);
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit,reset } = useForm();
     let responseFromServer = useRef<any>([]);
     const { mutate } = useMutation({
         mutationFn: getUserBaseFilter,
         onSuccess: (res: any) => {
             responseFromServer.current = [...responseFromServer.current, ...res.users];
+            dispatch(actions.makeListFilter(responseFromServer.current));
         },
     });
 
-    const handleSubmitForm = (payloadForm: typeForm | any) => {
+    const handleSubmitForm = (payloadForm: OutPutFormFilter | any) => {
+        // khi lấy từ input tất cả đề là string nên dòng này chuyển select của age và height  về number
+        payloadForm = {
+            ...payloadForm,
+            age: { ...payloadForm.age, select: parseInt(payloadForm.age.select) },
+            height: { ...payloadForm.height, select: parseInt(payloadForm.height.select) },
+        };
+        dispatch(actions.setCriterialForFilter(payloadForm));
+        // duyệt qua các phần tữ trong object
         const listKeyOfPayloadForm = Object.keys(payloadForm);
         listKeyOfPayloadForm.forEach((item) => {
             if (payloadForm[item][item]) {
@@ -133,8 +128,8 @@ function Filter() {
                 });
             }
         });
-      
-        reset();
+        // sau khi submit thì phải reset mảng vì nếu không nó sẽ tích vào rất nhiêu lần
+        responseFromServer.current = [];
     };
     const handleClearForm = () => {
         responseFromServer.current = [];
@@ -142,30 +137,11 @@ function Filter() {
         setTimeout(() => {
             setIsDisplayForm(true);
         }, 1);
+        reset();
     };
-    const listUnique = useMemo(() => {
-        const listUserFromServer = responseFromServer.current;
-        let uniqueList: any[] = [];
-        listUserFromServer.forEach((element: any) => {
-            let flag = true;
-            uniqueList.forEach((item) => {
-                if (item?.id === element.id) {
-                    flag = false;
-                }
-            });
-            if (flag === true) {
-                uniqueList.push(element);
-            }
-        });
-        setListUser(uniqueList);
 
-        return uniqueList;
-    }, [responseFromServer.current]);
-    // useEffect(()=>{
-    //     dispatch(actions.makeListFilter([...listUnique]));
-    // })
     return (
-        <div className="bg-white  w-[319px] pt-[13px] pb-[24px] px-[22px] h-[700px]  ">
+        <div className="bg-white  w-[319px] pt-[13px] pb-[24px] px-[22px]  ">
             <div className="bg-white rounded-md">
                 <p>Filter</p>
                 <form onSubmit={handleSubmit(handleSubmitForm)}>

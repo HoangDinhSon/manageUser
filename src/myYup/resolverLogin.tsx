@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-// validation of login
+//---- validation of login----------
 const schema = yup
     .object({
         username: yup.string().required(),
@@ -11,15 +11,13 @@ type FormLogin = yup.InferType<typeof schema>;
 const resolverLogin = {
     resolver: yupResolver(schema),
 };
-
 export default resolverLogin;
 export type { FormLogin };
-// validation of edit form 
+// validation of edit form -------------
 
 const schemaForFormEdit =yup.object({
     
 
-
-
 })
 type FormEditUser = yup.InferType<typeof schemaForFormEdit >
+

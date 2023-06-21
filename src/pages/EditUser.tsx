@@ -19,7 +19,6 @@ import {
     listOptionPotion,
 } from '../constance_for_page';
 import { Select, PhoneNumber, Input, InputWithCharacter } from '../components';
-import { UserAfterEdit } from '../type/typeComponentEditUser';
 
 function EditUser() {
     const [state, dispatch] = useGlobalState();

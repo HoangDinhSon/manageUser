@@ -8,7 +8,8 @@ const CLOSE_FORM_VIEW_USER = 'close_form_view_user';
 const VIEW_DATA_FOR_FORM_VIEW = 'view_data_for_form_view';
 const EDIT_USER ="edit_user";
 const GET_ID_FOR_EDIT= "get_id_for_edit";
-const MAKE_LIST_FILTER = "make_list_filter"
+const MAKE_LIST_FILTER = "make_list_filter";
+const SET_CRITERIAL_FOR_FILTER = "set_criterial_for_filter"
 
 const ADD_NEW_USER= "add_new_user";
 const  DISPLAY_IMPORT_FORM = "display_import_form";
@@ -25,6 +26,7 @@ export {
     VIEW_DATA_FOR_FORM_VIEW,
     GET_ID_FOR_EDIT,
     EDIT_USER,
+    SET_CRITERIAL_FOR_FILTER,
   
 
     

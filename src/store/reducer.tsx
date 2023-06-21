@@ -1,6 +1,7 @@
 import {
     GET_ROW_PER_PAGE,
     GET_ORDINAL_NUMBER_PAGE,
+    SET_CRITERIAL_FOR_FILTER,
     MAKE_LIST_FILTER,
     UPDATE_LIST_USER,
     TOGLE_DISPLAY_FILTER,
@@ -14,6 +15,7 @@ import {
     DISPLAY_IMPORT_FORM,
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
+import { typeKeyOfCriterial } from '../type';
 const ROW_PER_PAGE_DEFAULT = 5;
 const ORDINAL_NUMBER_PAGE_DEFAULT = 1;
 const IS_DISPLAY_FILTER_DEFAULT = false;
@@ -43,6 +45,7 @@ type TypeStateGlobal = {
     userAfterEdit: any; //object
     isDisplayImportForm: boolean;
     listFilter: Array<any>;
+    criterialForFilter: any; //object
 };
 const initState = {
     rowPerPage: ROW_PER_PAGE_DEFAULT,
@@ -57,6 +60,7 @@ const initState = {
     userAfterEdit: {}, // kiểm tra xem có dùng tới ko
     isDisplayImportForm: IS_DISPLAY_IMPORT_FORM_DEFAULT,
     listFilter: [],
+    criterialForFilter: {},
 };
 
 function reducer(state: TypeStateGlobal, action: any) {
@@ -136,9 +140,51 @@ function reducer(state: TypeStateGlobal, action: any) {
             };
         }
         case MAKE_LIST_FILTER: {
+            let keyOfCriterial :typeKeyOfCriterial = Object.keys(state.criterialForFilter);
+            // nhưng cái criterial  nào dc chọn nằm ở đây 
+            const newListCriterial :typeKeyOfCriterial = keyOfCriterial.map((key: any) => {
+                if (state.criterialForFilter[key][key] === true) {
+                    return key;
+                }
+            });
+
+            let unique: any[] = [];
+            unique.push(action.payload[0]);
+            action.payload.forEach((item: any) => {
+                let flag = false;
+                unique.forEach((element) => {
+                    if (item.id == element.id) {
+                        flag = true;
+                    }
+                });
+                if (flag === false) {
+                    unique.push(item);
+                }
+            });
+            let listUserSuitableCriterial: any[] = [];
+            unique.map((user) => {
+                let flag = false;
+                newListCriterial.map((criterial) => {
+                    if (user[criterial] !== state.criterialForFilter[criterial]?.select) {
+                        flag = true;
+                    }
+                });
+                if (flag === false) {
+                    listUserSuitableCriterial.push(user);
+                }
+            });
+
             return {
                 ...state,
-                listFilter: action.payload,
+                listFilter:[...listUserSuitableCriterial],
+            };
+        }
+        case SET_CRITERIAL_FOR_FILTER: {
+            console.log('critericaFilter>>>', action.payload);
+            
+            return {
+                ...state,
+                criterialForFilter: action.payload,
             };
         }
 

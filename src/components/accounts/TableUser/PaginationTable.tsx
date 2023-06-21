@@ -4,7 +4,10 @@ import { DEFAULT_COUNT } from '../../../constance_for_page';
 
 function PaginationTable() {
     const [state, dispatch] = ContextState.useGlobalState();
-    const count = state.resApi.total?Math.ceil(state.resApi.total / state.rowPerPage):DEFAULT_COUNT;
+    let count = state.resApi.total ? Math.ceil(state.resApi.total / state.rowPerPage) : DEFAULT_COUNT;
+    if (state.isDisplayFiler) {
+        count = Math.ceil(state.listFilter.length / state.rowPerPage);
+    }
     const handleRowPerPage = (e: any) => {
         dispatch(actions.getRowPerPage(e.target.value));
     };
@@ -13,9 +16,9 @@ function PaginationTable() {
     };
 
     return (
-        <div className=" sticky  bottom-0 right-[20px] left-[118px] h-[68px] bg-white">
+        <div className="h-[68px]  ">
             <div className="flex justify-between items-center h-[68px]">
-                <div className='text-[#9DA7B9]'>Showing 1 to 10 of 32,316 entries</div>
+                <div className="text-[#9DA7B9] ">Showing 1 to 10 of 32,316 entries</div>
                 <div className="flex">
                     <Select
                         value={state.rowPerPage}

@@ -77,20 +77,24 @@ function Menu({ children }: any) {
                         <div className="relative flex flex-col items-center  gap-[53px] pt-5 h-full">
                             <img src={hamberger} alt="" onClick={handleSwitchDisplay} />
                             <div className="flex flex-col items-center gap-[53px]">
-                                <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} name={LINK_PAGE_DASHBOARD}/>
+                                <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} name={LINK_PAGE_DASHBOARD} />
                                 <IconMenu icon={project} iconNameMenu={nameOfproject} name={LINK_PAGE_PROJECT} />
                                 <IconMenu icon={stacks} iconNameMenu={nameOfStacks} name={LINK_PAGE_STACKS} />
                                 <IconMenu icon={Report} iconNameMenu={nameOfreport} name={LINK_PAGE_REPORT} />
                                 <IconMenu icon={accounts} iconNameMenu={nameOfaccounts} name={LINK_PAGE_ACCOUNT} />
-                                <IconMenu icon={RoleManager} iconNameMenu={nameOfRolemanager} name={LINK_PAGE_ROLEMANAGER}/>
+                                <IconMenu
+                                    icon={RoleManager}
+                                    iconNameMenu={nameOfRolemanager}
+                                    name={LINK_PAGE_ROLEMANAGER}
+                                />
                             </div>
                             <div className=" flex flex-col items-center gap-10 ">
-                                <img src={notification} alt=""  className='cursor-pointer'/>
+                                <img src={notification} alt="" className="cursor-pointer" />
                                 <div className="relative">
                                     <div className="absolute bottom-0 left-[52px] ">
                                         {isDisPlayLogout && <FormLogOut />}
                                     </div>
-                                    <img src={bgAvatar} alt="" onClick={handleLogOut}  className='cursor-pointer'/>
+                                    <img src={bgAvatar} alt="" onClick={handleLogOut} className="cursor-pointer" />
                                 </div>
                             </div>
                         </div>
@@ -112,7 +116,10 @@ function Menu({ children }: any) {
             {/*3/4. Background  */}
             <div className="fixed  bg-[#ECECEC] top-0 bottom-0 left-0 right-0 z-[-1]"></div>
             {/*4/4. Content */}
-            <div className="mx-5 mt-[98px]  bg-[white] w-full rounded-xl mb-5 overflow-auto">{children}</div>
+            <div className=" mx-5 mt-[98px]  bg-[white] w-full h-screen rounded-xl mb-5 overflow-auto ">
+                {children}
+                
+                </div>
         </div>
     );
 }

@@ -15,7 +15,7 @@ const loginAuth = (payload: payloadLogin) =>
 const getLimitAndSkipUser = (limit: number, skip: number) =>
     axiosClient
         .get(
-            `https://dummyjson.com/users?limit=${limit}&skip=${skip}&select=id,firstName,maidenName,email,company,phone`,
+            `https://dummyjson.com/users?limit=${limit}&skip=${skip}&select=id,firstName,maidenName,email,company,phone,gender,age,eyeColor,bloodGroup,university,height`,
         )
         .then((res) => res.data);
 

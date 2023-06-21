@@ -1,6 +1,7 @@
 import {
     GET_ROW_PER_PAGE,
     GET_ORDINAL_NUMBER_PAGE,
+    SET_CRITERIAL_FOR_FILTER,
     MAKE_LIST_FILTER,
     UPDATE_LIST_USER,
     TOGLE_DISPLAY_FILTER,
@@ -15,6 +16,7 @@ import {
     DISPLAY_IMPORT_FORM,
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
+import { typeOfListUser } from '../type';
 const getRowPerPage = (payload: any) => ({
     type: GET_ROW_PER_PAGE,
     payload: payload,
@@ -66,14 +68,20 @@ const addNewUser =(newUser:any)=>({
 const toggleImportForm = ()=>({
     type: DISPLAY_IMPORT_FORM,
 })
-const makeListFilter = (listFilter:Array<any>)=>({
+const makeListFilter = (listFilter:typeOfListUser)=>({
     type: MAKE_LIST_FILTER,
     payload : listFilter,
+})
+// criterialForFilter là một object chứa các key:  gender, height,...
+const setCriterialForFilter =(criterialForFilter:any)=>({
+    type:SET_CRITERIAL_FOR_FILTER,
+    payload:criterialForFilter
 })
 
 export {
     getRowPerPage,
     getOrdinalNumberPage,
+    setCriterialForFilter,
     makeListFilter,
     upDateListUser,
     togleDisplayFilter,

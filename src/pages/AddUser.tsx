@@ -1,5 +1,4 @@
 import toast, { Toaster } from 'react-hot-toast';
-import { CircularProgress } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useState } from 'react';
@@ -17,7 +16,7 @@ import {
     listOptionOffice,
     listOptionPotion,
 } from '../constance_for_page';
-type resServerAfterAddNewUser = {};
+
 
 function AddUser() {
     const [state, dispatch] = useGlobalState();

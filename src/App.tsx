@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Login, Accounts, EditUser, AddUser } from './pages';
+import { Login, Accounts, EditUser, AddUser , FilterUser} from './pages';
 import { Menu } from './layout';
-import { LINK_PAGE_ACCOUNT_EDIT, LINK_PAGE_ACCOUNT, LINK_PAGE_ACCOUNT_ADD } from './constance_for_page';
+import { LINK_PAGE_ACCOUNT_EDIT, LINK_PAGE_ACCOUNT, LINK_PAGE_ACCOUNT_ADD,LINK_PAGE_ACCOUNT_FILTER } from './constance_for_page';
 
 import { CircularProgress } from '@mui/material';
 import { useGlobalState } from './store/Provider';
@@ -11,8 +11,6 @@ import { getLimitAndSkipUser } from './Api/logTimeApi';
 import { Fragment } from 'react';
 function App() {
     const [state, dispatch] = useGlobalState();
-    console.log('state*********>>>', state);
-    
     let limit = state.rowPerPage;
     let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
     const { status } = useQuery({
@@ -24,16 +22,17 @@ function App() {
     });
     return (
         <Fragment>
-            <BrowserRouter>
-                {status === 'success' && (
+            {status === 'success' && (
+                <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Login />}></Route>
-                        <Route path={LINK_PAGE_ACCOUNT} element={<Menu>{<Accounts />}</Menu>}></Route>
+                        <Route  path={LINK_PAGE_ACCOUNT} element={ <Menu> <Accounts /></Menu>}></Route>
                         <Route path={LINK_PAGE_ACCOUNT_EDIT} element={<Menu>{<EditUser />}</Menu>}></Route>
                         <Route path={LINK_PAGE_ACCOUNT_ADD} element={<Menu>{<AddUser />}</Menu>}></Route>
+                        <Route path={LINK_PAGE_ACCOUNT_FILTER} element={<Menu>{<FilterUser />}</Menu>}></Route>
                     </Routes>
-                )}
-            </BrowserRouter>
+                </BrowserRouter>
+            )}
         </Fragment>
     );
 }
