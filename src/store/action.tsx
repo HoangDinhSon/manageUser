@@ -11,6 +11,7 @@ import {
     VIEW_DATA_FOR_FORM_VIEW,
     GET_ID_FOR_EDIT,
     EDIT_USER,
+    RESET_CRITERIAL_FOR_FILTER,
     
     ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
@@ -77,6 +78,9 @@ const setCriterialForFilter =(criterialForFilter:any)=>({
     type:SET_CRITERIAL_FOR_FILTER,
     payload:criterialForFilter
 })
+const resetCriterialForFilter=()=>({
+    type :RESET_CRITERIAL_FOR_FILTER,
+})
 
 export {
     getRowPerPage,
@@ -93,6 +97,7 @@ export {
     editUser,
     addNewUser,
     toggleImportForm,
+    resetCriterialForFilter,
 };
 
 /*

@@ -13,9 +13,11 @@ import {
     EDIT_USER,
     ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
+    RESET_CRITERIAL_FOR_FILTER,
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
 import { typeKeyOfCriterial } from '../type';
+import { CRITERIAL_FOR_FILTER_DEFAULT } from '../constance_for_page';
 const ROW_PER_PAGE_DEFAULT = 5;
 const ORDINAL_NUMBER_PAGE_DEFAULT = 1;
 const IS_DISPLAY_FILTER_DEFAULT = false;
@@ -60,7 +62,7 @@ const initState = {
     userAfterEdit: {}, // kiểm tra xem có dùng tới ko
     isDisplayImportForm: IS_DISPLAY_IMPORT_FORM_DEFAULT,
     listFilter: [],
-    criterialForFilter: {},
+    criterialForFilter: CRITERIAL_FOR_FILTER_DEFAULT,
 };
 
 function reducer(state: TypeStateGlobal, action: any) {
@@ -140,9 +142,9 @@ function reducer(state: TypeStateGlobal, action: any) {
             };
         }
         case MAKE_LIST_FILTER: {
-            let keyOfCriterial :typeKeyOfCriterial = Object.keys(state.criterialForFilter);
-            // nhưng cái criterial  nào dc chọn nằm ở đây 
-            const newListCriterial :typeKeyOfCriterial = keyOfCriterial.map((key: any) => {
+            let keyOfCriterial: typeKeyOfCriterial = Object.keys(state.criterialForFilter);
+            // nhưng cái criterial  nào dc chọn nằm ở đây
+            const newListCriterial: typeKeyOfCriterial = keyOfCriterial.map((key: any) => {
                 if (state.criterialForFilter[key][key] === true) {
                     return key;
                 }
@@ -176,15 +178,19 @@ function reducer(state: TypeStateGlobal, action: any) {
 
             return {
                 ...state,
-                listFilter:[...listUserSuitableCriterial],
+                listFilter: [...listUserSuitableCriterial],
             };
         }
         case SET_CRITERIAL_FOR_FILTER: {
-            console.log('critericaFilter>>>', action.payload);
-            
             return {
                 ...state,
                 criterialForFilter: action.payload,
+            };
+        }
+        case RESET_CRITERIAL_FOR_FILTER: {
+            return {
+                ...state,
+                criterialForFilter: CRITERIAL_FOR_FILTER_DEFAULT,
             };
         }
 

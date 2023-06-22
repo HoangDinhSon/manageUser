@@ -19,7 +19,8 @@ import icondocument from './NavManageUser/icondocument.svg';
 import iconimportuser from './NavManageUser/iconimportuser.svg';
 import iconplususer from './NavManageUser/iconplususer.svg';
 import iconuploaduser from './NavManageUser/iconuploaduser.svg';
-export { icondocument, iconimportuser, iconplususer, iconuploaduser };
+import iconCloseForFilter from "./icon_of_table/iconCloseForFilter.png"
+export { icondocument, iconimportuser, iconplususer, iconuploaduser ,iconCloseForFilter};
 
 // icon for table
 import filterbutton from './icon_of_table/filterButton.svg';

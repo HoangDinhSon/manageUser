@@ -1,2 +1,3 @@
 import IconMenu from "./IconMenu";
-export {IconMenu}
+import Hamburger from "./Hamburger"
+export {IconMenu,Hamburger}

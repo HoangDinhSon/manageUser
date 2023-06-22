@@ -20,7 +20,7 @@ function TableRowForHeader() {
                 </div>
             </td>
             <td>
-                <div className="flex justify-between w-[94px]">
+                <div className="flex justify-between w-[74px]">
                     <span>Age</span>
                     <img src={iconArrowTable} alt="" />
                 </div>

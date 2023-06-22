@@ -1,4 +1,5 @@
-import { ID_FOR_EDIT_DEFAULT, DEFAULT_COUNT } from './constantsDefault';
+import { ID_FOR_EDIT_DEFAULT, DEFAULT_COUNT,CRITERIAL_FOR_FILTER_DEFAULT } from './constantsDefault';
+import { CriterialForFilter } from './constantGlobal';
 import {
     LINK_PAGE_ACCOUNT_EDIT,
     LINK_PAGE_ACCOUNT_FILTER,
@@ -25,6 +26,7 @@ export { listOptionTeam, listOptionCompany, listContractType, listOptionLevel, l
 export {
     DEFAULT_COUNT,
     ID_FOR_EDIT_DEFAULT,
+    CRITERIAL_FOR_FILTER_DEFAULT,
     LINK_PAGE_ACCOUNT_EDIT,
     LINK_PAGE_ACCOUNT,
     LINK_PAGE_ACCOUNT_ADD,
@@ -35,3 +37,6 @@ export {
     LINK_PAGE_REPORT,
     LINK_PAGE_ACCOUNT_FILTER,
 };
+// global style
+export type {CriterialForFilter}
+

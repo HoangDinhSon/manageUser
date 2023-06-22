@@ -13,7 +13,7 @@ import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
-import { FormLogOut, BtnImportAndADD } from '../components';
+import { FormLogOut, BtnImportAndADD ,Hamburger} from '../components';
 import {
     LINK_PAGE_ACCOUNT,
     LINK_PAGE_ACCOUNT_EDIT,
@@ -68,15 +68,25 @@ function Menu({ children }: any) {
         state.isDisplayAsideMenu === false &&
         (location.pathname === LINK_PAGE_ACCOUNT || location.pathname === `${LINK_PAGE_ACCOUNT}/`);
 
+    // change class to fit height aside Bar
+    const heightBrowser = window.innerHeight;
+    const HEIGHT_BROWSER_CHANGE_GAP = 740;
+    let classAsideBar = 'flex flex-col items-center  gap-[53px] pt-5 h-full ';
+    let classListItem = 'flex flex-col items-center  gap-[53px] pt-5 flex-grow';
+    if (heightBrowser < HEIGHT_BROWSER_CHANGE_GAP) {
+        classAsideBar = 'flex flex-col items-center  gap-[20px] pt-5 h-full ';
+        classListItem = 'flex flex-col items-center  gap-[20px] py-5 xs_max:py-0 ';
+    }
+
     return (
         <div className="menu_Layout flex bg-[#ECECEC]  w-full h-full relative">
             {/* 1/4. Aside Bar */}
             {state.isDisplayAsideMenu && (
-                <div className={`${state.isDisplayAsideMenu ? 'w-[85px]' : ''}`}>
-                    <div className=" w-[78px] bg-[#fff] fixed z-[2]  top-0 bottom-0 min-h-[750px] ">
-                        <div className="relative flex flex-col items-center  gap-[53px] pt-5 h-full">
+                <div className={`${state.isDisplayAsideMenu ? 'w-[85px] xs_max:w-0' : ''}`}>
+                    <div className=" w-[78px] bg-[#fff] fixed z-[2]  top-0 bottom-0  xs_max:w-full ">
+                        <div className={classAsideBar}>
                             <img src={hamberger} alt="" onClick={handleSwitchDisplay} />
-                            <div className="flex flex-col items-center gap-[53px]">
+                            <div className={classListItem}>
                                 <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} name={LINK_PAGE_DASHBOARD} />
                                 <IconMenu icon={project} iconNameMenu={nameOfproject} name={LINK_PAGE_PROJECT} />
                                 <IconMenu icon={stacks} iconNameMenu={nameOfStacks} name={LINK_PAGE_STACKS} />
@@ -88,10 +98,10 @@ function Menu({ children }: any) {
                                     name={LINK_PAGE_ROLEMANAGER}
                                 />
                             </div>
-                            <div className=" flex flex-col items-center gap-10 ">
+                            <div className=" flex flex-col items-center gap-10 pb-5 xs_max:gap-5 ">
                                 <img src={notification} alt="" className="cursor-pointer" />
                                 <div className="relative">
-                                    <div className="absolute bottom-0 left-[52px] ">
+                                    <div className="absolute bottom-0 left-[52px] xs_max:translate-y-[100%] xs_max:left-[26px] xs_max:-translate-x-[50%]">
                                         {isDisPlayLogout && <FormLogOut />}
                                     </div>
                                     <img src={bgAvatar} alt="" onClick={handleLogOut} className="cursor-pointer" />
@@ -110,16 +120,15 @@ function Menu({ children }: any) {
                             <ChangeContentBaseAddress />
                         </h4>
                     </div>
-                    {conditionToDisplayBtnADDandImport && <BtnImportAndADD />}
+                    {conditionToDisplayBtnADDandImport &&(<Hamburger><BtnImportAndADD/></Hamburger>)}
                 </div>
             </div>
             {/*3/4. Background  */}
             <div className="fixed  bg-[#ECECEC] top-0 bottom-0 left-0 right-0 z-[-1]"></div>
             {/*4/4. Content */}
-            <div className=" mx-5 mt-[98px]  bg-[white] w-full h-screen rounded-xl mb-5 overflow-auto ">
+            <div className="mx-5 mt-[98px] mb-5  bg-[white] w-full h-[calc(100vh-118px)] rounded-xl  overflow-auto xs_max:mx-[--margin4px] xs_max:mb-[--margin4px] xs_max:h-[calc(100vh-(98px-var(--margin4px)))]">
                 {children}
-                
-                </div>
+            </div>
         </div>
     );
 }

@@ -1,11 +1,13 @@
-import { Select, MenuItem, Pagination } from '@mui/material';
+import { Select, MenuItem, Pagination, PaginationItem, useMediaQuery, useTheme } from '@mui/material';
 import { actions, ContextState } from '../../../store';
 import { DEFAULT_COUNT } from '../../../constance_for_page';
-
+import { checkNumberOFCriterialForFilter } from '../../../handlelogic';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 function PaginationTable() {
     const [state, dispatch] = ContextState.useGlobalState();
+    const criterialWasChosen = checkNumberOFCriterialForFilter(state.criterialForFilter);
     let count = state.resApi.total ? Math.ceil(state.resApi.total / state.rowPerPage) : DEFAULT_COUNT;
-    if (state.isDisplayFiler) {
+    if (criterialWasChosen != 0) {
         count = Math.ceil(state.listFilter.length / state.rowPerPage);
     }
     const handleRowPerPage = (e: any) => {
@@ -14,12 +16,13 @@ function PaginationTable() {
     const handlePagination = (e: any, value: any) => {
         dispatch(actions.getOrdinalNumberPage(value));
     };
+    const theme = useTheme();
+    const matchWidthSmMax = useMediaQuery(theme.breakpoints.down(641));
 
     return (
-        <div className="h-[68px]  ">
-            <div className="flex justify-between items-center h-[68px]">
-                <div className="text-[#9DA7B9] ">Showing 1 to 10 of 32,316 entries</div>
-                <div className="flex">
+            <div className="flex justify-between items-center h-[68px] md_max:justify-center">
+                <div className="text-[#9DA7B9] md_max:hidden ">Showing 1 to 10 of 32,316 entries</div>
+                <div className="flex items-center ">
                     <Select
                         value={state.rowPerPage}
                         sx={{
@@ -45,15 +48,35 @@ function PaginationTable() {
                     <Pagination
                         variant="outlined"
                         shape="rounded"
+                        siblingCount={matchWidthSmMax ? 0 : 1}
+                        boundaryCount={0}
                         count={count}
-                        page={state.ordinalNumberPage}
+                        page={state.ordinalNumberPage}//ok
                         onChange={(e, value) => {
                             handlePagination(e, value);
-                        }}
+                        }}//ok
+                        renderItem={(item) => (<PaginationItem 
+                            components={
+                                !matchWidthSmMax
+                                    ? {
+                                          next: (props) => (
+                                              <li {...props} className="text-xs">
+                                                  Next
+                                              </li>
+                                          ),
+                                          previous: (props) => (
+                                              <li {...props} className="text-xs">
+                                                  Previous
+                                              </li>
+                                          ),
+                                      }
+                                    : {}
+                            }
+                            {...item}
+                        />)}
                     />
                 </div>
             </div>
-        </div>
     );
 }
 

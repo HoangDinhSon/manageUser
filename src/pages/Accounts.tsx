@@ -1,12 +1,16 @@
 import { Button, TextField } from '@mui/material';
 import { Toaster, toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { TableUser } from '../components/accounts/TableUser';
 import { filterbutton, iconSearch } from '../assets/icon';
+import { iconCloseForFilter } from '../assets';
 import { useGlobalState } from '../store/Provider';
 import { getUserBaseOnID } from '../Api/logTimeApi';
 import { actions } from '../store';
 import { ImportForm, Filter, FormViewUser, BtnImportAndADD } from '../components';
+// import {PaginationTable}
+import { checkNumberOFCriterialForFilter } from '../handlelogic';
 
 function Accounts() {
     const [state, dispatch] = useGlobalState();
@@ -25,10 +29,16 @@ function Accounts() {
             toast.error('get one api fail ');
         },
     });
+    const criterialWasChosen = checkNumberOFCriterialForFilter(state.criterialForFilter);
+    const resetCriterialFilter = () => {
+        dispatch(actions.resetCriterialForFilter());
+    };
+    const theme = createTheme({});
+
     return (
         <section className="accounts_page">
             <Toaster />
-            <div className="bg-white rounded-[12px] px-8 pt-8 pb-[68px]">
+            <div className="bg-white rounded-[12px] px-8 pt-8 pb-[68px] xs_max:px-[--margin4px]">
                 <div className="nav_for_table flex gap-1 h-[54px] items-end   border-b border-[#EBEBEB]">
                     <p className="w-[44px] h-[40px] leading-[40px] text-center text-[#5E90F0]  border-b-4 border-[#5E90F0]">
                         All
@@ -36,38 +46,40 @@ function Accounts() {
                     <p className="w-[75px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Vinova</p>
                     <p className="w-[44px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Patner</p>
                 </div>
-                <div className="flex justify-between ">
-                    <div className="search_filter h-[97px] pt-[29px]">
+                <div className="flex justify-between  py-[29px] md_max:block ">
+                    <div className="search_filter  md_max:flex md_max:justify-between  ">
                         <TextField
                             placeholder="Search"
                             InputProps={{
                                 startAdornment: <img src={iconSearch} alt="" className="pr-2" />,
-                                style: {
+                                sx: {
                                     height: '40px',
                                 },
                             }}
                         />
-                        <Button sx={{ height: '40px' }} onClick={handleSwitchDisplayFilterForm}>
-                            <img src={filterbutton} alt="" />
-                        </Button>
+                        <div className="inline-block">
+                            <Button sx={{ height: '40px' }} onClick={handleSwitchDisplayFilterForm}>
+                                <img src={filterbutton} alt="" />
+                            </Button>
+
+                            {!!criterialWasChosen && (
+                                <span className=" text-[#5E90F0] text-[14px] ">
+                                    <img
+                                        src={iconCloseForFilter}
+                                        className="inline-block mb-[2px] cursor-pointer"
+                                        onClick={resetCriterialFilter}
+                                    />
+                                    Clear {criterialWasChosen} filters
+                                </span>
+                            )}
+                        </div>
                     </div>
-                    {state.isDisplayAsideMenu && <BtnImportAndADD />}
+                    <div className="md_max:pt-3">{state.isDisplayAsideMenu && <BtnImportAndADD />}</div>
                 </div>
-
                 <TableUser />
-
                 {state.isDisplayFiler && (
                     <div className="fixed right-0 top-[78px] bottom-0  overflow-auto">
-                        <label
-                            htmlFor="hamburger"
-                            className="text-right block bg-[--colorGrey] leading-5  rounded-[3px] cursor-pointer w-[319px] pr-5 text-white"
-                        >
-                            &#8644;Filter
-                        </label>
-                        <input type="checkbox" name="" id="hamburger" className="peer/hamburger hidden" />
-                        <div className="peer-checked/hamburger:hidden">
-                            <Filter />
-                        </div>
+                        <Filter />
                     </div>
                 )}
                 {statusForApiByID === 'success' && state.isDisplayFormView && <FormViewUser />}

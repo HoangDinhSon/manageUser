@@ -6,13 +6,14 @@ const TOGLE_DISPLAY_ASIDE_MENU = 'togle_display_aside_menu';
 const DISPLAY_FORM_VIEW_USER = 'display_form_view_user';
 const CLOSE_FORM_VIEW_USER = 'close_form_view_user';
 const VIEW_DATA_FOR_FORM_VIEW = 'view_data_for_form_view';
-const EDIT_USER ="edit_user";
-const GET_ID_FOR_EDIT= "get_id_for_edit";
-const MAKE_LIST_FILTER = "make_list_filter";
-const SET_CRITERIAL_FOR_FILTER = "set_criterial_for_filter"
+const EDIT_USER = 'edit_user';
+const GET_ID_FOR_EDIT = 'get_id_for_edit';
+const MAKE_LIST_FILTER = 'make_list_filter';
+const SET_CRITERIAL_FOR_FILTER = 'set_criterial_for_filter';
+const RESET_CRITERIAL_FOR_FILTER = 'reset_criterial_for_filter';
 
-const ADD_NEW_USER= "add_new_user";
-const  DISPLAY_IMPORT_FORM = "display_import_form";
+const ADD_NEW_USER = 'add_new_user';
+const DISPLAY_IMPORT_FORM = 'display_import_form';
 
 export {
     GET_ROW_PER_PAGE,
@@ -27,9 +28,7 @@ export {
     GET_ID_FOR_EDIT,
     EDIT_USER,
     SET_CRITERIAL_FOR_FILTER,
-  
-
-    
+    RESET_CRITERIAL_FOR_FILTER,
     ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
 };
