@@ -2,8 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login, Accounts, EditUser, AddUser , FilterUser} from './pages';
 import { Menu } from './layout';
 import { LINK_PAGE_ACCOUNT_EDIT, LINK_PAGE_ACCOUNT, LINK_PAGE_ACCOUNT_ADD,LINK_PAGE_ACCOUNT_FILTER } from './constance_for_page';
-
-import { CircularProgress } from '@mui/material';
 import { useGlobalState } from './store/Provider';
 import { actions } from './store';
 import { useQuery } from 'react-query';
@@ -19,6 +17,7 @@ function App() {
         onSuccess: (res) => {
             dispatch(actions.upDateListUser(res));
         },
+        keepPreviousData:true,
     });
     return (
         <Fragment>

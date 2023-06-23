@@ -13,7 +13,7 @@ import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
-import { FormLogOut, BtnImportAndADD ,Hamburger} from '../components';
+import { FormLogOut, BtnImportAndADD, Hamburger } from '../components';
 import {
     LINK_PAGE_ACCOUNT,
     LINK_PAGE_ACCOUNT_EDIT,
@@ -112,7 +112,7 @@ function Menu({ children }: any) {
                 </div>
             )}
             {/*2/4. TopNav Bar */}
-            <div className="fixed z-[1] top-0 left-[0] right-0 h-[78px] px-[20px] bg-[#fff]  range_1441_:px-[calc((100%-1440px)/2+20px)] ">
+            <div className="fixed z-[1] top-0 left-[0] right-0 h-[78px] px-[20px] bg-[#fff]  range_1441_:px-[calc((100%-1440px)/2+20px)]  ">
                 <div className="flex justify-between items-center  h-[78px]">
                     <div className="Left_Nav flex items-center gap-[15px]">
                         <img src={hamberger} alt="" onClick={handleSwitchDisplay} className="cursor-pointer" />
@@ -120,13 +120,22 @@ function Menu({ children }: any) {
                             <ChangeContentBaseAddress />
                         </h4>
                     </div>
-                    {conditionToDisplayBtnADDandImport &&(<Hamburger><BtnImportAndADD/></Hamburger>)}
+                    {conditionToDisplayBtnADDandImport && (
+                        <div className='bg-[white]'>
+                            <div className='min_376:hidden'>
+                                <Hamburger> <BtnImportAndADD /></Hamburger>
+                            </div>
+                            <div className='xs_max:hidden'>
+                                <BtnImportAndADD />{' '}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
             {/*3/4. Background  */}
             <div className="fixed  bg-[#ECECEC] top-0 bottom-0 left-0 right-0 z-[-1]"></div>
             {/*4/4. Content */}
-            <div className="mx-5 mt-[98px] mb-5  bg-[white] w-full h-[calc(100vh-118px)] rounded-xl  overflow-auto xs_max:mx-[--margin4px] xs_max:mb-[--margin4px] xs_max:h-[calc(100vh-(98px-var(--margin4px)))]">
+            <div className="mx-5 mt-[98px] mb-5  bg-[white] w-full h-[calc(100vh-118px)] rounded-[--borderForLayout] overflow-auto xs_max:mx-[--margin4px] xs_max:mb-[--margin4px] xs_max:h-[calc(100vh-(98px-var(--margin4px)))]">
                 {children}
             </div>
         </div>

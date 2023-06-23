@@ -59,7 +59,6 @@
         overflow: hidden;
         word-wrap: normal;
     }
-
 }
 
 @layer components {
@@ -87,5 +86,8 @@
     --colorGrey: #999999;
     --greyChart: #9da7b9;
     --blackTranspirationHalf: rgba(0, 0, 0, 0.5);
-    --margin4px :4px;
+    --margin4px: 4px;
+    --borderWidth:2px;
+    --borderForLayout: 12px ;
 }
+

@@ -28,7 +28,7 @@ function TableRowForBody({ user}:any) {
             <td className="">{user?.bloodGroup}</td>
             <td className="">{user?.height}</td>
             <td onClick={() => handleDisplayViewForm(user)}>
-                <img src={IconViewUser} alt="" className="w-[50px] " />
+                <img src={IconViewUser} alt="" className="w-[50px] cursor-pointer " />
             </td>
             <td>
                 <NavLink to={LINK_PAGE_ACCOUNT_EDIT}>

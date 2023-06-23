@@ -1,3 +1,3 @@
 import { typeKeyOfCriterial } from "./typeOfReducer";
-import {typeOfListUser,typeUser,OutPutFormFilter} from "./typeGlobal";
-export type {typeKeyOfCriterial,typeOfListUser,typeUser,OutPutFormFilter}
+import {typeOfListUser,typeUser,OutPutFormFilter,typeUserAfterCallApiBaseOnID} from "./typeGlobal";
+export type {typeKeyOfCriterial,typeOfListUser,typeUser,OutPutFormFilter,typeUserAfterCallApiBaseOnID}

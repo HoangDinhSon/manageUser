@@ -16,7 +16,7 @@ import {
     RESET_CRITERIAL_FOR_FILTER,
 } from './constants';
 import { TypeOfUser } from '../type/typePageAccounts';
-import { typeKeyOfCriterial } from '../type';
+import { typeKeyOfCriterial, typeUserAfterCallApiBaseOnID } from '../type';
 import { CRITERIAL_FOR_FILTER_DEFAULT } from '../constance_for_page';
 const ROW_PER_PAGE_DEFAULT = 5;
 const ORDINAL_NUMBER_PAGE_DEFAULT = 1;
@@ -42,7 +42,7 @@ type TypeStateGlobal = {
     isDisplayAsideMenu: boolean;
     UserForFormView: TypeOfUser;
     isDisplayFormView: boolean;
-    UserForFormViewAfterCallApi: any;
+    UserForFormViewAfterCallApi: typeUserAfterCallApiBaseOnID;
     idForEdit: number;
     userAfterEdit: any; //object
     isDisplayImportForm: boolean;
