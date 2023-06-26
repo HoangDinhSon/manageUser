@@ -5,13 +5,13 @@
 @layer base {
     * {
         font-family: 'Poppins', sans-serif;
-        /* outline: 1px solid red; */
+        /* outline: 1px solid green; */
     }
 
     body {
         max-width: 1440px;
-        margin: 0 auto;
-        position: relative;
+        /* margin: 0 auto; */
+        /* position: relative; */
     }
     h1 {
         padding-top: 5px;
@@ -79,6 +79,17 @@
         background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='5' ry='5' stroke='%23D2D2D2FF' stroke-width='5' stroke-dasharray='5%25%2c 3%25' stroke-dashoffset='66' stroke-linecap='butt'/%3e%3c/svg%3e");
         border-radius: 5px;
     }
+
+    /* my loger */
+    .log_red {
+        background-color: red;
+    }
+    .log_yellow{
+        background-color: yellow;
+    }
+    .log_outline {
+        @apply outline outline-1 outline-[green]
+    }
 }
 :root {
     --outlineColor: #d2d2d2;
@@ -89,5 +100,8 @@
     --margin4px: 4px;
     --borderWidth:2px;
     --borderForLayout: 12px ;
+    --heightNav:78px;
+    --mrForChild:20px;
+    --hNavRes: 58px;
+    
 }
-

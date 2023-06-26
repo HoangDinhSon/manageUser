@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
+import { useTheme, useMediaQuery } from '@mui/material';
 import { accounts, dasboard, hamberger, project, stacks, RoleManager, Report } from '../assets/icon';
 import {
     nameOfDashboard,
@@ -24,11 +25,13 @@ import {
     LINK_PAGE_ROLEMANAGER,
     LINK_PAGE_REPORT,
 } from '../constance_for_page';
+import { HamburgerForAsideBar } from '../components/component_layout/Hamburger';
 
 function Menu({ children }: any) {
     const location = useLocation();
     const [state, dispatch] = useGlobalState();
     const [isDisPlayLogout, setIsDisplayLogout] = useState(false);
+    const HEIGHT_BROWSER_TO_CHANGE_GAP = 740;
     if (localStorage.getItem('userAdmin') == undefined) {
         window.location.href = 'http://localhost:4000';
         return <div></div>;
@@ -67,77 +70,76 @@ function Menu({ children }: any) {
     const conditionToDisplayBtnADDandImport =
         state.isDisplayAsideMenu === false &&
         (location.pathname === LINK_PAGE_ACCOUNT || location.pathname === `${LINK_PAGE_ACCOUNT}/`);
-
     // change class to fit height aside Bar
-    const heightBrowser = window.innerHeight;
-    const HEIGHT_BROWSER_CHANGE_GAP = 740;
+    const heightBrowser = window.screen.height;
     let classAsideBar = 'flex flex-col items-center  gap-[53px] pt-5 h-full ';
     let classListItem = 'flex flex-col items-center  gap-[53px] pt-5 flex-grow';
-    if (heightBrowser < HEIGHT_BROWSER_CHANGE_GAP) {
+    if (heightBrowser < HEIGHT_BROWSER_TO_CHANGE_GAP) {
         classAsideBar = 'flex flex-col items-center  gap-[20px] pt-5 h-full ';
         classListItem = 'flex flex-col items-center  gap-[20px] py-5 xs_max:py-0 ';
     }
 
+    const theme = useTheme();
+    const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1;
+    const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
+    let classForChildrenOfMenu =
+        'mx-[--mrForChild] mt-[calc(var(--mrForChild)+var(--heightNav))] mb-[--mrForChild]  bg-[white] w-[calc(100%-(2*var(--mrForChild)))]  rounded-[--borderForLayout] overflow-auto' +
+        ' xs_max:mx-[--margin4px] xs_max:mt-[calc(var(--hNavRes)+var(--margin4px))] xs_max:mb-[--margin4px]  xs_max:w-[calc(100%-2*var(--margin4px))] transition-all duration-[2s]';
+
     return (
-        <div className="menu_Layout flex bg-[#ECECEC]  w-full h-full relative">
+        <div className="menu_Layout  flex bg-[#ECECEC]  h-screen ">
             {/* 1/4. Aside Bar */}
-            {state.isDisplayAsideMenu && (
-                <div className={`${state.isDisplayAsideMenu ? 'w-[85px] xs_max:w-0' : ''}`}>
-                    <div className=" w-[78px] bg-[#fff] fixed z-[2]  top-0 bottom-0  xs_max:w-full ">
-                        <div className={classAsideBar}>
-                            <img src={hamberger} alt="" onClick={handleSwitchDisplay} />
-                            <div className={classListItem}>
-                                <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} name={LINK_PAGE_DASHBOARD} />
-                                <IconMenu icon={project} iconNameMenu={nameOfproject} name={LINK_PAGE_PROJECT} />
-                                <IconMenu icon={stacks} iconNameMenu={nameOfStacks} name={LINK_PAGE_STACKS} />
-                                <IconMenu icon={Report} iconNameMenu={nameOfreport} name={LINK_PAGE_REPORT} />
-                                <IconMenu icon={accounts} iconNameMenu={nameOfaccounts} name={LINK_PAGE_ACCOUNT} />
-                                <IconMenu
-                                    icon={RoleManager}
-                                    iconNameMenu={nameOfRolemanager}
-                                    name={LINK_PAGE_ROLEMANAGER}
-                                />
-                            </div>
-                            <div className=" flex flex-col items-center gap-10 pb-5 xs_max:gap-5 ">
-                                <img src={notification} alt="" className="cursor-pointer" />
-                                <div className="relative">
-                                    <div className="absolute bottom-0 left-[52px] xs_max:translate-y-[100%] xs_max:left-[26px] xs_max:-translate-x-[50%]">
-                                        {isDisPlayLogout && <FormLogOut />}
-                                    </div>
-                                    <img src={bgAvatar} alt="" onClick={handleLogOut} className="cursor-pointer" />
-                                </div>
+            <HamburgerForAsideBar>
+                <div className=" w-[78px] bg-white h-screen pt-[--heightNav]">
+                    <div className={classAsideBar}>
+                        <div className={classListItem}>
+                            <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} name={LINK_PAGE_DASHBOARD} />
+                            <IconMenu icon={project} iconNameMenu={nameOfproject} name={LINK_PAGE_PROJECT} />
+                            <IconMenu icon={stacks} iconNameMenu={nameOfStacks} name={LINK_PAGE_STACKS} />
+                            <IconMenu icon={Report} iconNameMenu={nameOfreport} name={LINK_PAGE_REPORT} />
+                            <IconMenu icon={accounts} iconNameMenu={nameOfaccounts} name={LINK_PAGE_ACCOUNT} />
+                            <IconMenu
+                                icon={RoleManager}
+                                iconNameMenu={nameOfRolemanager}
+                                name={LINK_PAGE_ROLEMANAGER}
+                            />
+                        </div>
+                        <div className=" flex flex-col items-center gap-10 pb-5 xs_max:gap-5 ">
+                            <img src={notification} alt="" className="cursor-pointer" />
+                            <div className="relative">
+                                <div className="absolute bottom-0 left-[52px]">{isDisPlayLogout && <FormLogOut />}</div>
+                                <img src={bgAvatar} alt="" onClick={handleLogOut} className="cursor-pointer" />
                             </div>
                         </div>
                     </div>
                 </div>
-            )}
+            </HamburgerForAsideBar>
+
             {/*2/4. TopNav Bar */}
-            <div className="fixed z-[1] top-0 left-[0] right-0 h-[78px] px-[20px] bg-[#fff]  range_1441_:px-[calc((100%-1440px)/2+20px)]  ">
-                <div className="flex justify-between items-center  h-[78px]">
+            <div className="fixed z-[1] top-0 left-[0] right-0  px-[20px] bg-[#fff] xs_max:h-[--hNavRes]  range_1441_:px-[calc((100%-1440px)/2+20px)]  ">
+                <div className="flex justify-between items-center  h-[--heightNav] xs_max:h-[--hNavRes]">
                     <div className="Left_Nav flex items-center gap-[15px]">
-                        <img src={hamberger} alt="" onClick={handleSwitchDisplay} className="cursor-pointer" />
-                        <h4 className={state.isDisplayAsideMenu ? 'pl-[20px]' : ''}>
+                        <h4 className='pl-[60px]'>
                             <ChangeContentBaseAddress />
                         </h4>
                     </div>
                     {conditionToDisplayBtnADDandImport && (
-                        <div className='bg-[white]'>
-                            <div className='min_376:hidden'>
-                                <Hamburger> <BtnImportAndADD /></Hamburger>
-                            </div>
-                            <div className='xs_max:hidden'>
-                                <BtnImportAndADD />{' '}
-                            </div>
+                        <div className="bg-[white]">
+                            {maxXS ? (
+                                <Hamburger>
+                                    <BtnImportAndADD />
+                                </Hamburger>
+                            ) : (
+                                <BtnImportAndADD />
+                            )}
                         </div>
                     )}
                 </div>
             </div>
             {/*3/4. Background  */}
-            <div className="fixed  bg-[#ECECEC] top-0 bottom-0 left-0 right-0 z-[-1]"></div>
+            <div className="fixed  bg-[#ECECEC] h-screen left-0 right-0 z-[-1]"></div>
             {/*4/4. Content */}
-            <div className="mx-5 mt-[98px] mb-5  bg-[white] w-full h-[calc(100vh-118px)] rounded-[--borderForLayout] overflow-auto xs_max:mx-[--margin4px] xs_max:mb-[--margin4px] xs_max:h-[calc(100vh-(98px-var(--margin4px)))]">
-                {children}
-            </div>
+            <div className={classForChildrenOfMenu}>{children}</div>
         </div>
     );
 }

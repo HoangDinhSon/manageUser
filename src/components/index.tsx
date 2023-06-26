@@ -14,4 +14,5 @@ export {Select ,PhoneNumber,Input,InputWithCharacter ,TableRowForHeader,TableRow
 
 // animation
 import TableAnimation from './animationUI/TableAnimation';
-export {TableAnimation}
+import OpacityTransition from './animationUI/OpacityTransition'; 
+export {TableAnimation ,OpacityTransition}

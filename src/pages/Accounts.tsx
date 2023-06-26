@@ -37,12 +37,13 @@ function Accounts() {
     };
     // response UI (theme dc config file Mui config)
     const theme = useTheme();
-    const xs_max = useMediaQuery(theme.breakpoints.down('xs'));
+    const xs_max = useMediaQuery(theme.breakpoints.down("xs"));
+    
 
     return (
         <section className="accounts_page">
             <Toaster />
-            <div className="bg-white rounded-[12px] px-8 pt-8 pb-[68px] xs_max:px-[--margin4px]">
+            <div className="bg-white rounded-[12px] px-8 pt-8 pb-[68px] xs_max:px-[--margin4px] xs_max:pt-4">
                 <div className="nav_for_table flex gap-1 h-[54px] items-end   border-b-[length:--borderWidth] border-[#EBEBEB]">
                     <p className="w-[44px] h-[40px] leading-[40px] text-center text-[#5E90F0]  border-b-4 border-[#5E90F0]">
                         All
@@ -50,7 +51,7 @@ function Accounts() {
                     <p className="w-[75px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Vinova</p>
                     <p className="w-[44px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Patner</p>
                 </div>
-                <div className="flex justify-between  py-[29px] md_max:block ">
+                <div className="flex justify-between  py-[29px] md_max:block xs_max:py-4">
                     <div className="search_filter  md_max:flex md_max:justify-between">
                         <TextField
                             placeholder="Search"
@@ -79,11 +80,11 @@ function Accounts() {
                             )}
                         </div>
                     </div>
-                    <div >{state.isDisplayAsideMenu && <BtnImportAndADD />}</div>
+                    {state.isDisplayAsideMenu&&(!xs_max) && <div className='pt-3'><BtnImportAndADD /></div>}
                 </div>
                 <TableUser />
                 {state.isDisplayFiler && (
-                    <div className="fixed right-0 top-[78px] bottom-0  overflow-auto">
+                    <div className="fixed right-[--mrForChild] top-[calc(var(--heightNav)+var(--mrForChild))] bottom-[--mrForChild]  overflow-auto">
                         <Filter />
                     </div>
                 )}

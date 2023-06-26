@@ -1,4 +1,4 @@
-import { CriterialForFilter } from './constance_for_page';
+import { CriterialForFilter } from "./type"
 
 const findIndex = (id: number, arrayObject: []): number => {
     let indexCurrent: number = -1;

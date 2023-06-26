@@ -144,7 +144,7 @@ function Filter() {
     }
 
     return (
-        <div className="bg-white  w-[319px] pt-[13px] pb-[24px] px-[22px]  ">
+        <div className="bg-white  w-[319px] pt-[13px] pb-[24px] px-[22px] sm_max:w-full ">
             <div className="bg-white rounded-md">
                 <p className='cursor-pointer' onClick = {handleHiddenFilter}>Filter</p>
                 <form onSubmit={handleSubmit(handleSubmitForm)}>

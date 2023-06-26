@@ -1,5 +1,4 @@
-import { ID_FOR_EDIT_DEFAULT, DEFAULT_COUNT,CRITERIAL_FOR_FILTER_DEFAULT ,USER_DEFAULT} from './constantsDefault';
-import { CriterialForFilter } from './constantGlobal';
+import { ID_FOR_EDIT_DEFAULT, DEFAULT_COUNT, CRITERIAL_FOR_FILTER_DEFAULT, USER_DEFAULT } from './constantsDefault';
 import {
     LINK_PAGE_ACCOUNT_EDIT,
     LINK_PAGE_ACCOUNT_FILTER,
@@ -20,8 +19,6 @@ import {
     listOptionPotion,
 } from './constantUI';
 
-
-
 export { listOptionTeam, listOptionCompany, listContractType, listOptionLevel, listOptionOffice, listOptionPotion };
 export {
     DEFAULT_COUNT,
@@ -39,6 +36,4 @@ export {
     LINK_PAGE_ACCOUNT_FILTER,
 };
 
-// global style
-export type {CriterialForFilter}
 

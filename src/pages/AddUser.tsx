@@ -34,6 +34,7 @@ function AddUser() {
         },
     });
     const onSubmitForm = (formData: any) => {
+        console.log('formData>>>', formData);
         mutate({
             ...formData,
             listSkill: listSkill,

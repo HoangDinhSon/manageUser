@@ -13,9 +13,9 @@ function TableUser() {
     const criterialWasChosen = checkNumberOFCriterialForFilter(state.criterialForFilter);
     //UI 
     const classWhenDisplayAsideBar =
-        'fixed bottom-5 left-[98px] w-[calc(100vw-119px)] bg-white px-[26px] rounded-b-[--borderForLayout] xs_max:px-0 xs_max:w-[calc(100%-8px)] xs_max:left-[--margin4px] xs_max:bottom-[--margin4px]';
+        'fixed bottom-[--mrForChild] left-0 ml-[98px] w-[calc(100vw-118px)] transition-all duration-[2s] bg-[white] px-[26px] rounded-b-[--borderForLayout] xs_max:px-0 xs_max:w-[calc(100%-8px)] xs_max:ml-[--heightNav] xs_max:bottom-[--margin4px]';
     const classWhenHiddenAsideBar =
-        'fixed bottom-5 left-[20px] w-[calc(100vw-41px)] bg-white px-[26px] rounded-b-[--borderForLayout] xs_max:px-0 xs_max:w-[calc(100vw-8px)] xs_max:left-[--margin4px] xs_max:bottom-[--margin4px]';
+        'fixed bottom-[--mrForChild] left-0 ml-[20px] w-[calc(100vw-40px)] transition-all duration-[2s] bg-[white] px-[26px]  rounded-b-[--borderForLayout] xs_max:px-0 xs_max:w-[calc(100vw-8px)] xs_max:ml-[--margin4px] xs_max:bottom-[--margin4px]';
 
     return (
         <div className="bg-[white] overflow-x-auto">

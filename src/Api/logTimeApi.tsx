@@ -19,8 +19,6 @@ const getLimitAndSkipUser = (limit: number, skip: number) =>
         )
         .then((res) => res.data);
 
-// const getUserBaseFilter = (keyFilter: string|number, valueFilter: string|number) =>
-//     axiosClient.get(`https://dummyjson.com/users/filter?key=${keyFilter}&value=${valueFilter}`).then((res) => res.data);
 const getUserBaseFilter = ({keyFilter, valueFilter}:any) =>
     axiosClient.get(`https://dummyjson.com/users/filter?key=${keyFilter}&value=${valueFilter}`).then((res) => res.data);
 
