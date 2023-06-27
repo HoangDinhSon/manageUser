@@ -27,15 +27,16 @@ function ImportForm() {
     const [listFile, setListFile] = useState<Array<any>>([]);
     const refInput = useRef(null);
     const [state, dispatch] = useGlobalState();
-    // Save File import into Array listFilr 
+    const refInputForChange: any = refInput?.current;
+    // Save File import into Array listFile
     if (refInput.current != null) {
-        const refInputForChange: any = refInput.current;
         refInputForChange.addEventListener('change', (event: any) => {
             const ListFile: Array<any> = Object.values(event.target.files);
             setListFile([...ListFile]);
         });
     }
     const removeFile = (index: number) => {
+        refInputForChange.value = null;
         setListFile((preState: Array<any>) => {
             preState.splice(index, 1);
             return [...preState];
@@ -44,20 +45,20 @@ function ImportForm() {
     const handleCloseImportForm = () => {
         dispatch(actions.toggleImportForm());
     };
-    const handleSubmitForm = (e:any) => {
-        e.preventDefault()
+    const handleSubmitForm = (e: any) => {
+        e.preventDefault();
         if (listFile.length === 0) {
             toast.error('you must import File');
         } else {
             dispatch(actions.toggleImportForm());
-            location.href= `http://localhost:4000${LINK_PAGE_ACCOUNT}`
+            location.href = `http://localhost:4000${LINK_PAGE_ACCOUNT}`;
         }
     };
 
     return (
         <section className="import_form fixed bg-[--blackTranspirationHalf]  top-0 bottom-0 left-0 right-0 z-10">
             <Toaster />
-            <form action="" onSubmit={(e)=>handleSubmitForm(e)}>
+            <form action="" onSubmit={(e) => handleSubmitForm(e)}>
                 <div className="fixed top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] w-[523px]  bg-white rounded-2xl px-6 py-8 xs_max:w-[calc(100vw-8px)]">
                     <div className="flex justify-between">
                         <h4 className="h4_lean_100">Import file</h4>

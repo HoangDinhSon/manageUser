@@ -59,6 +59,7 @@
         overflow: hidden;
         word-wrap: normal;
     }
+    
 }
 
 @layer components {
@@ -100,8 +101,9 @@
     --margin4px: 4px;
     --borderWidth:2px;
     --borderForLayout: 12px ;
-    --heightNav:78px;
+    --heightNav:78px;/* height for Nav bar or  width for aside Bar*/
     --mrForChild:20px;
-    --hNavRes: 58px;
-    
+    --hNavRes: 58px;/* height for Nav bar or  width for aside Bar when responsive*/
+    --timeOpacity : 1s;
+    --timeBtnImport:1s;
 }

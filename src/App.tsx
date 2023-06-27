@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { LinearProgress} from '@mui/material';
+import toast, { Toaster } from 'react-hot-toast';
+import { LinearProgress } from '@mui/material';
 import { Login, Accounts, EditUser, AddUser, FilterUser } from './pages';
 import { Menu } from './layout';
 import {
@@ -13,10 +14,11 @@ import { actions } from './store';
 import { useQuery } from 'react-query';
 import { getLimitAndSkipUser } from './Api/logTimeApi';
 import { Fragment } from 'react';
+
 function App() {
     const [state, dispatch] = useGlobalState();
     let limit = state.rowPerPage;
-    let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;    
+    let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
     const { status } = useQuery({
         queryKey: ['getLimitAndSkip', limit, skip],
         queryFn: () => getLimitAndSkipUser(limit, skip),
@@ -27,6 +29,7 @@ function App() {
     });
     return (
         <Fragment>
+            <Toaster />
             {status === 'success' && (
                 <BrowserRouter>
                     <Routes>

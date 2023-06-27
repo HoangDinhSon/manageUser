@@ -9,6 +9,7 @@ import IconcancelInFromDetaile from './icon/iconFormDetail/IconcancelInFromDetai
 import { iconCloseForFilter } from './icon';
 import iconArrowRight from './icon/icon_of_menu/iconArrowRight.png';
 import iconArrowLeft from './icon/icon_of_menu/iconArrowLeft.png';
+import {HamburgerMui} from './icon';
 export {
     closeSmall,
     bgAvatar,
@@ -21,4 +22,5 @@ export {
     iconCloseForFilter,
     iconArrowRight,
     iconArrowLeft,
+    HamburgerMui,
 };

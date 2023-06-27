@@ -80,7 +80,7 @@ function Accounts() {
                             )}
                         </div>
                     </div>
-                    {state.isDisplayAsideMenu&&(!xs_max) && <div className='pt-3'><BtnImportAndADD /></div>}
+                    {state.isDisplayAsideMenu&& <div className='md_max:pt-3 xs_max:hidden'><BtnImportAndADD /></div>}
                 </div>
                 <TableUser />
                 {state.isDisplayFiler && (

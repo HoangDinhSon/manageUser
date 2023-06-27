@@ -23,6 +23,7 @@ update state cha thì con cũng thay đổi
    b2 : dùng payload = useContext ( themeContext )
 
 # make component base div
+
 # React Hook Form and Yup
 
     step 1: schema -->
@@ -35,7 +36,15 @@ update state cha thì con cũng thay đổi
 làm thay đổi mảng cũ,
 return lại???
 
-# cập nhật state dùng destructor
+# Destructor
+
+    dùng cập nhật state,
+    1
+    return {classAsideBar,classListItem} ==> return một mảng có
+    {
+        classAsideBar:classAsideBar,
+        classListItem:classListItem
+    }
 
 # duyệt qua tất cả các phần tử trong object
 
@@ -48,44 +57,70 @@ return lại???
 
 dùng biến : border-t-[length:--borderWidth]
 
-
 # response
 
-1. MUI : dùng CSS cho component MUI 
-    b1 : setup ĐIỂM breakpoint o global 
-    b2 : dùng useMediaquery( theme.breakpoint.down ()) or up() ; có lấy giá trị diểm breakpoint cho ta một giá trị boolean và đi css cho 
+1. MUI : dùng CSS cho component MUI
+   b1 : setup ĐIỂM breakpoint o global
+   b2 : dùng useMediaquery( theme.breakpoint.down ()) or up() ; có lấy giá trị diểm breakpoint cho ta một giá trị boolean và đi css cho
 2. Tailwindcss
-    b1:  setup KHOẢNG breakpoint 
-# flex 
-    1. index : thứ tự giữa các item 
-    2. flex-grow : css cho 1 itemflex nếu =1 nó chiếm toàn bộ không gian trống 
-# window 
+   b1: setup KHOẢNG breakpoint
+
+# flex
+
+    1. index : thứ tự giữa các item
+    2. flex-grow : css cho 1 itemflex nếu =1 nó chiếm toàn bộ không gian trống
+
+# window
+
     window.screen tính cả scroll bar
-    window.innerScreen không tính scroll bar 
+    window.innerScreen không tính scroll bar
 
 # Reset lại giá trị InputFiled , Option ???
-# Reset lại giá trị trong ô input và trong ô option. 
-# Array 
+
+# Reset lại giá trị trong ô input và trong ô option.
+
+# Array
+
     các phương thức làm việc với mảng.
-        1. tạo một mảng dựa trên mảng gốc: mảng mới = mảng cũ + thêm 1 phần tử destructing 
+        1. tạo một mảng dựa trên mảng gốc: mảng mới = mảng cũ + thêm 1 phần tử destructing
         2. chỉnh sửa mãng gốc: thệm một phần tử vào đầu mảng .push().
+
 # string
-# object 
-# env 
+
+# object
+
+# env
+
+    dùng biến trong file src và dùng biến trong file config
     1. use myFile :(src/)
          import.meta.env.VITE_PORT ==> KHÔNG CÓ DẤU ";;;;;;;;;;;;"
-    2. use file config install : npm i dotenv , npm i @types/node 
+    2. use file config install : npm i dotenv , npm i @types/node
           require('dotenv').config();
           process.env.<biến môi trường> ==> KẾT QUẢ SẼ CÓ 1 DẤU ";:::"
-# Transition 
-    b1 : trạng thái ba đầu 
-    b2 : hành động làm thay đổi trạng thái 
-    b3 : trạng thái sau  
-# Hamburger /Hamburger
+
+# Transition
+
+    b1: trạng thái ba đầu
+    b2 : hành động làm thay đổi trạng thái
+    b3 : trạng thái sau
+
+# Hamburger /
+
     chứa các thẻ con cùng cấp
     input type= checkbox
-    label cùng id 
+    label cùng id
     div chứa (many thing )
 
+# dùng useMutation with axios.get
 
+    bình thường phương thức get sẽ dùng với useQuery
+    nhưng để triger một hàm call Api we use useMutation get .
+    b1. tạo hàm call api
+    b2. dùng mutate để triger
 
+# useEffect
+
+dependence trong useEffect mà một mảng có thể chứa , 1 mảng , chứa 1 biểu thức , chứa hàm
+ví dụ [isDisplay===false]
+
+#

@@ -1,32 +1,13 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { useTheme, useMediaQuery } from '@mui/material';
-import { accounts, dasboard, hamberger, project, stacks, RoleManager, Report } from '../assets/icon';
-import {
-    nameOfDashboard,
-    nameOfRolemanager,
-    nameOfStacks,
-    nameOfaccounts,
-    nameOfproject,
-    nameOfreport,
-} from '../assets/icon';
+import { FormLogOut, BtnImportAndADD, Hamburger } from '../components';
 import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
-import { actions } from '../store';
-import { bgAvatar, notification, arrowBackForLayout } from '../assets';
-import { FormLogOut, BtnImportAndADD, Hamburger } from '../components';
-import {
-    LINK_PAGE_ACCOUNT,
-    LINK_PAGE_ACCOUNT_EDIT,
-    LINK_PAGE_ACCOUNT_ADD,
-    LINK_PAGE_DASHBOARD,
-    LINK_PAGE_PROJECT,
-    LINK_PAGE_STACKS,
-    LINK_PAGE_ROLEMANAGER,
-    LINK_PAGE_REPORT,
-} from '../constance_for_page';
 import { HamburgerForAsideBar } from '../components/component_layout/Hamburger';
-
+import * as icon from '../assets/icon'
+import { bgAvatar, notification, arrowBackForLayout } from '../assets';
+import * as linkPage from '../constance_for_page'
 function Menu({ children }: any) {
     const location = useLocation();
     const [state, dispatch] = useGlobalState();
@@ -36,29 +17,26 @@ function Menu({ children }: any) {
         window.location.href = 'http://localhost:4000';
         return <div></div>;
     }
-    const handleSwitchDisplay = () => {
-        dispatch(actions.togleDisplayAsideMenu(state.isDisplayAsideMenu));
-    };
     const handleLogOut = () => {
         setIsDisplayLogout(!isDisPlayLogout);
     };
 
-    function ChangeContentBaseAddress() {
+    function ContentBaseAddress() {
         function ContentHeaderLayOut({ children }: any) {
             return (
                 <div className="flex gap-4">
-                    <NavLink to={LINK_PAGE_ACCOUNT}>
+                    <NavLink to={linkPage.LINK_PAGE_ACCOUNT}>
                         <img src={arrowBackForLayout} alt="" />
                     </NavLink>
-                    <p className="text-[--greyChart]">{children}</p>
+                    <p className="text-[--greyChart] xs_max:text-[16px]">{children}</p>
                 </div>
             );
         }
         switch (location.pathname) {
-            case LINK_PAGE_ACCOUNT_EDIT: {
+            case linkPage.LINK_PAGE_ACCOUNT_EDIT: {
                 return <ContentHeaderLayOut>Accounts / Edit Account</ContentHeaderLayOut>;
             }
-            case LINK_PAGE_ACCOUNT_ADD: {
+            case linkPage.LINK_PAGE_ACCOUNT_ADD: {
                 return <ContentHeaderLayOut>Accounts / Add Account</ContentHeaderLayOut>;
             }
             default: {
@@ -69,16 +47,19 @@ function Menu({ children }: any) {
     // hidden or display BtnAddAndImport :
     const conditionToDisplayBtnADDandImport =
         state.isDisplayAsideMenu === false &&
-        (location.pathname === LINK_PAGE_ACCOUNT || location.pathname === `${LINK_PAGE_ACCOUNT}/`);
-    // change class to fit height aside Bar
-    const heightBrowser = window.screen.height;
-    let classAsideBar = 'flex flex-col items-center  gap-[53px] pt-5 h-full ';
-    let classListItem = 'flex flex-col items-center  gap-[53px] pt-5 flex-grow';
-    if (heightBrowser < HEIGHT_BROWSER_TO_CHANGE_GAP) {
-        classAsideBar = 'flex flex-col items-center  gap-[20px] pt-5 h-full ';
-        classListItem = 'flex flex-col items-center  gap-[20px] py-5 xs_max:py-0 ';
-    }
-
+        (location.pathname === linkPage.LINK_PAGE_ACCOUNT || location.pathname === `${linkPage.LINK_PAGE_ACCOUNT}/`);
+    // change class to fit height viewpoint
+    const heightBrowser = screen.height;
+    const { classAsideBar, classListItem } = useMemo(() => {
+        let classAsideBar = 'flex flex-col items-center  gap-[53px] pt-5 h-full ';
+        let classListItem = 'flex flex-col items-center  gap-[53px] py-5 flex-grow xs_max:py-0';
+        if (heightBrowser < HEIGHT_BROWSER_TO_CHANGE_GAP) {
+            classAsideBar = classAsideBar.replace('gap-[53px]', 'gap-[20px]');
+            classListItem = classListItem.replace('gap-[53px]', 'gap-[20px]');
+        }
+        return { classAsideBar, classListItem };
+    }, [heightBrowser]);
+    // check width viewpoint
     const theme = useTheme();
     const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1;
     const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
@@ -88,39 +69,12 @@ function Menu({ children }: any) {
 
     return (
         <div className="menu_Layout  flex bg-[#ECECEC]  h-screen ">
-            {/* 1/4. Aside Bar */}
-            <HamburgerForAsideBar>
-                <div className=" w-[78px] bg-white h-screen pt-[--heightNav]">
-                    <div className={classAsideBar}>
-                        <div className={classListItem}>
-                            <IconMenu icon={dasboard} iconNameMenu={nameOfDashboard} name={LINK_PAGE_DASHBOARD} />
-                            <IconMenu icon={project} iconNameMenu={nameOfproject} name={LINK_PAGE_PROJECT} />
-                            <IconMenu icon={stacks} iconNameMenu={nameOfStacks} name={LINK_PAGE_STACKS} />
-                            <IconMenu icon={Report} iconNameMenu={nameOfreport} name={LINK_PAGE_REPORT} />
-                            <IconMenu icon={accounts} iconNameMenu={nameOfaccounts} name={LINK_PAGE_ACCOUNT} />
-                            <IconMenu
-                                icon={RoleManager}
-                                iconNameMenu={nameOfRolemanager}
-                                name={LINK_PAGE_ROLEMANAGER}
-                            />
-                        </div>
-                        <div className=" flex flex-col items-center gap-10 pb-5 xs_max:gap-5 ">
-                            <img src={notification} alt="" className="cursor-pointer" />
-                            <div className="relative">
-                                <div className="absolute bottom-0 left-[52px]">{isDisPlayLogout && <FormLogOut />}</div>
-                                <img src={bgAvatar} alt="" onClick={handleLogOut} className="cursor-pointer" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </HamburgerForAsideBar>
-
-            {/*2/4. TopNav Bar */}
-            <div className="fixed z-[1] top-0 left-[0] right-0  px-[20px] bg-[#fff] xs_max:h-[--hNavRes]  range_1441_:px-[calc((100%-1440px)/2+20px)]  ">
+            {/*1/4. TopNav Bar */}
+            <div className="fixed z-[6] top-0 h-[78px] xs_max:h-[--hNavRes] w-[calc(100%-80px-20px)] max-w-[calc(1440px-80px)] ml-[80px]  bg-[#fff]   ">
                 <div className="flex justify-between items-center  h-[--heightNav] xs_max:h-[--hNavRes]">
                     <div className="Left_Nav flex items-center gap-[15px]">
-                        <h4 className='pl-[60px]'>
-                            <ChangeContentBaseAddress />
+                        <h4>
+                            <ContentBaseAddress />
                         </h4>
                     </div>
                     {conditionToDisplayBtnADDandImport && (
@@ -136,8 +90,35 @@ function Menu({ children }: any) {
                     )}
                 </div>
             </div>
+            {/* 2/4. Aside Bar */}
+            <HamburgerForAsideBar>
+                <div className=" w-[--heightNav] bg-white h-screen pt-[--heightNav]">
+                    <div className={classAsideBar}>
+                        <div className={classListItem}>
+                            <IconMenu icon={icon.dasboard} iconNameMenu={icon.nameOfDashboard} name={linkPage.LINK_PAGE_DASHBOARD} />
+                            <IconMenu icon={icon.project} iconNameMenu={icon.nameOfproject} name={linkPage.LINK_PAGE_PROJECT} />
+                            <IconMenu icon={icon.stacks} iconNameMenu={icon.nameOfStacks} name={linkPage.LINK_PAGE_STACKS} />
+                            <IconMenu icon={icon.Report} iconNameMenu={icon.nameOfreport} name={linkPage.LINK_PAGE_REPORT} />
+                            <IconMenu icon={icon.accounts} iconNameMenu={icon.nameOfaccounts} name={linkPage.LINK_PAGE_ACCOUNT} />
+                            <IconMenu
+                                icon={icon.RoleManager}
+                                iconNameMenu={icon.nameOfRolemanager}
+                                name={linkPage.LINK_PAGE_ROLEMANAGER}
+                            />
+                        </div>
+                        <div className=" flex flex-col items-center gap-10 pb-5 xs_max:gap-5 ">
+                            <img src={notification} alt="" className="cursor-pointer" />
+                            <div className="relative">
+                                <div className="absolute bottom-0 left-[52px]">{isDisPlayLogout && <FormLogOut />}</div>
+                                <img src={bgAvatar} alt="" onClick={handleLogOut} className="cursor-pointer" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </HamburgerForAsideBar>
             {/*3/4. Background  */}
             <div className="fixed  bg-[#ECECEC] h-screen left-0 right-0 z-[-1]"></div>
+            <div className="fixed z-[0] bg-white top-0 left-0 right-0 h-[80px] xs_max:h-[60px] max-w-[1440px]"></div>
             {/*4/4. Content */}
             <div className={classForChildrenOfMenu}>{children}</div>
         </div>

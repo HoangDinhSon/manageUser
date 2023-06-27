@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Button } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { useGlobalState } from '../../store/Provider';
@@ -13,11 +12,11 @@ function BtnImportAndADD() {
     };
     return (
         <OpacityTransition>
-            <div className='Right_Nav flex items-center gap-[10px]'>
+            <div className='Right_Nav flex items-center gap-[10px] pr-[--mrForChild]'>
                 <img src={icondocument} alt="" className="cursor-pointer" />
                 <img src={iconimportuser} alt="" className="cursor-pointer" />
                 <img className="cursor-pointer" src={iconuploaduser} alt="" onClick={handleImportUser} />
-                <NavLink to={LINK_PAGE_ACCOUNT_ADD}>
+               {state.isDisplayAsideMenu?"": <NavLink to={LINK_PAGE_ACCOUNT_ADD}>
                     <Button
                         startIcon={<img src={iconplususer} alt="" />}
                         variant="contained"
@@ -29,7 +28,7 @@ function BtnImportAndADD() {
                     >
                         New Account
                     </Button>
-                </NavLink>
+                </NavLink>}
             </div>
         </OpacityTransition>
     );
