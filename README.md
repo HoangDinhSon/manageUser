@@ -100,9 +100,12 @@ dùng biến : border-t-[length:--borderWidth]
 
 # Transition
 
-    b1: trạng thái ba đầu
+    b1: trạng thái ba đầu w-100px 
     b2 : hành động làm thay đổi trạng thái
-    b3 : trạng thái sau
+    b3 : trạng thái sau w-200px
+# Animation
+    b1: đăng kí name , duration cho cái thẻ cần dc animation 
+    b2: @keyForame 
 
 # Hamburger /
 
@@ -123,4 +126,16 @@ dùng biến : border-t-[length:--borderWidth]
 dependence trong useEffect mà một mảng có thể chứa , 1 mảng , chứa 1 biểu thức , chứa hàm
 ví dụ [isDisplay===false]
 
-#
+# thêm file vảo trong in put 
+    lắng nghe sự kiện event 
+    b1 : event.target.files type object {0: data 1 ,  2 data 2 , }
+    set state 
+    nếu có sửa xóa thì lấy state ra chỉnh sửa sau đó cập nhật lại state 
+# CSS
+    - tính tổng 2 giá trị của biề trong css 
+    - lấy chiều dài của thẻ div này gán cho thẻ div khác ??
+    - 
+# react query 
+    -c1 Component nào dùng api thì gọi trong component đó ok hơn 
+    -c2  Gọi api trong component cha sau đó --> lưu vào global state (reducer)
+

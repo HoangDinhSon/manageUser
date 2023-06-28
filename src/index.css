@@ -7,12 +7,6 @@
         font-family: 'Poppins', sans-serif;
         /* outline: 1px solid green; */
     }
-
-    body {
-        max-width: 1440px;
-        /* margin: 0 auto; */
-        /* position: relative; */
-    }
     h1 {
         padding-top: 5px;
         font-size: 45px;
@@ -51,15 +45,11 @@
     thead td {
         color: #9da7b9;
     }
-
-    tbody td {
-    }
     td {
         padding: 18px 12px;
         overflow: hidden;
         word-wrap: normal;
     }
-    
 }
 
 @layer components {
@@ -81,15 +71,15 @@
         border-radius: 5px;
     }
 
-    /* my loger */
+    /* my logger css  */
     .log_red {
         background-color: red;
     }
-    .log_yellow{
+    .log_yellow {
         background-color: yellow;
     }
     .log_outline {
-        @apply outline outline-1 outline-[green]
+        @apply outline outline-1 outline-[green];
     }
 }
 :root {
@@ -99,11 +89,45 @@
     --greyChart: #9da7b9;
     --blackTranspirationHalf: rgba(0, 0, 0, 0.5);
     --margin4px: 4px;
-    --borderWidth:2px;
-    --borderForLayout: 12px ;
-    --heightNav:78px;/* height for Nav bar or  width for aside Bar*/
-    --mrForChild:20px;
-    --hNavRes: 58px;/* height for Nav bar or  width for aside Bar when responsive*/
-    --timeOpacity : 1s;
-    --timeBtnImport:1s;
+    --borderWidth: 2px;
+    --borderForLayout: 12px;
+    --heightNav: 78px; /* height for Nav bar or  width for aside Bar*/
+    --mrForChild: 20px;
+    --hNavRes: 58px; /* height for Nav bar or  width for aside Bar when responsive*/
+    --timeOpacity: 1s;
+    --timeBtnImport: 1s;
+    --durationTableUser: 1s;
+    --durationForMain: 1s;
+    /* Page Login  */
+    --pLeftLogin: 60px;
+}
+.my_table_animation {
+    position: relative;
+}
+.my_table_animation {
+    border-radius: var(--borderForLayout);
+    margin:3px 3px;
+    background-color: black;
+    animation-name: loading;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function:linear;
+}
+@keyframes loading {
+    0% {
+        color: #99999960;
+        background-color: #99999960;
+    }
+    25% {
+        background-color:#99999930 ;
+    }
+    50% {
+        background-color:#99999930 ;
+    }
+    100% {
+        background-color:#99999960 ;
+    }
+}
+input:-internal-autofill-selected{
+   -webkit-box-shadow: 0 0 0 30px white inset !important
 }

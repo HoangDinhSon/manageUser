@@ -53,6 +53,7 @@ function ImportForm() {
             dispatch(actions.toggleImportForm());
             location.href = `http://localhost:4000${LINK_PAGE_ACCOUNT}`;
         }
+        // 
     };
 
     return (
@@ -89,7 +90,7 @@ function ImportForm() {
                         className="hidden"
                         multiple
                         ref={refInput}
-                        accept=".csv,.excel,.xlsx,.img ,.png"
+                        accept=".csv,.excel,.xlsx,.img ,.png,.mp4"
                     />
                     <div className="total_file py-3">
                         <ul className="flex items-center  overflow-auto flex-wrap">

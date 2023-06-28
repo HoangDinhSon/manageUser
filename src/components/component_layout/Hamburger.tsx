@@ -59,9 +59,9 @@ function HamburgerForAsideBar({ children }: any) {
     const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1; //375+1
     const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
 
-    let classDiv = 'w-[85px] transition-[width] duration-[1s] overflow-hidden ';
+    let classDiv = 'w-[85px] transition-[width] duration-[--durationTableUser] overflow-hidden ';
     if (isDisplay === false) {
-        classDiv = 'w-0 transition-[width] duration-[1s] overflow-hidden';
+        classDiv = 'w-0 transition-[width] duration-[--durationTableUser] overflow-hidden';
     }
     // sau khi xuất hiện thì asid menu dc fixed
     const isDisplayFalse = isDisplay === false;

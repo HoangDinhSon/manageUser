@@ -64,13 +64,13 @@ function Menu({ children }: any) {
     const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1;
     const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
     let classForChildrenOfMenu =
-        'mx-[--mrForChild] mt-[calc(var(--mrForChild)+var(--heightNav))] mb-[--mrForChild]  bg-[white] w-[calc(100%-(2*var(--mrForChild)))]  rounded-[--borderForLayout] overflow-auto' +
-        ' xs_max:mx-[--margin4px] xs_max:mt-[calc(var(--hNavRes)+var(--margin4px))] xs_max:mb-[--margin4px]  xs_max:w-[calc(100%-2*var(--margin4px))] transition-all duration-[2s]';
+        ' mx-[--mrForChild] mt-[calc(var(--mrForChild)+var(--heightNav))] mb-[--mrForChild]  bg-[white] w-[calc(100%-(2*var(--mrForChild)))]  rounded-[--borderForLayout] overflow-auto' +
+        ' xs_max:mx-[--margin4px] xs_max:mt-[calc(var(--hNavRes)+var(--margin4px))] xs_max:mb-[--margin4px]  xs_max:w-[calc(100%-2*var(--margin4px))] transition-all duration-[--durationForMain]';
 
     return (
-        <div className="menu_Layout  flex bg-[#ECECEC]  h-screen ">
+        <div className="menu_Layout  flex bg-[#ECECEC]  h-screen w-screen ">
             {/*1/4. TopNav Bar */}
-            <div className="fixed z-[6] top-0 h-[78px] xs_max:h-[--hNavRes] w-[calc(100%-80px-20px)] max-w-[calc(1440px-80px)] ml-[80px]  bg-[#fff]   ">
+            <div className="fixed z-[6] ml-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-[calc(100%-80px)]    bg-[#fff]   ">
                 <div className="flex justify-between items-center  h-[--heightNav] xs_max:h-[--hNavRes]">
                     <div className="Left_Nav flex items-center gap-[15px]">
                         <h4>
@@ -117,10 +117,10 @@ function Menu({ children }: any) {
                 </div>
             </HamburgerForAsideBar>
             {/*3/4. Background  */}
-            <div className="fixed  bg-[#ECECEC] h-screen left-0 right-0 z-[-1]"></div>
-            <div className="fixed z-[0] bg-white top-0 left-0 right-0 h-[80px] xs_max:h-[60px] max-w-[1440px]"></div>
+            <div className="fixed  bg-[#ECECEC] h-screen left-0 right-0 z-[-1] "></div>
+            <div className="fixed z-[0] bg-white top-0 left-0 right-0 h-[80px] xs_max:h-[60px]"></div>
             {/*4/4. Content */}
-            <div className={classForChildrenOfMenu}>{children}</div>
+            <main className={classForChildrenOfMenu}>{children}</main>
         </div>
     );
 }

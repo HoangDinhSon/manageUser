@@ -30,7 +30,6 @@ function App() {
     return (
         <Fragment>
             <Toaster />
-            {status === 'success' && (
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Login />}></Route>
@@ -38,7 +37,7 @@ function App() {
                             path={LINK_PAGE_ACCOUNT}
                             element={
                                 <Menu>
-                                    <Accounts />
+                                    <Accounts status={status} />
                                 </Menu>
                             }
                         ></Route>
@@ -47,7 +46,6 @@ function App() {
                         <Route path={LINK_PAGE_ACCOUNT_FILTER} element={<Menu>{<FilterUser />}</Menu>}></Route>
                     </Routes>
                 </BrowserRouter>
-            )}
         </Fragment>
     );
 }

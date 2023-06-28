@@ -3,6 +3,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
+import {TableAnimation} from "../components";
 import { TableUser } from '../components/accounts/TableUser';
 import { filterbutton, iconSearch } from '../assets/icon';
 import { iconCloseForFilter } from '../assets';
@@ -13,7 +14,7 @@ import { ImportForm, Filter, FormViewUser, BtnImportAndADD } from '../components
 import { checkNumberOFCriterialForFilter } from '../handlelogic';
 import { typeUserAfterCallApiBaseOnID } from '../type';
 
-function Accounts() {
+function Accounts({status}:any) {
     const [state, dispatch] = useGlobalState();
     const handleSwitchDisplayFilterForm = () => {
         dispatch(actions.togleDisplayFilter(state.isDisplayFiler));
@@ -43,7 +44,9 @@ function Accounts() {
     return (
         <section className="accounts_page">
             <Toaster />
-            <div className="bg-white rounded-[12px] px-8 pt-8 pb-[68px] xs_max:px-[--margin4px] xs_max:pt-4">
+            {status==="loading"&& <TableAnimation/>}
+            {status==="success"&&
+            (<div className="bg-white rounded-[12px] px-8 pt-8 pb-[68px] xs_max:px-[--margin4px] xs_max:pt-4">
                 <div className="nav_for_table flex gap-1 h-[54px] items-end   border-b-[length:--borderWidth] border-[#EBEBEB]">
                     <p className="w-[44px] h-[40px] leading-[40px] text-center text-[#5E90F0]  border-b-4 border-[#5E90F0]">
                         All
@@ -90,7 +93,7 @@ function Accounts() {
                 )}
                 {statusForApiByID === 'success' && state.isDisplayFormView && <FormViewUser />}
                 {state.isDisplayImportForm && <ImportForm />}
-            </div>
+            </div>)}
         </section>
     );
 }
