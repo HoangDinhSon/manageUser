@@ -146,7 +146,7 @@ function EditUser() {
                         </div>
                         <Select label="Level" listOption={listOptionLevel} nameSelect="level" register={register} />
                         <SkillDisplayInput resultListSkill={getListSkill} />
-                        <button className="w-full h-[42px] rounded bg-[--ColorBgButton]">Save</button>
+                        <button className="w-full h-[42px] rounded bg-[--ColorBgButton] text-white">Save</button>
                     </form>
                 </div>
             )}

@@ -2,6 +2,7 @@
 chức năng : khi hover vào icon thì hiện thông tin chi tiết 
 dùng  : group , group-hover tailwindcss
 */
+import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 //type name :string
 //...props là một dạng của Atribute của thẻ div
@@ -20,7 +21,9 @@ function IconMenu({ icon, iconNameMenu, name, ...props }: any) {
             <div className="hidden group-hover:!block absolute top-[50%] left-[32px] -translate-y-[50%] h-[30px] w-[200px]  object-cover">
                 <img src={iconNameMenu} alt="" className="" />
             </div>
+            <NavLink to={name}>
             <img src={icon} alt="" />
+            </NavLink>
         </div>
     );
 }

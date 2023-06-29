@@ -50,7 +50,7 @@ function TableRowForHeader() {
                 </div>
             </td>
             <td>
-                <div className="flex justify-between min-w-[74px]">
+                <div className="flex justify-between min-w-[104px]">
                     <span>Blood Group</span>
                     <img src={iconArrowTable} alt="" />
                 </div>

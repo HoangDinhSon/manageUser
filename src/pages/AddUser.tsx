@@ -117,7 +117,7 @@ function AddUser() {
                     </div>
                     <Select label="Level" listOption={listOptionLevel} nameSelect="level" register={register} />
                     <SkillDisplayInput resultListSkill={getListSkill} />
-                    <button className="w-full h-[42px] rounded bg-[--ColorBgButton]" type="submit">
+                    <button className="w-full h-[42px] rounded bg-[--ColorBgButton] text-white" type="submit">
                         Save
                     </button>
                 </form>

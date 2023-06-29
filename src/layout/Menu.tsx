@@ -5,14 +5,14 @@ import { FormLogOut, BtnImportAndADD, Hamburger } from '../components';
 import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { HamburgerForAsideBar } from '../components/component_layout/Hamburger';
-import * as icon from '../assets/icon'
+import * as icon from '../assets/icon';
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
-import * as linkPage from '../constance_for_page'
+import * as linkPage from '../constance_for_page';
 function Menu({ children }: any) {
     const location = useLocation();
     const [state, dispatch] = useGlobalState();
     const [isDisPlayLogout, setIsDisplayLogout] = useState(false);
-    const HEIGHT_BROWSER_TO_CHANGE_GAP = 740;
+    const HEIGHT_BROWSER_TO_CHANGE_GAP = 800;
     if (localStorage.getItem('userAdmin') == undefined) {
         window.location.href = 'http://localhost:4000';
         return <div></div>;
@@ -40,7 +40,7 @@ function Menu({ children }: any) {
                 return <ContentHeaderLayOut>Accounts / Add Account</ContentHeaderLayOut>;
             }
             default: {
-                return <ContentHeaderLayOut>Accounts</ContentHeaderLayOut>;
+                return <div className="text-2xl font-medium">ACCOUNTS</div>;
             }
         }
     }
@@ -49,26 +49,37 @@ function Menu({ children }: any) {
         state.isDisplayAsideMenu === false &&
         (location.pathname === linkPage.LINK_PAGE_ACCOUNT || location.pathname === `${linkPage.LINK_PAGE_ACCOUNT}/`);
     // change class to fit height viewpoint
-    const heightBrowser = screen.height;
-    const { classAsideBar, classListItem } = useMemo(() => {
-        let classAsideBar = 'flex flex-col items-center  gap-[53px] pt-5 h-full ';
-        let classListItem = 'flex flex-col items-center  gap-[53px] py-5 flex-grow xs_max:py-0';
-        if (heightBrowser < HEIGHT_BROWSER_TO_CHANGE_GAP) {
-            classAsideBar = classAsideBar.replace('gap-[53px]', 'gap-[20px]');
-            classListItem = classListItem.replace('gap-[53px]', 'gap-[20px]');
-        }
-        return { classAsideBar, classListItem };
-    }, [heightBrowser]);
-    // check width viewpoint
+    const heightBrowser = window.innerHeight;
+    let classAsideBar = 'flex flex-col items-center  gap-[53px] pt-5 h-full ';
+    let classListItem = 'flex flex-col items-center  gap-[53px] py-5 flex-grow xs_max:py-0';
+    if (heightBrowser < HEIGHT_BROWSER_TO_CHANGE_GAP) {
+        classAsideBar = classAsideBar.replace('gap-[53px]', 'gap-[20px]');
+        classListItem = classListItem.replace('gap-[53px]', 'gap-[20px]');
+    }
     const theme = useTheme();
     const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1;
     const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
     let classForChildrenOfMenu =
-        ' mx-[--mrForChild] mt-[calc(var(--mrForChild)+var(--heightNav))] mb-[--mrForChild]  bg-[white] w-[calc(100%-(2*var(--mrForChild)))]  rounded-[--borderForLayout] overflow-auto' +
-        ' xs_max:mx-[--margin4px] xs_max:mt-[calc(var(--hNavRes)+var(--margin4px))] xs_max:mb-[--margin4px]  xs_max:w-[calc(100%-2*var(--margin4px))] transition-all duration-[--durationForMain]';
+        'fixed bg-white left-[20px] top-[98px]  w-[calc(100%-20px-20px)] h-[calc(100vh-98px-20px)] rounded-[--borderForLayout]  overflow-auto transition-all duration-[1s] ' +
+        ' ' +
+        ' after:fixed after:content-[""] after:h-[20px]   after:bg-[white] after:left-[20px] after:top-[98px] after:w-[calc(100%-40px)] after:rounded-t-[12px] after:transition-all after:duration-[1s]' +
+        ' ' +
+        'xs_max:left-[--margin4px] xs_max:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:w-[calc(100%-2*var(--margin4px))]' +
+        ' ' +
+        ' xs_max:after:left-[--margin4px] xs_max:after:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:after:w-[calc(100%-2*var(--margin4px))]';
+    if (state.isDisplayAsideMenu === true) {
+        classForChildrenOfMenu =
+            'fixed bg-white left-[98px] top-[98px]  w-[calc(100%-98px-20px)] h-[calc(100vh-98px-20px)] rounded-[--borderForLayout] overflow-auto transition-all duration-[1s]  ' +
+            ' ' +
+            ' after:fixed after:content-[""] after:h-[20px]   after:bg-[white] after:left-[98px] after:top-[98px] after:w-[calc(100%-118px)] after:rounded-t-[12px]  after:transition-all after:duration-[1s] ' +
+            ' ' +
+            ' xs_max:left-[calc(var(--margin4px)+var(--hNavRes))] xs_max:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))]' +
+            ' ' +
+            ' xs_max:after:left-[calc(var(--margin4px)+var(--hNavRes))] xs_max:after:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:after:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))] ';
+    }
 
     return (
-        <div className="menu_Layout  flex bg-[#ECECEC]  h-screen w-screen ">
+        <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full ">
             {/*1/4. TopNav Bar */}
             <div className="fixed z-[6] ml-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-[calc(100%-80px)]    bg-[#fff]   ">
                 <div className="flex justify-between items-center  h-[--heightNav] xs_max:h-[--hNavRes]">
@@ -78,7 +89,7 @@ function Menu({ children }: any) {
                         </h4>
                     </div>
                     {conditionToDisplayBtnADDandImport && (
-                        <div className="bg-[white]">
+                        <div className="bg-[white] ">
                             {maxXS ? (
                                 <Hamburger>
                                     <BtnImportAndADD />
@@ -95,11 +106,31 @@ function Menu({ children }: any) {
                 <div className=" w-[--heightNav] bg-white h-screen pt-[--heightNav]">
                     <div className={classAsideBar}>
                         <div className={classListItem}>
-                            <IconMenu icon={icon.dasboard} iconNameMenu={icon.nameOfDashboard} name={linkPage.LINK_PAGE_DASHBOARD} />
-                            <IconMenu icon={icon.project} iconNameMenu={icon.nameOfproject} name={linkPage.LINK_PAGE_PROJECT} />
-                            <IconMenu icon={icon.stacks} iconNameMenu={icon.nameOfStacks} name={linkPage.LINK_PAGE_STACKS} />
-                            <IconMenu icon={icon.Report} iconNameMenu={icon.nameOfreport} name={linkPage.LINK_PAGE_REPORT} />
-                            <IconMenu icon={icon.accounts} iconNameMenu={icon.nameOfaccounts} name={linkPage.LINK_PAGE_ACCOUNT} />
+                            <IconMenu
+                                icon={icon.dasboard}
+                                iconNameMenu={icon.nameOfDashboard}
+                                name={linkPage.LINK_PAGE_DASHBOARD}
+                            />
+                            <IconMenu
+                                icon={icon.project}
+                                iconNameMenu={icon.nameOfproject}
+                                name={linkPage.LINK_PAGE_PROJECT}
+                            />
+                            <IconMenu
+                                icon={icon.stacks}
+                                iconNameMenu={icon.nameOfStacks}
+                                name={linkPage.LINK_PAGE_STACKS}
+                            />
+                            <IconMenu
+                                icon={icon.Report}
+                                iconNameMenu={icon.nameOfreport}
+                                name={linkPage.LINK_PAGE_REPORT}
+                            />
+                            <IconMenu
+                                icon={icon.accounts}
+                                iconNameMenu={icon.nameOfaccounts}
+                                name={linkPage.LINK_PAGE_ACCOUNT}
+                            />
                             <IconMenu
                                 icon={icon.RoleManager}
                                 iconNameMenu={icon.nameOfRolemanager}

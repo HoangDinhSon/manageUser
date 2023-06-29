@@ -1,7 +1,7 @@
 import { iconArrowRight, iconArrowLeft } from '../../assets';
 import { useEffect, useState } from 'react';
 import { ContextState, actions } from '../../store';
-import { useTheme, useMediaQuery } from '@mui/material';
+import { useTheme, useMediaQuery, Tooltip } from '@mui/material';
 import { HamburgerMui } from '../../assets';
 
 function Hamburger({ children }: any) {
@@ -50,7 +50,6 @@ hoạt động : xuất hiện icon Mui --> sau khi nhấn vào icon Mui thì w-
 
 */
 
-
 function HamburgerForAsideBar({ children }: any) {
     const [isDisplay, setIsDisplay] = useState(false);
     const [classChildren, setClassChildren] = useState('');
@@ -59,16 +58,16 @@ function HamburgerForAsideBar({ children }: any) {
     const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1; //375+1
     const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
 
-    let classDiv = 'w-[85px] transition-[width] duration-[--durationTableUser] overflow-hidden ';
+    let classDiv = 'w-[78px] h-screen  transition-[all] duration-[--durationTableUser] overflow-hidden  ';
     if (isDisplay === false) {
-        classDiv = 'w-0 transition-[width] duration-[--durationTableUser] overflow-hidden';
+        classDiv = 'w-[0] transition-[all] duration-[--durationTableUser] overflow-hidden';
     }
     // sau khi xuất hiện thì asid menu dc fixed
     const isDisplayFalse = isDisplay === false;
     useEffect(() => {
         if (isDisplay === true) {
             setTimeout(() => {
-                setClassChildren('fixed z-[3]');
+                setClassChildren('fixed z-[3] left-0');
             }, 1000);
         }
     }, [isDisplayFalse]);

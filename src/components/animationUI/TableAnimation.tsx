@@ -1,23 +1,8 @@
+import { CircularProgress } from '@mui/material';
 function TableAnimation() {
     return (
-        <div>
-            <div className="h-[200px] bg-gray-200 my_table_animation"></div>
-            <div className="h-[10px] bg-white"></div>
-            <div role="status" className="ml-[3px] mt-2 animate-pulse">
-                <div className="mb-2.5 h-10 rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10 rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="mb-2.5 h-10  rounded bg-gray-200 dark:bg-gray-700" />
-                <div className="h-10  rounded bg-gray-200 dark:bg-gray-700" />
-            </div>
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center">
+            <CircularProgress />
         </div>
     );
 }
