@@ -1,8 +1,9 @@
 import { iconArrowRight, iconArrowLeft } from '../../assets';
 import { useEffect, useState } from 'react';
 import { ContextState, actions } from '../../store';
-import { useTheme, useMediaQuery, Tooltip } from '@mui/material';
+import { useTheme, useMediaQuery } from '@mui/material';
 import { HamburgerMui } from '../../assets';
+/*trong này có 2 Hamburger không liên quan đến nhau */
 
 function Hamburger({ children }: any) {
     const [isChecked, setIsChecked] = useState(false);
@@ -38,65 +39,71 @@ function Hamburger({ children }: any) {
                 height="41px"
                 className="peer-checked/hamburger:hidden mr-4"
             />
-            <div>{children}</div>
+            <main>{children}</main>
         </div>
     );
 }
+/*
+Hamburger Menu 
+
+*/
+function HamburgerMenu({onClick}:any){
+    const [state, dispatch] = ContextState.useGlobalState();
+    const handleOnClick=()=>{
+        onClick()
+    }
+    return(
+        <div
+        className="fixed top-[calc((var(--heightNav)-24px)/2)] left-[calc((var(--heightNav)-24px)/2)] xs_max:top-[calc((var(--hNavRes)-24px)/2)]  z-[4] cursor-pointer"
+        onClick={handleOnClick}
+    >
+        <HamburgerMui
+            sx={{
+                color: state.isDisplayAsideMenu ? 'red' : '#9DA7B9',
+            }}
+        />
+    </div>
+    )
+}
+
 
 /*
 chức năng : tạo hiệu ứng transition cho thanh asideseBar 
 hoạt động : xuất hiện icon Mui --> sau khi nhấn vào icon Mui thì w-0--> w-85px 
-
-
 */
 
 function HamburgerForAsideBar({ children }: any) {
-    const [isDisplay, setIsDisplay] = useState(false);
     const [classChildren, setClassChildren] = useState('');
     const [state, dispatch] = ContextState.useGlobalState();
     const theme = useTheme();
     const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1; //375+1
     const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
-
-    let classDiv = 'w-[78px] h-screen  transition-[all] duration-[--durationTableUser] overflow-hidden  ';
-    if (isDisplay === false) {
-        classDiv = 'w-[0] transition-[all] duration-[--durationTableUser] overflow-hidden';
+    let classDiv = 'fixed z-[3] w-[--heightNav] h-screen  transition-[all] duration-[--durationTableUser] overflow-hidden  ';
+    if (state.isDisplayAsideMenu === false) {
+        classDiv = 'fixed z-[3] w-[0] transition-[all] duration-[--durationTableUser] overflow-hidden';
     }
     // sau khi xuất hiện thì asid menu dc fixed
-    const isDisplayFalse = isDisplay === false;
+    let idSetTimeout: any;
     useEffect(() => {
-        if (isDisplay === true) {
-            setTimeout(() => {
+        if (state.isDisplayAsideMenu === true) {
+            idSetTimeout = setTimeout(() => {
                 setClassChildren('fixed z-[3] left-0');
             }, 1000);
         }
-    }, [isDisplayFalse]);
+    }, [state.isDisplayAsideMenu]);
 
     const handleDisplay = () => {
+        clearTimeout(idSetTimeout);
         setClassChildren('');
-        setIsDisplay(!isDisplay);
         dispatch(actions.togleDisplayAsideMenu(state.isDisplayAsideMenu));
     };
     return (
         <div className={classDiv}>
-            <div
-                className="fixed top-[calc((var(--heightNav)-24px)/2)] left-[calc((var(--heightNav)-24px)/2)] xs_max:top-[calc((var(--hNavRes)-24px)/2)]  z-[4] cursor-pointer"
-                onClick={handleDisplay}
-            >
-                <HamburgerMui
-                    sx={{
-                        color: state.isDisplayAsideMenu ? 'red' : '#9DA7B9',
-                    }}
-                />
-            </div>
+            <HamburgerMenu onClick= {handleDisplay}/>
             <div className={classChildren}>{children}</div>
-            {/* bg for (0-->375] */}
-            {maxXS && state.isDisplayAsideMenu && (
-                <div className="fixed left-[78px] top-[58px]  w-screen h-screen z-[2] bg-[#ffffff95]"></div>
-            )}
         </div>
     );
 }
 
-export { HamburgerForAsideBar };
+export { HamburgerForAsideBar ,HamburgerMenu,Hamburger};
 export default Hamburger;

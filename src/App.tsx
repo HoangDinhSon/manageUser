@@ -1,6 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
-import { LinearProgress } from '@mui/material';
 import { Login, Accounts, EditUser, AddUser, FilterUser } from './pages';
 import { Menu } from './layout';
 import {
@@ -29,7 +27,6 @@ function App() {
     });
     return (
         <Fragment>
-            <Toaster />
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Login />}></Route>

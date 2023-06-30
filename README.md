@@ -134,8 +134,13 @@ ví dụ [isDisplay===false]
 # CSS
     - tính tổng 2 giá trị của biề trong css 
     - lấy chiều dài của thẻ div này gán cho thẻ div khác ??
-    - 
+    - selector chọn một thẻ đồng thời có 2 class : .class1.class2 (ghi sát nhau )
 # react query 
     -c1 Component nào dùng api thì gọi trong component đó ok hơn 
     -c2  Gọi api trong component cha sau đó --> lưu vào global state (reducer)
-
+# @media Response 
+    response : tailwind max , min đều lấy dấu bằng . 
+    response : CSS thông thường max , min đều lấy dấu bằng . 
+    response : Mui Max không lấy dấu bằng tại break point , min có lấy dấu bằng 
+    CSS cho đồng thời chiều cao và chiều rộng : 
+        @media screen and (min-width: 1281px) and (max-height:900px) {}

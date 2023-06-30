@@ -8,7 +8,6 @@ import { calendar } from '../assets/icon';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import {
-    LINK_PAGE_ACCOUNT,
     listOptionTeam,
     listOptionCompany,
     listContractType,
@@ -16,7 +15,6 @@ import {
     listOptionOffice,
     listOptionPotion,
 } from '../constance_for_page';
-
 
 function AddUser() {
     const [state, dispatch] = useGlobalState();

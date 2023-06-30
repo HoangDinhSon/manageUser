@@ -100,8 +100,8 @@ function Login() {
                 <div className="main_login w-full  xl_max:w-[initial] ">
                     <div className="w-full flex  justify-between items-center  xl_max:block xl_max:max-w-[609px] sm_max:w-full sm_max:px-2">
                         <div className="form_login w-[609px]  xl_max:pt-0  sm_max:w-full">
-                            <div className='response_height_hidden'>
-                            <HeaderLogin/>
+                            <div className="response_height_hidden">
+                                <HeaderLogin />
                             </div>
                             <form action="submit" onSubmit={handleSubmit(onSubmit)}>
                                 <HrLine content="Login" />
@@ -151,7 +151,9 @@ function Login() {
                             </form>
                         </div>
                         <div className="image_right   xl_max:w-full text-center ">
-                            <div className='response_height_display hidden'><HeaderLogin/></div>
+                            <div className="response_height_display hidden">
+                                <HeaderLogin />
+                            </div>
                             <div className="relative  xl_max:mt-4 sm_max:hidden response_img  mx-[auto]">
                                 <img src={bgLogin} alt="" className="object-cover" />
                                 <img src={Frame} alt="" className="absolute top-[30px]  object-cover" />

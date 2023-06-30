@@ -1,3 +1,5 @@
+@import "./style_css/Filter.css";
+@import "./style_css/Login.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -87,11 +89,11 @@
     --colorGrey: #999999;
     --greyChart: #9da7b9;
     --blackTranspirationHalf: rgba(0, 0, 0, 0.5);
-    --margin4px: 4px;
     --borderWidth: 2px;
     --borderForLayout: 12px;
     --heightNav: 78px; /* height for Nav bar or  width for aside Bar*/
     --mrForChild: 20px;
+    --margin4px: 4px;
     --hNavRes: 58px; /* height for Nav bar or  width for aside Bar when responsive*/
     --timeOpacity: 1s;
     --timeBtnImport: 1s;
@@ -99,27 +101,16 @@
     --durationForMain: 1s;
     /* Page Login  */
     --pLeftLogin: 60px;
-    --heightBreak: 900px;
+    
 }
-.my_table_animation {
-    position: relative;
+::-webkit-scrollbar{
+    width:5px;
+    height: 5px;
 }
-
-input:-internal-autofill-selected {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+::-webkit-scrollbar-thumb{
+    background-color: #9da7b9;
+    border-radius: 2.5px;
 }
-
-@media screen and (min-width: 1280px) and (max-height:900px) {
-    .response_height_hidden {
-        display: none;
-    }
-    .response_height_display {
-        display: block !important;
-    }
-    .response_img {
-        display: flex;
-        justify-content: center;
-        width: 300px;
-        overflow: hidden;
-    }
+::-webkit-scrollbar-track{
+    margin: 20px 0px;
 }

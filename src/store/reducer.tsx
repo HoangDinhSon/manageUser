@@ -46,6 +46,7 @@ type TypeStateGlobal = {
     idForEdit: number;
     userAfterEdit: any; //object
     isDisplayImportForm: boolean;
+
     listFilter: Array<any>;
     criterialForFilter: any; //object
 };

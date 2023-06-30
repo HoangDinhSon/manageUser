@@ -1,4 +1,4 @@
-import { ID_FOR_EDIT_DEFAULT, DEFAULT_COUNT, CRITERIAL_FOR_FILTER_DEFAULT, USER_DEFAULT } from './constantsDefault';
+import { ID_FOR_EDIT_DEFAULT, DEFAULT_COUNT, USER_DEFAULT } from './constantsDefault';
 import {
     LINK_PAGE_ACCOUNT_EDIT,
     LINK_PAGE_ACCOUNT_FILTER,
@@ -18,9 +18,15 @@ import {
     listOptionOffice,
     listOptionPotion,
 } from './constantUI';
+import { CRITERIAL_FOR_FILTER_DEFAULT, ListFilter } from './constantFilter';
 
-export { listOptionTeam, listOptionCompany, listContractType, listOptionLevel, listOptionOffice, listOptionPotion };
 export {
+    listOptionTeam,
+    listOptionCompany,
+    listContractType,
+    listOptionLevel,
+    listOptionOffice,
+    listOptionPotion,
     DEFAULT_COUNT,
     ID_FOR_EDIT_DEFAULT,
     CRITERIAL_FOR_FILTER_DEFAULT,
@@ -34,6 +40,5 @@ export {
     LINK_PAGE_ROLEMANAGER,
     LINK_PAGE_REPORT,
     LINK_PAGE_ACCOUNT_FILTER,
+    ListFilter,
 };
-
-

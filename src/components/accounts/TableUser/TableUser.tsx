@@ -1,7 +1,7 @@
 import PaginationTable from './PaginationTable';
 import { ContextState } from '../../../store';
 import { TableRowForHeader, TableRowForBody } from '../..';
-import { checkNumberOFCriterialForFilter } from '../../../handlelogic';
+import { checkNumberOFCriterialForFilter, replaceManyString } from '../../../handlelogic';
 
 function TableUser() {
     const [state, dispatch] = ContextState.useGlobalState();
@@ -11,15 +11,18 @@ function TableUser() {
     const ordinalNumberPage = state.ordinalNumberPage;
     const listFilterPagination = listUserOfFilter.splice(rowPerPage * (ordinalNumberPage - 1), rowPerPage);
     const criterialWasChosen = checkNumberOFCriterialForFilter(state.criterialForFilter);
-    //UI 
+    //UI
     const classWhenDisplayAsideBar =
         'fixed bottom-[--mrForChild] left-0 ml-[98px] w-[calc(100vw-118px)]  transition-all duration-[--durationTableUser] bg-[white] px-[26px] rounded-b-[--borderForLayout] xs_max:px-0 xs_max:w-[calc(100vw-8px-58px)] xs_max:ml-[62px] xs_max:bottom-[--margin4px]';
-    const classWhenHiddenAsideBar =
-        'fixed bottom-[--mrForChild] left-0 ml-[20px] w-[calc(100vw-40px)]  transition-all duration-[--durationTableUser] bg-[white] px-[26px]  rounded-b-[--borderForLayout] xs_max:px-0 xs_max:w-[calc(100vw-8px)] xs_max:ml-[--margin4px] xs_max:bottom-[--margin4px]';
+    const classWhenHiddenAsideBar = replaceManyString(
+        classWhenDisplayAsideBar,
+        ['w-[calc(100vw-118px)]', 'xs_max:w-[calc(100vw-8px-58px)]', 'xs_max:ml-[62px]', 'ml-[98px]'],
+        ['w-[calc(100vw-40px)]', 'xs_max:w-[calc(100vw-8px)]', 'xs_max:ml-[--margin4px]', 'ml-[20px]'],
+    );
 
     return (
         <div className="bg-[white] overflow-x-auto">
-            <table className='w-full'>
+            <table className="w-full">
                 <thead>
                     <TableRowForHeader />
                 </thead>

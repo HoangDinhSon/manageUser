@@ -1,4 +1,4 @@
-import { CriterialForFilter } from "./type"
+import { CriterialForFilter } from './type';
 
 const findIndex = (id: number, arrayObject: []): number => {
     let indexCurrent: number = -1;
@@ -11,7 +11,7 @@ const findIndex = (id: number, arrayObject: []): number => {
     return indexCurrent;
 };
 
-const checkNumberOFCriterialForFilter  = (criterial: CriterialForFilter | any):number => {
+const checkNumberOFCriterialForFilter = (criterial: CriterialForFilter | any): number => {
     let sum = 0;
     for (let key in criterial) {
         if (criterial[key][key] === true) {
@@ -20,4 +20,13 @@ const checkNumberOFCriterialForFilter  = (criterial: CriterialForFilter | any):n
     }
     return sum;
 };
-export { findIndex ,checkNumberOFCriterialForFilter};
+// replace thay thế một vài string bằng string khác 
+const replaceManyString = (Paragraph: string, [...ArrayRoot]: Array<string>, [...WordTarget]: Array<string>) => {
+    let paragraphNew = '';
+    paragraphNew = ArrayRoot.reduce((total: string, item: string, index: number) => {
+        total = total.replace(item, WordTarget[index]);
+        return total;
+    }, Paragraph);
+    return paragraphNew;
+};
+export { findIndex, checkNumberOFCriterialForFilter, replaceManyString };

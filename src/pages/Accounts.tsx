@@ -3,7 +3,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
-import { PaginationTable, TableAnimation } from '../components';
+import { TableAnimation } from '../components';
 import { TableUser } from '../components/accounts/TableUser';
 import { filterbutton, iconSearch } from '../assets/icon';
 import { iconCloseForFilter } from '../assets';
@@ -89,11 +89,9 @@ function Accounts({ status }: any) {
                             </div>
                         )}
                     </div>
-
                     <TableUser />
-
                     {state.isDisplayFiler && (
-                        <div className="fixed right-[--mrForChild] top-[calc(var(--heightNav)+var(--mrForChild))] bottom-[--mrForChild]  overflow-auto">
+                        <div className="fixed z-10 right-[--mrForChild] top-[calc(var(--heightNav)+var(--mrForChild))] bottom-[--mrForChild]  overflow-auto xs_max:top-0 xs_max:right-0 xs_max:left-0 xs_max:bottom-0">
                             <Filter />
                         </div>
                     )}

@@ -32,7 +32,7 @@ function FormViewUser() {
     };
 
     return (
-        <section className="account_detail_form bg-[#00000020] fixed z-20 top-0 left-0 right-0 bottom-0">
+        <section className="account_detail_form bg-[#00000020] fixed z-10 top-0 left-0 right-0 bottom-0">
             <div className={responsiveUI()}>
                 <div className="flex justify-between">
                     <h4>Account Details</h4>
