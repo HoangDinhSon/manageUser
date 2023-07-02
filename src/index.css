@@ -1,3 +1,4 @@
+
 @import "./style_css/Filter.css";
 @import "./style_css/Login.css";
 @tailwind base;
@@ -51,6 +52,20 @@
         overflow: hidden;
         word-wrap: normal;
     }
+    input:-internal-autofill-selected {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+    ::-webkit-scrollbar{
+        width:5px;
+        height: 5px;
+    }
+    ::-webkit-scrollbar-thumb{
+        background-color: #9da7b9;
+        border-radius: 2.5px;
+    }
+    ::-webkit-scrollbar-track{
+        margin: 20px 0px;
+    }
 }
 
 @layer components {
@@ -73,16 +88,17 @@
     }
 
     /* my logger css  */
-    .log_red {
+    .red {
         background-color: red;
     }
-    .log_yellow {
+    .yellow {
         background-color: yellow;
     }
-    .log_outline {
+    .myoutline {
         @apply outline outline-1 outline-[green];
-    }
+    } 
 }
+
 :root {
     --outlineColor: #d2d2d2;
     --ColorBgButton: #5e90f0;
@@ -92,25 +108,15 @@
     --borderWidth: 2px;
     --borderForLayout: 12px;
     --heightNav: 78px; /* height for Nav bar or  width for aside Bar*/
+    --hNavRes: 58px; /* height for Nav bar or  width for aside Bar when responsive*/
     --mrForChild: 20px;
     --margin4px: 4px;
-    --hNavRes: 58px; /* height for Nav bar or  width for aside Bar when responsive*/
     --timeOpacity: 1s;
     --timeBtnImport: 1s;
     --durationTableUser: 1s;
     --durationForMain: 1s;
     /* Page Login  */
     --pLeftLogin: 60px;
+    --bgAnimation:#00000020;/* all entire screen  */
     
-}
-::-webkit-scrollbar{
-    width:5px;
-    height: 5px;
-}
-::-webkit-scrollbar-thumb{
-    background-color: #9da7b9;
-    border-radius: 2.5px;
-}
-::-webkit-scrollbar-track{
-    margin: 20px 0px;
 }

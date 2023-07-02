@@ -57,7 +57,7 @@ function ImportForm() {
     };
 
     return (
-        <section className="import_form fixed bg-[--blackTranspirationHalf]  top-0 bottom-0 left-0 right-0 z-10">
+        <section className="import_form fixed   top-0 bottom-0 left-0 right-0 z-10">
             <Toaster />
             <form action="" onSubmit={(e) => handleSubmitForm(e)}>
                 <div className="fixed top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] w-[523px]  bg-white rounded-2xl px-6 py-8 xs_max:w-[calc(100vw-8px)]">

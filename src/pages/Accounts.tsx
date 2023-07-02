@@ -10,7 +10,7 @@ import { iconCloseForFilter } from '../assets';
 import { useGlobalState } from '../store/Provider';
 import { getUserBaseOnID } from '../Api/logTimeApi';
 import { actions } from '../store';
-import { ImportForm, Filter, FormViewUser, BtnImportAndADD } from '../components';
+import { ImportForm, Filter, FormViewUser, BtnImportAndADD, AnimationMountAndUnMount } from '../components';
 import { checkNumberOFCriterialForFilter } from '../handlelogic';
 import { typeUserAfterCallApiBaseOnID } from '../type';
 
@@ -90,13 +90,15 @@ function Accounts({ status }: any) {
                         )}
                     </div>
                     <TableUser />
-                    {state.isDisplayFiler && (
-                        <div className="fixed z-10 right-[--mrForChild] top-[calc(var(--heightNav)+var(--mrForChild))] bottom-[--mrForChild]  overflow-auto xs_max:top-0 xs_max:right-0 xs_max:left-0 xs_max:bottom-0">
-                            <Filter />
-                        </div>
-                    )}
-                    {statusForApiByID === 'success' && state.isDisplayFormView && <FormViewUser />}
-                    {state.isDisplayImportForm && <ImportForm />}
+                    <AnimationMountAndUnMount isMount={state.isDisplayFiler}>
+                        <Filter />
+                    </AnimationMountAndUnMount>
+                    <AnimationMountAndUnMount isMount={statusForApiByID === 'success' && state.isDisplayFormView}>
+                        {statusForApiByID === 'success' && <FormViewUser />}
+                    </AnimationMountAndUnMount>
+                    <AnimationMountAndUnMount isMount={state.isDisplayImportForm}>
+                        <ImportForm />
+                    </AnimationMountAndUnMount>
                 </div>
             )}
         </section>

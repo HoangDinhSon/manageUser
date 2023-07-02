@@ -54,8 +54,11 @@ return lại???
 # lấy biến chung để responsive
 
 # Tailwindcss
+1. @base 
+2. @component --> tạo ra class mới 
+3. @utilities ()
 
-dùng biến : border-t-[length:--borderWidth]
+dùng biến : border-t-[length:--borderWidth] chỉ dùng khi đi với var còn tailwindcss thì tự biết 
 
 # response
 
@@ -105,7 +108,7 @@ dùng biến : border-t-[length:--borderWidth]
     b3 : trạng thái sau w-200px
 # Animation
     b1: đăng kí name , duration cho cái thẻ cần dc animation 
-    b2: @keyForame 
+    b2: @keyFrame 
 
 # Hamburger /
 
@@ -144,3 +147,5 @@ ví dụ [isDisplay===false]
     response : Mui Max không lấy dấu bằng tại break point , min có lấy dấu bằng 
     CSS cho đồng thời chiều cao và chiều rộng : 
         @media screen and (min-width: 1281px) and (max-height:900px) {}
+# tạo Transition khi Mount và unMount 
+  b1 : dùng scale =0 --> scale -100 vì ta dùng fixed nếu dùng width thì thẻ con fixed sẽ không có tác dụng cho dù có dùng overflow -auto .

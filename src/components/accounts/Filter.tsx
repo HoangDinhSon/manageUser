@@ -20,13 +20,13 @@ function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: a
     const handleChangeCheckBox = (e: any) => {
         setIsChecked(e.target.checked);
     };
-    useMemo(()=>{
+    useMemo(() => {
         setValue(state.criterialForFilter[PropsCheck].select);
-        setIsChecked(state.criterialForFilter[PropsCheck][PropsCheck])
-    },[state])
+        setIsChecked(state.criterialForFilter[PropsCheck][PropsCheck]);
+    }, [state]);
 
     return (
-        <div className="mt-[19px] ">
+        <div className="mt-[19px] res_height_Filter">
             <FormControlLabel
                 control={
                     <Checkbox
@@ -59,7 +59,7 @@ function Filter() {
     const { register, handleSubmit, reset } = useForm();
     // const [ListFilterState , setListFilter] = useState(ListFilter)
     let responseFromServer = useRef<any>([]);
-    const { mutate } = useMutation({
+    const { mutate,isLoading } = useMutation({
         mutationFn: getUserBaseFilter,
         onSuccess: (res: any) => {
             responseFromServer.current = [...responseFromServer.current, ...res.users];
@@ -69,8 +69,6 @@ function Filter() {
 
     const handleSubmitForm = (payloadForm: OutPutFormFilter | any) => {
         // khi lấy từ input tất cả đề là string nên dòng này chuyển select của age và height  về number
-        console.log('payloadForm>>>', payloadForm);
-        
         payloadForm = {
             ...payloadForm,
             age: { ...payloadForm.age, select: parseInt(payloadForm.age.select) },
@@ -101,9 +99,11 @@ function Filter() {
     };
 
     return (
-        <div className="bg-[white]  w-[319px] pt-[25px] pb-[24px] px-[22px] sm_max:w-full ">
-            <div className="bg-white rounded-md my_test_height">
-                <button onClick={handleHiddenFilter}>FILTER</button>
+        <div className="fixed z-10 right-[--mrForChild] top-[calc(var(--heightNav)+var(--mrForChild))] bottom-[--mrForChild] rounded-[--borderForLayout]  overflow-auto xs_max:top-0 xs_max:right-0 xs_max:left-0 xs_max:bottom-0 ">
+            <div className="bg-[white]  w-[319px] pt-[25px] pb-[24px] px-[22px] sm_max:w-full xs_max:h-full ">
+                <button onClick={handleHiddenFilter} className="btnFlashing">
+                   {isLoading?"Loading...":" FILTER"}
+                </button>
                 <form onSubmit={handleSubmit(handleSubmitForm)}>
                     {ListFilter.map((each) => (
                         <CheckAndSelect

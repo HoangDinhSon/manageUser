@@ -20,11 +20,24 @@ const checkNumberOFCriterialForFilter = (criterial: CriterialForFilter | any): n
     }
     return sum;
 };
-// replace thay thế một vài string bằng string khác 
+/* 
+1. replace thay thế một vài string bằng string khác 
+example : Paragraph  ="son van nam "
+        Arrayroot =  ["son" , nam ];
+        WordTarget = [ 1 ,2 ];
+        hàm sẽ trả về "1 van 2";
+        lưu ý : thay thế tương ứng : nhận vào một mảng các string cần thay thề có tính khoảng trắng trước sau 
+        không làm thay đổi string ban đầu , 
+        bắt đầu một kí tự rỗng và các chuỗi cần thêm 
+    
+*/
 const replaceManyString = (Paragraph: string, [...ArrayRoot]: Array<string>, [...WordTarget]: Array<string>) => {
+    if (ArrayRoot.length != WordTarget.length) {
+        return 'bạn phải nhập 2 mảng có cùng độ dài ';
+    }
     let paragraphNew = '';
     paragraphNew = ArrayRoot.reduce((total: string, item: string, index: number) => {
-        total = total.replace(item, WordTarget[index]);
+        total = total.replace(` ${item}`, ` ${WordTarget[index]}`);
         return total;
     }, Paragraph);
     return paragraphNew;

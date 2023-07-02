@@ -1,5 +1,5 @@
 import { iconArrowRight, iconArrowLeft } from '../../assets';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { ContextState, actions } from '../../store';
 import { useTheme, useMediaQuery } from '@mui/material';
 import { HamburgerMui } from '../../assets';
@@ -8,10 +8,10 @@ import { HamburgerMui } from '../../assets';
 function Hamburger({ children }: any) {
     const [isChecked, setIsChecked] = useState(false);
     let classDiv =
-        'flex  bg-[white] fixed   top-[calc(var(--hNavRes)/2)] -translate-y-[50%] right-0 px-[4px] my_hamburger w-[50px] transition-[width] duration-[--timeBtnImport] ';
+        'flex z-10 bg-[white] fixed   top-[calc(var(--hNavRes)/2)] -translate-y-[50%] right-0 px-[4px] my_hamburger w-[50px] transition-[width] duration-[--timeBtnImport] ';
     if (isChecked) {
         classDiv =
-            'flex  bg-[white] fixed  top-[calc(var(--hNavRes)/2)] -translate-y-[50%] right-0 px-[4px] my_hamburger w-[370px] transition-[width] duration-[--timeBtnImport]';
+            'flex  z-10 bg-[white] fixed  top-[calc(var(--hNavRes)/2)] -translate-y-[50%] right-0 px-[4px] my_hamburger w-[370px] transition-[width] duration-[--timeBtnImport]';
     }
     const handleOnclick = () => {
         setIsChecked(!isChecked);
@@ -47,63 +47,61 @@ function Hamburger({ children }: any) {
 Hamburger Menu 
 
 */
-function HamburgerMenu({onClick}:any){
+function HamburgerMenu({ onClick }: any) {
     const [state, dispatch] = ContextState.useGlobalState();
-    const handleOnClick=()=>{
-        onClick()
-    }
-    return(
+    const handleOnClick = () => {
+        onClick();
+    };
+    return (
         <div
-        className="fixed top-[calc((var(--heightNav)-24px)/2)] left-[calc((var(--heightNav)-24px)/2)] xs_max:top-[calc((var(--hNavRes)-24px)/2)]  z-[4] cursor-pointer"
-        onClick={handleOnClick}
-    >
-        <HamburgerMui
-            sx={{
-                color: state.isDisplayAsideMenu ? 'red' : '#9DA7B9',
-            }}
-        />
-    </div>
-    )
+            className="fixed top-[calc((var(--heightNav)-24px)/2)] left-[calc((var(--heightNav)-24px)/2)] xs_max:top-[calc((var(--hNavRes)-24px)/2)]  z-[4] cursor-pointer"
+            onClick={handleOnClick}
+        >
+            <HamburgerMui
+                sx={{
+                    color: state.isDisplayAsideMenu ? 'red' : '#9DA7B9',
+                }}
+            />
+        </div>
+    );
 }
-
 
 /*
 chức năng : tạo hiệu ứng transition cho thanh asideseBar 
 hoạt động : xuất hiện icon Mui --> sau khi nhấn vào icon Mui thì w-0--> w-85px 
 */
 
-function HamburgerForAsideBar({ children }: any) {
+function TransitionForAsideBar({ children }: any) {
     const [classChildren, setClassChildren] = useState('');
     const [state, dispatch] = ContextState.useGlobalState();
     const theme = useTheme();
     const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1; //375+1
     const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
-    let classDiv = 'fixed z-[3] w-[--heightNav] h-screen  transition-[all] duration-[--durationTableUser] overflow-hidden  ';
+
+    let classDiv =
+        'fixed z-[2] w-[--heightNav] h-screen  transition-[all] duration-[--durationTableUser] overflow-hidden ';
     if (state.isDisplayAsideMenu === false) {
-        classDiv = 'fixed z-[3] w-[0] transition-[all] duration-[--durationTableUser] overflow-hidden';
+        classDiv = 'fixed z-[2] w-[0] transition-[all] duration-[--durationTableUser] overflow-hidden';
     }
     // sau khi xuất hiện thì asid menu dc fixed
     let idSetTimeout: any;
     useEffect(() => {
         if (state.isDisplayAsideMenu === true) {
             idSetTimeout = setTimeout(() => {
-                setClassChildren('fixed z-[3] left-0');
+                setClassChildren('fixed z-[3] left-0  xs_max:w-full xs_max:bg-[#ffffff50]');
             }, 1000);
         }
     }, [state.isDisplayAsideMenu]);
-
-    const handleDisplay = () => {
+    useMemo(() => {
         clearTimeout(idSetTimeout);
         setClassChildren('');
-        dispatch(actions.togleDisplayAsideMenu(state.isDisplayAsideMenu));
-    };
+    }, [state.isDisplayAsideMenu]);
     return (
         <div className={classDiv}>
-            <HamburgerMenu onClick= {handleDisplay}/>
             <div className={classChildren}>{children}</div>
         </div>
     );
 }
 
-export { HamburgerForAsideBar ,HamburgerMenu,Hamburger};
+export { TransitionForAsideBar, HamburgerMenu, Hamburger };
 export default Hamburger;

@@ -23,16 +23,16 @@ function FormViewUser() {
         const widthScreen = window.innerWidth;
 
         if (widthScreen <= parseInt(import.meta.env.VITE_BREAKPOINTS_XS)) {
-            return 'fixed z-30  top-0 bottom-0 left-0 right-0 bg-white p-5';
+            return 'fixed z-[100]  top-0 bottom-0 left-0 right-0 bg-white p-5';
         }
         if (hScreen < 740) {
-            return 'fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-30  w-[602px] bg-white p-8 rounded-lg h-screen overflow-auto';
+            return 'fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-[100] w-[602px] bg-white p-8 rounded-lg h-screen overflow-auto';
         }
-        return 'fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-30  w-[602px] bg-white p-8 rounded-lg ';
+        return 'fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-[100]  w-[602px] bg-white p-8 rounded-lg ';
     };
 
     return (
-        <section className="account_detail_form bg-[#00000020] fixed z-10 top-0 left-0 right-0 bottom-0">
+        <section className="account_detail_form  fixed z-50 top-0 left-0  w-screen h-screen">
             <div className={responsiveUI()}>
                 <div className="flex justify-between">
                     <h4>Account Details</h4>
@@ -74,5 +74,5 @@ function FormViewUser() {
         </section>
     );
 }
-
+// son
 export default FormViewUser;

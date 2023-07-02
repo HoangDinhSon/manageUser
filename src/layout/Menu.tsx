@@ -5,10 +5,11 @@ import { FormLogOut, BtnImportAndADD, Hamburger } from '../components';
 import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
-import { HamburgerForAsideBar, HamburgerMenu } from '../components/component_layout/Hamburger';
+import { TransitionForAsideBar, HamburgerMenu } from '../components/component_layout/Hamburger';
 import * as icon from '../assets/icon';
 import { bgAvatar, notification, arrowBackForLayout, HamburgerMui } from '../assets';
 import * as linkPage from '../constance_for_page';
+import { replaceManyString } from '../handlelogic';
 function Menu({ children }: any) {
     const location = useLocation();
     const [state, dispatch] = useGlobalState();
@@ -61,33 +62,50 @@ function Menu({ children }: any) {
     const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1;
     const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
     let classForChildrenOfMenu =
-        'fixed z-[2] bg-white left-[20px] top-[98px]  w-[calc(100%-20px-20px)] h-[calc(100vh-98px-20px)] rounded-[--borderForLayout]  overflow-auto transition-all duration-[1s] ' +
+        'fixed z-[1] bg-white left-[20px] top-[98px]  w-[calc(100%-20px-20px)] h-[calc(100vh-98px-20px)] rounded-[--borderForLayout]  overflow-auto transition-all duration-[1s] ' +
         ' ' +
         ' after:fixed after:content-[""] after:h-[20px]   after:bg-[white] after:left-[20px] after:top-[98px] after:w-[calc(100%-40px)] after:rounded-t-[12px] after:transition-all after:duration-[1s]' +
         ' ' +
         'xs_max:left-[--margin4px] xs_max:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:w-[calc(100%-2*var(--margin4px))]' +
         ' ' +
         ' xs_max:after:left-[--margin4px] xs_max:after:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:after:w-[calc(100%-2*var(--margin4px))]';
-    if (state.isDisplayAsideMenu === true) {
-        classForChildrenOfMenu =
-            'fixed z-[2] bg-white left-[98px] top-[98px]  w-[calc(100%-98px-20px)] h-[calc(100vh-98px-20px)] rounded-[--borderForLayout] overflow-auto transition-all duration-[1s]  ' +
-            ' ' +
-            ' after:fixed after:content-[""] after:h-[20px]   after:bg-[white] after:left-[98px] after:top-[98px] after:w-[calc(100%-118px)] after:rounded-t-[12px]  after:transition-all after:duration-[1s] ' +
-            ' ' +
-            ' xs_max:left-[calc(var(--margin4px)+var(--hNavRes))] xs_max:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))]' +
-            ' ' +
-            ' xs_max:after:left-[calc(var(--margin4px)+var(--hNavRes))] xs_max:after:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:after:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))] ';
-    }
     const handleDisplay = () => {
         dispatch(actions.togleDisplayAsideMenu(state.isDisplayAsideMenu));
     };
+    if (state.isDisplayAsideMenu === true) {
+        classForChildrenOfMenu = replaceManyString(
+            classForChildrenOfMenu,
+            [
+                'left-[20px]',
+                'w-[calc(100%-20px-20px)]',
+                'after:left-[20px]',
+                'after:w-[calc(100%-40px)]',
+                'xs_max:left-[--margin4px]',
+                'xs_max:w-[calc(100%-2*var(--margin4px))]',
+                'xs_max:after:left-[--margin4px]',
+                'xs_max:after:w-[calc(100%-2*var(--margin4px))]',
+            ],
+            [
+                'left-[98px]',
+                'w-[calc(100%-98px-20px)]',
+                'after:left-[98px]',
+                'after:w-[calc(100%-118px)]',
+                'xs_max:left-[calc(var(--margin4px)+var(--hNavRes))]',
+                'xs_max:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))]',
+                'xs_max:after:left-[calc(var(--margin4px)+var(--hNavRes))]',
+                'xs_max:after:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))]',
+            ],
+        );
+    }
+    if (state.isDisplayFormView === true || state.isDisplayImportForm === true || state.isDisplayFiler === true) {
+        classForChildrenOfMenu = replaceManyString(classForChildrenOfMenu, ['z-[1]'], ['z-[4]']);
+    }
 
     return (
         <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full ">
-            {/* 1/5 Menu */}
-            {!state.isDisplayAsideMenu && <HamburgerMenu onClick={handleDisplay} />}
             {/*2/5. TopNav Bar */}
-            <div className="fixed z-[1] pl-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-full bg-[#fff]   ">
+            <div className="fixed z-[3] pl-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-full bg-[#fff]   ">
+                <HamburgerMenu onClick={handleDisplay} />
                 <div className="flex justify-between items-center  h-[--heightNav] xs_max:h-[--hNavRes]">
                     <div className="Left_Nav flex items-center gap-[15px]">
                         <h4>
@@ -108,7 +126,7 @@ function Menu({ children }: any) {
                 </div>
             </div>
             {/* 3/5. Aside Bar */}
-            <HamburgerForAsideBar>
+            <TransitionForAsideBar>
                 <div className=" w-[--heightNav] bg-white h-screen pt-[--heightNav]">
                     <div className={classAsideBar}>
                         <div className={classListItem}>
@@ -152,14 +170,12 @@ function Menu({ children }: any) {
                         </div>
                     </div>
                 </div>
-            </HamburgerForAsideBar>
+            </TransitionForAsideBar>
             {/*4/5. Background  */}
             <div className="fixed  bg-[#ECECEC] h-screen left-0 right-0 z-[-1] "></div>
-            {/* <div className="fixed z-[0] bg-white top-0 left-0 right-0 h-[78px] xs_max:h-[58px]"></div> */}
             {/*5/5. Content */}
             <main className={classForChildrenOfMenu}>{children}</main>
         </div>
     );
 }
-
 export default Menu;

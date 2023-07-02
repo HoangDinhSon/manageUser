@@ -10,6 +10,7 @@ import { Frame, bgLogin } from '../assets/image';
 import { resolverLogin } from '../myYup';
 import { FormLogin } from '../myYup';
 import { loginAuth } from '../Api/logTimeApi';
+// import "../style_css/Login.css";
 
 type payloadLogin = {
     username: string;
@@ -151,7 +152,7 @@ function Login() {
                             </form>
                         </div>
                         <div className="image_right   xl_max:w-full text-center ">
-                            <div className="response_height_display hidden">
+                            <div className="hidden response_height_display">
                                 <HeaderLogin />
                             </div>
                             <div className="relative  xl_max:mt-4 sm_max:hidden response_img  mx-[auto]">

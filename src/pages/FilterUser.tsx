@@ -1,25 +1,32 @@
-import { useState } from 'react';
-import { TableAnimation } from '../components';
-import { FormControlLabel, Checkbox } from '@mui/material';
+// import AnimationMountAndUnMount from '../components/animationUI/AnimationMountAndUnMount';
+// import { useState } from 'react';
 
 function FilterUser() {
-    // sau khi mount
-    const [value, setValue]= useState<boolean>(true);
-    const handleOnChange= (e:any)=>{
-        console.log('value of CheckBox >>>', e.target.checked);
-        setValue( e.target.checked)
-        
-        // setValue((preState)=>{
-        //         return (!preState)
-        // })
+    // const [state, setState] = useState(false);
+    // function Notification() {
+    //     return (
+    //         <div className='fixed top-[100px] left-[100px]'>
+    //             <div>Hello Notification</div>
+    //             <div>Hello Notification</div>
+    //             <div>Hello Notification</div>
+    //             <div>Hello Notification</div>
+    //             <div>Hello Notification</div>
+    //         </div>
+    //     );
+    // }
+    // const handleDisplay = () => {
+    //     setState(!state);
+    // };
 
-    }
     return (
-        <div className='pt-[30px]'>
-            <FormControlLabel
-                label="label"
-                control={<Checkbox  onChange={(e)=>handleOnChange(e) } checked={value}></Checkbox>}
-            />
+        <div className="fixed top-[100px] left-[100px] w-[100px] h-[100px] bg-slate-400  z-[30] overflow-hidden">
+            {/* <AnimationMountAndUnMount isMount={state}>
+                <Notification />
+            </AnimationMountAndUnMount>
+            <button onClick={handleDisplay}>toggle </button> */}
+            <div className="fixed top-[150px] left-[30px] yellow w-[100px] h-[100px] "></div>
+
+
         </div>
     );
 }

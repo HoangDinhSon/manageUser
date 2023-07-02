@@ -1,18 +1,16 @@
-
-@media screen and (min-width: 1281px) and (max-height:900px) {
-    .response_height_hidden {
-        display: none;
+@layer utilities {
+    @media screen and (min-width: 1281px) and (max-height: 900px) {
+        .response_height_display {
+            display: block !important ;
+        }
+        .response_height_hidden {
+            display: none;
+        }
+        .response_img {
+            display: flex;
+            justify-content: center;
+            width: 300px;
+            overflow: hidden;
+        }
     }
-    .response_height_display {
-        display: block !important;
-    }
-    .response_img {
-        display: flex;
-        justify-content: center;
-        width: 300px;
-        overflow: hidden;
-    }
-}
-input:-internal-autofill-selected {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
