@@ -3,14 +3,13 @@ import { createTheme, ThemeProvider, useTheme } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import toast, { Toaster } from 'react-hot-toast';
-import { LINK_PAGE_ACCOUNT } from '../constance_for_page';
-import { HrLine } from '../components/component_reuse';
-import { TextFieldLoginPassword } from '../components/Login';
-import { Frame, bgLogin } from '../assets/image';
-import { resolverLogin } from '../myYup';
-import { FormLogin } from '../myYup';
-import { loginAuth } from '../Api/logTimeApi';
-// import "../style_css/Login.css";
+import { LINK_PAGE_ACCOUNT } from '../../data/constance_for_page';
+import { HrLine } from '../../components/component_reuse';
+import { TextFieldLoginPassword } from '../../components/Login';
+import { Frame, bgLogin } from '../../assets/image';
+import { resolverLogin, FormLogin } from './validationLogin';
+import { loginAuth } from '../../Api/logTimeApi';
+
 
 type payloadLogin = {
     username: string;

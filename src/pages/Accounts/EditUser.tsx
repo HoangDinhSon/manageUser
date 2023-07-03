@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import toast, { Toaster } from 'react-hot-toast';
 import { LinearProgress } from '@mui/material';
-import { getUserBaseOnID, editUserBaseOnID } from '../Api/logTimeApi';
-import { SkillDisplayInput } from '../components';
-import { calendar } from '../assets/icon';
-import { useGlobalState } from '../store/Provider';
-import { actions } from '../store';
+import { getUserBaseOnID, editUserBaseOnID } from '../../Api/logTimeApi';
+import { SkillDisplayInput } from '../../components';
+import { calendar } from '../../assets/icon';
+import { useGlobalState } from '../../store/Provider';
+import { actions } from '../../store';
 import {
     ID_FOR_EDIT_DEFAULT,
     LINK_PAGE_ACCOUNT,
@@ -17,8 +17,8 @@ import {
     listOptionLevel,
     listOptionOffice,
     listOptionPotion,
-} from '../constance_for_page';
-import { Select, PhoneNumber, Input, InputWithCharacter } from '../components';
+} from '../../data/constance_for_page';
+import { Select, PhoneNumber, Input, InputWithCharacter } from '../../components';
 
 function EditUser() {
     const [state, dispatch] = useGlobalState();

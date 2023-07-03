@@ -2,11 +2,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useState } from 'react';
-import { addUserToServer } from '../Api/logTimeApi';
-import { InputWithCharacter, Select, Input, PhoneNumber, SkillDisplayInput } from '../components';
-import { calendar } from '../assets/icon';
-import { useGlobalState } from '../store/Provider';
-import { actions } from '../store';
+import { addUserToServer } from '../../Api/logTimeApi';
+import { InputWithCharacter, Select, Input, PhoneNumber, SkillDisplayInput } from '../../components';
+import { calendar } from '../../assets/icon';
+import { useGlobalState } from '../../store/Provider';
+import { actions } from '../../store';
 import {
     listOptionTeam,
     listOptionCompany,
@@ -14,7 +14,7 @@ import {
     listOptionLevel,
     listOptionOffice,
     listOptionPotion,
-} from '../constance_for_page';
+} from '../../data/constance_for_page';
 
 function AddUser() {
     const [state, dispatch] = useGlobalState();

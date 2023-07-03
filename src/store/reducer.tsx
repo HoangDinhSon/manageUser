@@ -15,9 +15,9 @@ import {
     DISPLAY_IMPORT_FORM,
     RESET_CRITERIAL_FOR_FILTER,
 } from './constants';
-import { TypeOfUser } from '../type/typePageAccounts';
-import { typeKeyOfCriterial, typeUserAfterCallApiBaseOnID } from '../type';
-import { CRITERIAL_FOR_FILTER_DEFAULT } from '../constance_for_page';
+import { TypeOfUser } from '../data/type/typePageAccounts';
+import { typeKeyOfCriterial, typeUserAfterCallApiBaseOnID } from '../data/type';
+import { CRITERIAL_FOR_FILTER_DEFAULT } from '../data/constance_for_page';
 const ROW_PER_PAGE_DEFAULT = 5;
 const ORDINAL_NUMBER_PAGE_DEFAULT = 1;
 const IS_DISPLAY_FILTER_DEFAULT = false;

@@ -14,3 +14,7 @@
         }
     }
 }
+/* 
+1.Tên class  tương ứng với selector ko phải chức năng 
+2.File css này dc import trong file index CSS , lưu ý tất  cả các class trong này có thể dùng ở tất cả compponent khác . 
+*/

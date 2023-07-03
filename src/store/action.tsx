@@ -16,8 +16,8 @@ import {
     ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
 } from './constants';
-import { TypeOfUser } from '../type/typePageAccounts';
-import { typeOfListUser } from '../type';
+import { TypeOfUser } from '../data/type/typePageAccounts';
+import { typeOfListUser } from '../data/type';
 const getRowPerPage = (payload: any) => ({
     type: GET_ROW_PER_PAGE,
     payload: payload,

@@ -8,7 +8,7 @@ import { actions } from '../store';
 import { TransitionForAsideBar, HamburgerMenu } from '../components/component_layout/Hamburger';
 import * as icon from '../assets/icon';
 import { bgAvatar, notification, arrowBackForLayout, HamburgerMui } from '../assets';
-import * as linkPage from '../constance_for_page';
+import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
 function Menu({ children }: any) {
     const location = useLocation();
@@ -64,11 +64,11 @@ function Menu({ children }: any) {
     let classForChildrenOfMenu =
         'fixed z-[1] bg-white left-[20px] top-[98px]  w-[calc(100%-20px-20px)] h-[calc(100vh-98px-20px)] rounded-[--borderForLayout]  overflow-auto transition-all duration-[1s] ' +
         ' ' +
-        ' after:fixed after:content-[""] after:h-[20px]   after:bg-[white] after:left-[20px] after:top-[98px] after:w-[calc(100%-40px)] after:rounded-t-[12px] after:transition-all after:duration-[1s]' +
+        ' before:fixed before:content-[""] before:h-[20px]   before:bg-[white] before:left-[20px]  before:w-[calc(100%-40px)] before:rounded-t-[12px] before:transition-all before:duration-[1s]' +
         ' ' +
-        'xs_max:left-[--margin4px] xs_max:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:w-[calc(100%-2*var(--margin4px))]' +
+        ' xs_max:left-[--margin4px] xs_max:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:w-[calc(100%-2*var(--margin4px))]' +
         ' ' +
-        ' xs_max:after:left-[--margin4px] xs_max:after:top-[calc(var(--hNavRes)+var(--margin4px))] xs_max:after:w-[calc(100%-2*var(--margin4px))]';
+        ' xs_max:before:left-[--margin4px]  xs_max:before:w-[calc(100%-2*var(--margin4px))]';
     const handleDisplay = () => {
         dispatch(actions.togleDisplayAsideMenu(state.isDisplayAsideMenu));
     };
@@ -78,22 +78,22 @@ function Menu({ children }: any) {
             [
                 'left-[20px]',
                 'w-[calc(100%-20px-20px)]',
-                'after:left-[20px]',
-                'after:w-[calc(100%-40px)]',
+                'before:left-[20px]',
+                'before:w-[calc(100%-40px)]',
                 'xs_max:left-[--margin4px]',
                 'xs_max:w-[calc(100%-2*var(--margin4px))]',
-                'xs_max:after:left-[--margin4px]',
-                'xs_max:after:w-[calc(100%-2*var(--margin4px))]',
+                'xs_max:before:left-[--margin4px]',
+                'xs_max:before:w-[calc(100%-2*var(--margin4px))]',
             ],
             [
                 'left-[98px]',
                 'w-[calc(100%-98px-20px)]',
-                'after:left-[98px]',
-                'after:w-[calc(100%-118px)]',
+                'before:left-[98px]',
+                'before:w-[calc(100%-118px)]',
                 'xs_max:left-[calc(var(--margin4px)+var(--hNavRes))]',
                 'xs_max:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))]',
-                'xs_max:after:left-[calc(var(--margin4px)+var(--hNavRes))]',
-                'xs_max:after:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))]',
+                'xs_max:before:left-[calc(var(--margin4px)+var(--hNavRes))]',
+                'xs_max:before:w-[calc(100%-2*var(--margin4px)-var(--hNavRes))]',
             ],
         );
     }

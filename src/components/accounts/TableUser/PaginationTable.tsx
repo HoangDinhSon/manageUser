@@ -1,6 +1,6 @@
 import { Select, MenuItem, Pagination, PaginationItem, useMediaQuery, useTheme } from '@mui/material';
 import { actions, ContextState } from '../../../store';
-import { DEFAULT_COUNT } from '../../../constance_for_page';
+import { DEFAULT_COUNT } from '../../../data/constance_for_page';
 import { checkNumberOFCriterialForFilter } from '../../../handlelogic';
 function PaginationTable() {
     const [state, dispatch] = ContextState.useGlobalState();

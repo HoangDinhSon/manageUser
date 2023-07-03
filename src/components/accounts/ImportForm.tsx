@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { cloudComputer, icondot, closeSmall, IconcancelInFromDetaile } from '../../assets';
 import { actions } from '../../store';
 import { useGlobalState } from '../../store/Provider';
-import { LINK_PAGE_ACCOUNT } from '../../constance_for_page';
+import { LINK_PAGE_ACCOUNT } from '../../data/constance_for_page';
 function RequirementFileUI() {
     return (
         <>

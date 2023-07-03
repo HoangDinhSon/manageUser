@@ -5,8 +5,8 @@ import { useMutation } from 'react-query';
 import { getUserBaseFilter } from '../../Api/logTimeApi';
 import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
-import { OutPutFormFilter } from '../../type';
-import { ListFilter, CRITERIAL_FOR_FILTER_DEFAULT } from '../../constance_for_page';
+import { OutPutFormFilter } from '../../data/type';
+import { ListFilter, CRITERIAL_FOR_FILTER_DEFAULT } from '../../data/constance_for_page';
 type typeSeclect = { children: string; value: string | number };
 type DataCallApi = { keyFilter: string | number; valueFilter: string | number }[]; // dạng mảng chứa object
 
@@ -57,7 +57,6 @@ function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: a
 function Filter() {
     const [state, dispatch] = useGlobalState();
     const { register, handleSubmit, reset } = useForm();
-    // const [ListFilterState , setListFilter] = useState(ListFilter)
     let responseFromServer = useRef<any>([]);
     const { mutate,isLoading } = useMutation({
         mutationFn: getUserBaseFilter,

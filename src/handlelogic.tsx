@@ -1,4 +1,4 @@
-import { CriterialForFilter } from './type';
+import { CriterialForFilter } from './data/type';
 
 const findIndex = (id: number, arrayObject: []): number => {
     let indexCurrent: number = -1;
@@ -24,10 +24,10 @@ const checkNumberOFCriterialForFilter = (criterial: CriterialForFilter | any): n
 1. replace thay thế một vài string bằng string khác 
 example : Paragraph  ="son van nam "
         Arrayroot =  ["son" , nam ];
-        WordTarget = [ 1 ,2 ];
-        hàm sẽ trả về "1 van 2";
+        WordTarget = [ "1" ,"2" ];
+        hàm sẽ trả về=  [1 van 2];
         lưu ý : thay thế tương ứng : nhận vào một mảng các string cần thay thề có tính khoảng trắng trước sau 
-        không làm thay đổi string ban đầu , 
+        không làm thay đổi string(Paragraph) ban đầu , 
         bắt đầu một kí tự rỗng và các chuỗi cần thêm 
     
 */

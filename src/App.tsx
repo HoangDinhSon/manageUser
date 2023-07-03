@@ -6,7 +6,7 @@ import {
     LINK_PAGE_ACCOUNT,
     LINK_PAGE_ACCOUNT_ADD,
     LINK_PAGE_ACCOUNT_FILTER,
-} from './constance_for_page';
+} from './data/constance_for_page';
 import { useGlobalState } from './store/Provider';
 import { actions } from './store';
 import { useQuery } from 'react-query';

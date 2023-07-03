@@ -11,13 +11,5 @@ type FormLogin = yup.InferType<typeof schema>;
 const resolverLogin = {
     resolver: yupResolver(schema),
 };
-export default resolverLogin;
+export  {resolverLogin};
 export type { FormLogin };
-// validation of edit form -------------
-
-const schemaForFormEdit =yup.object({
-    
-
-})
-type FormEditUser = yup.InferType<typeof schemaForFormEdit >
-

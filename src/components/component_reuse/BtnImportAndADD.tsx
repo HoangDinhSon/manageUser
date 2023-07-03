@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useGlobalState } from '../../store/Provider';
 import { icondocument, iconimportuser, iconuploaduser, iconplususer } from '../../assets/icon';
 import { actions } from '../../store';
-import { LINK_PAGE_ACCOUNT_ADD } from '../../constance_for_page';
+import { LINK_PAGE_ACCOUNT_ADD } from '../../data/constance_for_page';
 import { OpacityTransition } from '..';
 function BtnImportAndADD() {
     const [state, dispatch] = useGlobalState();
