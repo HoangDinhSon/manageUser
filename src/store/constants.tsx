@@ -11,7 +11,6 @@ const GET_ID_FOR_EDIT = 'get_id_for_edit';
 const MAKE_LIST_FILTER = 'make_list_filter';
 const SET_CRITERIAL_FOR_FILTER = 'set_criterial_for_filter';
 const RESET_CRITERIAL_FOR_FILTER = 'reset_criterial_for_filter';
-
 const ADD_NEW_USER = 'add_new_user';
 const DISPLAY_IMPORT_FORM = 'display_import_form';
 

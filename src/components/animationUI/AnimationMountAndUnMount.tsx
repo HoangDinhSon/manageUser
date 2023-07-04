@@ -1,13 +1,19 @@
 /* 
 tạo ra một animation khi một component bị mount and unmount dùng scale  
 */
+import { replaceManyString } from '../../handlelogic';
 
 function AnimationMountAndUnMount({ isMount, children }: { isMount: boolean; children: any }) {
-    const classWhenMount =
+    let classMountAndUnmount =
         'fixed z-20 top-0 left-0 bg-[--bgAnimation]  w-full h-full    transition-all duration-[1s] scale-x-100 translate-x-0';
-    const classWhenUnmount =
-        'fixed z-20 top-0 left-0 bg-[--bgAnimation]  w-full h-full   transition-all duration-[1s] scale-x-0  translate-x-full';
-    return <div className={isMount ? classWhenMount : classWhenUnmount}>{children}</div>;
+    if (isMount === false) {
+        classMountAndUnmount = replaceManyString(
+            classMountAndUnmount,
+            ['scale-x-100', 'translate-x-0'],
+            ['scale-x-0', 'translate-x-full'],
+        );
+    }
+    return <div className={classMountAndUnmount}>{children}</div>;
 }
 
 export default AnimationMountAndUnMount;

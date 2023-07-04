@@ -26,7 +26,7 @@ function RequirementFileUI() {
 function ImportForm() {
     const [listFile, setListFile] = useState<Array<any>>([]);
     const refInput = useRef(null);
-    const [state, dispatch] = useGlobalState();
+    const [, dispatch] = useGlobalState();
     const refInputForChange: any = refInput?.current;
     // Save File import into Array listFile
     if (refInput.current != null) {

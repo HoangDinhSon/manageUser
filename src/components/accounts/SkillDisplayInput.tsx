@@ -7,7 +7,7 @@ function SkillDisplayInput({ resultListSkill }: any) {
     const [skill, setSkill] = useState<string>('');
     const refInputSkill = useRef<any | null>(null);
     // transform ListSkill out
-    useEffect(() => resultListSkill(listSkill), [listSkill]);
+    useEffect(() =>{ resultListSkill(listSkill);}, [listSkill]);
     // get value Skill nhập từ input
     const handleGetInput = (event: any) => {
         setSkill(event.target.value);
@@ -26,12 +26,12 @@ function SkillDisplayInput({ resultListSkill }: any) {
         }
     };
     // xóa skill ra khỏi danh sách
-    const handleRemoveSkill = (e: any, index: number) => {
+    const handleRemoveSkill = (index: number) => {
         listSkill.splice(index, 1);
         setListSkill([...listSkill]);
     };
     return (
-        <div className="pt-4 pb-[42px] ">
+        <div className="pt-4 pb-[42px] relative ">
             <Toaster />
             <p className="my_after_star">Skills</p>
             <ListName listName={listSkill} onClick={handleRemoveSkill}/>
@@ -42,9 +42,13 @@ function SkillDisplayInput({ resultListSkill }: any) {
                 onKeyUpCapture={handlePressKey}
                 onChange={handleGetInput}
                 ref={refInputSkill}
+                id="IDlistSkill"
+                
             />
+           {(listSkill.length===0) && <div className='text-[red] text-[12px] absolute bottom-[15px]'> Kỹ năng không dc để trống bạn nhé </div>}
         </div>
     );
 }
 
 export default SkillDisplayInput;
+// count >0,và lengmang2 =0 thì hiện thông bào 

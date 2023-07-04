@@ -1,15 +1,14 @@
-
-@import "./pages/Accounts/acc.css";
-@import "./pages/Login/Login.css";
+@import './pages/Accounts/acc.css';
+@import './pages/Login/Login.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-    * {
-        font-family: 'Poppins', sans-serif;
-        /* outline: 1px solid green; */
+    html{
+        @apply font-sans;
     }
+   
     h1 {
         padding-top: 5px;
         font-size: 45px;
@@ -55,15 +54,15 @@
     input:-internal-autofill-selected {
         -webkit-box-shadow: 0 0 0 30px white inset !important;
     }
-    ::-webkit-scrollbar{
-        width:5px;
+    ::-webkit-scrollbar {
+        width: 5px;
         height: 5px;
     }
-    ::-webkit-scrollbar-thumb{
+    ::-webkit-scrollbar-thumb {
         background-color: #9da7b9;
         border-radius: 2.5px;
     }
-    ::-webkit-scrollbar-track{
+    ::-webkit-scrollbar-track {
         margin: 20px 0px;
     }
 }
@@ -86,6 +85,9 @@
         background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='5' ry='5' stroke='%23D2D2D2FF' stroke-width='5' stroke-dasharray='5%25%2c 3%25' stroke-dashoffset='66' stroke-linecap='butt'/%3e%3c/svg%3e");
         border-radius: 5px;
     }
+    .form_view_layout {
+        @apply grid-cols-3 grid gap-6  xs_max:grid-cols-2 xs_max:gap-1;
+    }
 
     /* my logger css  */
     .red {
@@ -96,7 +98,7 @@
     }
     .myoutline {
         @apply outline outline-1 outline-[green];
-    } 
+    }
 }
 
 :root {
@@ -117,6 +119,5 @@
     --durationForMain: 1s;
     /* Page Login  */
     --pLeftLogin: 60px;
-    --bgAnimation:#00000020;/* all entire screen  */
-    
+    --bgAnimation: #00000020; /* all entire screen  */
 }

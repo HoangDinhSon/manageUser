@@ -15,14 +15,14 @@ const loginAuth = (payload: payloadLogin) =>
 const getLimitAndSkipUser = (limit: number, skip: number) =>
     axiosClient
         .get(
-            `https://dummyjson.com/users?limit=${limit}&skip=${skip}&select=id,firstName,maidenName,email,company,phone,gender,age,eyeColor,bloodGroup,university,height`,
+            `/users?limit=${limit}&skip=${skip}&select=id,firstName,maidenName,email,company,phone,gender,age,eyeColor,bloodGroup,university,height`,
         )
         .then((res) => res.data)
         .catch((error) => {
             alert(error?.message);
         });
 const getUserBaseFilter = ({ keyFilter, valueFilter }: any) =>
-    axiosClient.get(`https://dummyjson.com/users/filter?key=${keyFilter}&value=${valueFilter}`).then((res) => res.data);
+    axiosClient.get(`/users/filter?key=${keyFilter}&value=${valueFilter}`).then((res) => res.data);
 
 const getUserBaseOnID = (id: typeID) => axiosClient.get(`/users/${id}`).then((res) => res.data);
 //type informationAfterEdit là một object chứa {firstName:string , id:number|string ,... }

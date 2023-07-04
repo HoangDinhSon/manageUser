@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 // dùng env : npm i dotenv , npm i @types/node
 require('dotenv').config();
+const defaultTheme = require('tailwindcss/defaultTheme')
 export default {
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
     theme: {
+        
         screens: {
             xs_max: { max: parseInt(process.env.VITE_BREAKPOINTS_XS) + 'px' }, //375
             sm_max: { max: parseInt(process.env.VITE_BREAKPOINTS_SM) + 'px' }, //640
@@ -14,7 +16,11 @@ export default {
             range_1441_: { min: parseInt(process.env.VITE_BREAKPOINTS_XXL) + 1 + 'px' }, //1441
             min_376: { min: parseInt(process.env.VITE_BREAKPOINTS_XS) + 1 + 'px' }, //376
         },
-        extend: {},
+        extend: {
+            fontFamily:{
+                "sans": ['Poppins',...defaultTheme.fontFamily.sans]
+            }
+        },
     },
     plugins: [],
 };

@@ -17,7 +17,6 @@ function FormViewUser() {
         dispatch(actions.closeFormViewUser());
     };
     const eachUser = state.UserForFormViewAfterCallApi;
-    const classLayout = 'grid-cols-3 grid gap-6  xs_max:grid-cols-2 xs_max:gap-1';
     const responsiveUI = (): string => {
         const hScreen = window.innerHeight;
         const widthScreen = window.innerWidth;
@@ -43,7 +42,7 @@ function FormViewUser() {
                         className="cursor-pointer"
                     />
                 </div>
-                <div className={classLayout}>
+                <div className="form_view_layout">
                     <DetailPropertyUser heading="First Name" content={eachUser?.firstName} />
                     <DetailPropertyUser heading="Last Name" content={eachUser?.lastName} />
                     <DetailPropertyUser heading="gender" content={eachUser.gender} />
@@ -54,7 +53,7 @@ function FormViewUser() {
                     <DetailPropertyUser heading="Phone" content={eachUser?.phone} />
                 </div>
                 <hr className="my-6 xs_max:my-3" />
-                <div className={classLayout}>
+                <div className="form_view_layout">
                     <DetailPropertyUser heading="bloodGroup" content={eachUser.bloodGroup} />
                     <DetailPropertyUser heading="university" content={eachUser.university} />
                     <DetailPropertyUser heading="height" content={eachUser.height} />
@@ -62,7 +61,7 @@ function FormViewUser() {
                     <DetailPropertyUser heading="Office" content={eachUser?.company.department} />
                 </div>
                 <hr className="my-6 xs_max:my-3" />
-                <div className={classLayout}>
+                <div className="form_view_layout">
                     <DetailPropertyUser heading="city" content={eachUser.address.city} />
                     <DetailPropertyUser heading="userAgent" content={eachUser.userAgent} />
                     <DetailPropertyUser heading="domain" content={eachUser.domain} />

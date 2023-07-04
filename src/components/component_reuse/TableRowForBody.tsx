@@ -6,7 +6,7 @@ import { LINK_PAGE_ACCOUNT_EDIT } from '../../data/constance_for_page';
 import { NavLink } from 'react-router-dom';
 
 function TableRowForBody({ user}:any) {
-    const [state, dispatch] = useGlobalState();
+    const [, dispatch] = useGlobalState();
     const handleDisplayViewForm = (user: TypeOfUser) => {
         dispatch(actions.displayFormViewUser(user));
     };

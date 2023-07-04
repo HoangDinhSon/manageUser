@@ -44,9 +44,7 @@ type TypeStateGlobal = {
     isDisplayFormView: boolean;
     UserForFormViewAfterCallApi: typeUserAfterCallApiBaseOnID;
     idForEdit: number;
-    userAfterEdit: any; //object
     isDisplayImportForm: boolean;
-
     listFilter: Array<any>;
     criterialForFilter: any; //object
 };
@@ -60,7 +58,6 @@ const initState = {
     isDisplayFormView: DISPLAY_FORM_VIEW_USER_DEFAULT,
     UserForFormViewAfterCallApi: {},
     idForEdit: ID_FOR_EDIT_DEFAULT,
-    userAfterEdit: {}, // kiểm tra xem có dùng tới ko
     isDisplayImportForm: IS_DISPLAY_IMPORT_FORM_DEFAULT,
     listFilter: [],
     criterialForFilter: CRITERIAL_FOR_FILTER_DEFAULT,

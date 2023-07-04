@@ -24,4 +24,22 @@ const listContractType = [
     { value: 'long', content: 'Long' },
     { value: 'infinity', content: 'Infinity' },
 ];
-export {listOptionCompany,listOptionOffice,listOptionTeam,listOptionPotion,listOptionLevel,listContractType}
+const NameRegisterForm = {
+    firstName: 'firstName',
+    lastName: 'lastName',
+    alias: 'alias',
+    role: 'role',
+    email: 'email',
+    phoneCodeCountry: 'phoneCodeCountry',
+    phoneNumber: 'phoneNumber',
+    contractType: 'contractType',
+    contractStartDate: 'contractStartDate',
+    contractEndDate: 'contractEndDate',
+    company: 'company',
+    office: 'office',
+    team: 'team',
+    position: 'position',
+    level: 'level',
+};
+
+export { listOptionCompany, listOptionOffice, listOptionTeam, listOptionPotion, listOptionLevel, listContractType,NameRegisterForm };

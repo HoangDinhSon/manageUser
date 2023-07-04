@@ -7,9 +7,15 @@ const schema = yup
         password: yup.string().required(),
     })
     .required();// end schema
+
+    
 type FormLogin = yup.InferType<typeof schema>;
 const resolverLogin = {
     resolver: yupResolver(schema),
 };
 export  {resolverLogin};
 export type { FormLogin };
+/* 
+
+
+*/

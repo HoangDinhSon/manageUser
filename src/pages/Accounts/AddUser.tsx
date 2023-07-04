@@ -15,10 +15,17 @@ import {
     listOptionOffice,
     listOptionPotion,
 } from '../../data/constance_for_page';
+import { typeFormAddAndEdit, resolverFormAddUser } from './validationForAccountPage';
+import { NameRegisterForm } from '../../data/constance_for_page/constantUI';
 
 function AddUser() {
-    const [state, dispatch] = useGlobalState();
-    const { register, handleSubmit, reset } = useForm();
+    const [, dispatch] = useGlobalState();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<typeFormAddAndEdit>(resolverFormAddUser);
     const [listSkill, setListSkill] = useState<Array<string>>([]);
     const { mutate } = useMutation({
         mutationFn: addUserToServer,
@@ -26,13 +33,20 @@ function AddUser() {
             toast.success('add user success');
             reset();
             dispatch(actions.addNewUser(res));
+            toast.success('Add to server success');
+            listSkill.length = 0; // xóa hết phần tử trong mảng
         },
         onError: () => {
             toast.error('can not send inform user to server');
         },
     });
     const onSubmitForm = (formData: any) => {
-        console.log('formData>>>', formData);
+        if (listSkill.length === 0) {
+            toast.error('List Skill không dc để trống ');
+            console.log('DATA>>>', document.getElementById('IDlistSkill'));
+            document.getElementById('IDlistSkill')?.focus();
+            return;
+        }
         mutate({
             ...formData,
             listSkill: listSkill,
@@ -54,27 +68,35 @@ function AddUser() {
                             label="First Name"
                             numberCharacter={0}
                             register={register}
-                            name={'firstName'}
+                            name={NameRegisterForm.firstName}
+                            errors={errors}
                             // value={data.firstName}
                         />
                         <InputWithCharacter
                             label="Last Name"
                             numberCharacter={0}
                             register={register}
-                            name={'lastName'}
+                            name={NameRegisterForm.lastName}
+                            errors={errors}
                             // value={data.lastName}
                         />
-                        <InputWithCharacter label="Alias" numberCharacter={0} register={register} name={'alias'} />
+                        <InputWithCharacter
+                            label="Alias"
+                            numberCharacter={0}
+                            register={register}
+                            name={NameRegisterForm.alias}
+                            errors={errors}
+                        />
                         <Select label="Role" listOption={listContractType} nameSelect="role" register={register} />
                     </div>
                     <div className="pt-6">
-                        <Input content="Email" name="email" register={register} />
+                        <Input content="Email" name={NameRegisterForm.email} register={register} errors={errors} />
                         <div className="pt-6">
                             <PhoneNumber
-                                nameCodeCountry="phoneCodeCountry"
-                                namePhoneNumber="phoneNumber"
+                                nameCodeCountry={NameRegisterForm.phoneCodeCountry}
+                                namePhoneNumber={NameRegisterForm.phoneNumber}
                                 register={register}
-                                // phone={data.phone}
+                                errors={errors}
                             />
                         </div>
                     </div>
@@ -83,21 +105,28 @@ function AddUser() {
                     <Select
                         label="Contract Type"
                         listOption={listContractType}
-                        nameSelect="contractType"
+                        nameSelect={NameRegisterForm.contractType}
                         register={register}
                     />
                     <div className="grid grid-cols-2 gap-6 pt-6">
                         <Input
                             content="Contract Start Date"
                             icon={calendar}
-                            name="contractStartDate"
+                            name={NameRegisterForm.contractStartDate}
                             register={register}
+                            errors={errors}
                         />
-                        <Input content="Contract End Date" icon={calendar} name="contractEndDate" register={register} />
+                        <Input
+                            content="Contract End Date"
+                            icon={calendar}
+                            name="contractEndDate"
+                            register={register}
+                            errors={errors}
+                        />
                         <Select
                             label="Company"
                             listOption={listOptionCompany}
-                            nameSelect="company"
+                            nameSelect={NameRegisterForm.company}
                             register={register}
                         />
                         <Select label="Office" listOption={listOptionOffice} nameSelect="office" register={register} />
@@ -105,15 +134,25 @@ function AddUser() {
                     <hr className="bg-[#EBEBEB]  my-8 " />
                     {/* Team */}
                     <div className="grid grid-cols-2 gap-6 pb-6">
-                        <Select label="Team" listOption={listOptionTeam} nameSelect="team" register={register} />
+                        <Select
+                            label="Team"
+                            listOption={listOptionTeam}
+                            nameSelect={NameRegisterForm.team}
+                            register={register}
+                        />
                         <Select
                             label="Position"
                             listOption={listOptionPotion}
-                            nameSelect="position"
+                            nameSelect={NameRegisterForm.position}
                             register={register}
                         />
                     </div>
-                    <Select label="Level" listOption={listOptionLevel} nameSelect="level" register={register} />
+                    <Select
+                        label="Level"
+                        listOption={listOptionLevel}
+                        nameSelect={NameRegisterForm.level}
+                        register={register}
+                    />
                     <SkillDisplayInput resultListSkill={getListSkill} />
                     <button className="w-full h-[42px] rounded bg-[--ColorBgButton] text-white" type="submit">
                         Save

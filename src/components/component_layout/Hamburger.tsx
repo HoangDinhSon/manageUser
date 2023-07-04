@@ -1,7 +1,6 @@
 import { iconArrowRight, iconArrowLeft } from '../../assets';
 import { useEffect, useState, useMemo } from 'react';
-import { ContextState, actions } from '../../store';
-import { useTheme, useMediaQuery } from '@mui/material';
+import { ContextState } from '../../store';
 import { HamburgerMui } from '../../assets';
 /*trong này có 2 Hamburger không liên quan đến nhau */
 
@@ -48,7 +47,7 @@ Hamburger Menu
 
 */
 function HamburgerMenu({ onClick }: any) {
-    const [state, dispatch] = ContextState.useGlobalState();
+    const [state, ] = ContextState.useGlobalState();
     const handleOnClick = () => {
         onClick();
     };
@@ -73,11 +72,7 @@ hoạt động : xuất hiện icon Mui --> sau khi nhấn vào icon Mui thì w-
 
 function TransitionForAsideBar({ children }: any) {
     const [classChildren, setClassChildren] = useState('');
-    const [state, dispatch] = ContextState.useGlobalState();
-    const theme = useTheme();
-    const XS = parseInt(import.meta.env.VITE_BREAKPOINTS_XS) + 1; //375+1
-    const maxXS: boolean = useMediaQuery(theme.breakpoints.down(XS)); //(0-->375px ]
-
+    const [state] = ContextState.useGlobalState();
     let classDiv =
         'fixed z-[2] w-[--heightNav] h-screen  transition-[all] duration-[--durationTableUser] overflow-hidden ';
     if (state.isDisplayAsideMenu === false) {

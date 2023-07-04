@@ -7,7 +7,7 @@ import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import { TransitionForAsideBar, HamburgerMenu } from '../components/component_layout/Hamburger';
 import * as icon from '../assets/icon';
-import { bgAvatar, notification, arrowBackForLayout, HamburgerMui } from '../assets';
+import { bgAvatar, notification, arrowBackForLayout } from '../assets';
 import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
 function Menu({ children }: any) {
@@ -97,6 +97,7 @@ function Menu({ children }: any) {
             ],
         );
     }
+    /* xem note 1 .  */
     if (state.isDisplayFormView === true || state.isDisplayImportForm === true || state.isDisplayFiler === true) {
         classForChildrenOfMenu = replaceManyString(classForChildrenOfMenu, ['z-[1]'], ['z-[4]']);
     }
@@ -179,3 +180,12 @@ function Menu({ children }: any) {
     );
 }
 export default Menu;
+/* 
+1. bình thường thì Layer : Nav z-index=3 
+    Aside : z-index= 2
+    main : z-index = 1 
+    background:  z= -1 ,; 
+
+
+
+*/

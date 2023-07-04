@@ -4,7 +4,7 @@ import { TableRowForHeader, TableRowForBody } from '../..';
 import { checkNumberOFCriterialForFilter, replaceManyString } from '../../../handlelogic';
 
 function TableUser() {
-    const [state, dispatch] = ContextState.useGlobalState();
+    const [state, ] = ContextState.useGlobalState();
     const listUser = state.resApi.users;
     const listUserOfFilter = [...state.listFilter];
     const rowPerPage = state.rowPerPage;

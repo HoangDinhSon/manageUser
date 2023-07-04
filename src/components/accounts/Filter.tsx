@@ -7,11 +7,10 @@ import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
 import { OutPutFormFilter } from '../../data/type';
 import { ListFilter, CRITERIAL_FOR_FILTER_DEFAULT } from '../../data/constance_for_page';
-type typeSeclect = { children: string; value: string | number };
-type DataCallApi = { keyFilter: string | number; valueFilter: string | number }[]; // dạng mảng chứa object
+type typeSelect = { children: string; value: string | number };
 
 function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: any) {
-    const [state, dispatch] = useGlobalState();
+    const [state, ] = useGlobalState();
     const [value, setValue] = useState(state.criterialForFilter[PropsCheck].select);
     const [isChecked, setIsChecked] = useState(state.criterialForFilter[PropsCheck][PropsCheck]);
     const handleChangeSelect = (e: any) => {
@@ -44,7 +43,7 @@ function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: a
                 sx={{ width: '100%', height: '36px', marginTop: '11px' }}
                 onChange={handleChangeSelect}
             >
-                {content.map((element: typeSeclect) => (
+                {content.map((element: typeSelect) => (
                     <MenuItem value={element.value} key={element.value}>
                         {element.children}
                     </MenuItem>

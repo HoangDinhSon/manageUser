@@ -55,8 +55,6 @@ const getIdForEdit =(idForEdit:number|string)=>({
     type:GET_ID_FOR_EDIT,
     payload:idForEdit
 })
-
-type userAfterEdit = {}// object chứa các key value 
 const editUser =(userAfterEdit:any)=>({
     type:EDIT_USER,
     payload:userAfterEdit,
