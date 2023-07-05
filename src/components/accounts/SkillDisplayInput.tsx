@@ -6,16 +6,21 @@ function SkillDisplayInput({ resultListSkill }: any) {
     const [listSkill, setListSkill] = useState<Array<string>>(listSkillDefault);
     const [skill, setSkill] = useState<string>('');
     const refInputSkill = useRef<any | null>(null);
-    // transform ListSkill out
-    useEffect(() =>{ resultListSkill(listSkill);}, [listSkill]);
+    let flag = useRef(false);
+    // transform ListSkill out parent 
+    useEffect(() => {
+        resultListSkill(listSkill);
+    }, [listSkill]);
+
     // get value Skill nhập từ input
     const handleGetInput = (event: any) => {
         setSkill(event.target.value);
     };
     // lưu mỗi skill vào trong list
     const handlePressKey = (event: any) => {
-        if (event.key === 'Insert') {
+        if (event.key === 'Enter') {
             if (skill === '') {
+                flag.current = true;
                 return toast.error('Skill is empty');
             }
             setListSkill([...listSkill, skill]);
@@ -34,7 +39,7 @@ function SkillDisplayInput({ resultListSkill }: any) {
         <div className="pt-4 pb-[42px] relative ">
             <Toaster />
             <p className="my_after_star">Skills</p>
-            <ListName listName={listSkill} onClick={handleRemoveSkill}/>
+            <ListName listName={listSkill} onClick={handleRemoveSkill} />
             <input
                 type="text"
                 className="w-full h-[42px] focus-within:my_outline_rounded_edit_form px-4"
@@ -42,13 +47,19 @@ function SkillDisplayInput({ resultListSkill }: any) {
                 onKeyUpCapture={handlePressKey}
                 onChange={handleGetInput}
                 ref={refInputSkill}
-                id="IDlistSkill"
-                
+                id="IDlistSkill" // dành để focus
             />
-           {(listSkill.length===0) && <div className='text-[red] text-[12px] absolute bottom-[15px]'> Kỹ năng không dc để trống bạn nhé </div>}
+            {/* 2. */}
+            {listSkill.length === 0 && flag.current && (
+                <div className="text-[red] text-[12px] absolute bottom-[15px]"> Skill can't empty</div>
+            )}
         </div>
     );
 }
 
 export default SkillDisplayInput;
-// count >0,và lengmang2 =0 thì hiện thông bào 
+
+/* 
+2. condition display notification error 
+3.IDlistSkill: to focus when user click Save while ListSkill is empty
+ */

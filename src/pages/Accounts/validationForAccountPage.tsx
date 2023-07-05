@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NameRegisterForm } from '../../data/constance_for_page/constantUI';
+import { NameRegisterForm } from '../../data/constance_for_page/UI_TYPE_CONSTANT';
 const {
     firstName,
     lastName,
@@ -21,13 +21,13 @@ const {
 
 const schemaAddUSer = yup
     .object({
-        [firstName]: yup.string().required(),
-        [lastName]: yup.string().required(),
-        [alias]: yup.string().required(),
-        [role]: yup.string().required(),
-        [email]: yup.string().required(),
+        [firstName]: yup.string().matches(/\p{L}/u).required(), // chỉ dc chữ cái bao gồm cả chữ non ASCII 
+        [lastName]: yup.string().matches(/\p{L}/u).required(),
+        [alias]: yup.string().matches(/\p{L}/u).required(),
+        [role]: yup.string().matches(/\p{L}/u).required(),
+        [email]: yup.string().matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).required(),
         [phoneCodeCountry]: yup.string().required(),
-        [phoneNumber]: yup.string().matches(/^\d+$/).required(),// yêu cầu là string chỉ có số only Number 
+        [phoneNumber]: yup.string().matches(/^\d+$/).required(), // yêu cầu là string chỉ có số only Number
         [contractType]: yup.string().required(),
         [contractStartDate]: yup.string().required(),
         [contractEndDate]: yup.string().required(),
@@ -38,15 +38,12 @@ const schemaAddUSer = yup
         [level]: yup.string().required(),
     })
     .required(); // yêu cầu phải điền vào cả .
-type typeFormAddAndEdit = yup.InferType<typeof schemaAddUSer>;
 const resolverFormAddUser = {
     resolver: yupResolver(schemaAddUSer),
 };
 export { resolverFormAddUser };
-export type { typeFormAddAndEdit };
+
 /* 
 NameRegisterForm mục đích để khớp Name của UI 
-
-
 
 */

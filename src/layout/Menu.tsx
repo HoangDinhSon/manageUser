@@ -10,6 +10,7 @@ import * as icon from '../assets/icon';
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
 import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
+import { Toaster } from 'react-hot-toast';
 function Menu({ children }: any) {
     const location = useLocation();
     const [state, dispatch] = useGlobalState();
@@ -104,6 +105,7 @@ function Menu({ children }: any) {
 
     return (
         <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full ">
+            <Toaster/>
             {/*2/5. TopNav Bar */}
             <div className="fixed z-[3] pl-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-full bg-[#fff]   ">
                 <HamburgerMenu onClick={handleDisplay} />

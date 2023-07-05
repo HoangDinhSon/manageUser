@@ -4,13 +4,14 @@
  output : void 
  effect : 
 */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 function OpacityTransition({ children }: any) {
     const [opacityTransition, setOpacityTransition] = useState('opacity-0  transition-all duration-[--timeOpacity]');
-    setTimeout(() => {
-        setOpacityTransition('opacity-100  transition-all duration-[--timeOpacity]');
-    }, 300);
-
+    useEffect(() => {
+        setTimeout(() => {
+            setOpacityTransition('opacity-100  transition-all duration-[--timeOpacity]');
+        }, 300);
+    });
     return <div className={opacityTransition}>{children}</div>;
 }
 

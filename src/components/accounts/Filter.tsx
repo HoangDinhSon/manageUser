@@ -16,9 +16,10 @@ function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: a
     const handleChangeSelect = (e: any) => {
         setValue(e.target.value);
     };
-    const handleChangeCheckBox = (e: any) => {
+    const handleChangeCheckBox = (e:any) => {
         setIsChecked(e.target.checked);
     };
+    /* mục đích:  dùng để câp nhật lại UI khi state thay đổi.  */
     useMemo(() => {
         setValue(state.criterialForFilter[PropsCheck].select);
         setIsChecked(state.criterialForFilter[PropsCheck][PropsCheck]);
@@ -85,7 +86,7 @@ function Filter() {
         });
         // sau khi submit thì phải reset mảng vì nếu không nó sẽ tích vào rất nhiêu lần
         responseFromServer.current = [];
-        reset();
+        reset();// reset lại bộ nhớ tạm trong handleSubmit của react hook form 
     };
     const handleClearForm = () => {
         reset();
@@ -128,3 +129,7 @@ function Filter() {
 }
 
 export default Filter;
+/* 
+useMemo đề bọc 2 cái setValue  vì tránh vòng lặp vĩnh viễn 
+
+*/

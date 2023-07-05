@@ -54,11 +54,12 @@ return lại???
 # lấy biến chung để responsive
 
 # Tailwindcss
-1. @base 
-2. @component --> tạo ra class mới 
+
+1. @base
+2. @component --> tạo ra class mới
 3. @utilities ()
 
-dùng biến : border-t-[length:--borderWidth] chỉ dùng khi đi với var còn tailwindcss thì tự biết 
+dùng biến : border-t-[length:--borderWidth] chỉ dùng khi đi với var còn tailwindcss thì tự biết
 
 # response
 
@@ -103,12 +104,14 @@ dùng biến : border-t-[length:--borderWidth] chỉ dùng khi đi với var cò
 
 # Transition
 
-    b1: trạng thái ba đầu w-100px 
+    b1: trạng thái ba đầu w-100px
     b2 : hành động làm thay đổi trạng thái
     b3 : trạng thái sau w-200px
+
 # Animation
-    b1: đăng kí name , duration cho cái thẻ cần dc animation 
-    b2: @keyFrame 
+
+    b1: đăng kí name , duration cho cái thẻ cần dc animation
+    b2: @keyFrame
 
 # Hamburger /
 
@@ -129,23 +132,37 @@ dùng biến : border-t-[length:--borderWidth] chỉ dùng khi đi với var cò
 dependence trong useEffect mà một mảng có thể chứa , 1 mảng , chứa 1 biểu thức , chứa hàm
 ví dụ [isDisplay===false]
 
-# thêm file vảo trong in put 
-    lắng nghe sự kiện event 
+# thêm file vảo trong in put
+
+    lắng nghe sự kiện event
     b1 : event.target.files type object {0: data 1 ,  2 data 2 , }
-    set state 
-    nếu có sửa xóa thì lấy state ra chỉnh sửa sau đó cập nhật lại state 
+    set state
+    nếu có sửa xóa thì lấy state ra chỉnh sửa sau đó cập nhật lại state
+
 # CSS
-    - tính tổng 2 giá trị của biề trong css 
+
+    - tính tổng 2 giá trị của biề trong css
     - lấy chiều dài của thẻ div này gán cho thẻ div khác ??
     - selector chọn một thẻ đồng thời có 2 class : .class1.class2 (ghi sát nhau )
-# react query 
-    -c1 Component nào dùng api thì gọi trong component đó ok hơn 
+
+# react query
+
+    -c1 Component nào dùng api thì gọi trong component đó ok hơn
     -c2  Gọi api trong component cha sau đó --> lưu vào global state (reducer)
-# @media Response 
-    response : tailwind max , min đều lấy dấu bằng . 
-    response : CSS thông thường max , min đều lấy dấu bằng . 
-    response : Mui Max không lấy dấu bằng tại break point , min có lấy dấu bằng 
-    CSS cho đồng thời chiều cao và chiều rộng : 
+
+# @media Response
+
+    response : tailwind max , min đều lấy dấu bằng .
+    response : CSS thông thường max , min đều lấy dấu bằng .
+    response : Mui Max không lấy dấu bằng tại break point , min có lấy dấu bằng
+    CSS cho đồng thời chiều cao và chiều rộng :
         @media screen and (min-width: 1281px) and (max-height:900px) {}
-# tạo Transition khi Mount và unMount 
-  b1 : dùng scale =0 --> scale -100 vì ta dùng fixed nếu dùng width thì thẻ con fixed sẽ không có tác dụng cho dù có dùng overflow -auto .
+
+# tạo Transition khi Mount và unMount
+
+b1 : dùng scale =0 --> scale -100 vì ta dùng fixed nếu dùng width thì thẻ con fixed sẽ không có tác dụng cho dù có dùng overflow -auto .
+
+# react hot toast
+
+<Toaster>
+cần đặt ngay tại vị trí ngoài cùng để đảm bảo thông báo sẽ luôn dc hiển thị ra ngoài

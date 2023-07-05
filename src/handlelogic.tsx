@@ -1,4 +1,4 @@
-import { CriterialForFilter } from './data/type';
+import { OutPutFormFilter } from './data/type';
 
 const findIndex = (id: number, arrayObject: []): number => {
     let indexCurrent: number = -1;
@@ -11,10 +11,12 @@ const findIndex = (id: number, arrayObject: []): number => {
     return indexCurrent;
 };
 
-const checkNumberOFCriterialForFilter = (criterial: CriterialForFilter | any): number => {
+const checkNumberOFCriterialForFilter = (criterial: OutPutFormFilter): number => {
     let sum = 0;
     for (let key in criterial) {
-        if (criterial[key][key] === true) {
+        const x = criterial[key as keyof OutPutFormFilter];
+        const y = x[key as keyof typeof x];
+        if (!!y === true) {
             sum++;
         }
     }

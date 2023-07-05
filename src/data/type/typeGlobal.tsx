@@ -1,17 +1,3 @@
-type typeUser = {
-    id: number | string;
-    firstName: string;
-    maidenName: string;
-    email: string;
-    company: string;
-    phone: string;
-    gender: string;
-    age: number | string;
-    eyeColor: string;
-    bloodGroup: string;
-    university: string;
-    height: string;
-};
 type OutPutFormFilter = {
     gender: {
         gender: boolean;
@@ -38,17 +24,17 @@ type OutPutFormFilter = {
         select: number;
     };
 };
-type typeOfListUser = Array<typeUser>;
+type typeOfListUser = Array<typeUserAfterCallApiBaseOnID>;
 
 type typeUserAfterCallApiBaseOnID = {
     id: number;
-    firstName:string;
-    lastName:string;
+    firstName: string;
+    lastName: string;
     maidenName: string;
     age: number;
     gender: string;
     email: string;
-    phone:string;
+    phone: string;
     username: string;
     password: string;
     birthDate: string;
@@ -59,7 +45,7 @@ type typeUserAfterCallApiBaseOnID = {
     eyeColor: string;
     hair: {
         color: string;
-        type:string;
+        type: string;
     };
     domain: string;
     ip: string;
@@ -68,27 +54,27 @@ type typeUserAfterCallApiBaseOnID = {
         city: string;
         coordinates: {
             lat: number;
-            lng:number;
+            lng: number;
         };
         postalCode: string;
         state: string;
     };
     macAddress: string;
-    university:string;
+    university: string;
     bank: {
         cardExpire: string;
         cardNumber: string;
         cardType: string;
-        currency:string;
+        currency: string;
         iban: string;
     };
     company: {
         address: {
             address: string;
-            city:string;
+            city: string;
             coordinates: {
-                lat:number;
-                lng:number;
+                lat: number;
+                lng: number;
             };
             postalCode: string;
             state: string;
@@ -101,14 +87,24 @@ type typeUserAfterCallApiBaseOnID = {
     ssn: string;
     userAgent: string;
 };
-type CriterialForFilter = {
+
+export type { typeOfListUser, OutPutFormFilter, typeUserAfterCallApiBaseOnID };
+
+/* type OutPutFormFilter = {
+    [index: string]: {
+        gender: boolean;
+        select: string;
+    }| {
+        age: boolean;
+        select: number;
+    };
     gender: {
         gender: boolean;
         select: string;
     };
     age: {
         age: boolean;
-        select: string | number;
+        select: number;
     };
     eyeColor: {
         eyeColor: boolean;
@@ -124,7 +120,6 @@ type CriterialForFilter = {
     };
     height: {
         height: boolean;
-        select: string | number;
+        select: number;
     };
-};
-export type { typeOfListUser, typeUser, OutPutFormFilter ,typeUserAfterCallApiBaseOnID,CriterialForFilter};
+}; */

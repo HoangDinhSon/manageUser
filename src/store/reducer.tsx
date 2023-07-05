@@ -31,6 +31,7 @@ const USE_FOR_FORM_VIEW_DEFAULT = {
     phone: 'DEFAULT',
 };
 import { findIndex } from '../handlelogic';
+import { typeOfListUser } from '../data/type';
 const ID_FOR_EDIT_DEFAULT = 0;
 const DISPLAY_FORM_VIEW_USER_DEFAULT = false;
 const IS_DISPLAY_IMPORT_FORM_DEFAULT = false;
@@ -141,16 +142,19 @@ function reducer(state: TypeStateGlobal, action: any) {
         }
         case MAKE_LIST_FILTER: {
             let keyOfCriterial: typeKeyOfCriterial = Object.keys(state.criterialForFilter);
+            const payloadFromFilter: typeOfListUser = action.payload;
             // nhưng cái criterial  nào dc chọn nằm ở đây
-            const newListCriterial: typeKeyOfCriterial = keyOfCriterial.map((key: any) => {
+            const newListCriterial: typeKeyOfCriterial = keyOfCriterial.filter((key) => {
                 if (state.criterialForFilter[key][key] === true) {
-                    return key;
+                    return true;
                 }
             });
 
-            let unique: any[] = [];
+            /* action.payload là một mảng chứa các user trong mảng này có thể có lặp lại 2 user giống nhau nên dựa vào id để xóa các user trùng nhau
+             */
+            let unique: typeOfListUser = [];
             unique.push(action.payload[0]);
-            action.payload.forEach((item: any) => {
+            payloadFromFilter.forEach((item: any) => {
                 let flag = false;
                 unique.forEach((element) => {
                     if (item.id == element.id) {
@@ -161,11 +165,12 @@ function reducer(state: TypeStateGlobal, action: any) {
                     unique.push(item);
                 }
             });
-            let listUserSuitableCriterial: any[] = [];
+
+            let listUserSuitableCriterial: typeOfListUser = [];
             unique.map((user) => {
                 let flag = false;
                 newListCriterial.map((criterial) => {
-                    if (user[criterial] !== state.criterialForFilter[criterial]?.select) {
+                    if (user[criterial as keyof typeof user] !== state.criterialForFilter[criterial]?.select) {
                         flag = true;
                     }
                 });
@@ -179,6 +184,7 @@ function reducer(state: TypeStateGlobal, action: any) {
                 listFilter: [...listUserSuitableCriterial],
             };
         }
+
         case SET_CRITERIAL_FOR_FILTER: {
             return {
                 ...state,

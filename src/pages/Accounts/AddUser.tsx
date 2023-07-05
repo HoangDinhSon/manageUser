@@ -1,7 +1,7 @@
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { useState } from 'react';
+import { useState,KeyboardEvent  } from 'react';
 import { addUserToServer } from '../../Api/logTimeApi';
 import { InputWithCharacter, Select, Input, PhoneNumber, SkillDisplayInput } from '../../components';
 import { calendar } from '../../assets/icon';
@@ -15,8 +15,8 @@ import {
     listOptionOffice,
     listOptionPotion,
 } from '../../data/constance_for_page';
-import { typeFormAddAndEdit, resolverFormAddUser } from './validationForAccountPage';
-import { NameRegisterForm } from '../../data/constance_for_page/constantUI';
+import { resolverFormAddUser } from './validationForAccountPage';
+import { NameRegisterForm ,typeFormAddAndEditAfterChange} from '../../data/constance_for_page/UI_TYPE_CONSTANT';
 
 function AddUser() {
     const [, dispatch] = useGlobalState();
@@ -25,12 +25,11 @@ function AddUser() {
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm<typeFormAddAndEdit>(resolverFormAddUser);
+    } = useForm<typeFormAddAndEditAfterChange>(resolverFormAddUser);
     const [listSkill, setListSkill] = useState<Array<string>>([]);
     const { mutate } = useMutation({
         mutationFn: addUserToServer,
         onSuccess: (res) => {
-            toast.success('add user success');
             reset();
             dispatch(actions.addNewUser(res));
             toast.success('Add to server success');
@@ -40,10 +39,13 @@ function AddUser() {
             toast.error('can not send inform user to server');
         },
     });
-    const onSubmitForm = (formData: any) => {
+    /* the function run base useEffect in component  SkillDisplayInput */
+    const getListSkill = (listSkillPayload: any) => {
+        setListSkill(listSkillPayload);
+    };
+    const handleOnSubmitForm = (formData: typeFormAddAndEditAfterChange) => {
         if (listSkill.length === 0) {
             toast.error('List Skill không dc để trống ');
-            console.log('DATA>>>', document.getElementById('IDlistSkill'));
             document.getElementById('IDlistSkill')?.focus();
             return;
         }
@@ -52,16 +54,17 @@ function AddUser() {
             listSkill: listSkill,
         });
     };
-
-    const getListSkill = (listSkillPayload: any) => {
-        setListSkill(listSkillPayload);
+    /* prevent default of Enter () */
+    const handleOnKeyDown = (e: KeyboardEvent ) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
     };
 
     return (
         <div className="edit_form ">
-            <Toaster />
             <div className="mx-5 my-7 max-w-[697px]">
-                <form action="submit" onSubmit={handleSubmit(onSubmitForm)}>
+                <form action="submit" onSubmit={handleSubmit(handleOnSubmitForm)} onKeyDown={(e) => handleOnKeyDown(e)}>
                     {/* Name */}
                     <div className="grid grid-cols-2 gap-6">
                         <InputWithCharacter
@@ -70,7 +73,6 @@ function AddUser() {
                             register={register}
                             name={NameRegisterForm.firstName}
                             errors={errors}
-                            // value={data.firstName}
                         />
                         <InputWithCharacter
                             label="Last Name"
@@ -78,7 +80,6 @@ function AddUser() {
                             register={register}
                             name={NameRegisterForm.lastName}
                             errors={errors}
-                            // value={data.lastName}
                         />
                         <InputWithCharacter
                             label="Alias"

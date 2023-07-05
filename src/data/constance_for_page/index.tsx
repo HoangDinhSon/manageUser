@@ -17,7 +17,7 @@ import {
     listOptionLevel,
     listOptionOffice,
     listOptionPotion,
-} from './constantUI';
+} from './UI_TYPE_CONSTANT';
 import { CRITERIAL_FOR_FILTER_DEFAULT, ListFilter } from './constantFilter';
 
 export {

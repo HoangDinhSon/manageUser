@@ -5,8 +5,8 @@ import './index.css';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../myMuiConfig.tsx';
 import { QueryClient, QueryClientProvider } from 'react-query';
-const queryClient = new QueryClient();
 import ContextProvider from '../src/store/Provider.tsx';
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
