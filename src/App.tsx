@@ -15,10 +15,13 @@ function App() {
         queryKey: ['getLimitAndSkip', limit, skip],
         queryFn: () => getLimitAndSkipUser(limit, skip),
         onSuccess: (res) => {
-            dispatch(actions.upDateListUser(res));
+            if (!!res) {
+                dispatch(actions.upDateListUser(res));
+            }
         },
         keepPreviousData: true,
     });
+
     return (
         <Fragment>
             <BrowserRouter>

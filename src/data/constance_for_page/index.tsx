@@ -10,22 +10,13 @@ import {
     LINK_PAGE_ROLEMANAGER,
     LINK_PAGE_REPORT,
 } from './constantLinkPage';
-import {
-    listOptionTeam,
-    listOptionCompany,
-    listContractType,
-    listOptionLevel,
-    listOptionOffice,
-    listOptionPotion,
-} from './UI_TYPE_CONSTANT';
+import { listOptionTeam, listOptionEyeColor, listOptionLevel, listOptionPotion } from './UI_TYPE_CONSTANT';
 import { CRITERIAL_FOR_FILTER_DEFAULT, ListFilter } from './constantFilter';
 
 export {
     listOptionTeam,
-    listOptionCompany,
-    listContractType,
+    listOptionEyeColor,
     listOptionLevel,
-    listOptionOffice,
     listOptionPotion,
     DEFAULT_COUNT,
     ID_FOR_EDIT_DEFAULT,

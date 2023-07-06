@@ -1,4 +1,4 @@
-import { TypeOfUser } from '../../data/type/typePageAccounts';
+import { typeUserAfterCallApiBaseOnID } from '../../data/type';
 import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
 import { IconViewUser, IconEditUser } from '../../assets/icon';
@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 function TableRowForBody({ user}:any) {
     const [, dispatch] = useGlobalState();
-    const handleDisplayViewForm = (user: TypeOfUser) => {
+    const handleDisplayViewForm = (user: typeUserAfterCallApiBaseOnID) => {
         dispatch(actions.displayFormViewUser(user));
     };
     const handleGetID = (id: number | string) => {

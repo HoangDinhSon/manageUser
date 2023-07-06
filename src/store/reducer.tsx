@@ -15,8 +15,7 @@ import {
     DISPLAY_IMPORT_FORM,
     RESET_CRITERIAL_FOR_FILTER,
 } from './constants';
-import { TypeOfUser } from '../data/type/typePageAccounts';
-import { typeKeyOfCriterial, typeUserAfterCallApiBaseOnID } from '../data/type';
+import { typeUserAfterCallApiBaseOnID } from '../data/type';
 import { CRITERIAL_FOR_FILTER_DEFAULT } from '../data/constance_for_page';
 const ROW_PER_PAGE_DEFAULT = 5;
 const ORDINAL_NUMBER_PAGE_DEFAULT = 1;
@@ -41,7 +40,7 @@ type TypeStateGlobal = {
     resApi: any; //Array<any>
     isDisplayFiler: boolean;
     isDisplayAsideMenu: boolean;
-    UserForFormView: TypeOfUser;
+    UserForFormView: typeUserAfterCallApiBaseOnID;
     isDisplayFormView: boolean;
     UserForFormViewAfterCallApi: typeUserAfterCallApiBaseOnID;
     idForEdit: number;
@@ -141,10 +140,10 @@ function reducer(state: TypeStateGlobal, action: any) {
             };
         }
         case MAKE_LIST_FILTER: {
-            let keyOfCriterial: typeKeyOfCriterial = Object.keys(state.criterialForFilter);
+            let keyOfCriterial: string[] = Object.keys(state.criterialForFilter);
             const payloadFromFilter: typeOfListUser = action.payload;
             // nhưng cái criterial  nào dc chọn nằm ở đây
-            const newListCriterial: typeKeyOfCriterial = keyOfCriterial.filter((key) => {
+            const newListCriterial: string[] = keyOfCriterial.filter((key) => {
                 if (state.criterialForFilter[key][key] === true) {
                     return true;
                 }

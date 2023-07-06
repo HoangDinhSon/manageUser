@@ -2,58 +2,115 @@ type listOption = Array<{
     value: string;
     content: string;
 }>;
-const listOptionCompany:listOption = [
-    { value: 'vinovaOne', content: 'VinovaOne' },
-    { value: 'vinovaTow', content: 'VinovaTow' },
+type typeFormAddAndEditAfterChange = {
+    firstName: string;
+    lastName: string;
+    age: string;
+    gender: string;
+    bloodGroup: string;
+    email: string;
+    phoneCodeCountry: string;
+    phoneNumber: string;
+    birthDate: string;
+    university: string; // mới thêm vào
+    eyeColor: string;
+    hairColor: string;
+    team: string;
+    position: string;
+    level: string;
+};
+const listOptionEyeColor: listOption = [
+    { value: 'Green', content: 'Green' },
+    { value: 'Brown', content: 'Brown' },
+    { value: 'Gray', content: 'Gray' },
+    { value: 'Amber', content: 'Amber' },
+    { value: 'Blue', content: 'Blue' },
 ];
-const listOptionOffice :listOption = [
-    { value: 'hn', content: 'Hà Nội' },
-    { value: 'hcm', content: 'Hồ Chí Minh' },
+const listHairColor: listOption = [
+    { value: 'Blond', content: 'Blond' },
+    { value: 'Brown', content: 'Brown' },
+    { value: 'Chestnut', content: 'Chestnut' },
+    { value: 'Black', content: 'Black' },
 ];
-const listOptionTeam :listOption = [
-    { value: 'propation1', content: 'Propation1' },
-    { value: 'propation2', content: 'Propation2' },
+const listOptionTeam: listOption = [
+    { value: 'backend', content: 'Backend' },
+    { value: 'frontend', content: 'Frontend' },
 ];
-const listOptionPotion :listOption = [
+const listOptionPotion: listOption = [
     { value: 'lead', content: 'Lead' },
     { value: 'employee', content: 'Employee' },
 ];
-const listOptionLevel :listOption = [
+const listOptionLevel: listOption = [
     { value: 'senior', content: 'Senior' },
     { value: 'fresher', content: 'Fresher' },
 ];
-const listContractType :listOption = [
-    { value: 'short', content: 'Short' },
-    { value: 'middle', content: 'Middle' },
-    { value: 'long', content: 'Long' },
-    { value: 'infinity', content: 'Infinity' },
+const listGender: listOption = [
+    { value: 'male', content: 'male' },
+    { value: 'female', content: 'female' },
 ];
+//O+  B+ A+ O− B− AB−
+const listBlood: listOption = [
+    { value: 'A−', content: 'A−' },
+    { value: 'A+', content: 'A+' },
+    { value: 'O+', content: 'O+' },
+    { value: 'O−', content: 'O−' },
+    { value: 'B+', content: 'B+' },
+    { value: 'B−', content: 'B−' },
+    { value: 'AB−', content: 'AB−' },
+];
+const CODE_PHONE_NUMBER = {
+    '+84': '+84',
+    '+85': '+85',
+    '+86': '+86',
+    '+63': '+63',
+};
 
-const NameRegisterForm = {
+const NameRegisterForm: typeFormAddAndEditAfterChange = {
     firstName: 'firstName',
     lastName: 'lastName',
-    alias: 'alias',
-    role: 'role',
+    age: 'age',
+    gender: 'gender',
+    bloodGroup: 'bloodGroup',
     email: 'email',
     phoneCodeCountry: 'phoneCodeCountry',
     phoneNumber: 'phoneNumber',
-    contractType: 'contractType',
-    contractStartDate: 'contractStartDate',
-    contractEndDate: 'contractEndDate',
-    company: 'company',
-    office: 'office',
+
+    birthDate: 'birthDate',
+    university: 'university', // mới thêm vào
+    eyeColor: 'eyeColor',
+    hairColor: 'hairColor',
     team: 'team',
     position: 'position',
     level: 'level',
 };
-type typeFormAddAndEditAfterChange = typeof NameRegisterForm;
+const DEFAULT_VALUE_fORM_ADD: typeFormAddAndEditAfterChange = {
+    firstName: '',
+    lastName: '',
+    age: '',
+    gender: listGender[0].value,
+    bloodGroup: listBlood[0].value,
+    email: '',
+    phoneCodeCountry: CODE_PHONE_NUMBER['+84'],
+    phoneNumber: '',
+    birthDate: "1994-01-02",
+    university: '', // mới thêm vào
+    eyeColor: listOptionEyeColor[0].value,
+    hairColor: listHairColor[0].value,
+    team: listOptionTeam[0].value,
+    position: listOptionPotion[0].value,
+    level: listOptionLevel[0].value,
+};
+
 export {
-    listOptionCompany,
-    listOptionOffice,
+    listOptionEyeColor,
+    listHairColor,
     listOptionTeam,
     listOptionPotion,
     listOptionLevel,
-    listContractType,
+    listBlood,
+    listGender,
     NameRegisterForm,
+    DEFAULT_VALUE_fORM_ADD,
+    CODE_PHONE_NUMBER,
 };
 export type { typeFormAddAndEditAfterChange, listOption };

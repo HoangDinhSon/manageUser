@@ -5,10 +5,10 @@
 @tailwind utilities;
 
 @layer base {
-    html{
+    html {
         @apply font-sans;
     }
-   
+
     h1 {
         padding-top: 5px;
         font-size: 45px;
@@ -69,10 +69,11 @@
 
 @layer components {
     .my_input {
-        @apply outline outline-1 outline-[--outlineColor] h-[42px] w-full rounded-md px-4 py-3 mt-1 ;
+        @apply outline outline-1 outline-[--outlineColor] h-[42px] w-full rounded-md px-4 py-3 mt-1;
     }
-    .my_input::-webkit-calendar-picker-indicator{
-        display: none;
+    .my_input::-webkit-calendar-picker-indicator {
+        background: url('./assets/icon/edit_user/calendar.svg');
+        cursor: pointer;
     }
     .my_after_star {
         @apply after:content-['*'] after:text-[red] after:ml-1;

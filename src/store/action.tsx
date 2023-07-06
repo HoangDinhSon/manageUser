@@ -16,7 +16,7 @@ import {
     ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
 } from './constants';
-import { TypeOfUser } from '../data/type/typePageAccounts';
+import { typeUserAfterCallApiBaseOnID } from '../data/type';
 import { typeOfListUser } from '../data/type';
 const getRowPerPage = (payload: any) => ({
     type: GET_ROW_PER_PAGE,
@@ -39,7 +39,7 @@ const togleDisplayAsideMenu = (payload: boolean) => ({
     payload: payload,
 });
 
-const displayFormViewUser = (user: TypeOfUser) => ({
+const displayFormViewUser = (user: typeUserAfterCallApiBaseOnID) => ({
     type: DISPLAY_FORM_VIEW_USER,
     payload: user,
 });

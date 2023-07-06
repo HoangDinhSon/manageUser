@@ -15,12 +15,30 @@ const loginAuth = (payload: payloadLogin) =>
 const getLimitAndSkipUser = (limit: number, skip: number) =>
     axiosClient
         .get(
-            `/users?limit=${limit}&skip=${skip}&select=id,firstName,maidenName,email,company,phone,gender,age,eyeColor,bloodGroup,university,height`,
+            `/users?limit=${limit}&skip=${skip}`,
         )
         .then((res) => res.data)
         .catch((error) => {
-            alert(error?.message);
+            // Error
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                // console.log(error.response.data);
+                // console.log(error.response.status);
+                // console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the
+                // browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
         });
+
 const getUserBaseFilter = ({ keyFilter, valueFilter }: any) =>
     axiosClient.get(`/users/filter?key=${keyFilter}&value=${valueFilter}`).then((res) => res.data);
 
@@ -32,3 +50,9 @@ const editUserBaseOnID = (payload: any) =>
 const addUserToServer = (detailUser: any) => axiosClient.post('/users/add', detailUser).then((res) => res.data);
 
 export { loginAuth, getLimitAndSkipUser, getUserBaseOnID, addUserToServer, editUserBaseOnID, getUserBaseFilter };
+/* 
+ ghi ghi hàm mục đích là để truyền tham số 
+ dùng axios call API 
+ dùng react Query theo doi quá trình call API của axios . 
+
+*/

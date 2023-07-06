@@ -1,22 +1,22 @@
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { useState,KeyboardEvent  } from 'react';
+import { useState, KeyboardEvent } from 'react';
 import { addUserToServer } from '../../Api/logTimeApi';
 import { InputWithCharacter, Select, Input, PhoneNumber, SkillDisplayInput } from '../../components';
-import { calendar } from '../../assets/icon';
 import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
-import {
-    listOptionTeam,
-    listOptionCompany,
-    listContractType,
-    listOptionLevel,
-    listOptionOffice,
-    listOptionPotion,
-} from '../../data/constance_for_page';
+import { listOptionTeam, listOptionLevel, listOptionPotion } from '../../data/constance_for_page';
 import { resolverFormAddUser } from './validationForAccountPage';
-import { NameRegisterForm ,typeFormAddAndEditAfterChange} from '../../data/constance_for_page/UI_TYPE_CONSTANT';
+import {
+    NameRegisterForm,
+    typeFormAddAndEditAfterChange,
+    DEFAULT_VALUE_fORM_ADD,
+    listBlood,
+    listGender,
+    listOptionEyeColor,
+    listHairColor,
+} from '../../data/constance_for_page/UI_TYPE_CONSTANT';
 
 function AddUser() {
     const [, dispatch] = useGlobalState();
@@ -25,12 +25,12 @@ function AddUser() {
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm<typeFormAddAndEditAfterChange>(resolverFormAddUser);
+    } = useForm<typeFormAddAndEditAfterChange>({ ...resolverFormAddUser, defaultValues: DEFAULT_VALUE_fORM_ADD });
     const [listSkill, setListSkill] = useState<Array<string>>([]);
     const { mutate } = useMutation({
         mutationFn: addUserToServer,
         onSuccess: (res) => {
-            reset();
+            reset(DEFAULT_VALUE_fORM_ADD); // reset lại các giá trị mặc định cho form
             dispatch(actions.addNewUser(res));
             toast.success('Add to server success');
             listSkill.length = 0; // xóa hết phần tử trong mảng
@@ -44,6 +44,7 @@ function AddUser() {
         setListSkill(listSkillPayload);
     };
     const handleOnSubmitForm = (formData: typeFormAddAndEditAfterChange) => {
+        console.log('formData>>>', formData);
         if (listSkill.length === 0) {
             toast.error('List Skill không dc để trống ');
             document.getElementById('IDlistSkill')?.focus();
@@ -55,11 +56,12 @@ function AddUser() {
         });
     };
     /* prevent default of Enter () */
-    const handleOnKeyDown = (e: KeyboardEvent ) => {
+    const handleOnKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
             e.preventDefault();
         }
     };
+    /*  get date today  */
 
     return (
         <div className="edit_form ">
@@ -73,6 +75,7 @@ function AddUser() {
                             register={register}
                             name={NameRegisterForm.firstName}
                             errors={errors}
+                            
                         />
                         <InputWithCharacter
                             label="Last Name"
@@ -80,18 +83,31 @@ function AddUser() {
                             register={register}
                             name={NameRegisterForm.lastName}
                             errors={errors}
+                            
                         />
                         <InputWithCharacter
-                            label="Alias"
+                            label="Age"
                             numberCharacter={0}
                             register={register}
-                            name={NameRegisterForm.alias}
+                            name={NameRegisterForm.age}
                             errors={errors}
+                           
                         />
-                        <Select label="Role" listOption={listContractType} nameSelect="role" register={register} />
+                        <Select
+                            label="Gender"
+                            listOption={listGender}
+                            nameSelect={NameRegisterForm.gender}
+                            register={register}
+                        />
                     </div>
                     <div className="pt-6">
-                        <Input content="Email" name={NameRegisterForm.email} register={register} errors={errors} />
+                        <Input
+                            content="Email"
+                            name={NameRegisterForm.email}
+                            register={register}
+                            errors={errors}
+                           
+                        />
                         <div className="pt-6">
                             <PhoneNumber
                                 nameCodeCountry={NameRegisterForm.phoneCodeCountry}
@@ -104,33 +120,39 @@ function AddUser() {
                     <hr className="bg-[#EBEBEB]  my-8 " />
                     {/* Contract */}
                     <Select
-                        label="Contract Type"
-                        listOption={listContractType}
-                        nameSelect={NameRegisterForm.contractType}
+                        label="Blood Group"
+                        listOption={listBlood}
+                        nameSelect={NameRegisterForm.bloodGroup}
                         register={register}
                     />
                     <div className="grid grid-cols-2 gap-6 pt-6">
                         <Input
-                            content="Contract Start Date"
-                            icon={calendar}
-                            name={NameRegisterForm.contractStartDate}
+                            content="Birth Date"
+                            name={NameRegisterForm.birthDate}
                             register={register}
                             errors={errors}
+                          
                         />
-                        <Input
-                            content="Contract End Date"
-                            icon={calendar}
-                            name="contractEndDate"
+                        <InputWithCharacter
+                            label="University"
+                            numberCharacter={0}
                             register={register}
+                            name={NameRegisterForm.university}
                             errors={errors}
+                            
                         />
                         <Select
-                            label="Company"
-                            listOption={listOptionCompany}
-                            nameSelect={NameRegisterForm.company}
+                            label="Eye Color"
+                            listOption={listOptionEyeColor}
+                            nameSelect={NameRegisterForm.eyeColor}
                             register={register}
                         />
-                        <Select label="Office" listOption={listOptionOffice} nameSelect="office" register={register} />
+                        <Select
+                            label="Hair Color"
+                            listOption={listHairColor}
+                            nameSelect={NameRegisterForm.hairColor}
+                            register={register}
+                        />
                     </div>
                     <hr className="bg-[#EBEBEB]  my-8 " />
                     {/* Team */}

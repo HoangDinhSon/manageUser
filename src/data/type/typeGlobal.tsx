@@ -31,7 +31,7 @@ type typeUserAfterCallApiBaseOnID = {
     firstName: string;
     lastName: string;
     maidenName: string;
-    age: number;
+    age: number;                         // là số 
     gender: string;
     email: string;
     phone: string;
@@ -40,8 +40,8 @@ type typeUserAfterCallApiBaseOnID = {
     birthDate: string;
     image: string;
     bloodGroup: string;
-    height: number;
-    weight: number;
+    height: number;                        // là số 
+    weight: number;                       // là số 
     eyeColor: string;
     hair: {
         color: string;
@@ -53,8 +53,8 @@ type typeUserAfterCallApiBaseOnID = {
         address: string;
         city: string;
         coordinates: {
-            lat: number;
-            lng: number;
+            lat: number;                       // là số 
+            lng: number;                       // là số 
         };
         postalCode: string;
         state: string;
@@ -73,8 +73,8 @@ type typeUserAfterCallApiBaseOnID = {
             address: string;
             city: string;
             coordinates: {
-                lat: number;
-                lng: number;
+                lat: number;                       // là số 
+                lng: number;                       // là số 
             };
             postalCode: string;
             state: string;
@@ -90,36 +90,3 @@ type typeUserAfterCallApiBaseOnID = {
 
 export type { typeOfListUser, OutPutFormFilter, typeUserAfterCallApiBaseOnID };
 
-/* type OutPutFormFilter = {
-    [index: string]: {
-        gender: boolean;
-        select: string;
-    }| {
-        age: boolean;
-        select: number;
-    };
-    gender: {
-        gender: boolean;
-        select: string;
-    };
-    age: {
-        age: boolean;
-        select: number;
-    };
-    eyeColor: {
-        eyeColor: boolean;
-        select: string;
-    };
-    bloodGroup: {
-        bloodGroup: boolean;
-        select: string;
-    };
-    university: {
-        university: boolean;
-        select: string;
-    };
-    height: {
-        height: boolean;
-        select: number;
-    };
-}; */

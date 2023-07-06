@@ -1,8 +1,12 @@
-
-import { arrowSelect } from "../../assets/icon";
-function PhoneNumber({ nameCodeCountry, namePhoneNumber, register, phone ,errors}: any) {
-    const codePhone = phone?.slice(0, 3); //string
-    const phoneAfter = phone?.slice(3);
+import { arrowSelect } from '../../assets/icon';
+import { CODE_PHONE_NUMBER } from '../../data/constance_for_page/UI_TYPE_CONSTANT';
+type typeOfPhoneNumber = {
+    nameCodeCountry: string;
+    namePhoneNumber: string;
+    register: any;
+    errors: any;
+};
+function PhoneNumber({ nameCodeCountry, namePhoneNumber, register,  errors }: typeOfPhoneNumber) {
     return (
         <div className="relative">
             <p className="my_after_star ">Phone</p>
@@ -12,16 +16,14 @@ function PhoneNumber({ nameCodeCountry, namePhoneNumber, register, phone ,errors
                     className=" my_hidden_icon_select w-[76px] pl-8  h-[42px] rounded-l-[5px]  outline outline-1 outline-[--outlineColor] text-[#666666]"
                     name={nameCodeCountry}
                     {...register(nameCodeCountry)}
-                    defaultValue={codePhone}
                 >
-                    <option value="+84">+84</option>
-                    <option value="+85">+85</option>
-                    <option value="+86">+86</option>
-                    <option value="+63">+63</option>
+                    <option value={CODE_PHONE_NUMBER['+84']}>{CODE_PHONE_NUMBER['+84']}</option>
+                    <option value={CODE_PHONE_NUMBER['+85']}>{CODE_PHONE_NUMBER['+85']}</option>
+                    <option value={CODE_PHONE_NUMBER['+86']}>{CODE_PHONE_NUMBER['+86']}</option>
+                    <option value={CODE_PHONE_NUMBER['+63']}>{CODE_PHONE_NUMBER['+63']}</option>
                 </select>
                 <label htmlFor="phoneNumber"></label>
                 <input
-                    defaultValue={phoneAfter}
                     name={namePhoneNumber}
                     {...register(namePhoneNumber)}
                     id="phoneNumber"
@@ -29,7 +31,9 @@ function PhoneNumber({ nameCodeCountry, namePhoneNumber, register, phone ,errors
                     className="w-[calc(100%-76px)] outline outline-1 outline-[--outlineColor] rounded-r-[5px] pl-4"
                 />
             </div>
-            {errors[namePhoneNumber]&& <div className="text-[12px] absolute -bottom-[20px] text-[red]">Phone is required and number</div>}
+            {errors[namePhoneNumber] && (
+                <div className="text-[12px] absolute -bottom-[20px] text-[red]">Phone is required and number</div>
+            )}
         </div>
     );
 }
