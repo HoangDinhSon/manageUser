@@ -1,4 +1,4 @@
-import { hasSameProperty } from '../../handlelogic';
+import { hasSameProperty } from "../../handlelogic";
 type listOption = Array<{
     value: string;
     content: string;

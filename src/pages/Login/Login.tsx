@@ -9,7 +9,7 @@ import { TextFieldLoginPassword } from '../../components/Login';
 import { Frame, bgLogin } from '../../assets/image';
 import { resolverLogin, FormLogin } from './validationLogin';
 import { loginAuth } from '../../Api/logTimeApi';
-
+import {  useState } from 'react';
 
 type payloadLogin = {
     username: string;
@@ -23,26 +23,38 @@ function Login() {
         window.location.href = localAccount;
         return <LinearProgress />;
     }
+    const [isDisableLogin, setDisableLogin] = useState(false);
 
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<FormLogin>(resolverLogin);
-    const { mutate } = useMutation({
+    const { mutate,  isLoading } = useMutation({
         mutationFn: loginAuth,
         onSuccess: (data) => {
             localStorage.setItem('userAdmin', JSON.stringify(data.token));
-            console.log(import.meta.env.VITE_PORT);
             location.href = localAccount;
         },
         onError: (error: any) => {
-            toast.error(`login fail because of +${error?.message}`);
+            toast.error(
+                `Fail!!!  ${
+                    error?.response.status === 400 ? ' Password or Username wrong' : 'error network'
+                }`,{duration:2000}
+            );
         },
     });
 
     const onSubmit = (payload: payloadLogin) => {
         mutate(payload);
+    };
+    const handleDisableLogin = () => {
+        setTimeout(() => {
+            setDisableLogin(true);
+        }, 1);
+        setTimeout(() => {
+            setDisableLogin(false);
+        }, 2000);
     };
     //UI ***
     const theme = useTheme();
@@ -135,14 +147,16 @@ function Login() {
                                     type="submit"
                                     variant="contained"
                                     fullWidth
+                                    disabled={isDisableLogin}
                                     sx={{
                                         marginTop: '20px',
                                         [xsMax]: {
                                             marginTop: '10px',
                                         },
                                     }}
+                                    onClick={handleDisableLogin}
                                 >
-                                    Login
+                                    {isLoading ? 'Login...' : 'Login'}
                                 </Button>
                                 <HrLine content="Or continue with" />
                                 <Button variant="outlined" fullWidth>

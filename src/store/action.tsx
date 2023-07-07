@@ -16,7 +16,7 @@ import {
     ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
 } from './constants';
-import { typeUserAfterCallApiBaseOnID } from '../data/type';
+import { typeUserAfterCallApiBaseOnID ,OutPutFormFilter} from '../data/type';
 import { typeOfListUser } from '../data/type';
 const getRowPerPage = (payload: any) => ({
     type: GET_ROW_PER_PAGE,
@@ -72,7 +72,7 @@ const makeListFilter = (listFilter:typeOfListUser)=>({
     payload : listFilter,
 })
 // criterialForFilter là một object chứa các key:  gender, height,...
-const setCriterialForFilter =(criterialForFilter:any)=>({
+const setCriterialForFilter =(criterialForFilter:OutPutFormFilter)=>({
     type:SET_CRITERIAL_FOR_FILTER,
     payload:criterialForFilter
 })

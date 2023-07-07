@@ -49,7 +49,6 @@ function AddUser() {
         setFocus(firstName)
     },[setFocus])
     const handleOnSubmitForm = (formData: typeFormAddAndEditAfterChange) => {
-        console.log('formData>>>', formData);
         if (listSkill.length === 0) {
             toast.error('List Skill không dc để trống ');
             document.getElementById('IDlistSkill')?.focus();

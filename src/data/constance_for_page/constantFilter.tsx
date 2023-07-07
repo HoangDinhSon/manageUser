@@ -1,4 +1,13 @@
-const ListFilter = [
+type typeSelect = { children: string; value: string | number };
+type typeListFilter = {
+    checked: boolean;
+    valueSelect: string|number;
+    label: string;
+    propcheck: string;
+    propselect: string;
+    content: typeSelect[];
+}[];
+const ListFilter:typeListFilter = [
     {
         checked: false,
         valueSelect: '',
@@ -96,3 +105,4 @@ const CRITERIAL_FOR_FILTER_DEFAULT = {
     },
 };
 export { CRITERIAL_FOR_FILTER_DEFAULT, ListFilter };
+export type {typeSelect,typeListFilter}

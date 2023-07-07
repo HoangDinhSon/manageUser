@@ -7,16 +7,23 @@ import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
 import { OutPutFormFilter } from '../../data/type';
 import { ListFilter, CRITERIAL_FOR_FILTER_DEFAULT } from '../../data/constance_for_page';
-type typeSelect = { children: string; value: string | number };
+import  {typeSelect} from "../../data/constance_for_page/constantFilter"
+type PropsCheckAndSelect = {
+    PropsCheck: string;
+    PropsSelect: string;
+    label: string;
+    content: typeSelect[];
+    register: any;
+};
 
-function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: any) {
-    const [state, ] = useGlobalState();
+function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: PropsCheckAndSelect) {
+    const [state] = useGlobalState();
     const [value, setValue] = useState(state.criterialForFilter[PropsCheck].select);
     const [isChecked, setIsChecked] = useState(state.criterialForFilter[PropsCheck][PropsCheck]);
     const handleChangeSelect = (e: any) => {
         setValue(e.target.value);
     };
-    const handleChangeCheckBox = (e:any) => {
+    const handleChangeCheckBox = (e: any) => {
         setIsChecked(e.target.checked);
     };
     /* mục đích:  dùng để câp nhật lại UI khi state thay đổi.  */
@@ -58,7 +65,7 @@ function Filter() {
     const [state, dispatch] = useGlobalState();
     const { register, handleSubmit, reset } = useForm();
     let responseFromServer = useRef<any>([]);
-    const { mutate,isLoading } = useMutation({
+    const { mutate, isLoading } = useMutation({
         mutationFn: getUserBaseFilter,
         onSuccess: (res: any) => {
             responseFromServer.current = [...responseFromServer.current, ...res.users];
@@ -86,7 +93,7 @@ function Filter() {
         });
         // sau khi submit thì phải reset mảng vì nếu không nó sẽ tích vào rất nhiêu lần
         responseFromServer.current = [];
-        reset();// reset lại bộ nhớ tạm trong handleSubmit của react hook form 
+        reset(); // reset lại bộ nhớ tạm trong handleSubmit của react hook form
     };
     const handleClearForm = () => {
         reset();
@@ -101,7 +108,7 @@ function Filter() {
         <div className="fixed z-10 right-[--mrForChild] top-[calc(var(--heightNav)+var(--mrForChild))] bottom-[--mrForChild] rounded-[--borderForLayout]  overflow-auto xs_max:top-0 xs_max:right-0 xs_max:left-0 xs_max:bottom-0 ">
             <div className="bg-[white]  w-[319px] pt-[25px] pb-[24px] px-[22px] sm_max:w-full xs_max:h-full ">
                 <button onClick={handleHiddenFilter} className="btnFlashing">
-                   {isLoading?"Loading...":" FILTER"}
+                    {isLoading ? 'Loading...' : ' FILTER'}
                 </button>
                 <form onSubmit={handleSubmit(handleSubmitForm)}>
                     {ListFilter.map((each) => (
@@ -114,7 +121,8 @@ function Filter() {
                             PropsSelect={each.propselect}
                         />
                     ))}
-                    <div className="mt-[42px] flex justify-between ">
+                    <div className="mt-[42px] flex justify-between relative">
+                        <p className='absolute top-[-30px]  w-full'>Click FILTER to close</p>
                         <Button variant="outlined" sx={{ width: '129px' }} onClick={handleClearForm}>
                             Clear All
                         </Button>

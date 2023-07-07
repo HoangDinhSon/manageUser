@@ -2,18 +2,18 @@ import { useForm } from 'react-hook-form';
 import { useState, KeyboardEvent, useEffect } from 'react';
 import { useMutation} from 'react-query';
 import toast from 'react-hot-toast';
-import { editUserBaseOnID } from '../../Api/logTimeApi';
-import { SkillDisplayInput } from '../../components';
-import { useGlobalState } from '../../store/Provider';
-import { actions } from '../../store';
+import { editUserBaseOnID } from '~/Api/logTimeApi';
+import { SkillDisplayInput } from '~/components';
+import { useGlobalState } from '~/store/Provider';
+import { actions } from '~/store';
 import {
     ID_FOR_EDIT_DEFAULT,
     LINK_PAGE_ACCOUNT,
     listOptionTeam,
     listOptionLevel,
     listOptionPotion,
-} from '../../data/constance_for_page';
-import { Select, PhoneNumber, Input, InputWithCharacter } from '../../components';
+} from '~/data/constance_for_page';
+import { Select, PhoneNumber, Input, InputWithCharacter } from '~/components';
 import { resolverFormAddUser } from './validationForAccountPage';
 import {
     NameRegisterForm,
@@ -21,8 +21,8 @@ import {
     listOptionEyeColor,
     listHairColor,
     listGender,
-} from '../../data/constance_for_page/UI_TYPE_CONSTANT';
-import axiosClient from '../../Api/axiosClient';
+} from '~/data/constance_for_page/UI_TYPE_CONSTANT';
+import axiosClient from '~/Api/axiosClient';
 
 function EditUser() {
     const [state, dispatch] = useGlobalState();
@@ -86,7 +86,6 @@ function EditUser() {
     });
 
     const handleOnSubmitForm = (formData: any) => {
-        console.log('onSubmitForm>>>', 999);
         if (listSkill.length === 0) {
             toast.error('List Skill không dc để trống');
             document.getElementById('IDlistSkill')?.focus();

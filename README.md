@@ -1,4 +1,17 @@
 # in program use useReducer , useContext make global state
+# Note config to import "../../"--> "~/MyComponent/Menu 
+    1.setup npm install -D vite-tsconfig-paths
+    2. in file  tsconfig.json 
+     "baseUrl": "./",
+        "paths": {
+            "~/*": ["./src/*"]
+        },
+    3.in File vite.config 
+       resolve: {
+            alias: {
+                "~":'/src',
+            },
+        },
 
 # userReducer
 
@@ -30,11 +43,9 @@ update state cha thì con cũng thay đổi
     step 2: type (because typescript)
     step 3: resolver --> object
     step 4: pass into useForm()
-
-# unshift
-
-làm thay đổi mảng cũ,
-return lại???
+    get value in form register 
+    display data for form asynchronous and synchronized
+    notify cation with errors combine with yup 
 
 # Destructor
 
@@ -57,7 +68,7 @@ return lại???
 
 1. @base
 2. @component --> tạo ra class mới
-3. @utilities ()
+3. @utilities ()--> class write in there will higher priority class in base , in component 
 
 dùng biến : border-t-[length:--borderWidth] chỉ dùng khi đi với var còn tailwindcss thì tự biết
 
@@ -78,10 +89,6 @@ dùng biến : border-t-[length:--borderWidth] chỉ dùng khi đi với var cò
 
     window.screen tính cả scroll bar
     window.innerScreen không tính scroll bar
-
-# Reset lại giá trị InputFiled , Option ???
-
-# Reset lại giá trị trong ô input và trong ô option.
 
 # Array
 
@@ -160,9 +167,9 @@ ví dụ [isDisplay===false]
 
 # tạo Transition khi Mount và unMount
 
-b1 : dùng scale =0 --> scale -100 vì ta dùng fixed nếu dùng width thì thẻ con fixed sẽ không có tác dụng cho dù có dùng overflow -auto .
+     dùng scale =0 --> scale 100 vì ta dùng fixed nếu dùng width thì thẻ con fixed sẽ không có tác dụng cho dù có dùng overflow :auto.
 
 # react hot toast
 
 <Toaster>
-cần đặt ngay tại vị trí ngoài cùng để đảm bảo thông báo sẽ luôn dc hiển thị ra ngoài
+    cần đặt ngay tại vị trí ngoài cùng để đảm bảo thông báo sẽ luôn dc hiển thị ra ngoài APP , main 

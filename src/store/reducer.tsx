@@ -30,7 +30,7 @@ const USE_FOR_FORM_VIEW_DEFAULT = {
     phone: 'DEFAULT',
 };
 import { findIndex } from '../handlelogic';
-import { typeOfListUser } from '../data/type';
+import { typeOfListUser, OutPutFormFilter } from '../data/type';
 const ID_FOR_EDIT_DEFAULT = 0;
 const DISPLAY_FORM_VIEW_USER_DEFAULT = false;
 const IS_DISPLAY_IMPORT_FORM_DEFAULT = false;
@@ -46,7 +46,7 @@ type TypeStateGlobal = {
     idForEdit: number;
     isDisplayImportForm: boolean;
     listFilter: Array<any>;
-    criterialForFilter: any; //object
+    criterialForFilter: OutPutFormFilter; //object
 };
 const initState = {
     rowPerPage: ROW_PER_PAGE_DEFAULT,
@@ -144,12 +144,14 @@ function reducer(state: TypeStateGlobal, action: any) {
             const payloadFromFilter: typeOfListUser = action.payload;
             // nhưng cái criterial  nào dc chọn nằm ở đây
             const newListCriterial: string[] = keyOfCriterial.filter((key) => {
-                if (state.criterialForFilter[key][key] === true) {
+                const valueOfFirstKey = state.criterialForFilter[key as keyof typeof state.criterialForFilter];
+                const valueOfSecondKey = valueOfFirstKey[key as keyof typeof valueOfFirstKey];
+                if (!!valueOfSecondKey === true) {
                     return true;
                 }
             });
 
-            /* action.payload là một mảng chứa các user trong mảng này có thể có lặp lại 2 user giống nhau nên dựa vào id để xóa các user trùng nhau
+            /* payloadFromFilter là một mảng chứa các user trong mảng này có thể có lặp lại 2 user giống nhau nên dựa vào id để xóa các user trùng nhau
              */
             let unique: typeOfListUser = [];
             unique.push(action.payload[0]);
@@ -164,12 +166,18 @@ function reducer(state: TypeStateGlobal, action: any) {
                     unique.push(item);
                 }
             });
-
+            /* 
+                sau khi có unique : là danh sách user không trùng nhau , user nào có đủ các criterial thì chép vào mảng mới 
+            
+            */
             let listUserSuitableCriterial: typeOfListUser = [];
             unique.map((user) => {
                 let flag = false;
                 newListCriterial.map((criterial) => {
-                    if (user[criterial as keyof typeof user] !== state.criterialForFilter[criterial]?.select) {
+                    if (
+                        user[criterial as keyof typeof user] !==
+                        state.criterialForFilter[criterial as keyof typeof state.criterialForFilter]?.select
+                    ) {
                         flag = true;
                     }
                 });
