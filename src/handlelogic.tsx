@@ -44,4 +44,30 @@ const replaceManyString = (Paragraph: string, [...ArrayRoot]: Array<string>, [..
     }, Paragraph);
     return paragraphNew;
 };
-export { findIndex, checkNumberOFCriterialForFilter, replaceManyString };
+/* 
+Check two object has same property 
+    1. check argument has object 
+    2. if two object has same key return true , else return false ,
+    3. if one or two argument not object return 1 . 
+
+*/
+function hasSameProperty(object1: any, object2: any): number | boolean {
+    function isObject(objectCheck: any) {
+        return typeof objectCheck === 'object' && !Array.isArray(objectCheck) && objectCheck !== null;
+    }
+    const lengthObject1 = Object.keys(object1).length;
+    const lengthObject2 = Object.keys(object2).length;
+    if (lengthObject1 !== lengthObject2) {
+        return false;
+    }
+    if (isObject(object1) && isObject(object2)) {
+        return Object.keys(object1).every((key) => {
+            return object2.hasOwnProperty(key);
+        });
+    } else {
+        console.log('one of the argument not object >>>');
+        return -1;
+    }
+}
+
+export { findIndex, checkNumberOFCriterialForFilter, replaceManyString, hasSameProperty };

@@ -42,7 +42,7 @@ function SkillDisplayInput({ resultListSkill }: any) {
             <ListName listName={listSkill} onClick={handleRemoveSkill} />
             <input
                 type="text"
-                className="w-full h-[42px] focus-within:my_outline_rounded_edit_form px-4"
+                className="w-full h-[42px] my_outline_rounded_edit_form px-4"
                 placeholder="Skills..."
                 onKeyUpCapture={handlePressKey}
                 onChange={handleGetInput}

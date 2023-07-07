@@ -17,17 +17,17 @@ const {
     position,
     level,
 } = NameRegisterForm;
-
+const wordNonASCII = /^([\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEFA-Za-z. \-]{0,55})$/
 const schemaAddUSer = yup
     .object({
-        [firstName]: yup.string().matches(/\p{L}/u).required(), // chỉ dc chữ cái bao gồm cả chữ non ASCII 
-        [lastName]: yup.string().matches(/\p{L}/u).required(),
-        [age]: yup.string().required(),//ok
+        [firstName]: yup.string().matches(wordNonASCII,"NOT include number").required(), // chỉ dc chữ cái bao gồm cả chữ non ASCII 
+        [lastName]: yup.string().matches(wordNonASCII,"NOT include number").required(),
+        [age]: yup.string().matches(/^[1-9][0-9]$/,"10<age<100").required(),//ok
         [bloodGroup]: yup.string().required(),
-        [email]: yup.string().matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).required(),
+        [email]: yup.string().email().required(),
         [phoneCodeCountry]: yup.string().required(),
-        [phoneNumber]: yup.string().matches(/^\d+$/).required(), // yêu cầu là string chỉ có số only Number
-        [university]: yup.string().required(),
+        [phoneNumber]: yup.string().matches(/^\+[\d ]|^\d+$/ ,"Only Number").required(), // yêu cầu là string chỉ có số only Number and space
+        [university]: yup.string().matches(wordNonASCII,"NOT include number").required(),
         [birthDate]: yup.string().required(),
         [eyeColor]: yup.string().required(),//ok
         [hairColor]: yup.string().required(),

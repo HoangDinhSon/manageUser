@@ -21,7 +21,7 @@ function Input({ content, name, register, errors }: typeInput) {
                 <input type={type} className="my_input" placeholder={content} name={name} {...register(name)} />
             </div>
             {errors[name] && (
-                <div className="text-[12px] absolute -bottom-[20px] text-[red]">{content + ' is required'}</div>
+                <div className="text-[12px] absolute -bottom-[20px] text-[red]">{errors[name].message}</div>
             )}
         </div>
     );
@@ -29,6 +29,4 @@ function Input({ content, name, register, errors }: typeInput) {
 export default Input;
 /* 
     tùy chọn : icon , value 
-    
-
 */

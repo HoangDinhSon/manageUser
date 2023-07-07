@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form';
-import { useState, KeyboardEvent } from 'react';
+import { useState, KeyboardEvent, useEffect } from 'react';
 import { useMutation} from 'react-query';
 import toast from 'react-hot-toast';
-
 import { editUserBaseOnID } from '../../Api/logTimeApi';
 import { SkillDisplayInput } from '../../components';
 import { useGlobalState } from '../../store/Provider';
@@ -37,6 +36,7 @@ function EditUser() {
         register,
         handleSubmit,
         formState: { errors },
+        setFocus,
     } = useForm({
         mode: 'onChange',
         ...resolverFormAddUser,
@@ -54,7 +54,7 @@ function EditUser() {
                     phoneCodeCountry: phoneCode,
                     phoneNumber: res.phone,
                     birthDate: res.birthDate,
-                    university: res.university, // mới thêm vào
+                    university: res.university, 
                     eyeColor: res.eyeColor,
                     hairColor: res.hair.color,
                     team: 'backend',
@@ -66,6 +66,10 @@ function EditUser() {
             }
         },
     });
+    /* Focus in firstName  */
+    useEffect(()=>{
+        setFocus(NameRegisterForm.firstName)
+    },[setFocus])
 
     const { mutate } = useMutation({
         mutationFn: editUserBaseOnID,
@@ -81,7 +85,7 @@ function EditUser() {
         },
     });
 
-    const onSubmitForm = (formData: any) => {
+    const handleOnSubmitForm = (formData: any) => {
         console.log('onSubmitForm>>>', 999);
         if (listSkill.length === 0) {
             toast.error('List Skill không dc để trống');
@@ -105,7 +109,7 @@ function EditUser() {
     return (
         <div className="edit_form ">
             <div className="mx-5 my-7 max-w-[697px]">
-                <form action="submit" onSubmit={handleSubmit(onSubmitForm)} onKeyDown={(e) => handleOnKeyDown(e)}>
+                <form action="submit" onSubmit={handleSubmit(handleOnSubmitForm)} onKeyDown={(e) => handleOnKeyDown(e)}>
                     {/* Name */}
                     <div className="grid grid-cols-2 gap-6">
                         <InputWithCharacter

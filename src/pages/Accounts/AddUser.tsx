@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { useState, KeyboardEvent } from 'react';
+import { useState, KeyboardEvent ,useEffect} from 'react';
 import { addUserToServer } from '../../Api/logTimeApi';
 import { InputWithCharacter, Select, Input, PhoneNumber, SkillDisplayInput } from '../../components';
 import { useGlobalState } from '../../store/Provider';
@@ -25,6 +25,7 @@ function AddUser() {
         handleSubmit,
         reset,
         formState: { errors },
+        setFocus,
     } = useForm<typeFormAddAndEditAfterChange>({ ...resolverFormAddUser, defaultValues: DEFAULT_VALUE_fORM_ADD });
     const [listSkill, setListSkill] = useState<Array<string>>([]);
     const { mutate } = useMutation({
@@ -43,6 +44,10 @@ function AddUser() {
     const getListSkill = (listSkillPayload: any) => {
         setListSkill(listSkillPayload);
     };
+    const firstName:any= NameRegisterForm.firstName
+    useEffect(()=>{
+        setFocus(firstName)
+    },[setFocus])
     const handleOnSubmitForm = (formData: typeFormAddAndEditAfterChange) => {
         console.log('formData>>>', formData);
         if (listSkill.length === 0) {

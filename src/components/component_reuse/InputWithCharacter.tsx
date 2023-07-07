@@ -15,7 +15,7 @@ function InputWithCharacter({ label, numberCharacter, register, name, errors }: 
                 <input type="" className="my_input " placeholder={label} {...register(name)} />
             </div>
             {errors[name] && (
-                <div className="text-[12px] absolute -bottom-[20px] text-[red]">{label + ' is required'}</div>
+                <div className="text-[12px] absolute -bottom-[20px] text-[red]">{errors[name].message}</div>
             )}
         </div>
     );

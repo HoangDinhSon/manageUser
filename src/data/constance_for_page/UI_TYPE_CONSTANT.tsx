@@ -1,3 +1,4 @@
+import { hasSameProperty } from '../../handlelogic';
 type listOption = Array<{
     value: string;
     content: string;
@@ -48,7 +49,7 @@ const listGender: listOption = [
     { value: 'male', content: 'male' },
     { value: 'female', content: 'female' },
 ];
-//O+  B+ A+ O− B− AB−
+
 const listBlood: listOption = [
     { value: 'A−', content: 'A−' },
     { value: 'A+', content: 'A+' },
@@ -64,8 +65,24 @@ const CODE_PHONE_NUMBER = {
     '+86': '+86',
     '+63': '+63',
 };
-
-const NameRegisterForm: typeFormAddAndEditAfterChange = {
+const instance: typeFormAddAndEditAfterChange = {
+    firstName: '',
+    lastName: '',
+    age: '',
+    gender: '',
+    bloodGroup: '',
+    email: '',
+    phoneCodeCountry: '',
+    phoneNumber: '',
+    birthDate: '',
+    university: '',
+    eyeColor: '',
+    hairColor: '',
+    team: '',
+    position: '',
+    level: '',
+};
+const NameRegisterForm = {
     firstName: 'firstName',
     lastName: 'lastName',
     age: 'age',
@@ -74,7 +91,6 @@ const NameRegisterForm: typeFormAddAndEditAfterChange = {
     email: 'email',
     phoneCodeCountry: 'phoneCodeCountry',
     phoneNumber: 'phoneNumber',
-
     birthDate: 'birthDate',
     university: 'university', // mới thêm vào
     eyeColor: 'eyeColor',
@@ -83,6 +99,13 @@ const NameRegisterForm: typeFormAddAndEditAfterChange = {
     position: 'position',
     level: 'level',
 };
+ (function checkKeyOfObject() {
+    if (hasSameProperty( instance,NameRegisterForm) === false || hasSameProperty(instance, NameRegisterForm) === -1) {
+        console.log('NameRegisterForm need has key same key of  typeFormAddAndEditAfterChange ');
+        alert('NameRegisterForm need has key same key of  typeFormAddAndEditAfterChange ');
+    }
+})();
+
 const DEFAULT_VALUE_fORM_ADD: typeFormAddAndEditAfterChange = {
     firstName: '',
     lastName: '',
@@ -92,7 +115,7 @@ const DEFAULT_VALUE_fORM_ADD: typeFormAddAndEditAfterChange = {
     email: '',
     phoneCodeCountry: CODE_PHONE_NUMBER['+84'],
     phoneNumber: '',
-    birthDate: "1994-01-02",
+    birthDate: '1994-01-02',
     university: '', // mới thêm vào
     eyeColor: listOptionEyeColor[0].value,
     hairColor: listHairColor[0].value,

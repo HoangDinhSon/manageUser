@@ -32,7 +32,7 @@ function PhoneNumber({ nameCodeCountry, namePhoneNumber, register,  errors }: ty
                 />
             </div>
             {errors[namePhoneNumber] && (
-                <div className="text-[12px] absolute -bottom-[20px] text-[red]">Phone is required and number</div>
+                <div className="text-[12px] absolute -bottom-[20px] text-[red]">{errors[namePhoneNumber].message}</div>
             )}
         </div>
     );

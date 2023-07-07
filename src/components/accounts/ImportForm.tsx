@@ -35,7 +35,7 @@ function ImportForm() {
             setListFile([...ListFile]);
         });
     }
-    const removeFile = (index: number) => {
+    const handleRemoveFile = (index: number) => {
         refInputForChange.value = null;
         setListFile((preState: Array<any>) => {
             preState.splice(index, 1);
@@ -107,7 +107,7 @@ function ImportForm() {
                                                 alt=""
                                                 className="hover:cursor-pointer"
                                                 width={'20px'}
-                                                onClick={() => removeFile(index)}
+                                                onClick={() => handleRemoveFile(index)}
                                             />
                                         </div>
                                     );
