@@ -21,13 +21,66 @@ const ROW_PER_PAGE_DEFAULT = 5;
 const ORDINAL_NUMBER_PAGE_DEFAULT = 1;
 const IS_DISPLAY_FILTER_DEFAULT = false;
 const DISPLAY_ASIDE_MENU_DEFAULT = false;
-const USE_FOR_FORM_VIEW_DEFAULT = {
+const USE_FOR_FORM_VIEW_DEFAULT:typeUserAfterCallApiBaseOnID = {
     id: 0,
-    firstName: 'DEFAULT',
-    maidenName: 'DEFAULT',
-    email: 'DEFAULT',
-    company: 'DEFAULT',
-    phone: 'DEFAULT',
+    firstName: "",
+    lastName: "string",
+    maidenName: "string",
+    age: 11,// phai la số có 2 chữ số và lớn hơn
+    gender: "string",
+    email: "string",
+    phone: "string",
+    username: "string",
+    password: "string",
+    birthDate: "string",
+    image: "string",
+    bloodGroup: "string",
+    height: 0,                      // là số 
+    weight: 0,                       // là số 
+    eyeColor: "string",
+    hair: {
+        color: "string",
+        type: "string",
+    },
+    domain: "string",
+    ip: "string",
+    address: {
+        address: "string",
+        city: "string",
+        coordinates: {
+            lat: 0,                       // là số 
+            lng: 0,                       // là số 
+        },
+        postalCode: "string",
+        state: "string",
+    },
+    macAddress: "string",
+    university: "string",
+    bank: {
+        cardExpire: "string",
+        cardNumber: "string",
+        cardType: "string",
+        currency: "string",
+        iban: "string",
+    },
+    company: {
+        address: {
+            address: "string",
+            city: "string",
+            coordinates: {
+                lat: 0,                       // là số 
+                lng: 0,                       // là số 
+            },
+            postalCode: "string",
+            state: "string",
+        },
+        department: "string",
+        name: "string",
+        title: "string",
+    },
+    ein: "string",
+    ssn: "string",
+    userAgent: "string",
 };
 import { findIndex } from '../handlelogic';
 import { typeOfListUser, OutPutFormFilter } from '../data/type';
