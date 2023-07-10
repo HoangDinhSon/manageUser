@@ -69,5 +69,16 @@ function hasSameProperty(object1: any, object2: any): number | boolean {
         return -1;
     }
 }
+/* 
+make watch  23:28:30s , 
+input : 
+output :string "23:28:30s"
+*/
+function watch(): string {
+    const date = new Date();
+    let watch: string = '';
+    watch = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+    return watch;
+}
 
-export { findIndex, checkNumberOFCriterialForFilter, replaceManyString, hasSameProperty };
+export { findIndex, checkNumberOFCriterialForFilter, replaceManyString, hasSameProperty, watch };

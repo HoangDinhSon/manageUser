@@ -83,6 +83,7 @@ const instance: typeFormAddAndEditAfterChange = {
     level: '',
 };
 const NameRegisterForm = {
+   
     firstName: 'firstName',
     lastName: 'lastName',
     age: 'age',

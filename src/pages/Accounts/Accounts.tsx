@@ -10,11 +10,21 @@ import { iconCloseForFilter } from '../../assets';
 import { useGlobalState } from '../../store/Provider';
 import { getUserBaseOnID } from '../../Api/logTimeApi';
 import { actions } from '../../store';
-import { ImportForm, Filter, FormViewUser, BtnImportAndADD, AnimationMountAndUnMount } from '../../components';
-import { checkNumberOFCriterialForFilter } from '../../handlelogic';
+import {
+    ImportForm,
+    Filter,
+    FormViewUser,
+    BtnImportAndADD,
+    AnimationMountAndUnMount,
+    WatchTime,
+} from '../../components';
+import { checkNumberOFCriterialForFilter, watch } from '../../handlelogic';
 import { typeUserAfterCallApiBaseOnID } from '../../data/type';
 
 function Accounts({ status }: any) {
+    /* Test */
+
+    /* Test */
     const [state, dispatch] = useGlobalState();
     const handleSwitchDisplayFilterForm = () => {
         dispatch(actions.togleDisplayFilter(state.isDisplayFiler));
@@ -44,12 +54,13 @@ function Accounts({ status }: any) {
             {status === 'loading' && <TableAnimation />}
             {status === 'success' && (
                 <div className="bg-white  rounded-[12px] px-8 pb-[68px] pt-8 xs_max:px-[--margin4px] xs_max:pt-4 ">
+                    <WatchTime />
                     <div className="nav_for_table flex gap-1 h-[54px] items-end   border-b-[length:--borderWidth] border-[#EBEBEB]">
                         <p className="w-[44px] h-[40px] leading-[40px] text-center text-[#5E90F0]  border-b-4 border-[#5E90F0]">
                             All
                         </p>
-                        <p className="w-[75px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Vinova</p>
                         <p className="w-[44px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Patner</p>
+                        <p className="w-[75px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]">Vinova</p>
                     </div>
                     <div className="flex justify-between  py-[29px] md_max:block xs_max:py-4">
                         <div className="search_filter  md_max:flex md_max:justify-between">

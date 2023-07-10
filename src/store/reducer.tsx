@@ -146,6 +146,7 @@ function reducer(state: TypeStateGlobal, action: any) {
             const newListCriterial: string[] = keyOfCriterial.filter((key) => {
                 const valueOfFirstKey = state.criterialForFilter[key as keyof typeof state.criterialForFilter];
                 const valueOfSecondKey = valueOfFirstKey[key as keyof typeof valueOfFirstKey];
+                // typeof valueSecondkey is boolean why at here string|number 
                 if (!!valueOfSecondKey === true) {
                     return true;
                 }
