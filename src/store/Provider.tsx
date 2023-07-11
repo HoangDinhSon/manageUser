@@ -11,6 +11,8 @@ function ContextProvider({ children }: any) {
     const [state, dispatch] = useReducer(reducer, initState);
     return <Context.Provider value={[state, dispatch]}>{children}</Context.Provider>;
 }
+
+
 const useGlobalState =()=>useContext(Context)
 
 export default ContextProvider;

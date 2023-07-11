@@ -1,9 +1,12 @@
 import axiosClient from './axiosClient';
+import { axiosTodo } from './axiosClient';
+import { typeOfTodo } from '~/data/type/typeGlobal';
 type typeID = string | number;
 type payloadLogin = {
     username: string;
     password: string;
 };
+
 const loginAuth = (payload: payloadLogin) =>
     axiosClient
         .post('/auth/login', {
@@ -14,9 +17,7 @@ const loginAuth = (payload: payloadLogin) =>
 
 const getLimitAndSkipUser = (limit: number, skip: number) =>
     axiosClient
-        .get(
-            `/users?limit=${limit}&skip=${skip}`,
-        )
+        .get(`/users?limit=${limit}&skip=${skip}`)
         .then((res) => res.data)
         .catch((error) => {
             // Error
@@ -56,3 +57,19 @@ export { loginAuth, getLimitAndSkipUser, getUserBaseOnID, addUserToServer, editU
  dùng react Query theo doi quá trình call API của axios . 
 
 */
+/* ----------------------New API ------------------ */
+const getTodo = () =>
+    axiosTodo
+        .get('/todos')
+        .then((res) => res.data)
+        .catch((error) => {
+            console.log('Error Get Todos>>>', error.message);
+        });
+const updateTodo = (dataForUpdate: typeOfTodo) =>
+    axiosTodo
+        .post(`/todos/${dataForUpdate._id}`, dataForUpdate)
+        .then((res) => res.data)
+        .catch((error) => {
+            console.log('error at updateTodo>>>', error.message);
+        });
+export { getTodo, updateTodo };

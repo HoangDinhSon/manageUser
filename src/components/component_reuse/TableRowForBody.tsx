@@ -3,7 +3,7 @@ import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
 import { IconViewUser, IconEditUser } from '../../assets/icon';
 import { LINK_PAGE_ACCOUNT_EDIT } from '../../data/constance_for_page';
-import { NavLink } from 'react-router-dom';
+import { NavLink ,Link} from 'react-router-dom';
 
 function TableRowForBody({ user}:any) {
     const [, dispatch] = useGlobalState();

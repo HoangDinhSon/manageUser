@@ -50,7 +50,10 @@ function Menu({ children }: any) {
     // hidden or display BtnAddAndImport :
     const conditionToDisplayBtnADDandImport =
         state.isDisplayAsideMenu === false &&
-        (location.pathname === linkPage.LINK_PAGE_ACCOUNT || location.pathname === `${linkPage.LINK_PAGE_ACCOUNT}/`);
+        (location.pathname === linkPage.LINK_PAGE_ACCOUNT ||
+            location.pathname === `${linkPage.LINK_PAGE_ACCOUNT}/` ||
+            location.pathname === linkPage.LINK_PAGE_REPORT ||
+            location.pathname === `${linkPage.LINK_PAGE_REPORT}/`);
     // change class to fit height viewpoint
     const heightBrowser = window.innerHeight;
     let classAsideBar = 'flex flex-col items-center  gap-[53px] pt-5 h-full ';
@@ -105,8 +108,8 @@ function Menu({ children }: any) {
 
     return (
         <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full ">
-            <Toaster/>
-            {/*2/5. TopNav Bar */}
+            <Toaster />
+            {/*1/4. TopNav Bar */}
             <div className="fixed z-[3] pl-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-full bg-[#fff]   ">
                 <HamburgerMenu onClick={handleDisplay} />
                 <div className="flex justify-between items-center  h-[--heightNav] xs_max:h-[--hNavRes]">
@@ -128,7 +131,7 @@ function Menu({ children }: any) {
                     )}
                 </div>
             </div>
-            {/* 3/5. Aside Bar */}
+            {/* 2/4. Aside Bar */}
             <TransitionForAsideBar>
                 <div className=" w-[--heightNav] bg-white h-screen pt-[--heightNav]">
                     <div className={classAsideBar}>
@@ -174,20 +177,18 @@ function Menu({ children }: any) {
                     </div>
                 </div>
             </TransitionForAsideBar>
-            {/*4/5. Background  */}
+            {/*3/4. Background  */}
             <div className="fixed  bg-[#ECECEC] h-screen left-0 right-0 z-[-1] "></div>
-            {/*5/5. Content */}
+            {/*4/4. Content */}
             <main className={classForChildrenOfMenu}>{children}</main>
         </div>
     );
 }
 export default Menu;
 /* 
-1. bình thường thì Layer : Nav z-index=3 
-    Aside : z-index= 2
-    main : z-index = 1 
-    background:  z= -1 ,; 
-
-
-
+1. bình thường thì Layer : 
+    background:z-index=-1 
+    main :     z-index= 1 
+    Aside:     z-index= 2
+    Nav        z-index= 3 
 */

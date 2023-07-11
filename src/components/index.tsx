@@ -10,9 +10,16 @@ import { Hamburger } from './component_layout';
 import AnimationMountAndUnMount from './animationUI/AnimationMountAndUnMount';
 import TableAnimation from './animationUI/TableAnimation';
 import OpacityTransition from './animationUI/OpacityTransition'; 
-import WatchTime from "~/components/component_reuse/WatchTime"
+import WatchTime from "~/components/component_reuse/WatchTime";
+import NavAccount from './accounts/NavAccount';
+import SearchAndFilter from './accounts/SearchAndFilter';
+import TableForNewApi from './table_for_new_api/TableForNewApi';
+import RowHeader from './table_for_new_api/component_small/RowHeader';
+import RowBody from './table_for_new_api/component_small/RowBody';
   
 
-export { SkillDisplayInput, FormLogOut, ImportForm, Filter, FormViewUser, ListName, BtnImportAndADD,PaginationTable};
+export { SkillDisplayInput, FormLogOut, ImportForm, Filter, FormViewUser, ListName, BtnImportAndADD,PaginationTable,SearchAndFilter};
 export {Select ,PhoneNumber,Input,InputWithCharacter ,TableRowForHeader,TableRowForBody,Hamburger}
-export {TableAnimation ,OpacityTransition ,AnimationMountAndUnMount ,WatchTime}
+export {TableAnimation ,OpacityTransition ,AnimationMountAndUnMount ,WatchTime,NavAccount}
+/* New Api  */
+export {TableForNewApi,RowHeader,RowBody}

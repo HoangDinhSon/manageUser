@@ -9,6 +9,8 @@ import {
     LINK_PAGE_STACKS,
     LINK_PAGE_ROLEMANAGER,
     LINK_PAGE_REPORT,
+    LINK_REPORT_WATCH,
+    LINK_REPORT_EDIT,
 } from './constantLinkPage';
 import { listOptionTeam, listOptionEyeColor, listOptionLevel, listOptionPotion } from './UI_TYPE_CONSTANT';
 import { CRITERIAL_FOR_FILTER_DEFAULT, ListFilter } from './constantFilter';
@@ -32,4 +34,6 @@ export {
     LINK_PAGE_REPORT,
     LINK_PAGE_ACCOUNT_FILTER,
     ListFilter,
+    LINK_REPORT_WATCH,
+    LINK_REPORT_EDIT,
 };

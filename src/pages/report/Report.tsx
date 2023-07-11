@@ -1,10 +1,9 @@
 import { Toaster, toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
-import { Outlet } from 'react-router-dom';
-import { TableAnimation } from '../../components';
-import { TableUser } from '../../components/accounts/TableUser';
+import { Outlet, useParams } from 'react-router-dom';
+import { TableAnimation, TableForNewApi } from '../../components';
 import { useGlobalState } from '../../store/Provider';
-import { getUserBaseOnID } from '../../Api/logTimeApi';
+import { getUserBaseOnID, getTodo } from '../../Api/logTimeApi';
 import { actions } from '../../store';
 import {
     ImportForm,
@@ -15,9 +14,15 @@ import {
     SearchAndFilter,
 } from '../../components';
 import { typeUserAfterCallApiBaseOnID } from '../../data/type';
-function Accounts({ status }: any) {
+
+function Report() {
     const [state, dispatch] = useGlobalState();
-    // call apis by id dùng cho hiển thị form View
+    // call api for table user
+    const { status, data: dataTodo, refetch } = useQuery({
+        queryKey: ['todos'],
+        queryFn: getTodo,
+    });
+
     const { status: statusForApiByID } = useQuery({
         queryKey: ['userByID', state.UserForFormView.id],
         queryFn: () => getUserBaseOnID(state.UserForFormView.id),
@@ -37,7 +42,7 @@ function Accounts({ status }: any) {
                 <div className="bg-white  rounded-[12px] px-8 pb-[68px] pt-8 xs_max:px-[--margin4px] xs_max:pt-4 ">
                     <NavAccount />
                     <SearchAndFilter />
-                    <TableUser />
+                    <TableForNewApi listTodo={dataTodo}  />
                     <AnimationMountAndUnMount isMount={state.isDisplayFiler}>
                         <Filter />
                     </AnimationMountAndUnMount>
@@ -47,11 +52,12 @@ function Accounts({ status }: any) {
                     <AnimationMountAndUnMount isMount={state.isDisplayImportForm}>
                         <ImportForm />
                     </AnimationMountAndUnMount>
+                    {/* dùng truyền dữ liệu vào trong component con của children react router dom  */}
+                    <Outlet context={[dataTodo,refetch]} />
                 </div>
             )}
-            <Outlet />
         </section>
     );
 }
 
-export default Accounts;
+export default Report;

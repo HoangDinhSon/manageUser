@@ -1,5 +1,6 @@
 @import './pages/Accounts/acc.css';
 @import './pages/Login/Login.css';
+@import "./pages/report/report.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

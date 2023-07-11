@@ -1,0 +1,5 @@
+@layer utilities {
+    .input_for_report {
+        @apply w-full h-[50px] text-[20px] border-red-600 border-2;
+    }
+}
