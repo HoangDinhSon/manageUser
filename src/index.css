@@ -1,6 +1,8 @@
 @import './pages/Accounts/acc.css';
 @import './pages/Login/Login.css';
-@import "./pages/report/report.css";
+@import './pages/report/report.css';
+@import './pages/stack/stack.css';
+@import "./pages/project//project.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -93,6 +95,9 @@
     .form_view_layout {
         @apply grid-cols-3 grid gap-6  xs_max:grid-cols-2 xs_max:gap-1;
     }
+    .center_fixed {
+        @apply fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] 
+    }
 
     /* my logger css  */
     .red {
@@ -103,6 +108,9 @@
     }
     .myoutline {
         @apply outline outline-1 outline-[green];
+    }
+    .bg_parent_form {
+        @apply fixed z-10 bg-[#00000030] w-full h-full top-0 left-0
     }
 }
 

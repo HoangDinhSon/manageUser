@@ -16,10 +16,11 @@ import SearchAndFilter from './accounts/SearchAndFilter';
 import TableForNewApi from './table_for_new_api/TableForNewApi';
 import RowHeader from './table_for_new_api/component_small/RowHeader';
 import RowBody from './table_for_new_api/component_small/RowBody';
-  
-
+import InputForReport from './component_reuse/report_page/InputForReport';
+import ButtonClose from './component_reuse/ButtonClose';
+import FormVerify from './component_reuse/FormVerify';
 export { SkillDisplayInput, FormLogOut, ImportForm, Filter, FormViewUser, ListName, BtnImportAndADD,PaginationTable,SearchAndFilter};
 export {Select ,PhoneNumber,Input,InputWithCharacter ,TableRowForHeader,TableRowForBody,Hamburger}
 export {TableAnimation ,OpacityTransition ,AnimationMountAndUnMount ,WatchTime,NavAccount}
 /* New Api  */
-export {TableForNewApi,RowHeader,RowBody}
+export {TableForNewApi,RowHeader,RowBody,InputForReport,ButtonClose,FormVerify}

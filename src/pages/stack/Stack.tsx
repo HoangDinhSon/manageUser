@@ -1,22 +1,26 @@
 import { Toaster, toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
-import { Outlet} from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 import { TableAnimation, TableForNewApi } from '../../components';
 import { getTodo } from '../../Api/logTimeApi';
+import { EditAndAddForPageStack } from '..';
+import { useGlobalState } from '~/store/Provider';
 
-import {
-    NavAccount,
-    SearchAndFilter,
-} from '../../components';
+import { NavAccount, SearchAndFilter } from '../../components';
 
-function Report() {
+function Stack() {
+    const [state] = useGlobalState();
     // call api for table user
-    const { status, data: dataTodo, refetch } = useQuery({
+    const {
+        status,
+        data: dataTodo,
+        refetch,
+    } = useQuery({
         queryKey: ['todos'],
         queryFn: getTodo,
-        onError:()=>{
-            toast.error("Oh No fail try press F5 refresh")
-        }
+        onError: () => {
+            toast.error('Oh No fail try press F5 refresh');
+        },
     });
 
     return (
@@ -28,11 +32,12 @@ function Report() {
                     <NavAccount />
                     <SearchAndFilter />
                     <TableForNewApi listTodo={dataTodo} refetch={refetch} />
-                    <Outlet context={[dataTodo,refetch]} />
+                    {(state.isDisplayEditAndAddPageStack) && <EditAndAddForPageStack listTodo={dataTodo}  refetch={refetch} />}
+                    {/* <Outlet context={[dataTodo, refetch]} /> */}
                 </div>
             )}
         </section>
     );
 }
 
-export default Report;
+export default Stack;

@@ -13,6 +13,14 @@ const SET_CRITERIAL_FOR_FILTER = 'set_criterial_for_filter';
 const RESET_CRITERIAL_FOR_FILTER = 'reset_criterial_for_filter';
 const ADD_NEW_USER = 'add_new_user';
 const DISPLAY_IMPORT_FORM = 'display_import_form';
+const GET_ID_OF_TODO_PAGE_STACK = 'get_id_of_todo_page_stack';
+const TOGGLE_EDIT_ADD_PAGE_STACK = 'toggle_edit_add_page_stack';
+// const DISPLAY_EDIT_PAGE_STACK = "display_edit_add"
+const SET_ID_TODO_PAGE_STACK_TO_DEFAULT = 'set_id_todo_page_stack_to_default';
+
+const TOGGLE_DISPLAY_VIEW_TODO_STACK= "toggle_display_view_todo_stack";
+const DISPLAY_VIEW_TODO_STACK = "display_view_todo_stack";
+const HIDDEN_VIEW_TODO_STACK ="hidden_view_todo_stack"
 
 export {
     GET_ROW_PER_PAGE,
@@ -30,4 +38,10 @@ export {
     RESET_CRITERIAL_FOR_FILTER,
     ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
+    GET_ID_OF_TODO_PAGE_STACK,
+    TOGGLE_EDIT_ADD_PAGE_STACK,
+    SET_ID_TODO_PAGE_STACK_TO_DEFAULT,
+    TOGGLE_DISPLAY_VIEW_TODO_STACK,
+    DISPLAY_VIEW_TODO_STACK,
+    HIDDEN_VIEW_TODO_STACK,
 };

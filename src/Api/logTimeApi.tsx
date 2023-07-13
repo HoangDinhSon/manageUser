@@ -72,4 +72,29 @@ const updateTodo = (dataForUpdate: typeOfTodo) =>
         .catch((error) => {
             console.log('error at updateTodo>>>', error.message);
         });
-export { getTodo, updateTodo };
+type typeDataForAdd = Omit<typeOfTodo, '_id'>;
+const createTodo = (dataForAdd: typeDataForAdd) =>
+    axiosTodo
+        .post('/todos', dataForAdd)
+        .then((res) => res.data)
+        .catch((error) => {
+            console.log('error at createTodo>>>', error.message);
+        });
+const deleteTodo = (id: string) =>
+    axiosTodo
+        .delete(`/todos/${id}`)
+        .then((res) => res.data)
+        .catch((error) => {
+            console.log('error at deleteTodo>>>', error.message);
+        });
+export { getTodo, updateTodo, createTodo, deleteTodo };
+// axios for useEffect
+const createTodoHandle = (dataForAdd: typeDataForAdd) =>
+    axiosTodo
+        .post('/todos', dataForAdd)
+        .then((res) => res)
+        .catch((error) => {
+            return error.message;
+            console.log('error at createTodo>>>', error.message);
+        });
+export {createTodoHandle}

@@ -14,6 +14,12 @@ import {
     ADD_NEW_USER,
     DISPLAY_IMPORT_FORM,
     RESET_CRITERIAL_FOR_FILTER,
+    GET_ID_OF_TODO_PAGE_STACK,
+    TOGGLE_EDIT_ADD_PAGE_STACK,
+    SET_ID_TODO_PAGE_STACK_TO_DEFAULT,
+    TOGGLE_DISPLAY_VIEW_TODO_STACK,
+    DISPLAY_VIEW_TODO_STACK,
+    HIDDEN_VIEW_TODO_STACK,
 } from './constants';
 import { typeUserAfterCallApiBaseOnID } from '../data/type';
 import { CRITERIAL_FOR_FILTER_DEFAULT } from '../data/constance_for_page';
@@ -21,72 +27,73 @@ const ROW_PER_PAGE_DEFAULT = 5;
 const ORDINAL_NUMBER_PAGE_DEFAULT = 1;
 const IS_DISPLAY_FILTER_DEFAULT = false;
 const DISPLAY_ASIDE_MENU_DEFAULT = false;
-const USE_FOR_FORM_VIEW_DEFAULT:typeUserAfterCallApiBaseOnID = {
+const USE_FOR_FORM_VIEW_DEFAULT: typeUserAfterCallApiBaseOnID = {
     id: 0,
-    firstName: "",
-    lastName: "string",
-    maidenName: "string",
-    age: 11,// phai la số có 2 chữ số và lớn hơn
-    gender: "string",
-    email: "string",
-    phone: "string",
-    username: "string",
-    password: "string",
-    birthDate: "string",
-    image: "string",
-    bloodGroup: "string",
-    height: 0,                      // là số 
-    weight: 0,                       // là số 
-    eyeColor: "string",
+    firstName: '',
+    lastName: 'string',
+    maidenName: 'string',
+    age: 11, // phai la số có 2 chữ số và lớn hơn
+    gender: 'string',
+    email: 'string',
+    phone: 'string',
+    username: 'string',
+    password: 'string',
+    birthDate: 'string',
+    image: 'string',
+    bloodGroup: 'string',
+    height: 0, // là số
+    weight: 0, // là số
+    eyeColor: 'string',
     hair: {
-        color: "string",
-        type: "string",
+        color: 'string',
+        type: 'string',
     },
-    domain: "string",
-    ip: "string",
+    domain: 'string',
+    ip: 'string',
     address: {
-        address: "string",
-        city: "string",
+        address: 'string',
+        city: 'string',
         coordinates: {
-            lat: 0,                       // là số 
-            lng: 0,                       // là số 
+            lat: 0, // là số
+            lng: 0, // là số
         },
-        postalCode: "string",
-        state: "string",
+        postalCode: 'string',
+        state: 'string',
     },
-    macAddress: "string",
-    university: "string",
+    macAddress: 'string',
+    university: 'string',
     bank: {
-        cardExpire: "string",
-        cardNumber: "string",
-        cardType: "string",
-        currency: "string",
-        iban: "string",
+        cardExpire: 'string',
+        cardNumber: 'string',
+        cardType: 'string',
+        currency: 'string',
+        iban: 'string',
     },
     company: {
         address: {
-            address: "string",
-            city: "string",
+            address: 'string',
+            city: 'string',
             coordinates: {
-                lat: 0,                       // là số 
-                lng: 0,                       // là số 
+                lat: 0, // là số
+                lng: 0, // là số
             },
-            postalCode: "string",
-            state: "string",
+            postalCode: 'string',
+            state: 'string',
         },
-        department: "string",
-        name: "string",
-        title: "string",
+        department: 'string',
+        name: 'string',
+        title: 'string',
     },
-    ein: "string",
-    ssn: "string",
-    userAgent: "string",
+    ein: 'string',
+    ssn: 'string',
+    userAgent: 'string',
 };
 import { findIndex } from '../handlelogic';
 import { typeOfListUser, OutPutFormFilter } from '../data/type';
 const ID_FOR_EDIT_DEFAULT = 0;
 const DISPLAY_FORM_VIEW_USER_DEFAULT = false;
 const IS_DISPLAY_IMPORT_FORM_DEFAULT = false;
+const DEFAULT_TODO_PAGE_STACK = '';
 type TypeStateGlobal = {
     rowPerPage: number;
     ordinalNumberPage: number;
@@ -100,6 +107,10 @@ type TypeStateGlobal = {
     isDisplayImportForm: boolean;
     listFilter: Array<any>;
     criterialForFilter: OutPutFormFilter; //object
+    idOfTodoForPageStack: string; // id dành cho edit
+    // idForViewOfPageStack: string; // id dành chi view
+    isDisplayEditAndAddPageStack: boolean;
+    isDisplayTodoViewOfPageStack: boolean;
 };
 const initState = {
     rowPerPage: ROW_PER_PAGE_DEFAULT,
@@ -114,6 +125,10 @@ const initState = {
     isDisplayImportForm: IS_DISPLAY_IMPORT_FORM_DEFAULT,
     listFilter: [],
     criterialForFilter: CRITERIAL_FOR_FILTER_DEFAULT,
+    idOfTodoForPageStack: DEFAULT_TODO_PAGE_STACK,
+    // idForViewOfPageStack: '',
+    isDisplayEditAndAddPageStack: false,
+    isDisplayTodoViewOfPageStack: false,
 };
 
 function reducer(state: TypeStateGlobal, action: any) {
@@ -199,7 +214,7 @@ function reducer(state: TypeStateGlobal, action: any) {
             const newListCriterial: string[] = keyOfCriterial.filter((key) => {
                 const valueOfFirstKey = state.criterialForFilter[key as keyof typeof state.criterialForFilter];
                 const valueOfSecondKey = valueOfFirstKey[key as keyof typeof valueOfFirstKey];
-                // typeof valueSecondkey is boolean why at here string|number 
+                // typeof valueSecondkey is boolean why at here string|number
                 if (!!valueOfSecondKey === true) {
                     return true;
                 }
@@ -256,6 +271,36 @@ function reducer(state: TypeStateGlobal, action: any) {
             return {
                 ...state,
                 criterialForFilter: CRITERIAL_FOR_FILTER_DEFAULT,
+            };
+        }
+        case GET_ID_OF_TODO_PAGE_STACK: {
+            return {
+                ...state,
+                idOfTodoForPageStack: action.payload,
+            };
+        }
+        case TOGGLE_EDIT_ADD_PAGE_STACK: {
+            return {
+                ...state,
+                isDisplayEditAndAddPageStack: !state.isDisplayEditAndAddPageStack,
+            };
+        }
+        case SET_ID_TODO_PAGE_STACK_TO_DEFAULT: {
+            return {
+                ...state,
+                idOfTodoForPageStack: DEFAULT_TODO_PAGE_STACK,
+            };
+        }
+        case DISPLAY_VIEW_TODO_STACK: {
+            return {
+                ...state,
+                isDisplayTodoViewOfPageStack: true,
+            };
+        }
+        case HIDDEN_VIEW_TODO_STACK: {
+            return {
+                ...state,
+                isDisplayTodoViewOfPageStack: false,
             };
         }
 

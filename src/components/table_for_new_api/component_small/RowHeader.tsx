@@ -7,7 +7,7 @@ function RowHeader() {
             <th>Author</th>
             <th>Status</th>
             <th>Created Date</th>
-            <th colSpan={2}>Action</th>
+            <th colSpan={4}>Action</th>
         </tr>
     );
 }

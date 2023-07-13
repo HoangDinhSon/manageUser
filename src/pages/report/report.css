@@ -1,5 +1,21 @@
 @layer utilities {
     .input_for_report {
-        @apply w-full h-[50px] text-[20px] border-red-600 border-2;
+        @apply w-full h-[50px] border-black border-2 px-2 rounded-lg;
     }
+    .btn_report {
+        @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg  px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-full mt-7
+    }
+    .checkbox_report{
+        @apply w-6 h-6 text-blue-600 bg-gray-100 border-gray-300  focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 rounded-lg 
+    }
+    .label_checkbox_report {
+        @apply w-full py-[15px] ml-2 font-medium text-gray-900 dark:text-gray-300
+    }
+    .unselectable {
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
 }

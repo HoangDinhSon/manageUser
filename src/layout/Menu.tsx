@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { useTheme, useMediaQuery } from '@mui/material';
-import { FormLogOut, BtnImportAndADD, Hamburger } from '../components';
+import { FormLogOut, BtnImportAndADD, Hamburger,FormVerify } from '../components';
 import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
@@ -11,8 +11,11 @@ import { bgAvatar, notification, arrowBackForLayout } from '../assets';
 import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
 import { Toaster } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/app_redux/store';
 function Menu({ children }: any) {
-    const location = useLocation();
+    const {isDisplayFormVerify}= useSelector((state:RootState)=>state.manageAppTodo)
+    const location = useLocation();// ko dùng tới ??
     const [state, dispatch] = useGlobalState();
     const [isDisPlayLogout, setIsDisplayLogout] = useState(false);
     const HEIGHT_BROWSER_TO_CHANGE_GAP = 800;
@@ -102,7 +105,12 @@ function Menu({ children }: any) {
         );
     }
     /* xem note 1 .  */
-    if (state.isDisplayFormView === true || state.isDisplayImportForm === true || state.isDisplayFiler === true) {
+    if (
+        state.isDisplayFormView === true ||
+        state.isDisplayImportForm === true ||
+        state.isDisplayFiler === true ||
+        state.isDisplayEditAndAddPageStack
+    ) {
         classForChildrenOfMenu = replaceManyString(classForChildrenOfMenu, ['z-[1]'], ['z-[4]']);
     }
 
@@ -181,6 +189,8 @@ function Menu({ children }: any) {
             <div className="fixed  bg-[#ECECEC] h-screen left-0 right-0 z-[-1] "></div>
             {/*4/4. Content */}
             <main className={classForChildrenOfMenu}>{children}</main>
+            {/* 5/5 FormVerify */}
+           {isDisplayFormVerify&& <FormVerify/>}
         </div>
     );
 }
@@ -191,4 +201,5 @@ export default Menu;
     main :     z-index= 1 
     Aside:     z-index= 2
     Nav        z-index= 3 
+    FormVerify : z-index= 4
 */

@@ -1,15 +1,24 @@
 import { useRoutes } from 'react-router-dom';
-import { Login, Accounts, EditUser, AddUser, NotFount, Report } from './pages';
+import { Login, Accounts, EditUser, AddUser, NotFount, Report, Project } from './pages';
 import { Menu } from './layout';
 import * as LINK_PAGE from './data/constance_for_page';
 import { useGlobalState } from './store/Provider';
 import { actions } from './store';
 import { useQuery } from 'react-query';
 import { getLimitAndSkipUser } from './Api/logTimeApi';
-import { Fragment } from 'react';
-import { AddTodoForm, WatchTodoForm, EditTodoForm } from './pages';
+import { Fragment, useEffect } from 'react';
+import { AddTodoForm, WatchTodoForm, EditAndAddTodoForm, Stack } from './pages';
+// import { useLocation } from 'react-router-dom';
 
 function App() {
+    // const location = useLocation();
+    // const pathName = location.pathname;
+    // let textFirst: null|any= ""
+    // textFirst = pathName.includes("/report");
+    // const text ="/dsfsfs"
+    // console.log('pathNAm>>>', textFirst);
+    // let pathName = location.pathname.match(/(^\/[a-z]+$)/);
+    // console.log('pathName >>>', pathName?.[0]);
     const [state, dispatch] = useGlobalState();
     let limit = state.rowPerPage;
     let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
@@ -33,6 +42,22 @@ function App() {
             element: <Login />,
         },
         {
+            path: LINK_PAGE.LINK_PAGE_PROJECT,
+            element: (
+                <Menu>
+                    <Project />
+                </Menu>
+            ),
+        },
+        {
+            path: LINK_PAGE.LINK_PAGE_STACKS,
+            element: (
+                <Menu>
+                    <Stack />
+                </Menu>
+            ),
+        },
+        {
             path: `${LINK_PAGE.LINK_PAGE_REPORT}`,
             element: (
                 <Menu>
@@ -49,10 +74,10 @@ function App() {
                     ),
                 },
                 {
-                    path:`${LINK_PAGE.LINK_REPORT_EDIT}`,
+                    path: `${LINK_PAGE.LINK_REPORT_EDIT}`,
                     element: (
                         <Menu>
-                            <EditTodoForm />
+                            <EditAndAddTodoForm />
                         </Menu>
                     ),
                 },
@@ -60,7 +85,7 @@ function App() {
                     path: 'add',
                     element: (
                         <Menu>
-                            <AddTodoForm />
+                            <EditAndAddTodoForm />
                         </Menu>
                     ),
                 },
