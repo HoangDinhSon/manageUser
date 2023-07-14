@@ -1,24 +1,28 @@
 import { useDispatch } from 'react-redux';
-import { updateValueFormVerify } from '~/app_redux/reducer_redux';
+import { updateValueFormVerify,hiddenFormVerify } from '~/app_redux/reducer_redux';
 
 function FormVerify() {
     const dispatchOfRedux = useDispatch();
     const handleYes = (value: boolean) => {
         dispatchOfRedux(updateValueFormVerify(value));
+        dispatchOfRedux(hiddenFormVerify());
     };
     const handleNo = (value: boolean) => {
         dispatchOfRedux(updateValueFormVerify(value));
+        dispatchOfRedux(hiddenFormVerify());
     };
     return (
-        <div className="w-[200px] h-[100px] bg-[blue] center_fixed z-[4] ">
-            <div className="pb-[50px] text-center">Verify</div>
-            <div className="flex justify-end">
-                <button className="px-[10px]" onClick={() => handleYes(true)}>
-                    YES
-                </button>
-                <button className="px-[10px]" onClick={() => handleNo(false)}>
-                    NO
-                </button>
+        <div className="bg_parent_form">
+            <div className="w-[350px] h-[150px] bg-[white] center_fixed z-[4] rounded-md relative">
+                <div className=" pl-3 pt-4">Do you want to add the Todo?</div>
+                <div className="flex justify-end gap-4 absolute bottom-3 right-3 ">
+                    <button className="btn85x25"  onClick={() => handleYes(true)}>
+                        Yes
+                    </button>
+                    <button className="btn85x25" onClick={() => handleNo(false)}>
+                        No
+                    </button>
+                </div>
             </div>
         </div>
     );

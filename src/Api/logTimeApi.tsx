@@ -1,6 +1,10 @@
 import axiosClient from './axiosClient';
 import { axiosTodo } from './axiosClient';
 import { typeOfTodo } from '~/data/type/typeGlobal';
+import type { AxiosResponse } from 'axios';
+import { toast } from 'react-hot-toast';
+import { useEffect } from 'react';
+
 type typeID = string | number;
 type payloadLogin = {
     username: string;
@@ -89,12 +93,5 @@ const deleteTodo = (id: string) =>
         });
 export { getTodo, updateTodo, createTodo, deleteTodo };
 // axios for useEffect
-const createTodoHandle = (dataForAdd: typeDataForAdd) =>
-    axiosTodo
-        .post('/todos', dataForAdd)
-        .then((res) => res)
-        .catch((error) => {
-            return error.message;
-            console.log('error at createTodo>>>', error.message);
-        });
-export {createTodoHandle}
+const updateTodoHandle = (dataForUpdate: typeOfTodo) => axiosTodo.post(`/todos/${dataForUpdate._id}`, dataForUpdate);
+export {  updateTodoHandle };

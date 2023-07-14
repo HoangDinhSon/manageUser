@@ -1,74 +1,45 @@
-import { Toaster, toast } from 'react-hot-toast';
-import { useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
+import { toast } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 import { displayFormVerify } from '~/app_redux/reducer_redux';
 import { RootState } from '~/app_redux/store';
-import { TableAnimation, TableForNewApi } from '../../components';
-import { getTodo } from '../../Api/logTimeApi';
-// import { EditAndAddForPageStack } from '..';
-// import { useGlobalState } from '~/store/Provider';
-import { EditAddViewForm } from '~/pages';
-import { createTodoHandle } from '~/Api/logTimeApi';
-
-import { NavAccount, SearchAndFilter } from '../../components';
-// const conditionSend = {
-//     verifyLengthList: false,
-//     verify: false,
-// };
-
+import { TableAnimation, TableForNewApi, NavAccount } from '../../components';
+import { EditAddViewFormPageProject } from '~/pages';
+import { useGetData, createTodoHandle, updateTodoForPageProject } from '~/custome_hook/call_api';
+import { TableForViewTodo } from '~/pages';
 function Project() {
-    const { isDisplayFormAddEditViewPageProject, listTodoSendServer, valueFormVerify } = useSelector(
+    const { refetch, response } = useGetData();
+    const { isDisplayFormAddEditViewPageProject, listTodoSendServer } = useSelector(
         (state: RootState) => state.manageAppTodo,
     );
     const dispatchOfRedux = useDispatch();
-    // const [conditionSendToApi, setConditionSendToApi] = useState(conditionSend);
-    // call api for table user
-    const {
-        status,
-        data: dataTodo,
-        refetch,
-    } = useQuery({
-        queryKey: ['todos'],
-        queryFn: getTodo,
-        onError: () => {
-            toast.error('Oh No fail try press F5 refresh');
-        },
-    });
     const handleOnClick = () => {
         // check xem trong mảng list trong redux có phần tử >1 hay không ;
-
-        if (listTodoSendServer.length === 1) {
+        if (listTodoSendServer.length <= 1) {
             toast.error('there is no todo in list');
         }
         if (listTodoSendServer.length > 1) {
             // hỏi người dùng có muốn update hay không .
             dispatchOfRedux(displayFormVerify());
         }
-
-        // gửi lên ser ver
     };
-    // if (valueFormVerify && listTodoSendServer.length > 1) {
-    //     listTodoSendServer.map((element) => {
-    //        const responseOfServer=  createTodoHandle(element);
-    //        console.log('responsfrom appi add to do >>>', responseOfServer);
-    //     });
-    // }
-
+    createTodoHandle(refetch);
     return (
         <section className="">
-            <Toaster />
-            {status === 'loading' && <TableAnimation />}
-            {status === 'success' && (
+            {!!!response?.data && <TableAnimation />}
+            {!!response?.data && (
                 <div className="bg-white  rounded-[12px] px-8 pb-[68px] pt-8 xs_max:px-[--margin4px] xs_max:pt-4 ">
                     <NavAccount />
                     <div className="py-[25px]">
-                        <button className="bg-[blue] w-full rounded-md text-white " onClick={handleOnClick}>
+                        <div className="text-center pb-3 ">Những todo chưa dc gửi lên ser ver </div>
+                        <TableForViewTodo list={listTodoSendServer} />
+                        <button className="bg-[blue] w-full rounded-md text-white mt-3 " onClick={handleOnClick}>
                             ADD TODO
                         </button>
                     </div>
-                    <TableForNewApi listTodo={dataTodo} refetch={refetch} />
-                    {isDisplayFormAddEditViewPageProject && <EditAddViewForm />}
+                    <TableForNewApi listTodo={response?.data} refetch={refetch} />
+                    {isDisplayFormAddEditViewPageProject && (
+                        <EditAddViewFormPageProject listTodo={response?.data} refetch={refetch} />
+                    )}
                 </div>
             )}
         </section>
@@ -76,3 +47,10 @@ function Project() {
 }
 
 export default Project;
+/* 
+Các chức năng sau phải hoàn thành :
+getdate từ server : 
+thử 3 lần : axios??
+nếu thành công thì lấy data , nếu không thành công thì in ra lỗi 
+feature 2 : when create todo if có lỗi khi update 1 cái nào thì cần thông báo lại cho người dùng 
+*/

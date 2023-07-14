@@ -11,7 +11,16 @@ import EditAndAddTodoForm from './report/component/EditAndAddTodoForm';
 import Stack from './stack/Stack';
 import EditAndAddForPageStack from './stack/component/EditandAddForPageStack';
 import Project from './project/Project';
-import EditAddViewForm from './project/component_project/EditAddViewForm';
-
-export { AddTodoForm, WatchTodoForm, EditAndAddTodoForm, Stack, EditAndAddForPageStack, Project, EditAddViewForm };
+import EditAddViewFormPageProject from './project/component_project/EditAddViewFormPageProject';
+import TableForViewTodo from './project/component_project/TableForViewTodo';
+export {
+    AddTodoForm,
+    WatchTodoForm,
+    EditAndAddTodoForm,
+    Stack,
+    EditAndAddForPageStack,
+    Project,
+    EditAddViewFormPageProject,
+    TableForViewTodo,
+};
 export { Login, Accounts, EditUser, AddUser, NotFount, Report };

@@ -1,5 +1,5 @@
 import { typeOfTodo } from '~/data/type/typeGlobal';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { toast } from 'react-hot-toast';
 import { deleteTodo } from '~/Api/logTimeApi';
@@ -7,8 +7,9 @@ import { KIND_OF_DEFAULT } from '../TableForNewApi';
 import * as LINK_PAGE from '~/data/constance_for_page';
 import { useGlobalState } from '~/store/Provider';
 import { actions } from '~/store';
-import { useSelector, useDispatch } from 'react-redux';
-import { displayFormAddEdit, hiddenFormAddEdit } from '~/app_redux/reducer_redux';
+import { useDispatch } from 'react-redux';
+import { displayFormAddEdit, changeIdAndKindOfForm } from '~/app_redux/reducer_redux';
+import * as CONST from "~/data/constance_for_page/constantGlobal"
 type typePropsOfRowBody = {
     eachTodo: typeOfTodo;
     index: number;
@@ -18,12 +19,11 @@ type typePropsOfRowBody = {
 
 function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody) {
     const dispatchOfRedux = useDispatch();
-    const [state, dispatch] = useGlobalState();
-    let ContentForEdit: any = 'Không xác định ';
-    let contentForADD: any = 'Không xác định ';
-    let contentForWatch: any = ' không xác định ';
+    const [, dispatch] = useGlobalState();
+    let ContentForEdit: any = 'Unknow';
+    let contentForADD: any = 'Unknow';
+    let contentForWatch: any = 'Unknow';
     const handleWatch = (id: string) => {
-        // console.log('watch>>>', 999);
         dispatch(actions.toggleEditAddPageStack());
         dispatch(actions.getIdOfTodoPageStack(id));
         dispatch(actions.displayViewTodoStack());
@@ -34,16 +34,22 @@ function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody
     };
     const handleAdd = () => {
         dispatch(actions.toggleEditAddPageStack());
-        // console.log('add>>>', 999);
     };
     const handleDelete = (id: string) => {
         mutate(id);
     };
     const handleAddForPageProjects = () => {
-        // hiển thị form 
+        // hiển thị form
         dispatchOfRedux(displayFormAddEdit());
-        // 
     };
+    const handleEditForPageProjects = (id: string) => {
+        dispatchOfRedux(displayFormAddEdit());
+        dispatchOfRedux(changeIdAndKindOfForm({ id: id, kindOfForm: 'edit' }));
+    };
+    const handleViewForPageProjects =(id:string)=>{
+        dispatchOfRedux(displayFormAddEdit());
+        dispatchOfRedux(changeIdAndKindOfForm({ id: id, kindOfForm: CONST.VIEW }));
+    }
     switch (kindOfElement) {
         case KIND_OF_DEFAULT: {
             console.log('check component Stack >>>');
@@ -62,9 +68,9 @@ function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody
             break;
         }
         case LINK_PAGE.LINK_PAGE_PROJECT: {
-            ContentForEdit = 'Edit Project';
-            contentForADD = <div onClick={handleAddForPageProjects}>Add project</div>;
-            contentForWatch = 'Watch project';
+            ContentForEdit = <div onClick={() => handleEditForPageProjects(eachTodo._id)}>Edit</div>;
+            contentForADD = <div onClick={handleAddForPageProjects}>Add</div>;
+            contentForWatch = <div onClick={() => handleViewForPageProjects(eachTodo._id)}>View</div>;
             break;
         }
     }
@@ -100,7 +106,7 @@ function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody
 
 export default RowBody;
 /* 
-row body này dùng chung cho tất cả các page ==> nó có dạng nào tùy thuộc vào table truyền vào 
+RowBody Share with many page (), we distinguish follow var kindOfForm
 các page :
         page :/report 
         page :/stack

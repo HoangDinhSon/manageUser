@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { typeOfTodo } from '~/data/type/typeGlobal';
+import * as  CONSTANT from "~/data/constance_for_page/constantGlobal"
 //1. default value :
 const DEFAULT_OF_LIST_TODO = [
     {
@@ -10,15 +11,24 @@ const DEFAULT_OF_LIST_TODO = [
         createdDate: '',
     },
 ];
+export const ID_AND_KIND_OF_FORM = {
+    id: '',
+    kindOfForm: CONSTANT.ADD,
+};
 //2.type
 type todoFromFormAdd = Omit<typeOfTodo, '_id'>;
 type typeListTodoSendServer = Array<todoFromFormAdd>;
+type typeIdAndKindOfForm = {
+    id: string;
+    kindOfForm: string;
+};
 
 export interface typeInitialState {
     isDisplayFormAddEditViewPageProject: boolean;
     listTodoSendServer: typeListTodoSendServer;
     isDisplayFormVerify: boolean;
     valueFormVerify: boolean;
+    idAndKindOfForm: typeIdAndKindOfForm;
 }
 //3. initial
 const initialState: typeInitialState = {
@@ -26,6 +36,7 @@ const initialState: typeInitialState = {
     listTodoSendServer: DEFAULT_OF_LIST_TODO,
     isDisplayFormVerify: false,
     valueFormVerify: false,
+    idAndKindOfForm: ID_AND_KIND_OF_FORM,
 };
 // 4. tạo reducer với các action
 export const reducerSlice = createSlice({
@@ -42,6 +53,15 @@ export const reducerSlice = createSlice({
         addTodoIntoList: (state, action: PayloadAction<todoFromFormAdd>) => {
             state.listTodoSendServer.push(action.payload);
         },
+        deleteOneTodo: (state, action: PayloadAction<number>) => {
+            state.listTodoSendServer.splice(action.payload, 1);
+        },
+        addManyTodoIntoList: (state, action: PayloadAction<todoFromFormAdd[]>) => {
+            state.listTodoSendServer = [...action.payload];
+        },
+        setDefaultTodoList: (state) => {
+            state.listTodoSendServer = DEFAULT_OF_LIST_TODO;
+        },
         displayFormVerify: (state) => {
             state.isDisplayFormVerify = true;
         },
@@ -50,6 +70,9 @@ export const reducerSlice = createSlice({
         },
         updateValueFormVerify: (state, action: PayloadAction<boolean>) => {
             state.valueFormVerify = action.payload;
+        },
+        changeIdAndKindOfForm: (state, action: PayloadAction<typeIdAndKindOfForm>) => {
+            state.idAndKindOfForm={ ...action.payload}
         },
     },
 });
@@ -60,5 +83,17 @@ export const {
     displayFormVerify,
     hiddenFormVerify,
     updateValueFormVerify,
+    setDefaultTodoList,
+    addManyTodoIntoList,
+    deleteOneTodo,
+    changeIdAndKindOfForm,
 } = reducerSlice.actions;
 export default reducerSlice.reducer;
+/* 
+addTodolist hành động cập nhật 1 todo 
+
+
+
+
+
+*/

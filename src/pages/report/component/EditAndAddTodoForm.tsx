@@ -26,7 +26,7 @@ export const listInput = [
         name: `${NAME.author}`,
     },
     {
-        label: 'Create date',
+        label: 'Date Finish',
         name: `${NAME.createdDate}`,
     },
 ];
