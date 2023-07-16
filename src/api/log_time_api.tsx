@@ -18,9 +18,9 @@ const loginAuth = (payload: payloadLogin) =>
             password: payload.password,
         })
         .then((res) => res.data)
-        .catch((error) => {
-            // console.log('error>>>', error);
-        });
+        // .catch((error) => {
+        //     // console.log('error>>>', error);
+        // });
 
 const getLimitAndSkipUser = (limit: number, skip: number) =>
     axiosClient
