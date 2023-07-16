@@ -14,7 +14,7 @@ import {
 } from '~/app_redux/reducer_redux';
 import { typeOfTodo, typeOfListTodo } from '~/data/type/typeGlobal';
 import { updateTodoForPageProject } from '~/custome_hook/call_api';
-import * as CONST from "~/data/constance_for_page/constantGlobal"
+import * as CONST from "~/data/constance_for_page/constant_global"
 
 type typeDefaultFormAdd = Omit<typeOfTodo, '_id'>;
 type typeProps = {

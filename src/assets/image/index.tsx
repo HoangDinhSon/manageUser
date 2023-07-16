@@ -1,3 +1,3 @@
-import Frame from "./Login/Frame.png";
-import bgLogin from "./Login/bgLogin.png";
+import Frame from "./login/Frame.png";
+import bgLogin from "./login/bgLogin.png";
 export {Frame,bgLogin}

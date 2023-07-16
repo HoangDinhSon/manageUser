@@ -5,7 +5,7 @@ import iconLogout from './icon/icon_layout/iconLogout.svg';
 import arrowBackForLayout from './icon/icon_layout/arrowBackForLayout.svg';
 import cloudComputer from './icon/import_form/cloudComputer.svg';
 import icondot from './icon/import_form/icondot.svg';
-import IconcancelInFromDetaile from './icon/iconFormDetail/IconcancelInFromDetaile.svg';
+import  IconcancelInFromDetaile  from '~/assets/icon/icon_form_detail/IconcancelInFromDetaile.svg';
 import { iconCloseForFilter } from './icon';
 import iconArrowRight from './icon/icon_of_menu/iconArrowRight.png';
 import iconArrowLeft from './icon/icon_of_menu/iconArrowLeft.png';

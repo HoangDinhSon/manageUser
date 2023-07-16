@@ -1,5 +1,5 @@
 import { arrowSelect } from "../../assets/icon";
-import { listOption } from "../../data/constance_for_page/UI_TYPE_CONSTANT";
+import { listOption } from "../../data/constance_for_page/constant_type_ui";
 type typeSelect = {
     nameSelect:string;
     listOption:listOption;// mảng các object 

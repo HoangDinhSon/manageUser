@@ -29,7 +29,7 @@ import IconViewUser from './icon_of_table/IconViewUser.svg';
 import IconEditUser from './icon_of_table/IconEditUser.svg';
 export { filterbutton, iconSearch, iconArrowTable, IconViewUser, IconEditUser };
 //icon Form Detail
-import IconcancelInFromDetaile from './iconFormDetail/IconcancelInFromDetaile.svg';
+import IconcancelInFromDetaile from './icon_form_detail/IconcancelInFromDetaile.svg';
 export { IconcancelInFromDetaile };
 //
 import arrowSelect from './edit_user/arrowSelect.svg';

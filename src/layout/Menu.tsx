@@ -6,13 +6,15 @@ import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import { TransitionForAsideBar, HamburgerMenu } from '../components/component_layout/Hamburger';
-import * as icon from '../assets/icon';
+// import * as icon from '../assets/icon';
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
 import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
 import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/app_redux/store';
+import * as CONST from "~/data/constance_for_page/constant_global"
+
 function Menu({ children }: any) {
     const {isDisplayFormVerify}= useSelector((state:RootState)=>state.manageAppTodo)
     const location = useLocation();// ko dùng tới ??
@@ -144,36 +146,14 @@ function Menu({ children }: any) {
                 <div className=" w-[--heightNav] bg-white h-screen pt-[--heightNav]">
                     <div className={classAsideBar}>
                         <div className={classListItem}>
-                            <IconMenu
-                                icon={icon.dasboard}
-                                iconNameMenu={icon.nameOfDashboard}
-                                name={linkPage.LINK_PAGE_DASHBOARD}
-                            />
-                            <IconMenu
-                                icon={icon.project}
-                                iconNameMenu={icon.nameOfproject}
-                                name={linkPage.LINK_PAGE_PROJECT}
-                            />
-                            <IconMenu
-                                icon={icon.stacks}
-                                iconNameMenu={icon.nameOfStacks}
-                                name={linkPage.LINK_PAGE_STACKS}
-                            />
-                            <IconMenu
-                                icon={icon.Report}
-                                iconNameMenu={icon.nameOfreport}
-                                name={linkPage.LINK_PAGE_REPORT}
-                            />
-                            <IconMenu
-                                icon={icon.accounts}
-                                iconNameMenu={icon.nameOfaccounts}
-                                name={linkPage.LINK_PAGE_ACCOUNT}
-                            />
-                            <IconMenu
-                                icon={icon.RoleManager}
-                                iconNameMenu={icon.nameOfRolemanager}
-                                name={linkPage.LINK_PAGE_ROLEMANAGER}
-                            />
+                            {CONST.listMenuAsideBar.map((ele,index)=>{
+                                return(  <IconMenu
+                                    key ={index}
+                                    icon={ele.icon}
+                                    iconNameMenu={ele.iconNameMenu}
+                                    name={ele.name}
+                                />)
+                            })}
                         </div>
                         <div className=" flex flex-col items-center gap-10 pb-5 xs_max:gap-5 ">
                             <img src={notification} alt="" className="cursor-pointer" />

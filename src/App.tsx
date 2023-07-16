@@ -5,20 +5,11 @@ import * as LINK_PAGE from './data/constance_for_page';
 import { useGlobalState } from './store/Provider';
 import { actions } from './store';
 import { useQuery } from 'react-query';
-import { getLimitAndSkipUser } from './Api/logTimeApi';
+import { getLimitAndSkipUser } from './api/log_time_api';
 import { Fragment, useEffect } from 'react';
-import { AddTodoForm, WatchTodoForm, EditAndAddTodoForm, Stack } from './pages';
-// import { useLocation } from 'react-router-dom';
+import {  WatchTodoForm, EditAndAddTodoForm, Stack } from './pages';
 
 function App() {
-    // const location = useLocation();
-    // const pathName = location.pathname;
-    // let textFirst: null|any= ""
-    // textFirst = pathName.includes("/report");
-    // const text ="/dsfsfs"
-    // console.log('pathNAm>>>', textFirst);
-    // let pathName = location.pathname.match(/(^\/[a-z]+$)/);
-    // console.log('pathName >>>', pathName?.[0]);
     const [state, dispatch] = useGlobalState();
     let limit = state.rowPerPage;
     let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;

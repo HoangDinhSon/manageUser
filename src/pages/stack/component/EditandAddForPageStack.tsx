@@ -10,7 +10,7 @@ import { actions } from '~/store';
 import { useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { updateTodo, createTodo } from '~/Api/logTimeApi';
+import { updateTodo, createTodo } from '~/api/log_time_api';
 type typeProps = {
     listTodo: typeOfListTodo;
     refetch: any;

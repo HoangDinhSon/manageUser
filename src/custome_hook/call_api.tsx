@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
-import { axiosTodo } from '~/Api/axiosClient';
+import { axiosTodo } from '~/api/axios_client';
 import { toast } from 'react-hot-toast';
 import type { AxiosResponse } from 'axios';
 import { typeOfTodo } from '~/data/type/typeGlobal';
 import { useDispatch, useSelector } from 'react-redux';
+import handleError from './handle_error';
 import {
     updateValueFormVerify,
     addManyTodoIntoList,
@@ -12,7 +13,7 @@ import {
     hiddenFormAddEdit,
 } from '~/app_redux/reducer_redux';
 import { RootState } from '~/app_redux/store';
-import { updateTodoHandle } from '~/Api/logTimeApi';
+import { updateTodoHandle } from '~/api/log_time_api';
 import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
 function useGetData() {
@@ -57,12 +58,13 @@ function createTodoHandle(refetch: () => void) {
             .post('/todos', dataForAdd)
             .then((res) => {
                 if (res.data) {
-                    console.log('resdata if success>>>', res.data);
+                    // console.log('resdata if success>>>', res.data);
                     refCloneListTodo.current.splice(i, 1);
                 }
             })
-            .catch(() => {
-                toast.error(`can NOT create Todo `);
+            .catch((error) => {
+                // toast.error(`can NOT create Todo `);
+                handleError({ error, myMessage: 'can NOT create Todo' });
             });
     };
     // check length của listTodo và verify of User
@@ -112,8 +114,9 @@ const updateTodoForPageProject = ({ dataSendServer, refetch, dispatchRedux }: ty
                 toast.error('update to do Fail');
             }
         })
-        .catch(() => {
-            toast.error('update to do Fail catch');
+        .catch((error) => {
+            handleError({ error, myMessage: 'Update to do Fail catch' });
         });
 };
 export { updateTodoForPageProject };
+

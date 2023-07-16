@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { typeOfTodo } from '~/data/type/typeGlobal';
-import * as  CONSTANT from "~/data/constance_for_page/constantGlobal"
+import * as  CONSTANT from "~/data/constance_for_page/constant_global"
 //1. default value :
 const DEFAULT_OF_LIST_TODO = [
     {

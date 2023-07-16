@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { typeOfTodo, typeOfListTodo, NAME } from '~/data/type/typeGlobal';
 import { schema } from '../validation_report_page';
 import { LINK_PAGE_REPORT } from '~/data/constance_for_page';
-import { updateTodo, createTodo } from '~/Api/logTimeApi';
+import { updateTodo, createTodo } from '~/api/log_time_api';
 import { InputForReport } from '~/components';
 
 type typeDefaultValue = Omit<typeOfTodo, '_id'>;
@@ -93,7 +93,7 @@ function EditAndAddTodoForm() {
         formState: { errors },
     } = useForm({
         resolver: yupResolver(schema),
-        defaultValues: todoForEdit||defaultValue,
+        defaultValues: todoForEdit || defaultValue,
     });
     const handleSubmitForForm = (data: any) => {
         switch (kindOfForm) {
@@ -124,6 +124,8 @@ function EditAndAddTodoForm() {
     }, [errors]);
     return (
         <div className=" pt-[30px]  h-full w-full z-50">
+            {kindOfForm === EDIT && <div className="px-[20px] w-full ">EDIT TODO</div>}
+            {kindOfForm === ADD && <div className="px-[20px] w-full">ADD TODO</div>}
             <div className="w-[500px] px-[20px]">
                 <form action="" onSubmit={handleSubmit(handleSubmitForForm)}>
                     {listInput?.map((ele, index) => {

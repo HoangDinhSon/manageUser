@@ -1,5 +1,5 @@
 
-import { NameRegisterForm } from '../../data/constance_for_page/UI_TYPE_CONSTANT';
+import { NameRegisterForm } from '../../data/constance_for_page/constant_type_ui';
 type typeInput = {
     content: string;
     name: string;

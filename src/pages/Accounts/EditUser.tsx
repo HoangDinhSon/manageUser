@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useState, KeyboardEvent, useEffect } from 'react';
 import { useMutation} from 'react-query';
 import toast from 'react-hot-toast';
-import { editUserBaseOnID } from '~/Api/logTimeApi';
+import { editUserBaseOnID } from '~/api/log_time_api';
 import { SkillDisplayInput } from '~/components';
 import { useGlobalState } from '~/store/Provider';
 import { actions } from '~/store';
@@ -21,8 +21,8 @@ import {
     listOptionEyeColor,
     listHairColor,
     listGender,
-} from '~/data/constance_for_page/UI_TYPE_CONSTANT';
-import axiosClient from '~/Api/axiosClient';
+} from '~/data/constance_for_page/constant_type_ui';
+import axiosClient from '~/api/axios_client';
 
 function EditUser() {
     console.log('edituser>>>', 999);

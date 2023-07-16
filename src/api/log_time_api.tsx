@@ -1,5 +1,5 @@
-import axiosClient from './axiosClient';
-import { axiosTodo } from './axiosClient';
+import axiosClient from '~/api/axios_client';
+import { axiosTodo } from '~/api/axios_client';
 import { typeOfTodo } from '~/data/type/typeGlobal';
 import type { AxiosResponse } from 'axios';
 import { toast } from 'react-hot-toast';
@@ -17,7 +17,10 @@ const loginAuth = (payload: payloadLogin) =>
             username: payload.username,
             password: payload.password,
         })
-        .then((res) => res.data);
+        .then((res) => res.data)
+        .catch((error) => {
+            // console.log('error>>>', error);
+        });
 
 const getLimitAndSkipUser = (limit: number, skip: number) =>
     axiosClient
@@ -94,4 +97,4 @@ const deleteTodo = (id: string) =>
 export { getTodo, updateTodo, createTodo, deleteTodo };
 // axios for useEffect
 const updateTodoHandle = (dataForUpdate: typeOfTodo) => axiosTodo.post(`/todos/${dataForUpdate._id}`, dataForUpdate);
-export {  updateTodoHandle };
+export { updateTodoHandle };

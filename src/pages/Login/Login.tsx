@@ -8,8 +8,8 @@ import { HrLine } from '../../components/component_reuse';
 import { TextFieldLoginPassword } from '../../components/Login';
 import { Frame, bgLogin } from '../../assets/image';
 import { resolverLogin, FormLogin } from './validationLogin';
-import { loginAuth } from '../../Api/logTimeApi';
-import {  useState } from 'react';
+import { loginAuth } from '../../api/log_time_api';
+import debounce from '~/custome_hook/debounce';
 
 type payloadLogin = {
     username: string;
@@ -23,38 +23,28 @@ function Login() {
         window.location.href = localAccount;
         return <LinearProgress />;
     }
-    const [isDisableLogin, setDisableLogin] = useState(false);
-
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<FormLogin>(resolverLogin);
-    const { mutate,  isLoading } = useMutation({
+    const { mutate, isLoading } = useMutation({
         mutationFn: loginAuth,
         onSuccess: (data) => {
+            console.log('onSucess>>>', 999);
             localStorage.setItem('userAdmin', JSON.stringify(data.token));
             location.href = localAccount;
         },
         onError: (error: any) => {
             toast.error(
-                `Fail!!!  ${
-                    error?.response.status === 400 ? ' Password or Username wrong' : 'error network'
-                }`,{duration:2000}
+                `Fail!!!  ${error?.response.status === 400 ? ' Password or Username wrong' : 'Error network'}`,
+                { duration: 2000 },
             );
         },
     });
-
     const onSubmit = (payload: payloadLogin) => {
-        mutate(payload);
-    };
-    const handleDisableLogin = () => {
-        setTimeout(() => {
-            setDisableLogin(true);
-        }, 1);
-        setTimeout(() => {
-            setDisableLogin(false);
-        }, 2000);
+        // console.log('click on submit >>>', 1);
+        debounce(() =>  mutate(payload), 500);
     };
     //UI ***
     const theme = useTheme();
@@ -147,14 +137,12 @@ function Login() {
                                     type="submit"
                                     variant="contained"
                                     fullWidth
-                                    disabled={isDisableLogin}
                                     sx={{
                                         marginTop: '20px',
                                         [xsMax]: {
                                             marginTop: '10px',
                                         },
                                     }}
-                                    onClick={handleDisableLogin}
                                 >
                                     {isLoading ? 'Login...' : 'Login'}
                                 </Button>

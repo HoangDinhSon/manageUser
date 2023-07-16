@@ -2,7 +2,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
 // import { Outlet } from 'react-router-dom';
 import { TableAnimation, TableForNewApi } from '../../components';
-import { getTodo } from '../../Api/logTimeApi';
+import { getTodo } from '../../api/log_time_api';
 import { EditAndAddForPageStack } from '..';
 import { useGlobalState } from '~/store/Provider';
 

@@ -2,14 +2,14 @@ import { typeOfTodo } from '~/data/type/typeGlobal';
 import { Link } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { toast } from 'react-hot-toast';
-import { deleteTodo } from '~/Api/logTimeApi';
+import { deleteTodo } from '~/api/log_time_api';
 import { KIND_OF_DEFAULT } from '../TableForNewApi';
 import * as LINK_PAGE from '~/data/constance_for_page';
 import { useGlobalState } from '~/store/Provider';
 import { actions } from '~/store';
 import { useDispatch } from 'react-redux';
 import { displayFormAddEdit, changeIdAndKindOfForm } from '~/app_redux/reducer_redux';
-import * as CONST from "~/data/constance_for_page/constantGlobal"
+import * as CONST from "~/data/constance_for_page/constant_global"
 type typePropsOfRowBody = {
     eachTodo: typeOfTodo;
     index: number;

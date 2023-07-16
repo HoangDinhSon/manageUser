@@ -10,7 +10,7 @@ const axiosClient = axios.create({
 });
 const axiosTodo = axios.create({
     baseURL: 'https://api-todo-jcyg.onrender.com',
-    timeout: 5000,
+    timeout: 10000,
     headers: {
         'Content-Type': 'application/json; charset=utf-8',
     },

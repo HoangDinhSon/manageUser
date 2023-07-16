@@ -2,7 +2,7 @@ import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useState, KeyboardEvent ,useEffect} from 'react';
-import { addUserToServer } from '../../Api/logTimeApi';
+import { addUserToServer } from '../../api/log_time_api';
 import { InputWithCharacter, Select, Input, PhoneNumber, SkillDisplayInput } from '../../components';
 import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
@@ -16,7 +16,7 @@ import {
     listGender,
     listOptionEyeColor,
     listHairColor,
-} from '../../data/constance_for_page/UI_TYPE_CONSTANT';
+} from '../../data/constance_for_page/constant_type_ui';
 
 function AddUser() {
     const [, dispatch] = useGlobalState();

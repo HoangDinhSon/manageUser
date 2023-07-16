@@ -1,5 +1,5 @@
 import { arrowSelect } from '../../assets/icon';
-import { CODE_PHONE_NUMBER } from '../../data/constance_for_page/UI_TYPE_CONSTANT';
+import { CODE_PHONE_NUMBER } from '../../data/constance_for_page/constant_type_ui';
 type typeOfPhoneNumber = {
     nameCodeCountry: string;
     namePhoneNumber: string;

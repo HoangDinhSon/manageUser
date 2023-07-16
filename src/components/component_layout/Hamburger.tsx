@@ -66,7 +66,7 @@ function HamburgerMenu({ onClick }: any) {
 }
 
 /*
-chức năng : tạo hiệu ứng transition cho thanh asideseBar 
+feature : make affect transition for component asideBar 
 hoạt động : xuất hiện icon Mui --> sau khi nhấn vào icon Mui thì w-0--> w-85px 
 */
 

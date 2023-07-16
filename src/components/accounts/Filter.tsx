@@ -1,55 +1,68 @@
 import { Checkbox, FormControlLabel, Select, MenuItem, Button } from '@mui/material';
-import { useRef, useState, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
+import { useRef, useState, useMemo, useEffect } from 'react';
+import { useForm, useController } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { getUserBaseFilter } from '../../Api/logTimeApi';
+import { getUserBaseFilter } from '../../api/log_time_api';
 import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
 import { OutPutFormFilter } from '../../data/type';
 import { ListFilter, CRITERIAL_FOR_FILTER_DEFAULT } from '../../data/constance_for_page';
-import  {typeSelect} from "../../data/constance_for_page/constantFilter"
+import { typeSelect } from '../../data/constance_for_page/constant_filter';
 type PropsCheckAndSelect = {
     PropsCheck: string;
     PropsSelect: string;
     label: string;
     content: typeSelect[];
     register: any;
+    control: any;
 };
 
-function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: PropsCheckAndSelect) {
+function CheckAndSelect({ PropsCheck, PropsSelect, label, content,  control}: PropsCheckAndSelect) {
     const [state] = useGlobalState();
+    /*Start Test useControl*/
+    const { field: checkBox } = useController({
+        control: control,
+        name: `${PropsCheck}.${PropsCheck}`,
+    });
+    const { field: select } = useController({
+        control: control,
+        name: `${PropsCheck}.${PropsSelect}`,
+    });
+    /*End  Test useControl*/
     const [value, setValue] = useState(state.criterialForFilter[PropsCheck].select);
     const [isChecked, setIsChecked] = useState(state.criterialForFilter[PropsCheck][PropsCheck]);
     const handleChangeSelect = (e: any) => {
         setValue(e.target.value);
+        select.onChange(e.target.value)
     };
     const handleChangeCheckBox = (e: any) => {
+        checkBox.onChange(e.target.checked);// true or false send value to react hook form 
         setIsChecked(e.target.checked);
     };
-    /* mục đích:  dùng để câp nhật lại UI khi state thay đổi.  */
-    useMemo(() => {
+    /* mục đích:  dùng để câp nhật lại UI khi state redux thay đổi.  */
+    useEffect(() => {
         setValue(state.criterialForFilter[PropsCheck].select);
         setIsChecked(state.criterialForFilter[PropsCheck][PropsCheck]);
     }, [state]);
-
     return (
         <div className="mt-[19px] res_height_Filter">
             <FormControlLabel
                 control={
                     <Checkbox
-                        {...register(`${PropsCheck}.${PropsCheck}`)}
-                        checked={isChecked}
+                        checked={!!isChecked}
                         onChange={(e) => handleChangeCheckBox(e)}
+                        name={checkBox.name}
                     ></Checkbox>
                 }
                 label={label}
                 sx={{ width: '100%', height: '20px' }}
             />
             <Select
-                {...register(`${PropsCheck}.${PropsSelect}`)}
                 value={value}
                 sx={{ width: '100%', height: '36px', marginTop: '11px' }}
                 onChange={handleChangeSelect}
+                //test
+                name = {select.name}
             >
                 {content.map((element: typeSelect) => (
                     <MenuItem value={element.value} key={element.value}>
@@ -63,7 +76,7 @@ function CheckAndSelect({ PropsCheck, PropsSelect, label, content, register }: P
 
 function Filter() {
     const [state, dispatch] = useGlobalState();
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, control} = useForm();
     let responseFromServer = useRef<any>([]);
     const { mutate, isLoading } = useMutation({
         mutationFn: getUserBaseFilter,
@@ -92,8 +105,7 @@ function Filter() {
             }
         });
         // sau khi submit thì phải reset mảng vì nếu không nó sẽ tích vào rất nhiêu lần
-        responseFromServer.current = [];
-        reset(); // reset lại bộ nhớ tạm trong handleSubmit của react hook form
+        responseFromServer.current = []; 
     };
     const handleClearForm = () => {
         reset();
@@ -119,15 +131,17 @@ function Filter() {
                             register={register}
                             PropsCheck={each.propcheck}
                             PropsSelect={each.propselect}
+                            control={control}
+                           
                         />
                     ))}
                     <div className="mt-[42px] flex justify-between relative">
-                        <p className='absolute top-[-30px]  w-full'>Click FILTER to close</p>
+                        <p className="absolute top-[-30px]  w-full">Click FILTER to close</p>
                         <Button variant="outlined" sx={{ width: '129px' }} onClick={handleClearForm}>
                             Clear All
                         </Button>
                         <Button variant="contained" sx={{ width: '129px' }} type="submit">
-                            Show{' '}
+                            Show
                         </Button>
                     </div>
                 </form>
@@ -138,6 +152,6 @@ function Filter() {
 
 export default Filter;
 /* 
-useMemo đề bọc 2 cái setValue  vì tránh vòng lặp vĩnh viễn 
+useEffect đề bọc 2 cái setValue  vì tránh vòng lặp vĩnh viễn 
 
 */

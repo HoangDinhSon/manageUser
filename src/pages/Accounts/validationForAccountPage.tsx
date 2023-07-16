@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NameRegisterForm } from '../../data/constance_for_page/UI_TYPE_CONSTANT';
+import { NameRegisterForm } from '../../data/constance_for_page/constant_type_ui';
 const {
     firstName,
     lastName,
