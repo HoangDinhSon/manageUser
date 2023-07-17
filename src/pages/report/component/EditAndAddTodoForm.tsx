@@ -9,6 +9,7 @@ import { schema } from '../validation_report_page';
 import { LINK_PAGE_REPORT } from '~/data/constance_for_page';
 import { updateTodo, createTodo } from '~/api/log_time_api';
 import { InputForReport } from '~/components';
+import { handleErrorAxiosUseForReactQuery } from '~/custome_hook/handle_error';
 
 type typeDefaultValue = Omit<typeOfTodo, '_id'>;
 
@@ -70,8 +71,8 @@ function EditAndAddTodoForm() {
             refetch();
             window.history.back();
         },
-        onError: () => {
-            toast.error('some thing wrong');
+        onError: (error) => {
+            handleErrorAxiosUseForReactQuery(error, 'Whoops!: Some thing wrong');
         },
     });
     // create to do
@@ -81,8 +82,8 @@ function EditAndAddTodoForm() {
             refetch();
             window.history.back();
         },
-        onError: () => {
-            toast.error('some thing wrong');
+        onError: (error) => {
+            handleErrorAxiosUseForReactQuery(error, 'Whoops!:Some thing wrong');
         },
     });
 

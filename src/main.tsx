@@ -13,10 +13,8 @@ import { Provider } from 'react-redux';
 
 const queryClient = new QueryClient({
     queryCache: new QueryCache({
-        onError: (error: any, query) => {
-            if (query.state.data !== undefined) {
-                toast.error(`Something went wrong: ${error.message}`);
-            }
+        onError: () => {
+            toast.error('Something went wrong at main');
         },
     }),
 });

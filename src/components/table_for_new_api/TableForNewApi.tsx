@@ -2,7 +2,7 @@ import { RowHeader, RowBody } from '..';
 import { typeOfListTodo } from '~/data/type/typeGlobal';
 import { useLocation } from 'react-router-dom';
 import * as LINK_PAGE from '~/data/constance_for_page';
-import { useMemo, useEffect } from 'react';
+// import { useMemo, useEffect } from 'react';
 
 type typeProps = {
     listTodo: typeOfListTodo;
@@ -23,9 +23,7 @@ function TableForNewApi({ listTodo, refetch }: typeProps) {
         kindOfElement = LINK_PAGE.LINK_PAGE_PROJECT;
     }
     if (kindOfElement === KIND_OF_DEFAULT) {
-        useEffect(() => {
-            console.log('you need update case at Table >>>');
-        },[]);
+        console.log('you need update case at Table >>>');
     }
 
     return (

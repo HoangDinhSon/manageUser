@@ -7,9 +7,13 @@ import { KIND_OF_DEFAULT } from '../TableForNewApi';
 import * as LINK_PAGE from '~/data/constance_for_page';
 import { useGlobalState } from '~/store/Provider';
 import { actions } from '~/store';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/app_redux/store';
+import { displayFormVerify, updateValueFormVerify } from '~/app_redux/reducer_redux';
 import { displayFormAddEdit, changeIdAndKindOfForm } from '~/app_redux/reducer_redux';
-import * as CONST from "~/data/constance_for_page/constant_global"
+import * as CONST from '~/data/constance_for_page/constant_global';
+import { useState, useRef, useEffect } from 'react';
+import { handleErrorAxiosUseForReactQuery } from '~/custome_hook/handle_error';
 type typePropsOfRowBody = {
     eachTodo: typeOfTodo;
     index: number;
@@ -18,8 +22,10 @@ type typePropsOfRowBody = {
 };
 
 function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody) {
-    const dispatchOfRedux = useDispatch();
-    const [, dispatch] = useGlobalState();
+    const idRefDelete = useRef('');
+    const dispatchOfRedux = useDispatch(); // dispatch of redux
+    const [, dispatch] = useGlobalState(); // dispatch of hook react
+    const { valueFormVerify } = useSelector((state: RootState) => state.manageAppTodo);
     let ContentForEdit: any = 'Unknow';
     let contentForADD: any = 'Unknow';
     let contentForWatch: any = 'Unknow';
@@ -36,7 +42,9 @@ function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody
         dispatch(actions.toggleEditAddPageStack());
     };
     const handleDelete = (id: string) => {
-        mutate(id);
+        dispatchOfRedux(displayFormVerify());
+        idRefDelete.current=id
+        // setIdDelete(id);
     };
     const handleAddForPageProjects = () => {
         // hiển thị form
@@ -46,10 +54,10 @@ function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody
         dispatchOfRedux(displayFormAddEdit());
         dispatchOfRedux(changeIdAndKindOfForm({ id: id, kindOfForm: 'edit' }));
     };
-    const handleViewForPageProjects =(id:string)=>{
+    const handleViewForPageProjects = (id: string) => {
         dispatchOfRedux(displayFormAddEdit());
         dispatchOfRedux(changeIdAndKindOfForm({ id: id, kindOfForm: CONST.VIEW }));
-    }
+    };
     switch (kindOfElement) {
         case KIND_OF_DEFAULT: {
             console.log('check component Stack >>>');
@@ -78,13 +86,23 @@ function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody
     const { mutate } = useMutation({
         mutationFn: deleteTodo,
         onSuccess: () => {
-            toast.success('delete success');
+            toast.success('Delete success');
+            dispatchOfRedux(updateValueFormVerify(false));
+            idRefDelete.current=""
             refetch();
         },
-        onError: () => {
-            toast.error('delete fail');
+        onError: (error) => {
+            handleErrorAxiosUseForReactQuery(error,'Whoops!! delete fail')
         },
     });
+
+    /* delete only trigger when verify by user and idDelete.current truthy */
+    useEffect(() => {
+        if (!!idRefDelete.current && valueFormVerify) {
+            mutate(idRefDelete.current);
+            console.log('check id delete>>>', idRefDelete.current,valueFormVerify);
+        }
+    },[!!idRefDelete.current && valueFormVerify]);
 
     return (
         <tr>

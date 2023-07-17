@@ -10,6 +10,9 @@ import { Frame, bgLogin } from '../../assets/image';
 import { resolverLogin, FormLogin } from './validationLogin';
 import { loginAuth } from '../../api/log_time_api';
 import debounce from '~/custome_hook/debounce';
+import { handleErrorAxiosUseForReactQuery } from '~/custome_hook/handle_error';
+
+
 
 type payloadLogin = {
     username: string;
@@ -31,19 +34,14 @@ function Login() {
     const { mutate, isLoading } = useMutation({
         mutationFn: loginAuth,
         onSuccess: (data) => {
-            console.log('onSucess>>>', 999);
             localStorage.setItem('userAdmin', JSON.stringify(data.token));
             location.href = localAccount;
         },
         onError: (error: any) => {
-            toast.error(
-                `Fail!!!  ${error?.response.status === 400 ? ' Password or Username wrong' : 'Error network'}`,
-                { duration: 2000 },
-            );
+            handleErrorAxiosUseForReactQuery(error,"Password or Username Wrong")
         },
     });
     const onSubmit = (payload: payloadLogin) => {
-        // console.log('click on submit >>>', 1);
         debounce(() =>  mutate(payload), 500);
     };
     //UI ***

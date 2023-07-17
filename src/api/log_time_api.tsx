@@ -1,9 +1,12 @@
 import axiosClient from '~/api/axios_client';
 import { axiosTodo } from '~/api/axios_client';
 import { typeOfTodo } from '~/data/type/typeGlobal';
-import type { AxiosResponse } from 'axios';
-import { toast } from 'react-hot-toast';
-import { useEffect } from 'react';
+// import handleError from '~/custome_hook/handle_error';
+import { handleErrorAxiosUseForReactQuery } from '~/custome_hook/handle_error';
+
+// import type { AxiosResponse } from 'axios';
+// import { toast } from 'react-hot-toast';
+// import { useEffect } from 'react';
 
 type typeID = string | number;
 type payloadLogin = {
@@ -18,9 +21,9 @@ const loginAuth = (payload: payloadLogin) =>
             password: payload.password,
         })
         .then((res) => res.data)
-        // .catch((error) => {
-        //     // console.log('error>>>', error);
-        // });
+        .catch((error) => {
+            throw error;
+        });
 
 const getLimitAndSkipUser = (limit: number, skip: number) =>
     axiosClient
@@ -43,8 +46,8 @@ const getLimitAndSkipUser = (limit: number, skip: number) =>
             } else {
                 // Something happened in setting up the request that triggered an Error
                 console.log('Error', error.message);
+                console.log(error.config);
             }
-            console.log(error.config);
         });
 
 const getUserBaseFilter = ({ keyFilter, valueFilter }: any) =>
@@ -59,7 +62,7 @@ const addUserToServer = (detailUser: any) => axiosClient.post('/users/add', deta
 
 export { loginAuth, getLimitAndSkipUser, getUserBaseOnID, addUserToServer, editUserBaseOnID, getUserBaseFilter };
 /* 
- ghi ghi hàm mục đích là để truyền tham số 
+ Ghi hàm mục đích là để truyền tham số 
  dùng axios call API 
  dùng react Query theo doi quá trình call API của axios . 
 
@@ -69,15 +72,15 @@ const getTodo = () =>
     axiosTodo
         .get('/todos')
         .then((res) => res.data)
-        .catch((error) => {
-            console.log('Error Get Todos>>>', error.message);
-        });
+        .catch((error)=>{
+            handleErrorAxiosUseForReactQuery(error,"fail get data for report page")
+        })
 const updateTodo = (dataForUpdate: typeOfTodo) =>
     axiosTodo
         .post(`/todos/${dataForUpdate._id}`, dataForUpdate)
         .then((res) => res.data)
         .catch((error) => {
-            console.log('error at updateTodo>>>', error.message);
+            throw error
         });
 type typeDataForAdd = Omit<typeOfTodo, '_id'>;
 const createTodo = (dataForAdd: typeDataForAdd) =>
@@ -85,14 +88,14 @@ const createTodo = (dataForAdd: typeDataForAdd) =>
         .post('/todos', dataForAdd)
         .then((res) => res.data)
         .catch((error) => {
-            console.log('error at createTodo>>>', error.message);
+            throw error
         });
 const deleteTodo = (id: string) =>
     axiosTodo
         .delete(`/todos/${id}`)
         .then((res) => res.data)
         .catch((error) => {
-            console.log('error at deleteTodo>>>', error.message);
+            throw error
         });
 export { getTodo, updateTodo, createTodo, deleteTodo };
 // axios for useEffect

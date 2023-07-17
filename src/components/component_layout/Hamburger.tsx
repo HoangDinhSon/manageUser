@@ -69,7 +69,7 @@ function HamburgerMenu({ onClick }: any) {
 feature : make affect transition for component asideBar 
 hoạt động : xuất hiện icon Mui --> sau khi nhấn vào icon Mui thì w-0--> w-85px 
 */
-
+let idSetTimeout: any;
 function TransitionForAsideBar({ children }: any) {
     const [classChildren, setClassChildren] = useState('');
     const [state] = ContextState.useGlobalState();
@@ -79,7 +79,7 @@ function TransitionForAsideBar({ children }: any) {
         classDiv = 'fixed z-[2] w-[0] transition-[all] duration-[--durationTableUser] overflow-hidden';
     }
     // sau khi xuất hiện thì asid menu dc fixed
-    let idSetTimeout: any;
+ 
     useEffect(() => {
         if (state.isDisplayAsideMenu === true) {
             idSetTimeout = setTimeout(() => {

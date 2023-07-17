@@ -94,7 +94,7 @@ type typeOfTodo = {
     text: string;//Go to sleep
     complete: boolean;//true
     author: string;//my name is son
-    createdDate: string;//23/12/2023
+    createdDate: string|Date;//23/12/2023
 };
 const NAME = {
     text: 'text',

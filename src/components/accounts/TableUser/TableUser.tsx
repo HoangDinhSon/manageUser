@@ -33,7 +33,7 @@ function TableUser() {
                         listFilterPagination.map((user: any, index: number) => (
                             <TableRowForBody user={user} key={index} />
                         ))}
-                    {criterialWasChosen === 0 && listUser.length === 0 && (
+                    {criterialWasChosen === 0 && listUser?.length === 0 && (
                         <tr>
                             <td colSpan={11} className="text-center">
                                 WE HAVE NOT DATA

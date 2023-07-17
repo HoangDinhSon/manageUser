@@ -21,6 +21,9 @@ function App() {
                 dispatch(actions.upDateListUser(res));
             }
         },
+        onError:()=>{
+            console.log('only will have response from server >>>', 999);
+        },
         keepPreviousData: true,
     });
     const elements = useRoutes([
