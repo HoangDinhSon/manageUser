@@ -90,10 +90,7 @@ export const {
 } = reducerSlice.actions;
 export default reducerSlice.reducer;
 /* 
-addTodolist hành động cập nhật 1 todo 
-
-
-
-
-
+Redux reducer : 
+step 1: make reducer (initial state , and reducer )
+step 2: in store run it and save it in key 
 */

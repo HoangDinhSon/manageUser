@@ -19,21 +19,30 @@ import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 function useGetData() {
     const [triggerFetching, setTriggerFetching] = useState(1);
     const [resForFetch, setDataOfRes] = useState<any>(null);
+    /* build ra product need delete because Strict mode  */
+    const refCleanup = useRef<boolean>(false);
     const refetch = () => {
         setTriggerFetching((prev) => (prev += 1));
     };
-    // define axios call api 
+    // define axios call api
     const getTodoHandleByUseEffect = async (setSate: (res: AxiosResponse<any, any>) => void) => {
         try {
             const res = await axiosTodo.get('/todos');
             if (res.data) {
                 setSate(res);
+                refCleanup.current = false;
             }
         } catch (error: any) {
             toast.error(`Oh some thing Error`);
         }
     };
     useEffect(() => {
+        /*Start  Hàm này sẽ không có tác dụng trong product vì trong product Strict mode*/
+        if (refCleanup.current) {
+            return;
+        }
+        refCleanup.current = true;
+        /*End  Hàm này sẽ không có tác dụng trong product vì trong product Strict mode */
         getTodoHandleByUseEffect(setDataOfRes);
     }, [triggerFetching]);
     return { refetch: refetch, response: resForFetch };
@@ -90,8 +99,6 @@ export { createTodoHandle };
 Note 1 : when send listTodo to server : if some thing is error , will some todo can not send to ser ver , 
 that todo save at listTodoSendSer ver 
 */
-
-
 
 /* **********o0o************* */
 type typePropsOfUpdate = {

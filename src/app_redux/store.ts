@@ -11,5 +11,4 @@ export type AppDispatch = typeof store.dispatch;
 /* 
 tạo ra store 
 
-
 */

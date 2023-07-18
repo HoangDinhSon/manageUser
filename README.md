@@ -1,12 +1,14 @@
 # in program use useReducer , useContext make global state
-# Note config to import "../../"--> "~/MyComponent/Menu 
+
+# Note config to import "../../"--> "~/MyComponent/Menu
+
     1.setup npm install -D vite-tsconfig-paths
-    2. in file  tsconfig.json 
+    2. in file  tsconfig.json
      "baseUrl": "./",
         "paths": {
             "~/*": ["./src/*"]
         },
-    3.in File vite.config 
+    3.in File vite.config
        resolve: {
             alias: {
                 "~":'/src',
@@ -43,9 +45,9 @@ update state cha thì con cũng thay đổi
     step 2: type (because typescript)
     step 3: resolver --> object
     step 4: pass into useForm()
-    get value in form register 
+    get value in form register
     display data for form asynchronous and synchronized
-    notify cation with errors combine with yup 
+    notify cation with errors combine with yup
 
 # Destructor
 
@@ -68,7 +70,7 @@ update state cha thì con cũng thay đổi
 
 1. @base
 2. @component --> tạo ra class mới
-3. @utilities ()--> class write in there will higher priority class in base , in component 
+3. @utilities ()--> class write in there will higher priority class in base , in component
 
 dùng biến : border-t-[length:--borderWidth] chỉ dùng khi đi với var còn tailwindcss thì tự biết
 
@@ -171,5 +173,14 @@ ví dụ [isDisplay===false]
 
 # react hot toast
 
-<Toaster>
-    cần đặt ngay tại vị trí ngoài cùng để đảm bảo thông báo sẽ luôn dc hiển thị ra ngoài APP , main 
+    <Toaster>
+    cần đặt ngay tại vị trí ngoài cùng để đảm bảo thông báo sẽ luôn dc hiển thị ra ngoài APP , main
+
+# Redux :
+/_
+Redux reducer :
+step 1: make reducer (initial state , and reducer )
+step 2: in store run it and save it in key
+step 3: consumer in component , or dispatch actions
+Each App should reducer private
+_/

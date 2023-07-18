@@ -1,12 +1,7 @@
 import axiosClient from '~/api/axios_client';
 import { axiosTodo } from '~/api/axios_client';
 import { typeOfTodo } from '~/data/type/typeGlobal';
-// import handleError from '~/custome_hook/handle_error';
 import { handleErrorAxiosUseForReactQuery } from '~/custome_hook/handle_error';
-
-// import type { AxiosResponse } from 'axios';
-// import { toast } from 'react-hot-toast';
-// import { useEffect } from 'react';
 
 type typeID = string | number;
 type payloadLogin = {
@@ -101,3 +96,7 @@ export { getTodo, updateTodo, createTodo, deleteTodo };
 // axios for useEffect
 const updateTodoHandle = (dataForUpdate: typeOfTodo) => axiosTodo.post(`/todos/${dataForUpdate._id}`, dataForUpdate);
 export { updateTodoHandle };
+/* 
+    getTodo throw error but in useQuery cant get error ??? 
+
+*/

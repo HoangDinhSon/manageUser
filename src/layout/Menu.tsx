@@ -23,7 +23,7 @@ function Menu({ children }: any) {
         window.location.href = 'http://localhost:4000';
         return <div></div>;
     }
-    const handleLogOut = () => {
+    const handleLogOut = (e:any) => {
         setIsDisplayLogout(!isDisPlayLogout);
     };
 
@@ -113,9 +113,12 @@ function Menu({ children }: any) {
     ) {
         classForChildrenOfMenu = replaceManyString(classForChildrenOfMenu, ['z-[1]'], ['z-[4]']);
     }
+    const handleCloseFormLogout =()=>{
+        setIsDisplayLogout(false)
+    }
 
     return (
-        <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full ">
+        <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full " onClick={handleCloseFormLogout}>
             {/*1/4. TopNav Bar */}
             <div className="fixed z-[3] pl-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-full bg-[#fff]   ">
                 <HamburgerMenu onClick={handleDisplay} />
@@ -154,9 +157,9 @@ function Menu({ children }: any) {
                         </div>
                         <div className=" flex flex-col items-center gap-10 pb-5 xs_max:gap-5 ">
                             <img src={notification} alt="" className="cursor-pointer" />
-                            <div className="relative">
+                            <div className="relative" onClick={(e)=>e.stopPropagation()}>
                                 <div className="absolute bottom-0 left-[52px]">{isDisPlayLogout && <FormLogOut />}</div>
-                                <img src={bgAvatar} alt="" onClick={handleLogOut} className="cursor-pointer" />
+                                <img src={bgAvatar} alt="" onClick={(e)=>handleLogOut(e)} className="cursor-pointer" />
                             </div>
                         </div>
                     </div>
