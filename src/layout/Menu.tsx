@@ -6,11 +6,9 @@ import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
 import { TransitionForAsideBar, HamburgerMenu } from '../components/component_layout/Hamburger';
-// import * as icon from '../assets/icon';
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
 import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
-// import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/app_redux/store';
 import * as CONST from "~/data/constance_for_page/constant_global"
@@ -118,7 +116,6 @@ function Menu({ children }: any) {
 
     return (
         <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full ">
-            {/* <Toaster /> */}
             {/*1/4. TopNav Bar */}
             <div className="fixed z-[3] pl-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-full bg-[#fff]   ">
                 <HamburgerMenu onClick={handleDisplay} />
@@ -176,7 +173,7 @@ function Menu({ children }: any) {
 }
 export default Menu;
 /* 
-1. bình thường thì Layer : 
+1. normal is Layer : 
     background:z-index=-1 
     main :     z-index= 1 
     Aside:     z-index= 2

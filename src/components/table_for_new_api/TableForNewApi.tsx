@@ -2,7 +2,6 @@ import { RowHeader, RowBody } from '..';
 import { typeOfListTodo } from '~/data/type/typeGlobal';
 import { useLocation } from 'react-router-dom';
 import * as LINK_PAGE from '~/data/constance_for_page';
-// import { useMemo, useEffect } from 'react';
 
 type typeProps = {
     listTodo: typeOfListTodo;

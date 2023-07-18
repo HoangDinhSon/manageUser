@@ -22,6 +22,7 @@ function useGetData() {
     const refetch = () => {
         setTriggerFetching((prev) => (prev += 1));
     };
+    // define axios call api 
     const getTodoHandleByUseEffect = async (setSate: (res: AxiosResponse<any, any>) => void) => {
         try {
             const res = await axiosTodo.get('/todos');
@@ -58,12 +59,10 @@ function createTodoHandle(refetch: () => void) {
             .post('/todos', dataForAdd)
             .then((res) => {
                 if (res.data) {
-                    // console.log('resdata if success>>>', res.data);
                     refCloneListTodo.current.splice(i, 1);
                 }
             })
             .catch((error) => {
-                // toast.error(`can NOT create Todo `);
                 handleError({ error, myMessage: 'can NOT create Todo' });
             });
     };
@@ -76,7 +75,6 @@ function createTodoHandle(refetch: () => void) {
     }
     // when success or a part success xem Note 1
     if (ref.current === true) {
-        // console.log('check ref current>>>', ref.current);
         setTimeout(() => {
             dispatchOfRedux(updateValueFormVerify(false));
             dispatchOfRedux(addManyTodoIntoList(refCloneListTodo.current));
@@ -91,10 +89,11 @@ export { createTodoHandle };
 /* 
 Note 1 : when send listTodo to server : if some thing is error , will some todo can not send to ser ver , 
 that todo save at listTodoSendSer ver 
-
 */
 
-// const dispatchRedux = useDispatch();
+
+
+/* **********o0o************* */
 type typePropsOfUpdate = {
     dataSendServer: typeOfTodo;
     refetch: () => void;
@@ -119,4 +118,3 @@ const updateTodoForPageProject = ({ dataSendServer, refetch, dispatchRedux }: ty
         });
 };
 export { updateTodoForPageProject };
-

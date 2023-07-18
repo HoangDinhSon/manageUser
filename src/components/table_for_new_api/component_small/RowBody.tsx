@@ -100,7 +100,7 @@ function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody
     useEffect(() => {
         if (!!idRefDelete.current && valueFormVerify) {
             mutate(idRefDelete.current);
-            console.log('check id delete>>>', idRefDelete.current,valueFormVerify);
+            // console.log('check id delete>>>', idRefDelete.current,valueFormVerify);
         }
     },[!!idRefDelete.current && valueFormVerify]);
 
@@ -111,7 +111,7 @@ function RowBody({ eachTodo, index, refetch, kindOfElement }: typePropsOfRowBody
             <td>{eachTodo.text}</td>
             <td>{eachTodo.author}</td>
             <td>{eachTodo.complete ? 'Done' : 'Not done'}</td>
-            <td>{eachTodo.createdDate}</td>
+            <td>{eachTodo.createdDate.toString()}</td>
             <td className="cursor-pointer">{contentForWatch}</td>
             <td className="cursor-pointer">{ContentForEdit}</td>
             <td className="cursor-pointer">{contentForADD}</td>

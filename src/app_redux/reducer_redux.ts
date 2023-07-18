@@ -8,7 +8,7 @@ const DEFAULT_OF_LIST_TODO = [
         text: '',
         complete: false,
         author: '',
-        createdDate: '',
+        createdDate: "",
     },
 ];
 export const ID_AND_KIND_OF_FORM = {

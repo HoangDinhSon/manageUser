@@ -66,7 +66,8 @@ function EditAddViewFormPageProject({ listTodo, refetch }: typeProps) {
     };
     const handleSubmitForm = (dataOfForm: typeDefaultFormAdd) => {
         if (kindOfForm === ADD) {
-            dispatchOfRedux(addTodoIntoList(dataOfForm));
+            // do redux không nhân kiểu Date làm giá trị nên sau khi form lấy date rồi thì cần chuyển qua dạng string
+            dispatchOfRedux(addTodoIntoList({...dataOfForm,createdDate:dataOfForm.createdDate.toString()}));
             reset(defaultOfForm);
             // sau khi submit thì focus vào form đầu tiên .
             const element: any = document.querySelector('input[name="text"]');
