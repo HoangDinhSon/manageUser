@@ -74,9 +74,9 @@ function TransitionForAsideBar({ children }: any) {
     const [classChildren, setClassChildren] = useState('');
     const [state] = ContextState.useGlobalState();
     let classDiv =
-        'fixed z-[2] w-[--heightNav] h-screen  transition-[all] duration-[--durationTableUser] overflow-hidden ';
+        'fixed z-[2] w-[--heightNav] h-screen  transition-[all] duration-[--durationTableUser] overflow-hidden top-0 left-0';
     if (state.isDisplayAsideMenu === false) {
-        classDiv = 'fixed z-[2] w-[0] transition-[all] duration-[--durationTableUser] overflow-hidden';
+        classDiv = 'fixed z-[2] w-[0] transition-[all] duration-[--durationTableUser] overflow-hidden top-0 left-0';
     }
     // sau khi xuất hiện thì asid menu dc fixed
  

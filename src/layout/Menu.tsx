@@ -10,7 +10,7 @@ import { TransitionForAsideBar, HamburgerMenu } from '../components/component_la
 import { bgAvatar, notification, arrowBackForLayout } from '../assets';
 import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
-import { Toaster } from 'react-hot-toast';
+// import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/app_redux/store';
 import * as CONST from "~/data/constance_for_page/constant_global"
