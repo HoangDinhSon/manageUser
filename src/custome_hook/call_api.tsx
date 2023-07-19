@@ -68,10 +68,7 @@ function createTodoHandle(refetch: () => void) {
         axiosTodo
             .post('/todos', dataForAdd)
             .then((res) => {
-                console.log('check res nếu lổi status 200 vẫn có thể vào đây >>>', "");
-                if (res.data) {
-                    refCloneListTodo.current.splice(i, 1);
-                }
+                refCloneListTodo.current.splice(i, 1);
             })
             .catch((error) => {
                 debounce(()=>handleError({ error, myMessage: 'can NOT create Todo' }),2000)
