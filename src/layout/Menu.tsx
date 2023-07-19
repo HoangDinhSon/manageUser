@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useState, useRef } from 'react';
+import { useLocation, NavLink} from 'react-router-dom';
 import { useTheme, useMediaQuery } from '@mui/material';
-import { FormLogOut, BtnImportAndADD, Hamburger,FormVerify } from '../components';
+import { FormLogOut, BtnImportAndADD, Hamburger, FormVerify } from '../components';
 import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
 import { actions } from '../store';
@@ -11,19 +11,21 @@ import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/app_redux/store';
-import * as CONST from "~/data/constance_for_page/constant_global"
+import * as CONST from '~/data/constance_for_page/constant_global';
+import { useDetectClickOutside } from '~/custome_hook';
 
 function Menu({ children }: any) {
-    const {isDisplayFormVerify}= useSelector((state:RootState)=>state.manageAppTodo)
-    const location = useLocation();// ko dùng tới ??
+    const { isDisplayFormVerify } = useSelector((state: RootState) => state.manageAppTodo);
+    const location = useLocation(); // ko dùng tới ??
     const [state, dispatch] = useGlobalState();
     const [isDisPlayLogout, setIsDisplayLogout] = useState(false);
+    const refFormLogout = useRef<any>(null);
     const HEIGHT_BROWSER_TO_CHANGE_GAP = 800;
     if (localStorage.getItem('userAdmin') == undefined) {
         window.location.href = 'http://localhost:4000';
         return <div></div>;
     }
-    const handleLogOut = (e:any) => {
+    const handleLogOut = (e: any) => {
         setIsDisplayLogout(!isDisPlayLogout);
     };
 
@@ -113,12 +115,11 @@ function Menu({ children }: any) {
     ) {
         classForChildrenOfMenu = replaceManyString(classForChildrenOfMenu, ['z-[1]'], ['z-[4]']);
     }
-    const handleCloseFormLogout =()=>{
-        setIsDisplayLogout(false)
-    }
+    /* Click out side form Logout and hidden form  */
+    useDetectClickOutside(refFormLogout, [isDisPlayLogout, setIsDisplayLogout]);
 
     return (
-        <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full " onClick={handleCloseFormLogout}>
+        <div className="menu_Layout flex   bg-[#ECECEC]  h-screen w-full ">
             {/*1/4. TopNav Bar */}
             <div className="fixed z-[3] pl-[80px] top-0 h-[78px] xs_max:h-[--hNavRes] w-full bg-[#fff]   ">
                 <HamburgerMenu onClick={handleDisplay} />
@@ -146,20 +147,29 @@ function Menu({ children }: any) {
                 <div className=" w-[--heightNav] bg-white h-screen pt-[--heightNav]">
                     <div className={classAsideBar}>
                         <div className={classListItem}>
-                            {CONST.listMenuAsideBar.map((ele,index)=>{
-                                return(  <IconMenu
-                                    key ={index}
-                                    icon={ele.icon}
-                                    iconNameMenu={ele.iconNameMenu}
-                                    name={ele.name}
-                                />)
+                            {CONST.listMenuAsideBar.map((ele, index) => {
+                                return (
+                                    <IconMenu
+                                        key={index}
+                                        icon={ele.icon}
+                                        iconNameMenu={ele.iconNameMenu}
+                                        name={ele.name}
+                                    />
+                                );
                             })}
                         </div>
                         <div className=" flex flex-col items-center gap-10 pb-5 xs_max:gap-5 ">
                             <img src={notification} alt="" className="cursor-pointer" />
-                            <div className="relative" onClick={(e)=>e.stopPropagation()}>
-                                <div className="absolute bottom-0 left-[52px]">{isDisPlayLogout && <FormLogOut />}</div>
-                                <img src={bgAvatar} alt="" onClick={(e)=>handleLogOut(e)} className="cursor-pointer" />
+                            <div className="relative">
+                                <div className="absolute bottom-0 left-[52px]" ref={refFormLogout}>
+                                    {isDisPlayLogout && <FormLogOut />}
+                                </div>
+                                <img
+                                    src={bgAvatar}
+                                    alt=""
+                                    onClick={(e) => handleLogOut(e)}
+                                    className="cursor-pointer"
+                                />
                             </div>
                         </div>
                     </div>
@@ -170,7 +180,7 @@ function Menu({ children }: any) {
             {/*4/4. Content */}
             <main className={classForChildrenOfMenu}>{children}</main>
             {/* 5/5 FormVerify */}
-           {isDisplayFormVerify&& <FormVerify/>}
+            {isDisplayFormVerify && <FormVerify />}
         </div>
     );
 }
@@ -181,5 +191,5 @@ export default Menu;
     main :     z-index= 1 
     Aside:     z-index= 2
     Nav        z-index= 3 
-    FormVerify : z-index= 4
+    FormVerify : z-index= 4.
 */

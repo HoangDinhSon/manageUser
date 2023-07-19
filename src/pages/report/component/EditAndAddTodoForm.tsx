@@ -3,7 +3,6 @@ import { useOutletContext, useParams, useLocation } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from 'react-query';
 import { useEffect } from 'react';
-import toast from 'react-hot-toast';
 import { typeOfTodo, typeOfListTodo, NAME } from '~/data/type/typeGlobal';
 import { schema } from '../validation_report_page';
 import { LINK_PAGE_REPORT } from '~/data/constance_for_page';
@@ -97,6 +96,7 @@ function EditAndAddTodoForm() {
         defaultValues: todoForEdit || defaultValue,
     });
     const handleSubmitForForm = (data: any) => {
+        console.log('type of data>>>', data);
         switch (kindOfForm) {
             case EDIT: {
                 mutateEdit({

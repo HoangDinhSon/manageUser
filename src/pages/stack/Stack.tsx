@@ -1,6 +1,5 @@
 import { Toaster, toast } from 'react-hot-toast';
 import { useQuery } from 'react-query';
-// import { Outlet } from 'react-router-dom';
 import { TableAnimation, TableForNewApi } from '../../components';
 import { getTodo } from '../../api/log_time_api';
 import { EditAndAddForPageStack } from '..';
@@ -18,9 +17,6 @@ function Stack() {
     } = useQuery({
         queryKey: ['todos'],
         queryFn: getTodo,
-        onError: () => {
-            toast.error('Oh No fail try press F5 refresh');
-        },
     });
 
     return (
@@ -33,7 +29,6 @@ function Stack() {
                     <SearchAndFilter />
                     <TableForNewApi listTodo={dataTodo} refetch={refetch} />
                     {(state.isDisplayEditAndAddPageStack) && <EditAndAddForPageStack listTodo={dataTodo}  refetch={refetch} />}
-                    {/* <Outlet context={[dataTodo, refetch]} /> */}
                 </div>
             )}
         </section>

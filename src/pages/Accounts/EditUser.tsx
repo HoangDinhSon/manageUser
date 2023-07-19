@@ -25,7 +25,6 @@ import {
 import axiosClient from '~/api/axios_client';
 
 function EditUser() {
-    console.log('edituser>>>', 999);
     const [state, dispatch] = useGlobalState();
     const [listSkill, setListSkill] = useState<Array<string>>([]);
     //check id of user Edit

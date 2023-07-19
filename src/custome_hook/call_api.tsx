@@ -5,6 +5,7 @@ import type { AxiosResponse } from 'axios';
 import { typeOfTodo } from '~/data/type/typeGlobal';
 import { useDispatch, useSelector } from 'react-redux';
 import handleError from './handle_error';
+import debounce from './debounce';
 import {
     updateValueFormVerify,
     addManyTodoIntoList,
@@ -33,6 +34,7 @@ function useGetData() {
                 refCleanup.current = false;
             }
         } catch (error: any) {
+            console.log('error>>>', error);
             toast.error(`Oh some thing Error`);
         }
     };
@@ -57,9 +59,8 @@ if disconnect OR have connect but can't connect to server api will ==> announce 
 function createTodoHandle(refetch: () => void) {
     const { listTodoSendServer, valueFormVerify } = useSelector((state: RootState) => state.manageAppTodo);
     const ref = useRef(false);
-    const cloneListTodo = JSON.parse(JSON.stringify(listTodoSendServer));
-    const refCloneListTodo = useRef(cloneListTodo);
-    // console.log('reCloneListTodo>>>', refCloneListTodo);
+    const refCloneListTodo = useRef<any>(null);
+    refCloneListTodo.current= JSON.parse(JSON.stringify(listTodoSendServer))  
     const dispatchOfRedux = useDispatch();
     //Define Call api
     type typeDataForAdd = Omit<typeOfTodo, '_id'>;
@@ -67,12 +68,13 @@ function createTodoHandle(refetch: () => void) {
         axiosTodo
             .post('/todos', dataForAdd)
             .then((res) => {
+                console.log('check res nếu lổi status 200 vẫn có thể vào đây >>>', "");
                 if (res.data) {
                     refCloneListTodo.current.splice(i, 1);
                 }
             })
             .catch((error) => {
-                handleError({ error, myMessage: 'can NOT create Todo' });
+                debounce(()=>handleError({ error, myMessage: 'can NOT create Todo' }),2000)
             });
     };
     // check length của listTodo và verify of User

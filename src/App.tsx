@@ -7,7 +7,7 @@ import { actions } from './store';
 import { useQuery } from 'react-query';
 import { getLimitAndSkipUser } from './api/log_time_api';
 import { Fragment, useEffect } from 'react';
-import {  WatchTodoForm, EditAndAddTodoForm, Stack } from './pages';
+import { WatchTodoForm, EditAndAddTodoForm, Stack } from './pages';
 
 function App() {
     const [state, dispatch] = useGlobalState();
@@ -21,7 +21,7 @@ function App() {
                 dispatch(actions.upDateListUser(res));
             }
         },
-        onError:()=>{
+        onError: () => {
             console.log('only will have response from server >>>', 999);
         },
         keepPreviousData: true,
@@ -60,7 +60,7 @@ function App() {
             ),
             children: [
                 {
-                    path: `${LINK_PAGE.LINK_REPORT_WATCH}`,
+                    path: LINK_PAGE.LINK_REPORT_WATCH,
                     element: (
                         <Menu>
                             <WatchTodoForm />
@@ -68,7 +68,7 @@ function App() {
                     ),
                 },
                 {
-                    path: `${LINK_PAGE.LINK_REPORT_EDIT}`,
+                    path: LINK_PAGE.LINK_REPORT_EDIT,
                     element: (
                         <Menu>
                             <EditAndAddTodoForm />

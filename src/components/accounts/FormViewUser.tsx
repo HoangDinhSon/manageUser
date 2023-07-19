@@ -32,7 +32,7 @@ function FormViewUser() {
 
     return (
         <section className="account_detail_form  fixed z-50 top-0 left-0  w-screen h-screen">
-            <div className={responsiveUI()}>
+            <div className={responsiveUI()} onClick={(e)=>e.stopPropagation()}>
                 <div className="flex justify-between">
                     <h4>Account Details</h4>
                     <img

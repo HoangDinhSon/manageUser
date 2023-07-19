@@ -13,14 +13,7 @@ function Project() {
     );
     const dispatchOfRedux = useDispatch();
     const handleOnClick = () => {
-        // check xem trong mảng list trong redux có phần tử >1 hay không ;
-        if (listTodoSendServer.length <= 1) {
-            toast.error('there is no todo in list');
-        }
-        if (listTodoSendServer.length > 1) {
-            // hỏi người dùng có muốn update hay không .
-            dispatchOfRedux(displayFormVerify());
-        }
+        dispatchOfRedux(displayFormVerify());
     };
     createTodoHandle(refetch);
     return (

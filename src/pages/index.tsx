@@ -1,7 +1,7 @@
-import Login from './Login/Login';
-import Accounts from './Accounts/Accounts';
-import EditUser from './Accounts/EditUser';
-import AddUser from './Accounts/AddUser';
+import Login from './login/Login';
+import Accounts from './accounts/Accounts';
+import EditUser from './accounts/EditUser';
+import AddUser from './accounts/AddUser';
 import NotFount from './NotFount';
 import Report from './report/Report';
 // Todo
