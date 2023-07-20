@@ -17,8 +17,9 @@ type PropsCheckAndSelect = {
     control: any;
 };
 
-function CheckAndSelect({ PropsCheck, PropsSelect, label, content,  control}: PropsCheckAndSelect) {
-    const [state] = useGlobalState();
+function CheckAndSelect({ PropsCheck, PropsSelect, label, content, control }: PropsCheckAndSelect) {
+    const [state, dispatch] = useGlobalState();
+    // console.log('state>>>', state.criterialForFilter);
     /*Start Test useControl*/
     const { field: checkBox } = useController({
         control: control,
@@ -33,23 +34,24 @@ function CheckAndSelect({ PropsCheck, PropsSelect, label, content,  control}: Pr
     const [isChecked, setIsChecked] = useState(state.criterialForFilter[PropsCheck][PropsCheck]);
     const handleChangeSelect = (e: any) => {
         setValue(e.target.value);
-        select.onChange(e.target.value)
+        select.onChange(e.target.value);
     };
     const handleChangeCheckBox = (e: any) => {
-        checkBox.onChange(e.target.checked);// true or false send value to react hook form 
+        checkBox.onChange(e.target.checked); // true or false send value to react hook form
         setIsChecked(e.target.checked);
     };
     /* mục đích:  dùng để câp nhật lại UI khi state redux thay đổi.  */
     useEffect(() => {
         setValue(state.criterialForFilter[PropsCheck].select);
         setIsChecked(state.criterialForFilter[PropsCheck][PropsCheck]);
-    }, [state]);
+    }, [state.criterialForFilter]);
     return (
         <div className="mt-[19px] res_height_Filter">
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={!!isChecked}
+                        // value={isChecked}
+                        checked={isChecked}
                         onChange={(e) => handleChangeCheckBox(e)}
                         name={checkBox.name}
                     ></Checkbox>
@@ -62,7 +64,7 @@ function CheckAndSelect({ PropsCheck, PropsSelect, label, content,  control}: Pr
                 sx={{ width: '100%', height: '36px', marginTop: '11px' }}
                 onChange={handleChangeSelect}
                 //test
-                name = {select.name}
+                name={select.name}
             >
                 {content.map((element: typeSelect) => (
                     <MenuItem value={element.value} key={element.value}>
@@ -76,7 +78,9 @@ function CheckAndSelect({ PropsCheck, PropsSelect, label, content,  control}: Pr
 
 function Filter() {
     const [state, dispatch] = useGlobalState();
-    const { register, handleSubmit, reset, control} = useForm();
+    const { register, handleSubmit, reset, control } = useForm({
+        defaultValues: state.criterialForFilter,
+    });
     let responseFromServer = useRef<any>([]);
     const { mutate, isLoading } = useMutation({
         mutationFn: getUserBaseFilter,
@@ -88,6 +92,7 @@ function Filter() {
 
     const handleSubmitForm = (payloadForm: OutPutFormFilter | any) => {
         // khi lấy từ input tất cả đề là string nên dòng này chuyển select của age và height  về number
+        // console.log('payloadForm>>>', payloadForm);
         payloadForm = {
             ...payloadForm,
             age: { ...payloadForm.age, select: parseInt(payloadForm.age.select) },
@@ -105,12 +110,12 @@ function Filter() {
             }
         });
         // sau khi submit thì phải reset mảng vì nếu không nó sẽ tích vào rất nhiêu lần
-        responseFromServer.current = []; 
+        responseFromServer.current = [];
     };
     const handleClearForm = () => {
-        reset();
+        reset(CRITERIAL_FOR_FILTER_DEFAULT);
         responseFromServer.current = [];
-        dispatch(actions.setCriterialForFilter(CRITERIAL_FOR_FILTER_DEFAULT));
+        dispatch(actions.resetCriterialForFilter());
     };
     const handleHiddenFilter = () => {
         dispatch(actions.togleDisplayFilter(state.isDisplayFiler));
@@ -132,7 +137,6 @@ function Filter() {
                             PropsCheck={each.propcheck}
                             PropsSelect={each.propselect}
                             control={control}
-                           
                         />
                     ))}
                     <div className="mt-[42px] flex justify-between relative">

@@ -67,15 +67,15 @@ const getTodo = () =>
     axiosTodo
         .get('/todos')
         .then((res) => res.data)
-        .catch((error)=>{
-            handleErrorAxiosUseForReactQuery(error,"fail get data for report page")
-        })
+        .catch((error) => {
+            handleErrorAxiosUseForReactQuery(error, 'fail get data for report page');
+        });
 const updateTodo = (dataForUpdate: typeOfTodo) =>
     axiosTodo
         .post(`/todos/${dataForUpdate._id}`, dataForUpdate)
         .then((res) => res.data)
         .catch((error) => {
-            throw error
+            throw error;
         });
 type typeDataForAdd = Omit<typeOfTodo, '_id'>;
 const createTodo = (dataForAdd: typeDataForAdd) =>
@@ -83,14 +83,14 @@ const createTodo = (dataForAdd: typeDataForAdd) =>
         .post('/todos', dataForAdd)
         .then((res) => res.data)
         .catch((error) => {
-            throw error
+            throw error;
         });
 const deleteTodo = (id: string) =>
     axiosTodo
         .delete(`/todos/${id}`)
         .then((res) => res.data)
         .catch((error) => {
-            throw error
+            throw error;
         });
 export { getTodo, updateTodo, createTodo, deleteTodo };
 // axios for useEffect

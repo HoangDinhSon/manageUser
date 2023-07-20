@@ -1,14 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { useOutletContext, useParams, useLocation } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useMutation } from 'react-query';
 import { useEffect } from 'react';
+import { toastSuccess, myToastPromise } from '~/custome_hook';
 import { typeOfTodo, typeOfListTodo, NAME } from '~/data/type/typeGlobal';
 import { schema } from '../validation_report_page';
 import { LINK_PAGE_REPORT } from '~/data/constance_for_page';
-import { updateTodo, createTodo } from '~/api/log_time_api';
 import { InputForReport } from '~/components';
-import { handleErrorAxiosUseForReactQuery } from '~/custome_hook/handle_error';
+import { useCreateTodo, useUpdateTodo } from '~/custome_hook';
 
 type typeDefaultValue = Omit<typeOfTodo, '_id'>;
 
@@ -64,28 +63,11 @@ function EditAndAddTodoForm() {
         return <span>directors to page reload</span>;
     }
     // update todo dùng post
-    const { mutate: mutateEdit } = useMutation({
-        mutationFn: updateTodo,
-        onSuccess: () => {
-            refetch();
-            window.history.back();
-        },
-        onError: (error) => {
-            handleErrorAxiosUseForReactQuery(error, 'Whoops!: Some thing wrong');
-        },
-    });
+    const { mutate: mutateEdit, status: statusUpdateTodo,error : errorUpdateTodo, } = useUpdateTodo(refetch);
+    myToastPromise(statusUpdateTodo,errorUpdateTodo,"Update Todo Fail");
     // create to do
-    const { mutate: mutateCreate } = useMutation({
-        mutationFn: createTodo,
-        onSuccess: () => {
-            refetch();
-            window.history.back();
-        },
-        onError: (error) => {
-            handleErrorAxiosUseForReactQuery(error, 'Whoops!:Some thing wrong');
-        },
-    });
-
+    const { mutate: mutateCreate, status: statusCreateTodo ,error:errorCreateTodo } = useCreateTodo(refetch);
+    myToastPromise(statusCreateTodo,errorCreateTodo,"Create Todo Fail!!!");
     const {
         control,
         handleSubmit,
@@ -96,7 +78,7 @@ function EditAndAddTodoForm() {
         defaultValues: todoForEdit || defaultValue,
     });
     const handleSubmitForForm = (data: any) => {
-        console.log('type of data>>>', data);
+        // console.log('type of data>>>', data);
         switch (kindOfForm) {
             case EDIT: {
                 mutateEdit({

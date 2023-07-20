@@ -9,8 +9,9 @@ import { useGlobalState } from '~/store/Provider';
 import { actions } from '~/store';
 import { useEffect } from 'react';
 import { useMutation } from 'react-query';
-import { toast } from 'react-hot-toast';
 import { updateTodo, createTodo } from '~/api/log_time_api';
+import { myToastPromise } from '~/custome_hook';
+
 type typeProps = {
     listTodo: typeOfListTodo;
     refetch: any;
@@ -34,29 +35,38 @@ function EditAndAddForPageStack({ listTodo, refetch }: typeProps) {
         kindOfForm = WATCH;
     }
     // update todo dùng post
-    const { mutate: mutateEdit } = useMutation({
+    const {
+        mutate: mutateEdit,
+        error: errorUpdateTodo,
+        status: statusUpdateTodo,
+    } = useMutation({
         mutationFn: updateTodo,
         onSuccess: () => {
-            dispatch(actions.toggleEditAddPageStack());
             refetch();
         },
-        onError: () => {
-            toast.error('some thing wrong');
-        },
     });
+    myToastPromise(statusUpdateTodo, errorUpdateTodo, 'Update Todo Fail');
+
     // create to do
-    const { mutate: mutateCreate } = useMutation({
+    const {
+        mutate: mutateCreate,
+        error: errorCreateTodo,
+        status: statusCreateTodo,
+    } = useMutation({
         mutationFn: createTodo,
         onSuccess: () => {
-            toast.success('create success');
-            dispatch(actions.toggleEditAddPageStack());
             refetch();
         },
-        onError: () => {
-            toast.error('some thing wrong');
-        },
     });
-
+    myToastPromise(statusCreateTodo, errorCreateTodo, 'Create Todo Fail');
+    useEffect(() => {
+        if (statusCreateTodo === 'success') {
+            dispatch(actions.toggleEditAddPageStack());
+        }
+        if (statusUpdateTodo === 'success') {
+            dispatch(actions.toggleEditAddPageStack());
+        }
+    }, [statusUpdateTodo, statusCreateTodo]);
     const {
         control,
         handleSubmit,
