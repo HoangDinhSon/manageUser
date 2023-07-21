@@ -67,9 +67,9 @@ const getTodo = () =>
     axiosTodo
         .get('/todos')
         .then((res) => res.data)
-        .catch((error) => {
-            handleErrorAxiosUseForReactQuery(error, 'fail get data for report page');
-        });
+        // .catch((error) => {
+        //     handleErrorAxiosUseForReactQuery(error, 'fail get data for report page');
+        // });
 const updateTodo = (dataForUpdate: typeOfTodo) =>
     axiosTodo
         .post(`/todos/${dataForUpdate._id}`, dataForUpdate)

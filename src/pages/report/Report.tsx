@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { TableAnimation, TableForNewApi } from '../../components';
 import { getTodo } from '../../api/log_time_api';
 import { NavAccount, SearchAndFilter } from '../../components';
+import { handleErrorAxiosUseForReactQuery } from '~/custome_hook';
 
 function Report() {
     // call api for table Todo
@@ -13,6 +14,9 @@ function Report() {
     } = useQuery({
         queryKey: ['todos'],
         queryFn: getTodo,
+        onError:(error)=>{
+            handleErrorAxiosUseForReactQuery(error, 'fail get data for report page')
+        }
     });
 
     return (

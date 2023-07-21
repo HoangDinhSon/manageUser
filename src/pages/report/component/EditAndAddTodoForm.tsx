@@ -7,7 +7,8 @@ import { typeOfTodo, typeOfListTodo, NAME } from '~/data/type/typeGlobal';
 import { schema } from '../validation_report_page';
 import { LINK_PAGE_REPORT } from '~/data/constance_for_page';
 import { InputForReport } from '~/components';
-import { useCreateTodo, useUpdateTodo } from '~/custome_hook';
+import { useCreateTodo, useUpdateTodo,useFindKindOfFormBaseURL } from '~/custome_hook';
+import *as CONST from "~/data/constance_for_page";
 
 type typeDefaultValue = Omit<typeOfTodo, '_id'>;
 
@@ -40,15 +41,9 @@ const EDIT = 'edit';
 const ADD = 'add';
 function EditAndAddTodoForm() {
     /* Kiểm tra xem form là form add hay form edit  */
-    const location = useLocation();
-    let kindOfForm = '';
-    if (location.pathname.match(/^\/report\/[a-zA-z0-9]+\/edit$/)) {
-        kindOfForm = EDIT;
-    } else if (location.pathname.match(/^\/report\/add$/)) {
-        kindOfForm = ADD;
-    } else {
-        // đảm bảo rằng nếu người dùng nhập lên ô địa chỉ phải đúng format
-        window.location.href = `http://localhost:4000${LINK_PAGE_REPORT}`;
+    let {kindOfForm} =  useFindKindOfFormBaseURL()
+    if (kindOfForm!=CONST.ADD && kindOfForm != CONST.EDIT){
+        window.location.href = `http://localhost:4000${LINK_PAGE_REPORT}`
     }
     const [listTodo, refetch]: [typeOfListTodo, any] = useOutletContext();
     const { id }: any = useParams<string>();
@@ -62,7 +57,7 @@ function EditAndAddTodoForm() {
         window.location.href = `http://localhost:4000${LINK_PAGE_REPORT}`;
         return <span>directors to page reload</span>;
     }
-    // update todo dùng post
+    // update todo
     const { mutate: mutateEdit, status: statusUpdateTodo,error : errorUpdateTodo, } = useUpdateTodo(refetch);
     myToastPromise(statusUpdateTodo,errorUpdateTodo,"Update Todo Fail");
     // create to do

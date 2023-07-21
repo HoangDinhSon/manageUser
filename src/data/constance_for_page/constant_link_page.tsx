@@ -1,3 +1,10 @@
+export const PAGE_ACCOUNT= "accounts";
+export const PAGE_DASHBOARD= "dashboard";
+export const PAGE_PROJECT= "project";
+export const PAGE_ROLEMANAGER= "rolemanager";
+export const PAGE_STACKS= "stacks";
+export const PAGE_REPORT= "report";
+
 const LINK_PAGE_ACCOUNT_EDIT = '/accounts/edit';
 const LINK_PAGE_ACCOUNT_ADD = '/accounts/add';
 const LINK_PAGE_ACCOUNT_FILTER = '/accounts/filter';

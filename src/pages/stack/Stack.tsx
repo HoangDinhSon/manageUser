@@ -4,6 +4,7 @@ import { TableAnimation, TableForNewApi } from '../../components';
 import { getTodo } from '../../api/log_time_api';
 import { EditAndAddForPageStack } from '..';
 import { useGlobalState } from '~/store/Provider';
+import { handleErrorAxiosUseForReactQuery } from '~/custome_hook';
 
 import { NavAccount, SearchAndFilter } from '../../components';
 
@@ -17,6 +18,9 @@ function Stack() {
     } = useQuery({
         queryKey: ['todos'],
         queryFn: getTodo,
+        onError:(error)=>{
+            handleErrorAxiosUseForReactQuery(error, 'fail get data for report page')
+        }
     });
 
     return (
