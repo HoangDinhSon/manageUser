@@ -55,43 +55,52 @@ export { useGetData };
 + response  from api , 
 if disconnect OR have connect but can't connect to server api will ==> announce mistake , and response === null   
 */
+const DEFAULT_OF_LIST_TODO = [
+    {
+        text: '',
+        complete: false,
+        author: '',
+        createdDate: '',
+    },
+];
 
 function createTodoHandle(refetch: () => void) {
     const { listTodoSendServer, valueFormVerify } = useSelector((state: RootState) => state.manageAppTodo);
+    const [responseTodoFromApi, setResponseTodoFrommApi] = useState<any>([]);
     const ref = useRef(false);
-    const refCloneListTodo = useRef<any>(null);
-    refCloneListTodo.current= JSON.parse(JSON.stringify(listTodoSendServer))  
+    const refCloneListTodo = useRef<any>(listTodoSendServer);
     const dispatchOfRedux = useDispatch();
     //Define Call api
     type typeDataForAdd = Omit<typeOfTodo, '_id'>;
-    const createTodo = (dataForAdd: typeDataForAdd, i: number) => {
-        axiosTodo
-            .post('/todos', dataForAdd)
-            .then((res) => {
-                refCloneListTodo.current.splice(i, 1);
-            })
-            .catch((error) => {
-                debounce(()=>handleError({ error, myMessage: 'can NOT create Todo' }),2000)
-            });
-    };
-    // check length của listTodo và verify of User
-    if (valueFormVerify && listTodoSendServer.length > 1 && !ref.current) {
-        for (let i = 1; i < listTodoSendServer.length; i++) {
-            createTodo(listTodoSendServer[i], i);
+    async function PromiseALLCreateTodo() {
+        const createTodo = (dataForAdd: typeDataForAdd) => axiosTodo.post('/todos', dataForAdd);
+        try {
+            const list = listTodoSendServer.map((element, index) => index && createTodo(element));
+            const result = await Promise.all(list);
+            setResponseTodoFrommApi(result);
+        } catch (error) {
+            console.log('error at PromiseALLCreateTodo>>>', error);
         }
-        ref.current = true;
     }
-    // when success or a part success xem Note 1
-    if (ref.current === true) {
-        setTimeout(() => {
-            dispatchOfRedux(updateValueFormVerify(false));
-            dispatchOfRedux(addManyTodoIntoList(refCloneListTodo.current));
+
+    useEffect(() => {
+        if (valueFormVerify && listTodoSendServer.length > 1) {
+            console.log('only 1 times>>>', 999);
+            PromiseALLCreateTodo();
             ref.current = false;
-        }, 2000);
-        setTimeout(() => {
-            refetch();
-        }, 2000);
-    }
+        }
+    }, [valueFormVerify]);
+    useEffect(() => {
+        if (!ref.current && responseTodoFromApi.length > 0) {
+            ref.current = true;
+            console.log('responseTodoFromApi>>>', responseTodoFromApi);
+            dispatchOfRedux(updateValueFormVerify(false));
+            dispatchOfRedux(addManyTodoIntoList(DEFAULT_OF_LIST_TODO));
+            setTimeout(() => {
+                refetch();
+            }, 1000);
+        }
+    });
 }
 export { createTodoHandle };
 /* 
