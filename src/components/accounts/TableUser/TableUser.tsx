@@ -2,9 +2,10 @@ import PaginationTable from './PaginationTable';
 import { ContextState } from '../../../store';
 import { TableRowForHeader, TableRowForBody } from '../..';
 import { checkNumberOFCriterialForFilter, replaceManyString } from '../../../handlelogic';
+import { sortUser } from '~/custome_hook';
 
 function TableUser() {
-    const [state, ] = ContextState.useGlobalState();
+    const [state] = ContextState.useGlobalState();
     const listUser = state.resApi.users;
     const listUserOfFilter = [...state.listFilter];
     const rowPerPage = state.rowPerPage;
@@ -19,7 +20,7 @@ function TableUser() {
         ['w-[calc(100vw-118px)]', 'xs_max:w-[calc(100vw-8px-58px)]', 'xs_max:ml-[62px]', 'ml-[98px]'],
         ['w-[calc(100vw-40px)]', 'xs_max:w-[calc(100vw-8px)]', 'xs_max:ml-[--margin4px]', 'ml-[20px]'],
     );
-
+    const listSortByAbc = sortUser(listUser);
     return (
         <div className="bg-[white] overflow-x-auto">
             <table className="w-full">
@@ -28,7 +29,7 @@ function TableUser() {
                 </thead>
                 <tbody>
                     {criterialWasChosen === 0 &&
-                        listUser?.map((user: any, index: number) => <TableRowForBody user={user} key={index} />)}
+                        listSortByAbc?.map((user: any, index: number) => <TableRowForBody user={user} key={index} />)}
                     {criterialWasChosen !== 0 &&
                         listFilterPagination.map((user: any, index: number) => (
                             <TableRowForBody user={user} key={index} />

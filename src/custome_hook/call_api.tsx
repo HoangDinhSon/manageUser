@@ -5,6 +5,7 @@ import type { AxiosResponse } from 'axios';
 import { typeOfTodo } from '~/data/type/typeGlobal';
 import { useDispatch, useSelector } from 'react-redux';
 import handleError from './handle_error';
+import { handleErrorAxiosUseForReactQuery } from './handle_error';
 import debounce from './debounce';
 import {
     updateValueFormVerify,
@@ -75,11 +76,12 @@ function createTodoHandle(refetch: () => void) {
     async function PromiseALLCreateTodo() {
         const createTodo = (dataForAdd: typeDataForAdd) => axiosTodo.post('/todos', dataForAdd);
         try {
+            // index&& because no want get first value (first value is default value)
             const list = listTodoSendServer.map((element, index) => index && createTodo(element));
             const result = await Promise.all(list);
             setResponseTodoFrommApi(result);
         } catch (error) {
-            console.log('error at PromiseALLCreateTodo>>>', error);
+            handleErrorAxiosUseForReactQuery(error, "Create Fail")
         }
     }
 
@@ -93,7 +95,7 @@ function createTodoHandle(refetch: () => void) {
     useEffect(() => {
         if (!ref.current && responseTodoFromApi.length > 0) {
             ref.current = true;
-            console.log('responseTodoFromApi>>>', responseTodoFromApi);
+            // console.log('responseTodoFromApi>>>', responseTodoFromApi);
             dispatchOfRedux(updateValueFormVerify(false));
             dispatchOfRedux(addManyTodoIntoList(DEFAULT_OF_LIST_TODO));
             setTimeout(() => {

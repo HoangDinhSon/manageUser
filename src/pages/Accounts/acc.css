@@ -9,6 +9,12 @@
         animation-duration: 3s;
         animation-iteration-count: infinite;
     }
+    .active_for_account_nav{
+      @apply  text-[#5E90F0]  border-[#5E90F0] w-[60px] h-[40px] leading-[40px] text-center  border-b-4 
+    }
+    .normal_for_account_nav{
+        @apply w-[60px] h-[40px] leading-[40px]  text-center text-[#9DA7B9]
+    }
     @keyframes flashing {
         0% {
             background: rgb(0, 0, 0);

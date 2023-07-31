@@ -13,6 +13,8 @@ import { Provider } from 'react-redux';
 
 const queryClient = new QueryClient({
     queryCache: new QueryCache({
+        // 🎉 only show error toasts if we already have data in the cache
+        // which indicates a failed background update
         onError: () => {
             toast.error('Something went wrong at main');
         },

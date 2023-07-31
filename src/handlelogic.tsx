@@ -34,6 +34,7 @@ example : Paragraph  ="son van nam "
     
 */
 const replaceManyString = (Paragraph: string, [...ArrayRoot]: Array<string>, [...WordTarget]: Array<string>) => {
+    // can use try catch repace this if ?? 
     if (ArrayRoot.length != WordTarget.length) {
         return 'bạn phải nhập 2 mảng có cùng độ dài ';
     }

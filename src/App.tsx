@@ -8,6 +8,7 @@ import { useQuery } from 'react-query';
 import { getLimitAndSkipUser } from './api/log_time_api';
 import { Fragment, useEffect } from 'react';
 import { WatchTodoForm, EditAndAddTodoForm, Stack } from './pages';
+import * as CONST from '~/data/constance_for_page';
 
 function App() {
     const [state, dispatch] = useGlobalState();
@@ -26,6 +27,24 @@ function App() {
         },
         keepPreviousData: true,
     });
+    const childrenAddAndEditPageAccounts = [
+        {
+            path: 'add',
+            element: (
+                <Menu>
+                    <AddUser />
+                </Menu>
+            ),
+        },
+        {
+            path: 'edit',
+            element: (
+                <Menu>
+                    <EditUser />
+                </Menu>
+            ),
+        },
+    ];
     const elements = useRoutes([
         {
             path: '*',
@@ -87,32 +106,37 @@ function App() {
         },
         {
             path: LINK_PAGE.LINK_PAGE_ACCOUNT,
-            element: (
-                <Menu>
-                    <Accounts status={status} />
-                </Menu>
-            ),
             children: [
                 {
-                    path: 'add',
+                    path: '',
                     element: (
                         <Menu>
-                            <AddUser />
+                            <Accounts status={status} />
                         </Menu>
                     ),
+                    children: childrenAddAndEditPageAccounts,
                 },
                 {
-                    path: 'edit',
+                    path: 'vinova',
                     element: (
                         <Menu>
-                            <EditUser />
+                            <Accounts status={status} />
                         </Menu>
                     ),
+                    children: childrenAddAndEditPageAccounts,
+                },
+                {
+                    path: 'partner',
+                    element: (
+                        <Menu>
+                            <Accounts status={status} />
+                        </Menu>
+                    ),
+                    children: childrenAddAndEditPageAccounts,
                 },
             ],
         },
     ]);
-
     return <Fragment>{elements}</Fragment>;
 }
 export default App;

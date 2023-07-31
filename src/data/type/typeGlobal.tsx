@@ -90,11 +90,11 @@ type typeUserAfterCallApiBaseOnID = {
 /* New Api  */
 
 type typeOfTodo = {
-    _id: string;//62da138c6618db000400f677
-    text: string;//Go to sleep
-    complete: boolean;//true
-    author: string;//my name is son
-    createdDate: string|Date;//23/12/2023
+    _id: string; //62da138c6618db000400f677
+    text: string; //Go to sleep
+    complete: boolean; //true
+    author: string; //my name is son
+    createdDate: string | Date; //23/12/2023
 };
 const NAME = {
     text: 'text',
@@ -103,6 +103,6 @@ const NAME = {
     createdDate: 'createdDate',
 };
 type typeOfListTodo = Array<typeOfTodo>;
-export {NAME}
+export { NAME };
 
 export type { typeOfListUser, OutPutFormFilter, typeUserAfterCallApiBaseOnID, typeOfTodo, typeOfListTodo };

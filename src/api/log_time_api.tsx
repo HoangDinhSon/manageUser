@@ -1,7 +1,6 @@
 import axiosClient from '~/api/axios_client';
 import { axiosTodo } from '~/api/axios_client';
 import { typeOfTodo } from '~/data/type/typeGlobal';
-import { handleErrorAxiosUseForReactQuery } from '~/custome_hook/handle_error';
 
 type typeID = string | number;
 type payloadLogin = {
