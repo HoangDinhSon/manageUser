@@ -1,14 +1,23 @@
 import { useRoutes } from 'react-router-dom';
-import { Login, Accounts, EditUser, AddUser, NotFount, Report, Project } from './pages';
+// import { Login, Accounts, EditUser, AddUser, NotFount, Report, Project } from './pages';
+// import { Login, Accounts, EditUser, AddUser, NotFount, Report, Project } from './pages';
 import { Menu } from './layout';
 import * as LINK_PAGE from './data/constance_for_page';
 import { useGlobalState } from './store/Provider';
 import { actions } from './store';
 import { useQuery } from 'react-query';
 import { getLimitAndSkipUser } from './api/log_time_api';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, Suspense, lazy } from 'react';
 import { WatchTodoForm, EditAndAddTodoForm, Stack } from './pages';
 import * as CONST from '~/data/constance_for_page';
+
+const Login = lazy(() => import('~/pages/login/Login'));
+const Accounts = lazy(() => import('~/pages/accounts/Accounts'));
+const EditUser = lazy(() => import('~/pages/accounts/EditUser'));
+const AddUser = lazy(() => import('~/pages/accounts/AddUser'));
+const NotFount = lazy(() => import('~/pages/NotFount'));
+const Report = lazy(() => import('~/pages/report/Report'));
+const Project = lazy(() => import('~/pages/project/Project'));
 
 function App() {
     const [state, dispatch] = useGlobalState();
@@ -137,6 +146,10 @@ function App() {
             ],
         },
     ]);
-    return <Fragment>{elements}</Fragment>;
+    return (
+        <Fragment>
+            <Suspense>{elements}</Suspense>
+        </Fragment>
+    );
 }
 export default App;

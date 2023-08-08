@@ -17,7 +17,7 @@ import {
     SearchAndFilter,
 } from '../../components';
 import { typeUserAfterCallApiBaseOnID } from '../../data/type';
-import { useKindOfTable } from '~/custome_hook';
+import { useKindOfTable, classifyUser } from '~/custome_hook';
 import { initState, typePagination } from '~/components/TableForUser';
 
 function Accounts({ status }: any) {
@@ -55,23 +55,36 @@ function Accounts({ status }: any) {
 
     return (
         <section className="">
-            {/* <Toaster /> */}
             {queryAll.status === 'loading' && <TableAnimation />}
-            {(queryAll.status === 'success'&&status==="success") && (
+            {queryAll.status === 'success' && status === 'success' && (
                 <div className="bg-white  rounded-[12px] px-8 pb-[68px] pt-8 xs_max:px-[--margin4px] xs_max:pt-4 ">
                     <NavAccount />
                     <SearchAndFilter />
-                    {kindOfTable === 'all' && <TableUser />}
 
-                    {(kindOfTable === 'vinova' || kindOfTable === 'partner') && (
+                    {(kindOfTable === 'all') && (
                         <TableForUser
                             listUser={queryAll.data.users}
+                            kindOfTable="all"
+                            numberOfUser={80}
+                            handleOnChangePagination={handleOnChangePagination}
+                        />
+                    )}
+                    {(kindOfTable === 'vinova') && (
+                        <TableForUser
+                            listUser={classifyUser(queryAll.data?.users).listMale}
+                            kindOfTable="vinova"
+                            numberOfUser={80}
+                            handleOnChangePagination={handleOnChangePagination}
+                        />
+                    )}
+                    {( kindOfTable === 'partner') && (
+                        <TableForUser
+                            listUser={classifyUser(queryAll.data?.users).listFemale}
                             kindOfTable="partner"
                             numberOfUser={80}
                             handleOnChangePagination={handleOnChangePagination}
                         />
                     )}
-
                     <AnimationMountAndUnMount isMount={state.isDisplayFiler}>
                         <Filter />
                     </AnimationMountAndUnMount>

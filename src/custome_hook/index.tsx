@@ -8,6 +8,7 @@ import sortUser from './sortUser';
 import useTypeTableForAccount from './useTypeTableForAccount';
 import removeUserFromList from './remove_user_from_list';
 import removeListUserInOtherList from './remove_listuser_in_other_list';
+import classifyUser from './classify_user';
 export * from './handle_error';
 export * from './custome_toast';
 export {
@@ -21,4 +22,5 @@ export {
     useTypeTableForAccount,
     removeUserFromList,
     removeListUserInOtherList,
+    classifyUser,
 };
