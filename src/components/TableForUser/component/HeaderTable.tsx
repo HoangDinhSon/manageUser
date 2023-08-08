@@ -1,11 +1,37 @@
-import { iconArrowTable } from "~/assets/icon";
-function HeaderTable() {
+import { FormEvent, ChangeEvent } from 'react';
+import * as type from '~/data/type';
+import { iconArrowTable } from '~/assets/icon';
+import { useContextTable } from '../store_table/ContextTable';
+import { addOrRemoveListUser } from '../ultils';
+type typePropsHeaderTable = {
+    listUser: type.typeOfListUser;
+};
+function HeaderTable({ listUser }: typePropsHeaderTable) {
+    const { setStateTable, stateOfTable } = useContextTable();
+    // console.log('stateOfTable>>>', stateOfTable);
+    const handleChangeAll = (event: ChangeEvent<HTMLInputElement>) => {
+        addOrRemoveListUser({
+            isChecked: event.target.checked,
+            listUser: listUser,
+            stateOfTable: stateOfTable,
+            setStateTable: setStateTable,
+        });
+    };
+    // useMemo
+    const isChecked = listUser.every((element) => stateOfTable.userIsChecked.includes(element));
+
     return (
         <tr className="text-center">
             <td>
-                <div className="min-w-[20px]">
-                    <input type="checkbox" />
-                </div>
+                <label htmlFor="checkBoxHeader" className="w-[20px] h-[20px] block ">
+                    <input
+                        checked={isChecked}
+                        type="checkbox"
+                        id="checkBoxHeader"
+                        className="w-full h-full cursor-pointer"
+                        onChange={(e) => handleChangeAll(e)}
+                    />
+                </label>
             </td>
             <td>
                 <div className="flex justify-between min-w-[86px]">
@@ -69,4 +95,4 @@ function HeaderTable() {
         </tr>
     );
 }
-export default HeaderTable 
+export default HeaderTable;

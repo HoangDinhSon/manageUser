@@ -11,7 +11,7 @@ import * as linkPage from '../data/constance_for_page';
 import { replaceManyString } from '../handlelogic';
 import { useSelector } from 'react-redux';
 import { RootState } from '~/app_redux/store';
-import * as CONST from '~/data/constance_for_page/constant_global';
+import * as CONST from '~/data/constance_for_page';
 import { useDetectClickOutside } from '~/custome_hook';
 
 function Menu({ children }: any) {
@@ -22,7 +22,7 @@ function Menu({ children }: any) {
     const refFormLogout = useRef<any>(null);
     const HEIGHT_BROWSER_TO_CHANGE_GAP = 800;
     if (localStorage.getItem('userAdmin') == undefined) {
-        window.location.href = 'http://localhost:4000';
+        window.location.href = CONST.LINK_PAGE_lOGIN;
         return <div></div>;
     }
     const handleLogOut = (e: any) => {

@@ -71,7 +71,7 @@ function App() {
             ),
         },
         {
-            path: `${LINK_PAGE.LINK_PAGE_REPORT}`,
+            path: LINK_PAGE.LINK_PAGE_REPORT,
             element: (
                 <Menu>
                     <Report />

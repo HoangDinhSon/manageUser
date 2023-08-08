@@ -64,6 +64,7 @@ const CODE_PHONE_NUMBER = {
     '+85': '+85',
     '+86': '+86',
     '+63': '+63',
+    '+37': '+37',
 };
 const instance: typeFormAddAndEditAfterChange = {
     firstName: '',

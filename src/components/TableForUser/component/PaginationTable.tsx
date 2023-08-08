@@ -1,19 +1,22 @@
 import { Select, MenuItem, Pagination, PaginationItem, useMediaQuery, useTheme } from '@mui/material';
-import { useContextTable, typeState, DEFAULT_ROW_PER_PAGE } from '../store_table/ContextTable';
-
-
+import { useContextTable, DEFAULT_ROW_PER_PAGE, typeState, typeOnChangePagination } from '../store_table/ContextTable';
 type typeOFProps = {
     numberOfUser: number;
-   
+    handleOnChangePagination?: typeOnChangePagination;
 };
-function PaginationTable({ numberOfUser }: typeOFProps) {
-    const {stateOfTable, setStateTable} = useContextTable();
+function PaginationTable({ numberOfUser, handleOnChangePagination }: typeOFProps) {
+    const { stateOfTable, setStateTable } = useContextTable();
     // numberOfPage count:
     const count = Math.ceil(numberOfUser / stateOfTable.rowPerPage);
     const handleRowPerPage = (e: any) => {
+        !!handleOnChangePagination &&
+            handleOnChangePagination({ rowPerPage: parseInt(e.target.value), ordinalPage: stateOfTable.ordinalPage });
         setStateTable((prev: typeState) => ({ ...prev, rowPerPage: parseInt(e.target.value) }));
     };
     const handlePagination = (e: any, value: any) => {
+        // !!handleOnChangePagination && handleOnChangePagination(parseInt(value));
+        !!handleOnChangePagination &&
+            handleOnChangePagination({ rowPerPage: stateOfTable.rowPerPage, ordinalPage: parseInt(value) });
         setStateTable((prev: typeState) => ({ ...prev, ordinalPage: parseInt(value) }));
     };
     const theme = useTheme();

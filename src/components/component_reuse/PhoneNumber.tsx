@@ -1,12 +1,12 @@
 import { arrowSelect } from '../../assets/icon';
-import { CODE_PHONE_NUMBER } from '../../data/constance_for_page/constant_type_ui';
+import * as CONST from '~/data/constance_for_page';
 type typeOfPhoneNumber = {
     nameCodeCountry: string;
     namePhoneNumber: string;
     register: any;
     errors: any;
 };
-function PhoneNumber({ nameCodeCountry, namePhoneNumber, register,  errors }: typeOfPhoneNumber) {
+function PhoneNumber({ nameCodeCountry, namePhoneNumber, register, errors }: typeOfPhoneNumber) {
     return (
         <div className="relative">
             <p className="my_after_star ">Phone</p>
@@ -17,10 +17,9 @@ function PhoneNumber({ nameCodeCountry, namePhoneNumber, register,  errors }: ty
                     name={nameCodeCountry}
                     {...register(nameCodeCountry)}
                 >
-                    <option value={CODE_PHONE_NUMBER['+84']}>{CODE_PHONE_NUMBER['+84']}</option>
-                    <option value={CODE_PHONE_NUMBER['+85']}>{CODE_PHONE_NUMBER['+85']}</option>
-                    <option value={CODE_PHONE_NUMBER['+86']}>{CODE_PHONE_NUMBER['+86']}</option>
-                    <option value={CODE_PHONE_NUMBER['+63']}>{CODE_PHONE_NUMBER['+63']}</option>
+                    {CONST.COUNTRY_PHONE_CODE.map((country) => (
+                        <option value={country.code}>{country.code}</option>
+                    ))}
                 </select>
                 <label htmlFor="phoneNumber"></label>
                 <input

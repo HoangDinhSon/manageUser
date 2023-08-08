@@ -33,7 +33,4 @@ export default FormVerify;
 FormVerify :
 sẽ xác nhận sư thay đổi: quản lí  valueFormVerify
 form này dùng chung cho xác nhận nhiều hành động delete/edit/add. 
-
-
-
 */

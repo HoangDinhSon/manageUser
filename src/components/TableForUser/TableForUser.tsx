@@ -1,30 +1,30 @@
 import { HeaderTable, RowBody, PaginationTable } from './component';
-import { ContextTableProvider,  typeState } from './store_table/ContextTable';
-import { Dispatch, SetStateAction } from 'react';
+import { ContextTableProvider, typeOnChangePagination } from './store_table/ContextTable';
+import * as type from '~/data/type';
 
 type Props = {
-    listUser: any[];
+    listUser: type.typeOfListUser;
     kindOfTable: 'all' | 'vinova' | 'partner';
     numberOfUser: number;
-    setStateGlobal: Dispatch<SetStateAction<typeState | undefined>>;
+    handleOnChangePagination?: typeOnChangePagination; //optional
 };
 
-function TableForUser({ listUser, kindOfTable, numberOfUser, setStateGlobal }: Props) {
+function TableForUser({ listUser, kindOfTable, numberOfUser, handleOnChangePagination }: Props) {
     return (
         <ContextTableProvider>
-            <div className="w-full bg-[red]">
+            <div className="w-full ">
                 <table className="w-full">
                     <thead>
-                        <HeaderTable />
+                        <HeaderTable listUser={listUser} />
                     </thead>
                     <tbody>
                         {listUser.map((user, index) => {
-                            return <RowBody user={user} key={index} />;
+                            return <RowBody user={user} key={user.id} />;
                         })}
                     </tbody>
                 </table>
                 <div className="w-[calc(100%-158px)] fixed bottom-[--mrForChild]">
-                    <PaginationTable numberOfUser={numberOfUser} />
+                    <PaginationTable numberOfUser={numberOfUser} handleOnChangePagination={handleOnChangePagination} />
                 </div>
             </div>
         </ContextTableProvider>

@@ -1,14 +1,40 @@
 import { NavLink } from 'react-router-dom';
 import { IconViewUser, IconEditUser } from '~/assets/icon';
+import { useContextTable } from '../store_table/ContextTable';
+import { hasUserInList, removeUserFromList } from '~/custome_hook';
+import * as type from '~/data/type';
 
-function RowBody({ user }: any) {
-    const handleDisplayViewForm = (user: any) => {};
-    const handleOnchange = (event: any) => {};
+
+import { changeStateBaseEvent } from '../ultils';
+type typeProps = {
+    user: type.typeUserAfterCallApiBaseOnID;
+};
+function RowBody({ user }: typeProps) {
+    const { setStateTable, stateOfTable } = useContextTable();
+    const isChecked = hasUserInList(stateOfTable.userIsChecked, user);
+    console.log('isChecked>>>', isChecked);
+    console.log('stateOfTable>>>', stateOfTable);
+
+    const handleDisplayViewForm = (user: type.typeUserAfterCallApiBaseOnID) => {};
+    const handleOnchange = (event: any) => {
+        changeStateBaseEvent({
+            isChecked: event.target.checked,
+            user: user,
+            setStateTable: setStateTable,
+            stateOfTable: stateOfTable,
+        });
+    };
     const handleGetID = (id: any) => {};
+
     return (
         <tr>
             <td className="text-center">
-                <input type="checkbox"  onChange={(event) => handleOnchange(event)} />
+                <input
+                    checked={isChecked}
+                    type="checkbox"
+                    onChange={(event) => handleOnchange(event)}
+                    className="w-[20px] h-[20px] block cursor-pointer"
+                />
             </td>
             <td className="">{user?.id}</td>
             <td className="">{user?.firstName}</td>

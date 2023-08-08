@@ -43,7 +43,11 @@ function EditUser() {
         defaultValues: async () => {
             try {
                 const res = await axiosClient.get(`/users/${state.idForEdit}`).then((res) => res.data);
-                const phoneCode = res.phone.slice(0, 3);
+                // const phoneCode = res.phone.slice(0, 3);
+                const phoneCode = res.phone//string
+                const phoneCodeNew =phoneCode.match(/^\+[0-9]+/g);
+                console.log('phoneCodeNew>>>', phoneCodeNew);
+                console.log('phoneCode>>>',typeof  phoneCode);
                 return {
                     firstName: res.firstName,
                     lastName: res.lastName,
@@ -51,7 +55,7 @@ function EditUser() {
                     gender: res.gender,
                     bloodGroup: res.bloodGroup,
                     email: res.email,
-                    phoneCodeCountry: phoneCode,
+                    phoneCodeCountry: phoneCodeNew[0],
                     phoneNumber: res.phone,
                     birthDate: res.birthDate,
                     university: res.university, 
