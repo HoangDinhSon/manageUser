@@ -21,21 +21,8 @@ const Project = lazy(() => import('~/pages/project/Project'));
 
 function App() {
     const [state, dispatch] = useGlobalState();
-    let limit = state.rowPerPage;
-    let skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
-    const { status } = useQuery({
-        queryKey: ['getLimitAndSkip', limit, skip],
-        queryFn: () => getLimitAndSkipUser(limit, skip),
-        onSuccess: (res) => {
-            if (!!res) {
-                dispatch(actions.upDateListUser(res));
-            }
-        },
-        onError: () => {
-            console.log('only will have response from server >>>', 999);
-        },
-        keepPreviousData: true,
-    });
+    const limit = state.rowPerPage;
+    const skip = (state.ordinalNumberPage - 1) * state.rowPerPage;
     const childrenAddAndEditPageAccounts = [
         {
             path: 'add',
@@ -120,7 +107,7 @@ function App() {
                     path: '',
                     element: (
                         <Menu>
-                            <Accounts status={status} />
+                            <Accounts />
                         </Menu>
                     ),
                     children: childrenAddAndEditPageAccounts,
@@ -129,7 +116,7 @@ function App() {
                     path: 'vinova',
                     element: (
                         <Menu>
-                            <Accounts status={status} />
+                            <Accounts />
                         </Menu>
                     ),
                     children: childrenAddAndEditPageAccounts,
@@ -138,7 +125,7 @@ function App() {
                     path: 'partner',
                     element: (
                         <Menu>
-                            <Accounts status={status} />
+                            <Accounts />
                         </Menu>
                     ),
                     children: childrenAddAndEditPageAccounts,

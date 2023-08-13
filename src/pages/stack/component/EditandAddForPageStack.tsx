@@ -10,7 +10,7 @@ import { actions } from '~/store';
 import { useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { updateTodo, createTodo } from '~/api/log_time_api';
-import { myToastPromise } from '~/custome_hook';
+import { useToastPromise } from '~/custome_hook';
 
 type typeProps = {
     listTodo: typeOfListTodo;
@@ -21,10 +21,13 @@ const EDIT = 'edit';
 const WATCH = 'watch';
 function EditAndAddForPageStack({ listTodo, refetch }: typeProps) {
     const [state, dispatch] = useGlobalState();
-    // check form là add or edit watch
-    const [todoForEdit] = listTodo?.filter((todo) => {
-        return todo._id === state.idOfTodoForPageStack;
-    });
+    function getTodoParticular() {
+        return listTodo?.filter((todo) => {
+            return todo._id === state.idOfTodoForPageStack;
+        });
+    }
+    const [todoForEdit]= getTodoParticular();
+
     let defaultOfForm = defaultValue;
     let kindOfForm = ADD;
     if (state.idOfTodoForPageStack) {
@@ -45,7 +48,7 @@ function EditAndAddForPageStack({ listTodo, refetch }: typeProps) {
             refetch();
         },
     });
-    myToastPromise(statusUpdateTodo, errorUpdateTodo, 'Update Todo Fail');
+    useToastPromise(statusUpdateTodo, errorUpdateTodo, 'Update Todo Fail');
 
     // create to do
     const {
@@ -58,7 +61,7 @@ function EditAndAddForPageStack({ listTodo, refetch }: typeProps) {
             refetch();
         },
     });
-    myToastPromise(statusCreateTodo, errorCreateTodo, 'Create Todo Fail');
+    useToastPromise(statusCreateTodo, errorCreateTodo, 'Create Todo Fail');
     useEffect(() => {
         if (statusCreateTodo === 'success') {
             dispatch(actions.toggleEditAddPageStack());
@@ -66,7 +69,7 @@ function EditAndAddForPageStack({ listTodo, refetch }: typeProps) {
         if (statusUpdateTodo === 'success') {
             dispatch(actions.toggleEditAddPageStack());
         }
-    }, [statusUpdateTodo, statusCreateTodo]);
+    }, [statusUpdateTodo, statusCreateTodo, dispatch]);
     const {
         control,
         handleSubmit,

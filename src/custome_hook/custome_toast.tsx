@@ -10,7 +10,7 @@ type message = string;
 // };
 
 let idLoading: any;
-export const myToastPromise = (status: string,error:any,myMessage:string) => {
+export const useToastPromise = (status: string,error:any,myMessage:string) => {
     useEffect(() => {
         if (status != 'idle') {
             if (status === 'loading') {
@@ -35,6 +35,5 @@ input :
 
 */
 /* *****************0o0***************** */
-function toastHandleWithoutLib(){
-    
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+

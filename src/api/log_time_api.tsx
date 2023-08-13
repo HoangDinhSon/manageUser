@@ -19,30 +19,35 @@ const loginAuth = (payload: payloadLogin) =>
             throw error;
         });
 
-const getLimitAndSkipUser = (limit: number, skip: number) =>
-    axiosClient
-        .get(`/users?limit=${limit}&skip=${skip}`)
-        .then((res) => res.data)
-        .catch((error) => {
-            // Error
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                // console.log(error.response.data);
-                // console.log(error.response.status);
-                // console.log(error.response.headers);
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the
-                // browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-                console.log(error.config);
-            }
-        });
+const getLimitAndSkipUser = (limit: number, skip: number, searchParam: string) => {
+    const link = searchParam ? `/users/search?q=${searchParam}` : `/users?limit=${limit}&skip=${skip}`;
+    return (
+        axiosClient
+            // .get(`/users?limit=${limit}&skip=${skip}`)
+            .get(link)
+            .then((res) => res.data)
+            .catch((error) => {
+                // Error
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    // console.log(error.response.data);
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the
+                    // browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                    console.log(error.config);
+                }
+            })
+    );
+};
 
 const getUserBaseFilter = ({ keyFilter, valueFilter }: any) =>
     axiosClient.get(`/users/filter?key=${keyFilter}&value=${valueFilter}`).then((res) => res.data);
@@ -62,13 +67,10 @@ export { loginAuth, getLimitAndSkipUser, getUserBaseOnID, addUserToServer, editU
 
 */
 /* ----------------------New API ------------------ */
-const getTodo = () =>
-    axiosTodo
-        .get('/todos')
-        .then((res) => res.data)
-        // .catch((error) => {
-        //     handleErrorAxiosUseForReactQuery(error, 'fail get data for report page');
-        // });
+const getTodo = () => axiosTodo.get('/todos').then((res) => res.data);
+// .catch((error) => {
+//     handleErrorAxiosUseForReactQuery(error, 'fail get data for report page');
+// });
 const updateTodo = (dataForUpdate: typeOfTodo) =>
     axiosTodo
         .post(`/todos/${dataForUpdate._id}`, dataForUpdate)

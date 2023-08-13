@@ -150,7 +150,7 @@ function reducer(state: TypeStateGlobal, action: any) {
             };
         }
         case TOGLE_DISPLAY_FILTER: {
-            let isDisplay = !action.payload;
+            const isDisplay = !action.payload;
             return {
                 ...state,
                 isDisplayFiler: isDisplay,
@@ -208,7 +208,7 @@ function reducer(state: TypeStateGlobal, action: any) {
             };
         }
         case MAKE_LIST_FILTER: {
-            let keyOfCriterial: string[] = Object.keys(state.criterialForFilter);
+            const keyOfCriterial: string[] = Object.keys(state.criterialForFilter);
             const payloadFromFilter: typeOfListUser = action.payload;
             // nhưng cái criterial  nào dc chọn nằm ở đây
             const newListCriterial: string[] = keyOfCriterial.filter((key) => {
@@ -222,7 +222,7 @@ function reducer(state: TypeStateGlobal, action: any) {
 
             /* payloadFromFilter là một mảng chứa các user trong mảng này có thể có lặp lại 2 user giống nhau nên dựa vào id để xóa các user trùng nhau
              */
-            let unique: typeOfListUser = [];
+            const unique: typeOfListUser = [];
             unique.push(action.payload[0]);
             payloadFromFilter.forEach((item: any) => {
                 let flag = false;
@@ -239,7 +239,7 @@ function reducer(state: TypeStateGlobal, action: any) {
                 sau khi có unique : là danh sách user không trùng nhau , user nào có đủ các criterial thì chép vào mảng mới 
             
             */
-            let listUserSuitableCriterial: typeOfListUser = [];
+            const listUserSuitableCriterial: typeOfListUser = [];
             unique.map((user) => {
                 let flag = false;
                 newListCriterial.map((criterial) => {

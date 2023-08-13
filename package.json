@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@githubnext/github-copilot-cli": "^0.1.33",
     "@hookform/resolvers": "^3.1.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
@@ -20,6 +21,7 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "lodash": "^4.17.21",
+    "material-ui-popup-state": "^5.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",

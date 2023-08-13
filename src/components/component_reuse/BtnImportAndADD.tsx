@@ -11,30 +11,27 @@ function BtnImportAndADD() {
         dispatch(actions.toggleImportForm());
     };
     return (
-        <OpacityTransition>
-            <div className="Right_Nav flex items-center gap-[10px] pr-[--mrForChild]">
+      //  <OpacityTransition>
+            <div className="Right_Nav flex items-center gap-[10px] ">
                 <img src={icondocument} alt="" className="cursor-pointer" />
                 <img src={iconimportuser} alt="" className="cursor-pointer" />
                 <img className="cursor-pointer" src={iconuploaduser} alt="" onClick={handleImportUser} />
-                {state.isDisplayAsideMenu ? (
-                    ''
-                ) : (
-                    <Link to={LINK_PAGE_ACCOUNT_ADD}>
-                        <Button
-                            startIcon={<img src={iconplususer} alt="" />}
-                            variant="contained"
-                            sx={{
-                                height: '40px',
-                                width: '150px',
-                                backgroundColor: 'var(--ColorBgButton)',
-                            }}
-                        >
-                            New Account
-                        </Button>
-                    </Link>
-                )}
+
+                <Link to={LINK_PAGE_ACCOUNT_ADD}>
+                    <Button
+                        startIcon={<img src={iconplususer} alt="" />}
+                        variant="contained"
+                        sx={{
+                            height: '40px',
+                            width: '150px',
+                            backgroundColor: 'var(--ColorBgButton)',
+                        }}
+                    >
+                        New Account
+                    </Button>
+                </Link>
             </div>
-        </OpacityTransition>
+      //  </OpacityTransition>
     );
 }
 

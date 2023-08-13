@@ -3,11 +3,12 @@ import { useQuery } from 'react-query';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import { TableAnimation } from '../../components';
-import { TableUser } from '../../components/accounts/TableUser';
+// import { TableUser } from '../../components/accounts/TableUser';
 import { useGlobalState } from '../../store/Provider';
 import { getLimitAndSkipUser, getUserBaseOnID } from '../../api/log_time_api';
 import { actions } from '../../store';
 import { TableForUser } from '~/components';
+import debounce from '~/custome_hook/debounce';
 import {
     ImportForm,
     Filter,
@@ -20,14 +21,14 @@ import { typeUserAfterCallApiBaseOnID } from '../../data/type';
 import { useKindOfTable, classifyUser } from '~/custome_hook';
 import { initState, typePagination } from '~/components/TableForUser';
 
-function Accounts({ status }: any) {
+function Accounts() {
     const [state, dispatch] = useGlobalState();
     const kindOfTable = useKindOfTable();
     const [statePagination, setStatePagination] = useState({
         rowPerPage: initState.rowPerPage,
         ordinalPage: initState.ordinalPage,
     });
-
+    const [searchParam, setSearchParam] = useState('');
     // call apis by id dùng cho hiển thị form View
     const { status: statusForApiByID } = useQuery({
         queryKey: ['userByID', state.UserForFormView.id],
@@ -41,11 +42,12 @@ function Accounts({ status }: any) {
         },
     });
     const queryAll = useQuery({
-        queryKey: ['getAll', statePagination],
+        queryKey: ['getAll', statePagination, searchParam],
         queryFn: () =>
             getLimitAndSkipUser(
                 statePagination.rowPerPage,
                 (statePagination.ordinalPage - 1) * statePagination.rowPerPage,
+                searchParam,
             ),
         keepPreviousData: true,
     });
@@ -56,12 +58,11 @@ function Accounts({ status }: any) {
     return (
         <section className="">
             {queryAll.status === 'loading' && <TableAnimation />}
-            {queryAll.status === 'success' && status === 'success' && (
+            {queryAll.status === 'success' && (
                 <div className="bg-white  rounded-[12px] px-8 pb-[68px] pt-8 xs_max:px-[--margin4px] xs_max:pt-4 ">
                     <NavAccount />
-                    <SearchAndFilter />
-
-                    {(kindOfTable === 'all') && (
+                    <SearchAndFilter onChange={(event) => debounce(() => setSearchParam(event.target.value), 1000)} />
+                    {kindOfTable === 'all' && (
                         <TableForUser
                             listUser={queryAll.data.users}
                             kindOfTable="all"
@@ -69,7 +70,7 @@ function Accounts({ status }: any) {
                             handleOnChangePagination={handleOnChangePagination}
                         />
                     )}
-                    {(kindOfTable === 'vinova') && (
+                    {kindOfTable === 'vinova' && (
                         <TableForUser
                             listUser={classifyUser(queryAll.data?.users).listMale}
                             kindOfTable="vinova"
@@ -77,7 +78,7 @@ function Accounts({ status }: any) {
                             handleOnChangePagination={handleOnChangePagination}
                         />
                     )}
-                    {( kindOfTable === 'partner') && (
+                    {kindOfTable === 'partner' && (
                         <TableForUser
                             listUser={classifyUser(queryAll.data?.users).listFemale}
                             kindOfTable="partner"
@@ -96,6 +97,7 @@ function Accounts({ status }: any) {
                     </AnimationMountAndUnMount>
                 </div>
             )}
+            {/* Children */}
             <Outlet />
         </section>
     );

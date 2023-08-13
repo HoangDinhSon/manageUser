@@ -2,6 +2,7 @@ import { ID_FOR_EDIT_DEFAULT, DEFAULT_COUNT, USER_DEFAULT } from './constants_de
 import { listOptionTeam, listOptionEyeColor, listOptionLevel, listOptionPotion } from './constant_type_ui';
 import { CRITERIAL_FOR_FILTER_DEFAULT, ListFilter } from './constant_filter';
 import { DEFAULT_ROW_PER_PAGE, DEFAULT_ORDINAL_PAGE } from './constance_page_account/constance_account_default';
+import { DRAWER_WIDTH, SPACE_MARGIN } from './constance_layout/constance_layout';
 export * from './constant_link_page';
 export * from './constant_global';
 export * from './constance_app/constant_app';
@@ -19,4 +20,6 @@ export {
     ListFilter,
     DEFAULT_ROW_PER_PAGE,
     DEFAULT_ORDINAL_PAGE,
+    DRAWER_WIDTH,
+    SPACE_MARGIN,
 };

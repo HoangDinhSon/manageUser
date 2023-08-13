@@ -53,7 +53,7 @@ function HamburgerMenu({ onClick }: any) {
     };
     return (
         <div
-            className="fixed top-[calc((var(--heightNav)-24px)/2)] left-[calc((var(--heightNav)-24px)/2)] xs_max:top-[calc((var(--hNavRes)-24px)/2)]  z-[4] cursor-pointer"
+            // className="fixed top-[calc((var(--heightNav)-24px)/2)] left-[calc((var(--heightNav)-24px)/2)] xs_max:top-[calc((var(--hNavRes)-24px)/2)]  z-[4] cursor-pointer"
             onClick={handleOnClick}
         >
             <HamburgerMui

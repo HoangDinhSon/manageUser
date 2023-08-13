@@ -12,10 +12,11 @@ type typeProps = {
 function RowBody({ user }: typeProps) {
     const { setStateTable, stateOfTable } = useContextTable();
     const isChecked = hasUserInList(stateOfTable.userIsChecked, user);
-    console.log('isChecked>>>', isChecked);
-    console.log('stateOfTable>>>', stateOfTable);
+ 
 
-    const handleDisplayViewForm = (user: type.typeUserAfterCallApiBaseOnID) => {};
+    const handleDisplayViewForm = (user: type.typeUserAfterCallApiBaseOnID) => {
+        console.log('DATA>>>', 999);
+    };
     const handleOnchange = (event: any) => {
         changeStateBaseEvent({
             isChecked: event.target.checked,
@@ -24,7 +25,9 @@ function RowBody({ user }: typeProps) {
             stateOfTable: stateOfTable,
         });
     };
-    const handleGetID = (id: any) => {};
+    const handleGetID = (id: any) => {
+        console.log('DATA>>>', 999);
+    };
 
     return (
         <tr>

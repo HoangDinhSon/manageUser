@@ -5,13 +5,13 @@ it has problem need fixed :
 */
 
 let timeOutIdForDebounce: any;
-const debounce = (fn: any, delay: number) => {
+const debounce = (callBackFunction: any, delay: number) => {
     function delayFunction() {
         if (timeOutIdForDebounce) {
             clearTimeout(timeOutIdForDebounce);
         }
         timeOutIdForDebounce = setTimeout(() => {
-            fn();
+            callBackFunction();
         }, delay);
     }
     delayFunction();
