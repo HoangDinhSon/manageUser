@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import { TableAnimation } from '../../components';
-// import { TableUser } from '../../components/accounts/TableUser';
 import { useGlobalState } from '../../store/Provider';
 import { getLimitAndSkipUser, getUserBaseOnID } from '../../api/log_time_api';
 import { actions } from '../../store';
@@ -97,7 +96,6 @@ function Accounts() {
                     </AnimationMountAndUnMount>
                 </div>
             )}
-            {/* Children */}
             <Outlet />
         </section>
     );

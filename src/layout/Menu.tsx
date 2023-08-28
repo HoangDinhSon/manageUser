@@ -1,6 +1,5 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useTheme, useMediaQuery, Box, Drawer, Toolbar, Popover } from '@mui/material';
-// import MenuIcon from '@mui/icons-material/Menu';
 import { FormLogOut, BtnImportAndADD, Hamburger, FormVerify } from '../components';
 import { IconMenu } from '../components/component_layout';
 import { useGlobalState } from '../store/Provider';
