@@ -17,8 +17,10 @@ function PhoneNumber({ nameCodeCountry, namePhoneNumber, register, errors }: typ
                     name={nameCodeCountry}
                     {...register(nameCodeCountry)}
                 >
-                    {CONST.COUNTRY_PHONE_CODE.map((country) => (
-                        <option value={country.code}>{country.code}</option>
+                    {CONST.COUNTRY_PHONE_CODE.map((country,index) => (
+                        <option value={country.code} key={index}>
+                            {country.code}
+                        </option>
                     ))}
                 </select>
                 <label htmlFor="phoneNumber"></label>
