@@ -3,19 +3,20 @@ import { IconViewUser, IconEditUser } from '~/assets/icon';
 import { useContextTable } from '../store_table/ContextTable';
 import { hasUserInList, removeUserFromList } from '~/custome_hook';
 import * as type from '~/data/type';
-
+import { useGlobalState } from '~/store/Provider';
+import { actions } from '~/store';
 
 import { changeStateBaseEvent } from '../ultils';
 type typeProps = {
     user: type.typeUserAfterCallApiBaseOnID;
 };
 function RowBody({ user }: typeProps) {
+    const [state, dispatch] = useGlobalState();
     const { setStateTable, stateOfTable } = useContextTable();
     const isChecked = hasUserInList(stateOfTable.userIsChecked, user);
- 
 
     const handleDisplayViewForm = (user: type.typeUserAfterCallApiBaseOnID) => {
-        console.log('DATA>>>', 999);
+        dispatch(actions.displayFormViewUser(user));
     };
     const handleOnchange = (event: any) => {
         changeStateBaseEvent({
@@ -26,7 +27,8 @@ function RowBody({ user }: typeProps) {
         });
     };
     const handleGetID = (id: any) => {
-        console.log('DATA>>>', 999);
+        dispatch(actions.getIdForEdit(id));
+        // console.log('DATA>>>', 999);
     };
 
     return (

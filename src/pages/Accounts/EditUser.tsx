@@ -14,7 +14,7 @@ import {
     listOptionPotion,
 } from '~/data/constance_for_page';
 import { Select, PhoneNumber, Input, InputWithCharacter } from '~/components';
-import { resolverFormAddUser } from './validationForAccountPage';
+import  resolverFormAddUser from "./validationForAccountPage";
 import {
     NameRegisterForm,
     listBlood,

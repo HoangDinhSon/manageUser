@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '~/app_redux/store';
 import * as CONST from '~/data/constance_for_page';
 import { TopNavBar, Main, BreadCrumbContent, MenuIconStyled, PopOverLogout } from './component';
+import { Outlet } from 'react-router-dom';
 
 function Menu({ children }: any) {
     const { isDisplayFormVerify } = useSelector((state: RootState) => state.manageAppTodo);
@@ -38,8 +39,9 @@ function Menu({ children }: any) {
     return (
         <Box sx={{ display: 'flex' }}>
             {/*1/4. TopNav Bar */}
+
             <TopNavBar position="fixed" open={open}>
-                <Toolbar sx={{ justifyContent: 'space-between' }}>
+                <Toolbar>
                     <Toolbar>
                         <MenuIconStyled onClick={handleDisplay} />
                         <BreadCrumbContent />
@@ -47,6 +49,7 @@ function Menu({ children }: any) {
                     <BtnImportAndADD /> :
                 </Toolbar>
             </TopNavBar>
+
             {/* 2/4. Aside Bar */}
             <Drawer open={open} variant="persistent" anchor="left">
                 <div className=" w-[--heightNav] bg-white h-screen pt-[--heightNav]">

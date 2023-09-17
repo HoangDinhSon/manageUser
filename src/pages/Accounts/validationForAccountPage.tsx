@@ -17,7 +17,7 @@ const {
     position,
     level,
 } = NameRegisterForm;
-const wordNonASCII = /^([\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEFA-Za-z. \-]{0,55})$/
+const wordNonASCII = /^([\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEFA-Za-z.]{0,55})$/
 const schemaAddUSer = yup
     .object({
         [firstName]: yup.string().matches(wordNonASCII,"NOT include number").required(), // chỉ dc chữ cái bao gồm cả chữ non ASCII 
@@ -39,7 +39,7 @@ const schemaAddUSer = yup
 const resolverFormAddUser = {
     resolver: yupResolver(schemaAddUSer),
 };
-export { resolverFormAddUser };
+export default  resolverFormAddUser ;
 
 /* 
 NameRegisterForm mục đích để khớp Name của UI 

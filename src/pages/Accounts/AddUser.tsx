@@ -1,13 +1,13 @@
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { useState, KeyboardEvent ,useEffect} from 'react';
+import { useState, KeyboardEvent, useEffect } from 'react';
 import { addUserToServer } from '../../api/log_time_api';
 import { InputWithCharacter, Select, Input, PhoneNumber, SkillDisplayInput } from '../../components';
 import { useGlobalState } from '../../store/Provider';
 import { actions } from '../../store';
 import { listOptionTeam, listOptionLevel, listOptionPotion } from '../../data/constance_for_page';
-import { resolverFormAddUser } from './validationForAccountPage';
+import  resolverFormAddUser  from './validationForAccountPage';
 import {
     NameRegisterForm,
     typeFormAddAndEditAfterChange,
@@ -44,10 +44,10 @@ function AddUser() {
     const getListSkill = (listSkillPayload: any) => {
         setListSkill(listSkillPayload);
     };
-    const firstName:any= NameRegisterForm.firstName
-    useEffect(()=>{
-        setFocus(firstName)
-    },[setFocus])
+    const firstName: any = NameRegisterForm.firstName;
+    useEffect(() => {
+        setFocus(firstName);
+    }, [firstName]);
     const handleOnSubmitForm = (formData: typeFormAddAndEditAfterChange) => {
         if (listSkill.length === 0) {
             toast.error('List Skill không dc để trống ');
@@ -79,7 +79,6 @@ function AddUser() {
                             register={register}
                             name={NameRegisterForm.firstName}
                             errors={errors}
-                            
                         />
                         <InputWithCharacter
                             label="Last Name"
@@ -87,7 +86,6 @@ function AddUser() {
                             register={register}
                             name={NameRegisterForm.lastName}
                             errors={errors}
-                            
                         />
                         <InputWithCharacter
                             label="Age"
@@ -95,7 +93,6 @@ function AddUser() {
                             register={register}
                             name={NameRegisterForm.age}
                             errors={errors}
-                           
                         />
                         <Select
                             label="Gender"
@@ -105,13 +102,7 @@ function AddUser() {
                         />
                     </div>
                     <div className="pt-6">
-                        <Input
-                            content="Email"
-                            name={NameRegisterForm.email}
-                            register={register}
-                            errors={errors}
-                           
-                        />
+                        <Input content="Email" name={NameRegisterForm.email} register={register} errors={errors} />
                         <div className="pt-6">
                             <PhoneNumber
                                 nameCodeCountry={NameRegisterForm.phoneCodeCountry}
@@ -135,7 +126,6 @@ function AddUser() {
                             name={NameRegisterForm.birthDate}
                             register={register}
                             errors={errors}
-                          
                         />
                         <InputWithCharacter
                             label="University"
@@ -143,7 +133,6 @@ function AddUser() {
                             register={register}
                             name={NameRegisterForm.university}
                             errors={errors}
-                            
                         />
                         <Select
                             label="Eye Color"
