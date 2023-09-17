@@ -11,12 +11,17 @@ const AddUser = lazy(() => import('~/pages/accounts/AddUser'));
 const NotFount = lazy(() => import('~/pages/NotFount'));
 const Report = lazy(() => import('~/pages/report/Report'));
 const Project = lazy(() => import('~/pages/project/Project'));
+const DraftPage = lazy(()=>import("~/pages/DraftPage"))
 
 function App() {
     const elements = useRoutes([
         {
             path: '*',
             element: <NotFount />,
+        },
+        {
+            path:"/draft",
+            element: <DraftPage/>
         },
         {
             path: '/',
